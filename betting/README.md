@@ -1,0 +1,44 @@
+# Betting executor
+
+Turns the model's edges into capped, Kelly-sized Polymarket orders.
+**This stakes real money when run with `--live`. Read this file first.**
+
+## Flow
+
+```
+1. edit betting/config.json          # YOUR caps: total + per-bet + min edges
+2. python3 betting/find_bets.py      # plan from RAW model vs live prices (no keys)
+3. review betting/state/plan.json    # every bet, stake, edge — read it
+4. .venv/bin/python3 betting/place_bets.py          # dry run, prints orders
+5. .venv/bin/python3 betting/place_bets.py --live   # real money
+```
+
+## Safety rails (enforced in place_bets.py, not just the plan)
+
+- total across all runs ≤ `max_total_stake_usdc` (persistent ledger in `state/`)
+- every stake ≤ `max_per_bet_usdc`
+- a market already in the ledger is never bought twice
+- dry run is the default; `--live` is an explicit opt-in
+- only positive-edge YES buys; Golden Ball/Glove never bet (no calibrated model)
+
+## Secrets — never committed
+
+`betting/.env` (gitignored, as is all of `betting/state/`):
+
+```
+POLYMARKET_PRIVATE_KEY=0x...   # Polygon wallet key that holds your USDC
+POLYMARKET_FUNDER=0x...        # ONLY if your account is email/Magic-based
+```
+
+Setup: `.venv/bin/pip install py-clob-client`. Your wallet needs USDC on
+Polygon and Polymarket allowances (do one manual trade in the UI first).
+
+## Honest caveats
+
+- Plan prices are Gamma mid-prices; market orders fill against the book, so
+  expect a little slippage on thin markets. Edges under ~5¢ may not survive it.
+- The model knows nothing about injuries/lineups. The Boot model's shares are
+  opposition-unadjusted (it loves CONCACAF strikers). Bet sizes assume the
+  model is right *on average* — quarter-Kelly exists because it isn't always.
+- Polymarket prices are probabilities; a "win" pays $1/share. Sized stakes are
+  in USDC spent, not shares.

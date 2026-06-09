@@ -8,3 +8,4 @@ sync_claude_history.sh
 *.log
 .env
 .env.*
+betting/state/
