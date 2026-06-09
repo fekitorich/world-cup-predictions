@@ -434,8 +434,12 @@ using the official FIFA bracket.</p>
 too, which is why mid-tier teams clear 70% there. Columns nest (champion ⊂ final ⊂ SF…), and
 each column sums across all 48 teams to the slots available: 12 group wins, 2 finalists, 1 champion.
 Read every percentage as a fair Polymarket price for that future. The ensemble matters: simulating
-with 200 bootstrap refits instead of one model widens uncertainty and shaves a couple of points
-off the favourite — that haircut is honesty, not noise.</p>
+with 200 bootstrap refits instead of one model widens uncertainty and shaves points off the
+favourite — that haircut is honesty, not noise. Anomalies are modelled too, as zero-mean
+randomness with assumed magnitudes: a per-tournament form shock (injuries, chemistry) on every
+team, knockout attrition (a 10% chance each tie leaves lasting damage — cards, knocks), and a
+fatigue penalty after 120-minute matches. None of it favours anyone on average; all of it
+favours outsiders, because chaos always does.</p>
 <table class="futures">
 <thead><tr><th>Team</th><th title="group A-L">Grp</th><th class="num" title="finish top of the group">Win group</th><th class="num" title="advance to the round of 32 — top two per group plus the eight best third-placed teams">Reach R32</th>
 <th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament — column sums to 100% across all teams">Champion</th></tr></thead>

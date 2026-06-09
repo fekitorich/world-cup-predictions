@@ -96,3 +96,18 @@ home win by ~7¢ vs model.
    tournament itself will settle which source prices best.
 4. **Run archive**: every output JSON is copied to `runs/<stamp>_<name>.json`;
    site footer shows model-run and price-snapshot timestamps.
+
+## Anomaly model (2026-06-10)
+
+Tournament sims (`wc26_tournament.py`) now include zero-mean anomaly variance:
+- **Form shock**: per-tournament per-team N(0, 0.06) on log scoring rates —
+  injuries/chemistry/camp variance the goals data can't see.
+- **KO attrition**: each knockout tie, 10% chance per team of a lasting
+  −0.04 log-attack knock (suspensions, injuries); **ET fatigue**: −0.03
+  next match after going 120 minutes.
+- Magnitudes are stated assumptions, not estimates. All shocks are zero-mean:
+  nobody is helped on average, but favourites lose tail mass to the field —
+  Argentina champion 19.0% → 16.6%, which moves the model toward market consensus.
+- Implementation switched tournament sampling to vectorised plain Poisson
+  (DC rho kept for match-card pricing only; ~1% draw-rate effect in sims).
+- Locked bracket unaffected (deterministic mean-model path; shocks are zero-mean).

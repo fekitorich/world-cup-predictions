@@ -16,6 +16,7 @@ Host advantage in knockouts: USA all rounds, Mexico/Canada through R16.
 Knockout draw probability split proportionally (extra-time/pens approx).
 """
 import json
+import math
 import os
 import random
 import sys
@@ -30,6 +31,12 @@ N_SIMS = 100_000
 MAX_G = 12
 rng = np.random.default_rng(2026)
 random.seed(2026)
+
+# --- anomaly model (assumed magnitudes, zero-mean; see model notes) ---
+FORM_SD = 0.06        # per-tournament team form shock on log attack/defence
+ATTRITION_P = 0.10    # chance a KO match leaves lasting damage (cards/knocks)
+ATTRITION_HIT = 0.04  # log-attack penalty per accumulated knock
+ET_FATIGUE = 0.03     # next-match log-attack penalty after a 120-minute tie
 
 P = params()
 HOSTS = {"United States", "Mexico", "Canada"}
@@ -176,28 +183,23 @@ def ko_win(model, a, b, round_no, _b=None):
     return _ko_cache[key]
 
 
-_ko_grid_cache = {}
-
-
-def ko_score_cdf(a, b, round_no, model=None, _b=None):
-    """Score CDF for a knockout tie, from the given bootstrap model so
-    parameter uncertainty reaches the knockout rounds (cached per model)."""
-    key = (a, b, round_no <= 2, _b)
-    if key not in _ko_grid_cache:
-        g = grid_np(*ko_lams(model if model is not None else MEAN,
-                             a, b, round_no), P["rho"])
-        _ko_grid_cache[key] = g.ravel().cumsum()
-    return _ko_grid_cache[key]
 
 
 # precompute group score CDFs for every bootstrap model: (B, 72, 169)
-print("precomputing score grids...", flush=True)
-CDFS = np.empty((N_BOOT, len(FIXTURES), (MAX_G + 1) ** 2))
+print("precomputing fixture rates...", flush=True)
+ALL_TEAMS = sorted({t for g in GROUPS for t in GROUP_TEAMS[g]})
+T_IDX = {t: i for i, t in enumerate(ALL_TEAMS)}
+# per-bootstrap-model expected goals for the 72 group fixtures
+L1G = np.empty((N_BOOT, len(FIXTURES)))
+L2G = np.empty((N_BOOT, len(FIXTURES)))
 for b, model in enumerate(BOOT):
     for f, m in enumerate(FIXTURES):
-        g = grid_np(*fixture_lams(model, m["home"], m["away"], m["city"]), P["rho"])
-        CDFS[b, f] = g.ravel().cumsum()
+        L1G[b, f], L2G[b, f] = fixture_lams(model, m["home"], m["away"], m["city"])
 FIX_INFO = [(m["home"], m["away"], m["group"]) for m in FIXTURES]
+FIX_HI = np.array([T_IDX[m["home"]] for m in FIXTURES])
+FIX_AI = np.array([T_IDX[m["away"]] for m in FIXTURES])
+# Tournament sims sample plain Poisson scores (the Dixon-Coles low-score
+# tweak shifts draw rates ~1% and is kept for match-card pricing only).
 
 
 def allocate_thirds(thirds, slots=THIRD_SLOTS):
@@ -227,10 +229,13 @@ def sim_tournament(b):
     gd = {}
     gf = {}
     goals = {}
-    u = np.random.random(len(FIXTURES))
+    # per-tournament form shock: injuries, chemistry, camp chaos (zero-mean)
+    shock = np.random.normal(0.0, FORM_SD, len(ALL_TEAMS))
+    tilt = np.exp(shock[FIX_HI] - shock[FIX_AI])
+    hg_s = np.random.poisson(L1G[b] * tilt)
+    ag_s = np.random.poisson(L2G[b] / tilt)
     for f, (home, away, grp) in enumerate(FIX_INFO):
-        c = int(np.searchsorted(CDFS[b, f], u[f]))
-        i, j = divmod(c, MAX_G + 1)
+        i, j = int(hg_s[f]), int(ag_s[f])
         for t, sf_, sa in ((home, i, j), (away, j, i)):
             pts[t] = pts.get(t, 0) + (3 if sf_ > sa else 1 if sf_ == sa else 0)
             gd[t] = gd.get(t, 0) + sf_ - sa
@@ -257,17 +262,30 @@ def sim_tournament(b):
             return win[v] if k == "W" else run[v] if k == "R" else alloc[no]
         teams_in[no] = (side(s1), side(s2))
 
+    handicap = {}   # accumulated attrition + fatigue per team (log-attack)
+
     def play_ko(a, bb, rnd):
-        """Sample a knockout score for goals; settle draws by win-share."""
-        cdf = ko_score_cdf(a, bb, rnd, model, b)
-        i, j = divmod(int(np.searchsorted(cdf, random.random())), MAX_G + 1)
-        goals[a] = goals.get(a, 0) + i
-        goals[bb] = goals.get(bb, 0) + j
+        """Sample a knockout score with form shock + carryover anomalies;
+        draws settled by relative strength (ET/pens approximation)."""
+        l1, l2 = ko_lams(model, a, bb, rnd)
+        ia, ib = T_IDX[a], T_IDX[bb]
+        l1 *= math.exp(shock[ia] - shock[ib] - handicap.get(a, 0.0))
+        l2 *= math.exp(shock[ib] - shock[ia] - handicap.get(bb, 0.0))
+        i = np.random.poisson(l1)
+        j = np.random.poisson(l2)
+        goals[a] = goals.get(a, 0) + int(i)
+        goals[bb] = goals.get(bb, 0) + int(j)
+        went_distance = i == j
+        for t in (a, bb):
+            if random.random() < ATTRITION_P:
+                handicap[t] = handicap.get(t, 0.0) + ATTRITION_HIT
+            if went_distance:
+                handicap[t] = handicap.get(t, 0.0) + ET_FATIGUE
         if i > j:
             return a
         if j > i:
             return bb
-        return a if random.random() < ko_win(model, a, bb, rnd, b) else bb
+        return a if random.random() < l1 / (l1 + l2) else bb
 
     winners = {}
     reached = {"r32": set(), "r16": set(), "qf": set(), "sf": set(),
@@ -313,7 +331,9 @@ def run_futures():
     out = {
         "method": f"{N_SIMS} Monte Carlo tournaments over a {N_BOOT}-model "
                   f"bootstrap ensemble (Dixon-Coles, params {P}); official "
-                  "FIFA bracket incl. third-place slot constraints",
+                  "FIFA bracket incl. third-place slot constraints; anomaly "
+                  f"model: form shock sd={FORM_SD}, KO attrition "
+                  f"p={ATTRITION_P} hit={ATTRITION_HIT}, ET fatigue {ET_FATIGUE}",
         "generated": now_utc(),
         "teams": {t: {s: round(count[t][s] / N_SIMS, 4) for s in stages}
                   for t in teams},
