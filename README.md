@@ -24,6 +24,13 @@ windows (CV log-loss 0.891 vs 1.046 baseline). Group-match probabilities are
 blended with Polymarket prices (log-opinion pool, w=0.35). Full notes in
 [wc26_model_notes.md](wc26_model_notes.md).
 
+## Betting executor
+
+`betting/` turns model-vs-market edges into capped, fractional-Kelly
+Polymarket orders (dry-run by default, hard per-bet and total caps, a
+persistent ledger against double-betting). All personal data — keys, caps,
+ledger — stays in gitignored local files. See [betting/README.md](betting/README.md).
+
 ## Reproduce
 
 Needs an [API-Football](https://www.api-football.com) key in

@@ -34,6 +34,19 @@ python3 -m http.server 8742 --directory docs   # browse
 - `wc26_model_notes.md` — method R&D, validation numbers, known blind spots
 - `docs/` — generated output, never edit by hand
 
+## Betting module (`betting/`)
+
+- `find_bets.py` (plan from RAW-model edges vs live prices, Kelly-sized) →
+  review `betting/state/plan.json` → `place_bets.py` (dry-run default,
+  `--live` to execute, `--limit N` for partial batches). Uses the
+  py-clob-client-v2 SDK (Polymarket migrated exchanges 2026-04-28).
+- ALL personal betting data is gitignored and must stay that way:
+  `betting/.env` (wallet key + API creds), `betting/config.local.json`
+  (real caps), `betting/state/` (plans + ledger). The committed
+  `betting/config.json` holds only generic placeholder caps.
+- The ledger enforces the total cap across runs and prevents double-betting;
+  never edit it by hand.
+
 ## Conventions
 
 - Team names are normalized to the main JSON's spelling ("United States", "Turkey",
