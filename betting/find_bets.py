@@ -134,6 +134,7 @@ def main():
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     cands.sort(key=lambda c: -c["edge"])
+    cands = cands[:CFG.get("max_bets", 12)]   # concentrate small bankrolls
 
     bankroll = CFG["max_total_stake_usdc"]
     total = 0.0
@@ -141,6 +142,7 @@ def main():
         stake = min(kelly_stake(c["model_p"], c["market_p"], bankroll),
                     CFG["max_per_bet_usdc"])
         c["stake_usdc"] = round(max(stake, 0), 2)
+    cands = [c for c in cands if c["stake_usdc"] >= CFG.get("min_stake_usdc", 1)]
     # scale down if the plan exceeds the total cap
     planned = sum(c["stake_usdc"] for c in cands)
     if planned > bankroll:

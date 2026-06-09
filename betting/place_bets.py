@@ -94,7 +94,7 @@ def main():
                  "(gitignored) or the environment")
 
     from py_clob_client.client import ClobClient
-    from py_clob_client.clob_types import MarketOrderArgs, OrderType
+    from py_clob_client.clob_types import ApiCreds, MarketOrderArgs, OrderType
 
     funder = env.get("POLYMARKET_FUNDER")
     # 1 = email/Magic login, 2 = MetaMask/browser-wallet login
@@ -104,7 +104,12 @@ def main():
                             chain_id=137, signature_type=sig_type, funder=funder)
     else:        # plain EOA trading directly (rare)
         client = ClobClient("https://clob.polymarket.com", key=key, chain_id=137)
-    client.set_api_creds(client.create_or_derive_api_creds())
+    if env.get("CLOB_API_KEY"):
+        client.set_api_creds(ApiCreds(
+            api_key=env["CLOB_API_KEY"], api_secret=env["CLOB_SECRET"],
+            api_passphrase=env["CLOB_PASSPHRASE"]))
+    else:
+        client.set_api_creds(client.create_or_derive_api_creds())
 
     for b in todo:
         print(f"placing ${b['stake_usdc']:.2f} on {b['bet']} ...", flush=True)

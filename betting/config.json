@@ -1,13 +1,15 @@
 {
-  "max_total_stake_usdc": 200,
-  "max_per_bet_usdc": 25,
-  "kelly_fraction": 0.25,
-  "min_edge_match": 0.05,
-  "min_edge_award": 0.10,
+  "max_total_stake_usdc": 20,
+  "max_per_bet_usdc": 5,
+  "kelly_fraction": 0.4,
+  "min_edge_match": 0.08,
+  "min_edge_award": 0.1,
   "include": {
     "moneyline": true,
     "golden_boot": true,
     "top_scorer_nation": true
   },
-  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them."
+  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them.",
+  "max_bets": 10,
+  "min_stake_usdc": 1
 }
