@@ -164,9 +164,28 @@ def hda(g):
             float(np.triu(g, 1).sum()))
 
 
-def ko_win(model, a, b, round_no):
-    pH, pD, pA = hda(grid_np(*ko_lams(model, a, b, round_no), P["rho"]))
-    return pH + pD * pH / (pH + pA)
+_ko_cache = {}
+
+
+def ko_win(model, a, b, round_no, _b=None):
+    """P(a beats b) — cached per bootstrap model index when given."""
+    key = (a, b, round_no <= 2, _b)
+    if key not in _ko_cache:
+        pH, pD, pA = hda(grid_np(*ko_lams(model, a, b, round_no), P["rho"]))
+        _ko_cache[key] = pH + pD * pH / (pH + pA)
+    return _ko_cache[key]
+
+
+_ko_grid_cache = {}
+
+
+def ko_score_cdf(a, b, round_no):
+    """Mean-model score CDF for a knockout tie (for goal tallies)."""
+    key = (a, b, round_no <= 2)
+    if key not in _ko_grid_cache:
+        g = grid_np(*ko_lams(MEAN, a, b, round_no), P["rho"])
+        _ko_grid_cache[key] = g.ravel().cumsum()
+    return _ko_grid_cache[key]
 
 
 # precompute group score CDFs for every bootstrap model: (B, 72, 169)
@@ -199,11 +218,13 @@ def allocate_thirds(thirds, slots=THIRD_SLOTS):
 
 
 def sim_tournament(b):
-    """One full tournament with bootstrap model b. Returns stage dict."""
+    """One full tournament with bootstrap model b.
+    Returns (group winners, reached stages, tournament goals per team)."""
     model = BOOT[b]
     pts = {}
     gd = {}
     gf = {}
+    goals = {}
     u = np.random.random(len(FIXTURES))
     for f, (home, away, grp) in enumerate(FIX_INFO):
         c = int(np.searchsorted(CDFS[b, f], u[f]))
@@ -212,6 +233,7 @@ def sim_tournament(b):
             pts[t] = pts.get(t, 0) + (3 if sf_ > sa else 1 if sf_ == sa else 0)
             gd[t] = gd.get(t, 0) + sf_ - sa
             gf[t] = gf.get(t, 0) + sf_
+            goals[t] = goals.get(t, 0) + sf_
     win, run, thirds = {}, {}, []
     for g in GROUPS:
         order = sorted(GROUP_TEAMS[g],
@@ -233,39 +255,58 @@ def sim_tournament(b):
             return win[v] if k == "W" else run[v] if k == "R" else alloc[no]
         teams_in[no] = (side(s1), side(s2))
 
+    def play_ko(a, bb, rnd):
+        """Sample a knockout score for goals; settle draws by win-share."""
+        cdf = ko_score_cdf(a, bb, rnd)
+        i, j = divmod(int(np.searchsorted(cdf, random.random())), MAX_G + 1)
+        goals[a] = goals.get(a, 0) + i
+        goals[bb] = goals.get(bb, 0) + j
+        if i > j:
+            return a
+        if j > i:
+            return bb
+        return a if random.random() < ko_win(model, a, bb, rnd, b) else bb
+
     winners = {}
     reached = {"r32": set(), "r16": set(), "qf": set(), "sf": set(),
                "final": set(), "champion": set()}
     for no, (a, bb) in teams_in.items():
         reached["r32"] |= {a, bb}
-        winners[no] = a if random.random() < ko_win(model, a, bb, 1) else bb
+        winners[no] = play_ko(a, bb, 1)
     for rnd, stage, pairs in ((2, "r16", R16), (3, "qf", QF), (4, "sf", SF)):
         for no, m1, m2 in pairs:
             a, bb = winners[m1], winners[m2]
             reached[stage] |= {a, bb}
-            winners[no] = a if random.random() < ko_win(model, a, bb, rnd) else bb
+            winners[no] = play_ko(a, bb, rnd)
     no, m1, m2 = FINAL
     a, bb = winners[m1], winners[m2]
     reached["final"] |= {a, bb}
-    champ = a if random.random() < ko_win(model, a, bb, 5) else bb
+    champ = play_ko(a, bb, 5)
     reached["champion"] = {champ}
-    return win, reached
+    return win, reached, goals
 
 
 def run_futures():
     stages = ["win_group", "r32", "r16", "qf", "sf", "final", "champion"]
-    count = {t: dict.fromkeys(stages, 0) for t in
-             {t for g in GROUPS for t in GROUP_TEAMS[g]}}
+    all_teams = sorted({t for g in GROUPS for t in GROUP_TEAMS[g]})
+    t_idx = {t: i for i, t in enumerate(all_teams)}
+    goals_mat = np.zeros((N_SIMS, len(all_teams)), dtype=np.int16)
+    count = {t: dict.fromkeys(stages, 0) for t in all_teams}
     for s in range(N_SIMS):
         b = s % N_BOOT
-        win, reached = sim_tournament(b)
+        win, reached, goals = sim_tournament(b)
         for g in GROUPS:
             count[win[g]]["win_group"] += 1
         for stage, ts in reached.items():
             for t in ts:
                 count[t][stage] += 1
+        for t, g in goals.items():
+            goals_mat[s, t_idx[t]] = g
         if s % 20000 == 19999:
             print(f"  {s + 1}/{N_SIMS} sims", flush=True)
+    np.savez_compressed(f"{ROOT}/wc26_team_goals.npz",
+                        goals=goals_mat, teams=np.array(all_teams))
+    print("saved per-sim team goal tallies -> wc26_team_goals.npz", flush=True)
     teams = sorted(count, key=lambda t: -count[t]["champion"])
     out = {
         "method": f"{N_SIMS} Monte Carlo tournaments over a {N_BOOT}-model "

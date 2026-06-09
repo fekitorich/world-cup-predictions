@@ -36,6 +36,10 @@ try:
     PRED = json.load(open(ROOT / "wc26_predictions.json"))
 except FileNotFoundError:
     PRED = None
+try:
+    AWARDS = json.load(open(ROOT / "wc26_awards.json"))
+except FileNotFoundError:
+    AWARDS = None
 
 TEAMS = {t["country"]: t for t in teams_data["teams"]}
 MATCHES = matches_data["matches"]
@@ -115,7 +119,7 @@ def page(title, body, depth=0, crumb=""):
 <header class="masthead">
   <div class="kicker">The Form Book — research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
-  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}bracket.html">Bracket</a></nav>
+  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a></nav>
 </header>
 {f'<div class="crumb">{crumb}</div>' if crumb else ''}
 <main>
@@ -490,6 +494,88 @@ the official FIFA bracket decides who meets whom.</p>
     (OUT / "bracket.html").write_text(page("Bracket", body))
 
 
+# ---------- awards page ----------
+def fmt_cents(v):
+    return f"{v * 100:.1f}¢" if v is not None else "—"
+
+
+def build_awards():
+    if not AWARDS:
+        return
+
+    def edge_cell(e):
+        if e is None:
+            return '<td class="num dim">—</td>'
+        cls = "pos" if e >= 0.03 else "neg" if e <= -0.03 else ""
+        return f'<td class="num edge {cls}">{e * 100:+.1f}¢</td>'
+
+    boot_rows = "".join(
+        f'<tr><td>{escape(b["player"])}</td><td>{team_link(b["team"])}</td>'
+        f'<td class="num">{b["intl_goals_24_26"]}</td>'
+        f'<td class="num">{b["exp_goals"]:.1f}</td>'
+        f'<td class="num fair">{b["p_model"] * 100:.1f}¢</td>'
+        f'<td class="num">{fmt_cents(b["market"])}</td>{edge_cell(b["edge"])}</tr>'
+        for b in AWARDS["golden_boot"][:20])
+    nation_rows = "".join(
+        f'<tr><td>{team_link(n["team"])}</td>'
+        f'<td class="num">{n["exp_goals"]:.1f}</td>'
+        f'<td class="num fair">{n["p_model"] * 100:.1f}¢</td>'
+        f'<td class="num">{fmt_cents(n["market"])}</td>{edge_cell(n["edge"])}</tr>'
+        for n in AWARDS["top_scorer_nation"][:12])
+    glove_rows = "".join(
+        f'<tr><td class="num">{i + 1}</td><td>{escape(g["player"])}</td>'
+        f'<td>{team_link(g["team"])}</td>'
+        f'<td class="num">{g["p_final"] * 100:.1f}%</td>'
+        f'<td class="num">{g["conceded_pg"]:.2f}</td>'
+        f'<td class="num">{fmt_cents(g.get("market"))}</td></tr>'
+        for i, g in enumerate(AWARDS["golden_glove"][:12]))
+    ball_rows = "".join(
+        f'<tr><td>{escape(b["player"])}</td>'
+        f'<td>{team_link(b["team"]) if b["team"] else "—"}</td>'
+        f'<td class="num">{fmt_cents(b["market"])}</td>'
+        f'<td class="num">{b["team_champion_p"] * 100:.1f}%'
+        f'</td></tr>' if b["team_champion_p"] is not None else
+        f'<tr><td>{escape(b["player"])}</td><td>—</td>'
+        f'<td class="num">{fmt_cents(b["market"])}</td><td class="num dim">—</td></tr>'
+        for b in AWARDS["golden_ball"][:12])
+
+    body = f"""<h1>The honours board</h1>
+<p class="standfirst">Golden Boot and top-scoring nation are modelled — each player's
+goals simulated across the same 100,000 tournaments behind the Futures page, using his
+share of his team's international goals since 2024. Glove and Ball are softer ground:
+one is a labelled heuristic, the other pure market.</p>
+
+<h2>Golden Boot — modelled</h2>
+<table class="ko">
+<thead><tr><th>Player</th><th>Team</th><th class="num">Intl goals 24–26</th>
+<th class="num">xG (tourn.)</th><th class="num">Model</th><th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
+<tbody>{boot_rows}</tbody></table>
+
+<h2>Top scoring nation — modelled</h2>
+<table class="ko">
+<thead><tr><th>Team</th><th class="num">Exp. goals</th><th class="num">Model</th>
+<th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
+<tbody>{nation_rows}</tbody></table>
+
+<h2>Golden Glove — heuristic lean</h2>
+<p class="standfirst">Rank = P(reach final) × defensive record. Not a calibrated
+probability; the market column is the bettable number.</p>
+<table class="ko">
+<thead><tr><th class="num">#</th><th>Keeper</th><th>Team</th><th class="num">P(final)</th>
+<th class="num">Conceded/g</th><th class="num">Polymarket</th></tr></thead>
+<tbody>{glove_rows}</tbody></table>
+
+<h2>Golden Ball — market only</h2>
+<p class="standfirst">Best-player awards are voted, not scored; we show the market
+with each candidate's team title odds for context.</p>
+<table class="ko">
+<thead><tr><th>Player</th><th>Team</th><th class="num">Polymarket</th>
+<th class="num">Team champion (model)</th></tr></thead>
+<tbody>{ball_rows}</tbody></table>
+<p class="modelnote">{escape(AWARDS["method"])} Prices as of {AWARDS["prices_at"]}.</p>"""
+    (OUT / "awards.html").write_text(page("Awards", body))
+
+
 CSS = """/* WC26 Form Book — editorial racing-form aesthetic */
 :root {
   --paper: #f6f1e6;
@@ -638,5 +724,6 @@ build_team_pages()
 build_match_pages()
 build_futures()
 build_bracket()
+build_awards()
 n = sum(1 for _ in OUT.rglob("*.html"))
 print(f"built {n} pages in {OUT}")
