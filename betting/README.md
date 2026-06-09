@@ -26,12 +26,15 @@ Turns the model's edges into capped, Kelly-sized Polymarket orders.
 `betting/.env` (gitignored, as is all of `betting/state/`):
 
 ```
-POLYMARKET_PRIVATE_KEY=0x...   # Polygon wallet key that holds your USDC
-POLYMARKET_FUNDER=0x...        # ONLY if your account is email/Magic-based
+POLYMARKET_PRIVATE_KEY=0x...    # export: Polymarket settings (email login)
+                                #         or MetaMask account details
+POLYMARKET_FUNDER=0x...         # your Polymarket profile/deposit address
+POLYMARKET_SIGNATURE_TYPE=1     # 1 = email/Google login, 2 = MetaMask login
 ```
 
-Setup: `.venv/bin/pip install py-clob-client`. Your wallet needs USDC on
-Polygon and Polymarket allowances (do one manual trade in the UI first).
+An existing funded Polymarket account is all you need — the script trades
+as that account. If you've ever placed a trade in the UI, allowances are
+already set. (`.venv/bin/pip install py-clob-client` once.)
 
 ## Honest caveats
 

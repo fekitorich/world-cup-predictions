@@ -97,10 +97,12 @@ def main():
     from py_clob_client.clob_types import MarketOrderArgs, OrderType
 
     funder = env.get("POLYMARKET_FUNDER")
-    if funder:   # email/Magic login accounts trade through a proxy wallet
+    # 1 = email/Magic login, 2 = MetaMask/browser-wallet login
+    sig_type = int(env.get("POLYMARKET_SIGNATURE_TYPE", "1"))
+    if funder:   # normal Polymarket accounts trade through a proxy wallet
         client = ClobClient("https://clob.polymarket.com", key=key,
-                            chain_id=137, signature_type=1, funder=funder)
-    else:        # plain EOA wallet
+                            chain_id=137, signature_type=sig_type, funder=funder)
+    else:        # plain EOA trading directly (rare)
         client = ClobClient("https://clob.polymarket.com", key=key, chain_id=137)
     client.set_api_creds(client.create_or_derive_api_creds())
 
