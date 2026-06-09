@@ -136,15 +136,21 @@ def main():
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     cands.sort(key=lambda c: -c["edge"])
-    cands = cands[:CFG.get("max_bets", 12)]   # concentrate small bankrolls
+    # category breadth: award bets that qualify always make the plan,
+    # moneyline fills the remaining slots by edge
+    max_bets = CFG.get("max_bets", 12)
+    awards = [c for c in cands if c["category"] != "moneyline"]
+    mlines = [c for c in cands if c["category"] == "moneyline"]
+    cands = awards + mlines[:max(max_bets - len(awards), 0)]
+    cands.sort(key=lambda c: -c["edge"])
 
     bankroll = CFG["max_total_stake_usdc"]
     total = 0.0
     for c in cands:
         stake = min(kelly_stake(c["model_p"], c["market_p"], bankroll),
                     CFG["max_per_bet_usdc"])
-        c["stake_usdc"] = round(max(stake, 0), 2)
-    cands = [c for c in cands if c["stake_usdc"] >= CFG.get("min_stake_usdc", 1)]
+        # floor qualifying bets at min_stake for breadth across categories
+        c["stake_usdc"] = round(max(stake, CFG.get("min_stake_usdc", 1)), 2)
     # scale down if the plan exceeds the total cap
     planned = sum(c["stake_usdc"] for c in cands)
     if planned > bankroll:
