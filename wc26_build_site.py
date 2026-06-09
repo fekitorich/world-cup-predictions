@@ -161,6 +161,11 @@ def build_index():
 
     body = f"""<h1>The twelve groups</h1>
 <p class="standfirst">48 teams, seeded here by FIFA ranking. Click any team for its full dossier.</p>
+<p class="fineprint">The FIFA column is the official 1 April 2026 ranking, shown for orientation only —
+the simulation rates teams purely from match results and disagrees in places (France is FIFA #1
+but mid-pack by title odds; the model prefers recent goals to reputation). The <sup class="host">host</sup>
+marker matters beyond ceremony: hosts get a fitted home-crowd boost (~+30% scoring) whenever they
+play in their own country, which is most of their matches.</p>
 <div class="groups">{''.join(cards)}</div>"""
     (OUT / "index.html").write_text(page("Groups", body))
 
@@ -193,6 +198,10 @@ def build_matches_list():
 
     body = f"""<h1>Group stage — all 72 fixtures</h1>
 <p class="standfirst">Every match links to a head-to-head card comparing both teams' last ten.</p>
+<p class="fineprint">Kick-offs are UTC — the 00:00–02:00 oddities are evening games in US/Mexico time
+zones, landing a calendar day later than the local date Polymarket uses in its market slugs.
+On matchday 3 both games in a group kick off simultaneously (FIFA's anti-collusion rule since 1982),
+so their in-play prices move together.</p>
 {''.join(sections)}"""
     (OUT / "matches.html").write_text(page("Matches", body))
 
@@ -253,6 +262,12 @@ def build_team_pages():
 {form_chips(t, 10)}
 </div>
 {stat_strip(stats(t))}
+<p class="fineprint">Over 2.5 (three-plus total goals) and BTTS (both teams scored) are counted
+here because they're the totals categories prediction markets actually trade. Caveat on the
+last ten: a few teams padded theirs with friendlies against club or B-team opposition — those
+rows say little, and the model's training data excludes non-international opponents entirely.
+Matches decided on penalties are recorded as draws (with a note): that's how FIFA counts them
+and how the model scores them.</p>
 <h2>Last ten internationals</h2>
 {last10_table(t)}
 <h2>Group {g} fixtures</h2>
@@ -335,6 +350,11 @@ def sim_section(m):
     bt = f" · backtest log-loss {SIM_LOGLOSS} vs 1.046 baseline on 1,071 matches" if SIM_LOGLOSS else ""
     return f"""<section class="sim">
 <h2>Simulation — fair prices vs market</h2>
+<p class="fineprint">Fair price is the model's probability written in Polymarket cents — a 56¢
+fair price means 56%, and a share bought below it profits on average <em>if the model is right</em>.
+Edge = fair minus market: green means the market sells the outcome cheaper than the model values it.
+xG here is Dixon-Coles expected goals from attack/defence ratings, not the shot-based xG of
+broadcast graphics. Spread −1.5 = win by two or more clear goals.</p>
 {hf}
 <p class="meta center">Model expected goals: {escape(m['home'])} {sim['xg']['home']} — {sim['xg']['away']} {escape(m['away'])}</p>
 {bar}
@@ -392,9 +412,14 @@ def build_futures():
         rows.append(f'<tr><td>{team_link(name)}</td>'
                     f'<td><b class="gchip">{team_group.get(name, "?")}</b></td>{cells}</tr>')
     body = f"""<h1>Tournament futures</h1>
-<p class="standfirst">20,000 Monte Carlo tournaments on the tuned match model.
-Group stage follows the real schedule; the knockout draw is approximated, so treat
-deep-run numbers as fair-value anchors for Polymarket futures, not gospel.</p>
+<p class="standfirst">100,000 Monte Carlo tournaments on a 200-model bootstrap ensemble,
+using the official FIFA bracket.</p>
+<p class="fineprint">Reach R32 is not the same as win group — eight third-placed teams advance
+too, which is why mid-tier teams clear 70% there. Columns nest (champion ⊂ final ⊂ SF…), and
+each column sums across all 48 teams to the slots available: 12 group wins, 2 finalists, 1 champion.
+Read every percentage as a fair Polymarket price for that future. The ensemble matters: simulating
+with 200 bootstrap refits instead of one model widens uncertainty and shaves a couple of points
+off the favourite — that haircut is honesty, not noise.</p>
 <table class="futures">
 <thead><tr><th>Team</th><th>Grp</th><th class="num">Win group</th><th class="num">Reach R32</th>
 <th class="num">QF</th><th class="num">SF</th><th class="num">Final</th><th class="num">Champion</th></tr></thead>
@@ -484,6 +509,13 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
 graded against reality as results land. Picks are modal outcomes from the mean model;
 the official FIFA bracket decides who meets whom.</p>
 <div class="champ">Predicted champion: <b>{team_link(PRED['champion'])}</b></div>
+<p class="fineprint">A locked bracket never updates — when reality diverges, the picks stay frozen,
+because a prediction you can revise isn't a prediction. The Conf column is the model's own
+probability for its pick: a 50% pick is a coin flip it was forced to call, so judge the model by
+the scorecard's probability metrics, not the ✓/✗ column. Brier and log-loss score the
+probabilities themselves (lower is better; guessing ⅓-⅓-⅓ scores 0.667 Brier, 1.099 log-loss) —
+and the model/market/blend comparison is the real experiment here: it settles which forecaster
+deserves your trust with actual match results.</p>
 <h2>Scorecard</h2>
 {acc_html}
 {ko_html}
@@ -546,6 +578,13 @@ share of his team's international goals since 2024. Glove and Ball are softer gr
 one is a labelled heuristic, the other pure market.</p>
 
 <h2>Golden Boot — modelled</h2>
+<p class="fineprint">xG (tourn.) is the player's expected tournament goals: his share of his
+team's international goals since 2024, applied to his team's goal count in each simulated
+tournament — so deep-run odds are baked in, and a striker on a likely semi-finalist beats an
+equal scorer on a group-stage exit. The share is not adjusted for opposition quality, which is
+why CONCACAF strikers rate high and the market disagrees. A "—" market means Polymarket simply
+hasn't listed the player: the model's co-favourite is unpriced, which is either an oversight
+or a verdict.</p>
 <table class="ko">
 <thead><tr><th>Player</th><th>Team</th><th class="num">Intl goals 24–26</th>
 <th class="num">xG (tourn.)</th><th class="num">Model</th><th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
@@ -711,6 +750,11 @@ footer p { margin: .2rem 0; }
 .scorelines { text-align: center; font-size: .85rem; }
 .scorelines small { color: var(--ink-soft); }
 .modelnote { font-size: .72rem; color: var(--ink-soft); text-align: center; max-width: 54ch; margin: 1.2rem auto 0; }
+.fineprint {
+  font-size: .76rem; color: var(--ink-soft); max-width: 72ch; line-height: 1.55;
+  border-left: 3px solid var(--rule); padding-left: .9rem; margin: .4rem 0 1.4rem;
+}
+.sim .fineprint { margin-left: auto; margin-right: auto; }
 """
 
 if OUT.exists():

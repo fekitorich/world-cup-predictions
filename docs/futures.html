@@ -19,9 +19,14 @@
 
 <main>
 <h1>Tournament futures</h1>
-<p class="standfirst">20,000 Monte Carlo tournaments on the tuned match model.
-Group stage follows the real schedule; the knockout draw is approximated, so treat
-deep-run numbers as fair-value anchors for Polymarket futures, not gospel.</p>
+<p class="standfirst">100,000 Monte Carlo tournaments on a 200-model bootstrap ensemble,
+using the official FIFA bracket.</p>
+<p class="fineprint">Reach R32 is not the same as win group — eight third-placed teams advance
+too, which is why mid-tier teams clear 70% there. Columns nest (champion ⊂ final ⊂ SF…), and
+each column sums across all 48 teams to the slots available: 12 group wins, 2 finalists, 1 champion.
+Read every percentage as a fair Polymarket price for that future. The ensemble matters: simulating
+with 200 bootstrap refits instead of one model widens uncertainty and shaves a couple of points
+off the favourite — that haircut is honesty, not noise.</p>
 <table class="futures">
 <thead><tr><th>Team</th><th>Grp</th><th class="num">Win group</th><th class="num">Reach R32</th>
 <th class="num">QF</th><th class="num">SF</th><th class="num">Final</th><th class="num">Champion</th></tr></thead>
