@@ -1,12 +1,12 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "ranking_date": "June 2026",
+  "ranking_date": "2026-04-01 (official FIFA ranking)",
   "teams": [
     {
       "country": "United States",
       "confederation": "CONCACAF",
       "host": true,
-      "fifa_ranking": 17,
+      "fifa_ranking": 16,
       "last_10_matches": [
         {
           "date": "2026-06-06",
@@ -182,7 +182,7 @@
       "country": "Mexico",
       "confederation": "CONCACAF",
       "host": true,
-      "fifa_ranking": 14,
+      "fifa_ranking": 15,
       "last_10_matches": [
         {
           "date": "2026-06-05",
@@ -270,7 +270,7 @@
       "country": "Panama",
       "confederation": "CONCACAF",
       "host": false,
-      "fifa_ranking": 34,
+      "fifa_ranking": 33,
       "last_10_matches": [
         {
           "date": "2026-06-06",
@@ -358,7 +358,7 @@
       "country": "Argentina",
       "confederation": "CONMEBOL",
       "host": false,
-      "fifa_ranking": 1,
+      "fifa_ranking": 3,
       "last_10_matches": [
         {
           "date": "2026-06-07",
@@ -622,7 +622,7 @@
       "country": "Uruguay",
       "confederation": "CONMEBOL",
       "host": false,
-      "fifa_ranking": 16,
+      "fifa_ranking": 17,
       "last_10_matches": [
         {
           "date": "2026-03-31",
@@ -1062,7 +1062,7 @@
       "country": "France",
       "confederation": "UEFA",
       "host": false,
-      "fifa_ranking": 3,
+      "fifa_ranking": 1,
       "last_10_matches": [
         {
           "date": "2026-06-08",
@@ -1327,7 +1327,7 @@
       "country": "Netherlands",
       "confederation": "UEFA",
       "host": false,
-      "fifa_ranking": 8,
+      "fifa_ranking": 7,
       "last_10_matches": [
         {
           "date": "2026-06-08",
@@ -1855,7 +1855,7 @@
       "country": "Scotland",
       "confederation": "UEFA",
       "host": false,
-      "fifa_ranking": 37,
+      "fifa_ranking": 43,
       "last_10_matches": [
         {
           "date": "2026-06-06",
@@ -1943,7 +1943,7 @@
       "country": "Morocco",
       "confederation": "CAF",
       "host": false,
-      "fifa_ranking": 7,
+      "fifa_ranking": 8,
       "last_10_matches": [
         {
           "date": "2026-06-07",
@@ -2032,7 +2032,7 @@
       "country": "Senegal",
       "confederation": "CAF",
       "host": false,
-      "fifa_ranking": 15,
+      "fifa_ranking": 14,
       "last_10_matches": [
         {
           "date": "2026-05-31",
@@ -2209,7 +2209,7 @@
       "country": "Ivory Coast",
       "confederation": "CAF",
       "host": false,
-      "fifa_ranking": 36,
+      "fifa_ranking": 34,
       "last_10_matches": [
         {
           "date": "2026-06-08",
@@ -2474,7 +2474,7 @@
       "country": "Tunisia",
       "confederation": "CAF",
       "host": false,
-      "fifa_ranking": 47,
+      "fifa_ranking": 44,
       "last_10_matches": [
         {
           "date": "2026-06-06",
