@@ -156,7 +156,7 @@ def build_index():
         cards.append(f"""<section class="group">
 <h2><span>Group</span> {g}</h2>
 <table>
-<thead><tr><th>Team</th><th class="num">FIFA</th><th>Form</th></tr></thead>
+<thead><tr><th>Team</th><th class="num" title="official FIFA ranking, 1 Apr 2026 — shown for orientation; the model does not use it">FIFA</th><th title="last 5 internationals, most recent first — W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -196,7 +196,7 @@ def build_matches_list():
         sections.append(f"""<section class="matchday">
 <h2>{date_label}</h2>
 <table>
-<thead><tr><th class="num">UTC</th><th>Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" title="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th title="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -225,19 +225,19 @@ def last10_table(team):
 <td class="comp">{escape(m['competition'])}</td>
 </tr>""")
     return f"""<table class="last10">
-<thead><tr><th class="num">Date</th><th>Opponent</th><th class="num">H/A</th><th class="num">Score</th><th>Res</th><th>Competition</th></tr></thead>
+<thead><tr><th class="num">Date</th><th>Opponent</th><th class="num" title="home or away, from this team's perspective">H/A</th><th class="num" title="goals for-against, from this team's perspective">Score</th><th title="result: W win, D draw (pens count as draws), L loss">Res</th><th>Competition</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>"""
 
 
 def stat_strip(s):
     return f"""<dl class="stats">
-<div><dt>Record</dt><dd>{s['record']}</dd></div>
-<div><dt>Goals / game</dt><dd>{s['gf_pg']:.1f}</dd></div>
-<div><dt>Conceded / game</dt><dd>{s['ga_pg']:.1f}</dd></div>
-<div><dt>Clean sheets</dt><dd>{s['cs']}/{s['n']}</dd></div>
-<div><dt>Over 2.5</dt><dd>{s['o25']}/{s['n']}</dd></div>
-<div><dt>BTTS</dt><dd>{s['btts']}/{s['n']}</dd></div>
+<div><dt title="wins-draws-losses over the last 10 internationals">Record</dt><dd>{s['record']}</dd></div>
+<div><dt title="goals scored per game, last 10">Goals / game</dt><dd>{s['gf_pg']:.1f}</dd></div>
+<div><dt title="goals conceded per game, last 10">Conceded / game</dt><dd>{s['ga_pg']:.1f}</dd></div>
+<div><dt title="games without conceding, last 10">Clean sheets</dt><dd>{s['cs']}/{s['n']}</dd></div>
+<div><dt title="games with 3+ total goals — the standard totals betting line">Over 2.5</dt><dd>{s['o25']}/{s['n']}</dd></div>
+<div><dt title="both teams scored — a standard prediction-market category">BTTS</dt><dd>{s['btts']}/{s['n']}</dd></div>
 </dl>"""
 
 
@@ -298,8 +298,17 @@ def compare_rows(h, a):
         ("Over 2.5 goals", f"{sh['o25']}/10", f"{sa['o25']}/10"),
         ("Both teams scored", f"{sh['btts']}/10", f"{sa['btts']}/10"),
     ]
+    tips = {
+        "FIFA ranking": "official FIFA ranking, 1 Apr 2026 — not used by the model",
+        "Form (last 5)": "most recent first — W win, D draw, L loss",
+        "Record (10)": "wins-draws-losses over the last 10 internationals",
+        "Clean sheets": "games without conceding, of the last 10",
+        "Over 2.5 goals": "games with 3+ total goals, of the last 10",
+        "Both teams scored": "games where neither side kept a clean sheet, of the last 10",
+    }
     return "".join(
-        f'<tr><td class="cl">{l}</td><th>{k}</th><td class="cr">{r}</td></tr>'
+        f'<tr><td class="cl">{l}</td><th title="{tips.get(k, "")}">{k}</th>'
+        f'<td class="cr">{r}</td></tr>'
         for k, l, r in rows
     )
 
@@ -364,7 +373,7 @@ broadcast graphics. Spread −1.5 = win by two or more clear goals.</p>
 <p class="meta center">Model expected goals: {escape(m['home'])} {sim['xg']['home']} — {sim['xg']['away']} {escape(m['away'])}</p>
 {bar}
 <table class="markets">
-<thead><tr><th>Market</th><th class="num">Probability</th><th class="num">Fair</th><th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
+<thead><tr><th>Market</th><th class="num" title="model probability of this outcome">Probability</th><th class="num" title="the model probability written as a share price — buy below this and you profit on average if the model is right">Fair</th><th class="num" title="live Polymarket YES price at last snapshot">Polymarket</th><th class="num" title="fair minus market — positive (green) means the market sells it cheaper than the model values it">Edge</th></tr></thead>
 <tbody>{''.join(market_rows)}</tbody>
 </table>
 {market_note}
@@ -426,8 +435,8 @@ Read every percentage as a fair Polymarket price for that future. The ensemble m
 with 200 bootstrap refits instead of one model widens uncertainty and shaves a couple of points
 off the favourite — that haircut is honesty, not noise.</p>
 <table class="futures">
-<thead><tr><th>Team</th><th>Grp</th><th class="num">Win group</th><th class="num">Reach R32</th>
-<th class="num">QF</th><th class="num">SF</th><th class="num">Final</th><th class="num">Champion</th></tr></thead>
+<thead><tr><th>Team</th><th title="group A-L">Grp</th><th class="num" title="finish top of the group">Win group</th><th class="num" title="advance to the round of 32 — top two per group plus the eight best third-placed teams">Reach R32</th>
+<th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament — column sums to 100% across all teams">Champion</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>"""
     (OUT / "futures.html").write_text(page("Futures", body))
@@ -454,7 +463,7 @@ def build_bracket():
                 f'<td class="num">{v["logloss"]}</td></tr>'
                 for src, v in acc["compare"].items())
             acc_html += f"""<table class="ko">
-<thead><tr><th>Probability source</th><th class="num">Brier</th><th class="num">Log-loss</th></tr></thead>
+<thead><tr><th>Probability source</th><th class="num" title="mean squared error of the probabilities — lower is better; guessing equally scores 0.667">Brier</th><th class="num" title="penalises confident wrong calls hardest — lower is better; guessing equally scores 1.099">Log-loss</th></tr></thead>
 <tbody>{comp_rows}</tbody></table>
 <p class="meta center">Lower is better — this settles whether the model, the market,
 or the blend prices matches best (market graded on {acc['market_priced_matches']} priced matches).</p>"""
@@ -477,7 +486,7 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
             f'<td class="num">{k["p_pick"] * 100:.0f}%</td></tr>'
             for k in rounds[rname])
         ko_html += f"""<section><h2>{rname}</h2>
-<table class="ko"><thead><tr><th class="num">#</th><th>Tie (predicted)</th><th>Pick</th><th class="num">Conf.</th></tr></thead>
+<table class="ko"><thead><tr><th class="num" title="official FIFA match number">#</th><th>Tie (predicted)</th><th>Pick</th><th class="num" title="the model's own probability for its pick — 50% means a forced coin-flip call">Conf.</th></tr></thead>
 <tbody>{lines}</tbody></table></section>"""
 
     gt_html = ""
@@ -505,8 +514,8 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
             f'<td class="num score">{p["pred_score"]}</td>'
             f'<td class="num">{conf:.0f}%</td>{actual}</tr>')
     track_html = f"""<table>
-<thead><tr><th class="num">Date</th><th>Grp</th><th>Fixture</th>
-<th class="num">Pred</th><th class="num">Conf.</th><th class="num">Actual</th><th></th></tr></thead>
+<thead><tr><th class="num">Date</th><th title="group A-L">Grp</th><th>Fixture</th>
+<th class="num" title="most likely exact score under the model">Pred</th><th class="num" title="probability of the predicted 1X2 result (market-blended)">Conf.</th><th class="num" title="filled in by wc26_update_results.py as games finish">Actual</th><th></th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>"""
 
     body = f"""<h1>The predicted tournament</h1>
@@ -591,8 +600,8 @@ why CONCACAF strikers rate high and the market disagrees. A "—" market means P
 hasn't listed the player: the model's co-favourite is unpriced, which is either an oversight
 or a verdict.</p>
 <table class="ko">
-<thead><tr><th>Player</th><th>Team</th><th class="num">Intl goals 24–26</th>
-<th class="num">xG (tourn.)</th><th class="num">Model</th><th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
+<thead><tr><th>Player</th><th>Team</th><th class="num" title="international goals 2024-26, all competitions — the basis of his share of team goals">Intl goals 24–26</th>
+<th class="num" title="expected tournament goals: his share applied to his team's goals across 100k simulated tournaments — deep runs included">xG (tourn.)</th><th class="num" title="probability of winning the Golden Boot, as a fair price">Model</th><th class="num" title="live Polymarket YES price">Polymarket</th><th class="num" title="model minus market — positive means underpriced">Edge</th></tr></thead>
 <tbody>{boot_rows}</tbody></table>
 
 <h2>Top scoring nation — modelled</h2>
@@ -605,8 +614,8 @@ or a verdict.</p>
 <p class="standfirst">Rank = P(reach final) × defensive record. Not a calibrated
 probability; the market column is the bettable number.</p>
 <table class="ko">
-<thead><tr><th class="num">#</th><th>Keeper</th><th>Team</th><th class="num">P(final)</th>
-<th class="num">Conceded/g</th><th class="num">Polymarket</th></tr></thead>
+<thead><tr><th class="num" title="heuristic rank: reach-final probability x defensive record — not a calibrated probability">#</th><th>Keeper</th><th>Team</th><th class="num" title="team's probability of reaching the final (Glove winners almost always come from finalists)">P(final)</th>
+<th class="num" title="team goals conceded per game, last 10">Conceded/g</th><th class="num" title="live Polymarket YES price">Polymarket</th></tr></thead>
 <tbody>{glove_rows}</tbody></table>
 
 <h2>Golden Ball — market only</h2>
@@ -780,6 +789,11 @@ footer p { margin: .2rem 0; }
 .scorelines { text-align: center; font-size: .85rem; }
 .scorelines small { color: var(--ink-soft); }
 .modelnote { font-size: .72rem; color: var(--ink-soft); text-align: center; max-width: 54ch; margin: 1.2rem auto 0; }
+th[title]:not([title=""]), dt[title] {
+  cursor: help;
+  text-decoration: underline dotted var(--ink-soft);
+  text-underline-offset: 3px;
+}
 .fineprint {
   font-size: .76rem; color: var(--ink-soft); max-width: 72ch; line-height: 1.55;
   border-left: 3px solid var(--rule); padding-left: .9rem; margin: .4rem 0 1.4rem;
