@@ -108,6 +108,31 @@ sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
 footer { max-width: 1080px; margin: 0 auto; padding: 18px 24px 40px; border-top: 3px double var(--ink); font-size: .72rem; color: var(--ink-soft); }
 footer p { margin: .2rem 0; }
 
+/* mobile */
+@media (max-width: 700px) {
+  main { padding: 0 14px 40px; }
+  .crumb { padding: 0 14px; }
+  h1 { font-size: 1.9rem; }
+  .wordmark { font-size: 2.1rem; }
+  .masthead { padding: 18px 8px 10px; }
+  .masthead nav { font-size: .7rem; letter-spacing: .08em; }
+  .masthead nav span { margin: 0 5px; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { font-size: .78rem; }
+  td, th { padding: .4rem .45rem .4rem 0; }
+  td.num, th.num { white-space: nowrap; }
+  .comp, .venue { white-space: nowrap; }
+  .stats div { flex: 1 1 90px; padding: .5rem .4rem; }
+  .stats dd { font-size: 1.05rem; }
+  .mlbar .seg { font-size: .58rem; padding: .5em .15em; }
+  .versus { gap: .6rem; }
+  .versus .v { font-size: 1rem; }
+  .bigscore { font-size: 2.2rem; }
+  .champ { font-size: 1.15rem; padding: .6rem .8rem; }
+  .fineprint { font-size: .72rem; }
+  .twocol { gap: 20px; }
+}
+
 /* simulation section */
 .sim { max-width: 640px; margin: 2.5rem auto 0; }
 .sim h2 { text-align: center; border-bottom: 2px solid var(--ink); }
