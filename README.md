@@ -4,7 +4,7 @@ Personal research tool for the FIFA World Cup 2026: a Dixon-Coles goal model,
 Monte Carlo tournament simulations, Polymarket price comparison, and a locked
 pre-tournament bracket graded against reality as results land.
 
-**Site:** https://amirdaraee.github.io/world-cup-predictions/
+**Site:** http://amirdaraee.com/world-cup-predictions/
 
 ## What's inside
 
