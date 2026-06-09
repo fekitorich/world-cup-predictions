@@ -179,11 +179,13 @@ def ko_win(model, a, b, round_no, _b=None):
 _ko_grid_cache = {}
 
 
-def ko_score_cdf(a, b, round_no):
-    """Mean-model score CDF for a knockout tie (for goal tallies)."""
-    key = (a, b, round_no <= 2)
+def ko_score_cdf(a, b, round_no, model=None, _b=None):
+    """Score CDF for a knockout tie, from the given bootstrap model so
+    parameter uncertainty reaches the knockout rounds (cached per model)."""
+    key = (a, b, round_no <= 2, _b)
     if key not in _ko_grid_cache:
-        g = grid_np(*ko_lams(MEAN, a, b, round_no), P["rho"])
+        g = grid_np(*ko_lams(model if model is not None else MEAN,
+                             a, b, round_no), P["rho"])
         _ko_grid_cache[key] = g.ravel().cumsum()
     return _ko_grid_cache[key]
 
@@ -257,7 +259,7 @@ def sim_tournament(b):
 
     def play_ko(a, bb, rnd):
         """Sample a knockout score for goals; settle draws by win-share."""
-        cdf = ko_score_cdf(a, bb, rnd)
+        cdf = ko_score_cdf(a, bb, rnd, model, b)
         i, j = divmod(int(np.searchsorted(cdf, random.random())), MAX_G + 1)
         goals[a] = goals.get(a, 0) + i
         goals[bb] = goals.get(bb, 0) + j
