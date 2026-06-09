@@ -153,7 +153,6 @@ footer p { margin: .2rem 0; }
 .futures td.hot { color: var(--green); font-weight: 600; }
 .champ { text-align: center; font-family: "Fraunces", serif; font-size: 1.5rem;
   border: 3px double var(--ink); padding: .8rem 1rem; margin: 1.2rem auto; max-width: 560px; }
-.ko { max-width: 720px; }
 .ko .pick { font-weight: 600; }
 .ko em, .standfirst code { font-style: italic; color: var(--ink-soft); }
 .scorelines { text-align: center; font-size: .85rem; }
@@ -177,7 +176,7 @@ footer p { margin: .2rem 0; }
 th.num[data-tip]:hover::after, dt[data-tip]:hover::after { left: auto; right: 0; }
 span.form[data-tip]:hover::after { left: auto; right: 0; }
 .fineprint {
-  font-size: .76rem; color: var(--ink-soft); max-width: 72ch; line-height: 1.55;
+  font-size: .76rem; color: var(--ink-soft); line-height: 1.55;
   border-left: 3px solid var(--rule); padding-left: .9rem; margin: .4rem 0 1.4rem;
 }
 .sim .fineprint { margin-left: auto; margin-right: auto; }
