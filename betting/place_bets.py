@@ -23,6 +23,8 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CFG = json.load(open(f"{HERE}/config.json"))
+if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
+    CFG.update(json.load(open(f"{HERE}/config.local.json")))
 LEDGER_PATH = f"{HERE}/state/ledger.json"
 
 
@@ -50,6 +52,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--live", action="store_true",
                     help="actually place orders (default: dry run)")
+    ap.add_argument("--limit", type=int, default=None,
+                    help="place at most N orders from the top of the plan")
     args = ap.parse_args()
 
     plan = json.load(open(f"{HERE}/state/plan.json"))
@@ -73,6 +77,8 @@ def main():
             continue
         todo.append(b)
 
+    if args.limit:
+        todo = todo[:args.limit]
     batch = sum(b["stake_usdc"] for b in todo)
     print(f"\nledger so far: ${spent:.2f} · this batch: ${batch:.2f} "
           f"· cap: ${CFG['max_total_stake_usdc']}")
@@ -93,8 +99,11 @@ def main():
         sys.exit("POLYMARKET_PRIVATE_KEY missing — put it in betting/.env "
                  "(gitignored) or the environment")
 
-    from py_clob_client.client import ClobClient
-    from py_clob_client.clob_types import ApiCreds, MarketOrderArgs, OrderType
+    # V2 SDK — required since Polymarket's 2026-04-28 exchange migration
+    from py_clob_client_v2.client import ClobClient
+    from py_clob_client_v2.clob_types import (ApiCreds, MarketOrderArgsV2,
+                                              OrderType,
+                                              PartialCreateOrderOptions)
 
     funder = env.get("POLYMARKET_FUNDER")
     # 1 = email/Magic login, 2 = MetaMask/browser-wallet login
@@ -104,18 +113,27 @@ def main():
                             chain_id=137, signature_type=sig_type, funder=funder)
     else:        # plain EOA trading directly (rare)
         client = ClobClient("https://clob.polymarket.com", key=key, chain_id=137)
-    if env.get("CLOB_API_KEY"):
-        client.set_api_creds(ApiCreds(
-            api_key=env["CLOB_API_KEY"], api_secret=env["CLOB_SECRET"],
-            api_passphrase=env["CLOB_PASSPHRASE"]))
-    else:
-        client.set_api_creds(client.create_or_derive_api_creds())
+    # derive CLOB creds from the signing key (canonical path); fall back to
+    # any explicitly provided creds if derivation fails
+    try:
+        client.set_api_creds(client.create_or_derive_api_key())
+    except Exception as e:
+        if env.get("CLOB_API_KEY"):
+            print(f"derive failed ({e}); trying provided CLOB creds")
+            client.set_api_creds(ApiCreds(
+                api_key=env["CLOB_API_KEY"], api_secret=env["CLOB_SECRET"],
+                api_passphrase=env["CLOB_PASSPHRASE"]))
+        else:
+            raise
 
     for b in todo:
         print(f"placing ${b['stake_usdc']:.2f} on {b['bet']} ...", flush=True)
         try:
-            order = client.create_market_order(MarketOrderArgs(
-                token_id=b["token_id"], amount=b["stake_usdc"], side="BUY"))
+            # WC match markets are neg-risk (multi-outcome) markets
+            order = client.create_market_order(
+                MarketOrderArgsV2(token_id=b["token_id"],
+                                  amount=b["stake_usdc"], side="BUY"),
+                PartialCreateOrderOptions(neg_risk=True))
             resp = client.post_order(order, OrderType.FOK)
             ok = bool(resp and resp.get("success"))
             print("  ->", resp)

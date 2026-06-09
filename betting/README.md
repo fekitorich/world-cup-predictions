@@ -34,7 +34,7 @@ POLYMARKET_SIGNATURE_TYPE=1     # 1 = email/Google login, 2 = MetaMask login
 
 An existing funded Polymarket account is all you need — the script trades
 as that account. If you've ever placed a trade in the UI, allowances are
-already set. (`.venv/bin/pip install py-clob-client` once.)
+already set. (`.venv/bin/pip install py-clob-client-v2` once.)
 
 ## Honest caveats
 

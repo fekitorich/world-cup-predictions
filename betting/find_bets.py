@@ -23,6 +23,8 @@ sys.path.insert(0, ROOT)
 from wc26_polymarket import ALIASES, names_for  # noqa: E402
 
 CFG = json.load(open(f"{HERE}/config.json"))
+if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
+    CFG.update(json.load(open(f"{HERE}/config.local.json")))
 AWARD_SLUGS = {
     "golden_boot": "world-cup-golden-boot-winner",
     "top_scorer_nation": "world-cup-top-scorer-nation",
