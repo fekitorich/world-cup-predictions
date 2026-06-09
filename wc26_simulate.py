@@ -59,15 +59,37 @@ def params():
 
 
 def load_matches(cutoff, half_life, friendly_w, margin_cap=99):
+    # corrections + missing matches, adjudicated against API-Football
+    # (see wc26_data_patches.json); survive CSV re-downloads
+    try:
+        patches = json.load(open(f"{ROOT}/wc26_data_patches.json"))
+    except FileNotFoundError:
+        patches = {"score_fixes": [], "additions": []}
+    fixes = {(f["date"], f["home_team"], f["away_team"]):
+             (f["home_score"], f["away_score"]) for f in patches["score_fixes"]}
     out = []
     cut = date.fromisoformat(cutoff)
-    for r in csv.DictReader(open(f"{ROOT}/international_results.csv")):
+    rows = list(csv.DictReader(open(f"{ROOT}/international_results.csv")))
+    seen = {(r["date"], r["home_team"], r["away_team"]) for r in rows}
+    for a in patches["additions"]:
+        if (a["date"], a["home_team"], a["away_team"]) not in seen:
+            rows.append({"date": a["date"], "home_team": a["home_team"],
+                         "away_team": a["away_team"],
+                         "home_score": str(a["home_score"]),
+                         "away_score": str(a["away_score"]),
+                         "tournament": a["tournament"],
+                         "neutral": "TRUE" if a["neutral"] else "FALSE"})
+    for r in rows:
         if r["home_score"] == "NA" or not (SINCE <= r["date"] < cutoff):
             continue
         w = 0.5 ** ((cut - date.fromisoformat(r["date"])).days / half_life)
         if r["tournament"] == "Friendly":
             w *= friendly_w
-        hg, ag = int(r["home_score"]), int(r["away_score"])
+        key = (r["date"], r["home_team"], r["away_team"])
+        if key in fixes:
+            hg, ag = fixes[key]
+        else:
+            hg, ag = int(r["home_score"]), int(r["away_score"])
         # cap blowout margins: 9-1 friendlies say less than they shout
         if hg - ag > margin_cap:
             hg = ag + margin_cap
