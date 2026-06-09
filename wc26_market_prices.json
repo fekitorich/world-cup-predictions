@@ -1,0 +1,646 @@
+{
+  "fetched_at": "2026-06-09 19:03 UTC",
+  "source": "Polymarket Gamma API",
+  "prices": {
+    "1489369": {
+      "moneyline": {
+        "home": 0.695,
+        "draw": 0.205,
+        "away": 0.105
+      },
+      "slug": "fifwc-mex-rsa-2026-06-11",
+      "volume": 709700,
+      "liquidity": 1704097
+    },
+    "1489370": {
+      "moneyline": {
+        "draw": 0.285,
+        "home": 0.495,
+        "away": 0.235
+      },
+      "slug": "fifwc-usa-par-2026-06-12",
+      "volume": 408256,
+      "liquidity": 867091
+    },
+    "1489373": {
+      "moneyline": {
+        "draw": 0.135,
+        "away": 0.795,
+        "home": 0.063
+      },
+      "slug": "fifwc-qat-che-2026-06-13",
+      "volume": 152637,
+      "liquidity": 516260
+    },
+    "1489371": {
+      "moneyline": {
+        "away": 0.175,
+        "home": 0.585,
+        "draw": 0.245
+      },
+      "slug": "fifwc-bra-mar-2026-06-13",
+      "volume": 201563,
+      "liquidity": 501761
+    },
+    "1489372": {
+      "moneyline": {
+        "away": 0.625,
+        "home": 0.145,
+        "draw": 0.225
+      },
+      "slug": "fifwc-hai-sco-2026-06-13",
+      "volume": 149732,
+      "liquidity": 484842
+    },
+    "1539001": {
+      "moneyline": {
+        "draw": 0.255,
+        "away": 0.565,
+        "home": 0.175
+      },
+      "slug": "fifwc-aus-tur-2026-06-14",
+      "volume": 77081,
+      "liquidity": 447904
+    },
+    "1489374": {
+      "moneyline": {
+        "home": 0.9385,
+        "away": 0.0225,
+        "draw": 0.0415
+      },
+      "slug": "fifwc-ger-kor-2026-06-14",
+      "volume": 482184,
+      "liquidity": 236283
+    },
+    "1489376": {
+      "moneyline": {
+        "away": 0.265,
+        "draw": 0.265,
+        "home": 0.465
+      },
+      "slug": "fifwc-nld-jpn-2026-06-14",
+      "volume": 322708,
+      "liquidity": 630530
+    },
+    "1489375": {
+      "moneyline": {
+        "draw": 0.335,
+        "away": 0.395,
+        "home": 0.265
+      },
+      "slug": "fifwc-civ-ecu-2026-06-14",
+      "volume": 45851,
+      "liquidity": 353080
+    },
+    "1539002": {
+      "moneyline": {
+        "home": 0.505,
+        "draw": 0.285,
+        "away": 0.215
+      },
+      "slug": "fifwc-swe-tun-2026-06-14",
+      "volume": 30133,
+      "liquidity": 318491
+    },
+    "1489377": {
+      "moneyline": {
+        "draw": 0.245,
+        "away": 0.175,
+        "home": 0.585
+      },
+      "slug": "fifwc-bel-egy-2026-06-15",
+      "volume": 25501,
+      "liquidity": 179218
+    },
+    "1489379": {
+      "moneyline": {
+        "home": 0.115,
+        "draw": 0.215,
+        "away": 0.685
+      },
+      "slug": "fifwc-ksa-ury-2026-06-15",
+      "volume": 52885,
+      "liquidity": 194254
+    },
+    "1489378": {
+      "moneyline": {
+        "home": 0.515,
+        "draw": 0.285,
+        "away": 0.205
+      },
+      "slug": "fifwc-irn-nzl-2026-06-15",
+      "volume": 86395,
+      "liquidity": 243896
+    },
+    "1489383": {
+      "moneyline": {
+        "home": 0.665,
+        "away": 0.125,
+        "draw": 0.215
+      },
+      "slug": "fifwc-fra-sen-2026-06-16",
+      "volume": 72632,
+      "liquidity": 234347
+    },
+    "1539016": {
+      "moneyline": {
+        "draw": 0.135,
+        "home": 0.065,
+        "away": 0.805
+      },
+      "slug": "fifwc-irq-nor-2026-06-16",
+      "volume": 39798,
+      "liquidity": 199476
+    },
+    "1489381": {
+      "moneyline": {
+        "draw": 0.205,
+        "away": 0.105,
+        "home": 0.695
+      },
+      "slug": "fifwc-arg-alg-2026-06-16",
+      "volume": 72305,
+      "liquidity": 216401
+    },
+    "1489382": {
+      "moneyline": {
+        "home": 0.735,
+        "draw": 0.165,
+        "away": 0.095
+      },
+      "slug": "fifwc-aut-jor-2026-06-17",
+      "volume": 53120,
+      "liquidity": 143728
+    },
+    "1539003": {
+      "moneyline": {
+        "away": 0.075,
+        "home": 0.765,
+        "draw": 0.165
+      },
+      "slug": "fifwc-prt-cdr-2026-06-17",
+      "volume": 49199,
+      "liquidity": 154442
+    },
+    "1489384": {
+      "moneyline": {
+        "away": 0.185,
+        "home": 0.565,
+        "draw": 0.255
+      },
+      "slug": "fifwc-eng-hrv-2026-06-17",
+      "volume": 43473,
+      "liquidity": 166171
+    },
+    "1489385": {
+      "moneyline": {
+        "home": 0.465,
+        "draw": 0.275,
+        "away": 0.265
+      },
+      "slug": "fifwc-gha-pan-2026-06-17",
+      "volume": 26010,
+      "liquidity": 135896
+    },
+    "1489386": {
+      "moneyline": {
+        "home": 0.105,
+        "draw": 0.205,
+        "away": 0.695
+      },
+      "slug": "fifwc-uzb-col-2026-06-17",
+      "volume": 23392,
+      "liquidity": 122147
+    },
+    "1539004": {
+      "moneyline": {
+        "draw": 0.285,
+        "home": 0.495,
+        "away": 0.225
+      },
+      "slug": "fifwc-cze-rsa-2026-06-18",
+      "volume": 6182,
+      "liquidity": 87037
+    },
+    "1489387": {
+      "moneyline": {
+        "draw": 0.175,
+        "home": 0.755,
+        "away": 0.085
+      },
+      "slug": "fifwc-can-qat-2026-06-18",
+      "volume": 17250,
+      "liquidity": 117532
+    },
+    "1489391": {
+      "moneyline": {
+        "draw": 0.245,
+        "away": 0.205,
+        "home": 0.555
+      },
+      "slug": "fifwc-usa-aus-2026-06-19",
+      "volume": 41228,
+      "liquidity": 109339
+    },
+    "1489390": {
+      "moneyline": {
+        "home": 0.225,
+        "draw": 0.285,
+        "away": 0.495
+      },
+      "slug": "fifwc-sco-mar-2026-06-19",
+      "volume": 14602,
+      "liquidity": 73196
+    },
+    "1489389": {
+      "moneyline": {
+        "home": 0.915,
+        "draw": 0.064,
+        "away": 0.0315
+      },
+      "slug": "fifwc-bra-hai-2026-06-19",
+      "volume": 71178,
+      "liquidity": 51682
+    },
+    "1539006": {
+      "moneyline": {
+        "draw": 0.305,
+        "away": 0.275,
+        "home": 0.435
+      },
+      "slug": "fifwc-tur-par-2026-06-19",
+      "volume": 6967,
+      "liquidity": 75750
+    },
+    "1539007": {
+      "moneyline": {
+        "home": 0.595,
+        "draw": 0.235,
+        "away": 0.175
+      },
+      "slug": "fifwc-nld-swe-2026-06-20",
+      "volume": 6485,
+      "liquidity": 59618
+    },
+    "1489393": {
+      "moneyline": {
+        "home": 0.625,
+        "away": 0.175,
+        "draw": 0.205
+      },
+      "slug": "fifwc-ger-civ-2026-06-20",
+      "volume": 41043,
+      "liquidity": 85447
+    },
+    "1489392": {
+      "moneyline": {
+        "draw": 0.125,
+        "away": 0.0695,
+        "home": 0.805
+      },
+      "slug": "fifwc-ecu-kor-2026-06-20",
+      "volume": 59045,
+      "liquidity": 64686
+    },
+    "1489394": {
+      "moneyline": {
+        "draw": 0.265,
+        "away": 0.565,
+        "home": 0.175
+      },
+      "slug": "fifwc-tun-jpn-2026-06-21",
+      "volume": 7324,
+      "liquidity": 82993
+    },
+    "1489397": {
+      "moneyline": {
+        "home": 0.875,
+        "draw": 0.085,
+        "away": 0.0355
+      },
+      "slug": "fifwc-esp-ksa-2026-06-21",
+      "volume": 18218,
+      "liquidity": 96155
+    },
+    "1489395": {
+      "moneyline": {
+        "away": 0.105,
+        "home": 0.695,
+        "draw": 0.195
+      },
+      "slug": "fifwc-bel-irn-2026-06-21",
+      "volume": 18042,
+      "liquidity": 50963
+    },
+    "1489396": {
+      "moneyline": {
+        "home": 0.195,
+        "draw": 0.255,
+        "away": 0.555
+      },
+      "slug": "fifwc-nzl-egy-2026-06-21",
+      "volume": 7434,
+      "liquidity": 72600
+    },
+    "1489399": {
+      "moneyline": {
+        "draw": 0.235,
+        "away": 0.165,
+        "home": 0.6
+      },
+      "slug": "fifwc-arg-aut-2026-06-22",
+      "volume": 12098,
+      "liquidity": 74330
+    },
+    "1539017": {
+      "moneyline": {
+        "draw": 0.095,
+        "away": 0.0375,
+        "home": 0.865
+      },
+      "slug": "fifwc-fra-irq-2026-06-22",
+      "volume": 19272,
+      "liquidity": 53211
+    },
+    "1489401": {
+      "moneyline": {
+        "away": 0.285,
+        "home": 0.445,
+        "draw": 0.265
+      },
+      "slug": "fifwc-nor-sen-2026-06-22",
+      "volume": 18518,
+      "liquidity": 75777
+    },
+    "1489400": {
+      "moneyline": {
+        "draw": 0.205,
+        "home": 0.135,
+        "away": 0.655
+      },
+      "slug": "fifwc-jor-alg-2026-06-22",
+      "volume": 39824,
+      "liquidity": 111992
+    },
+    "1489404": {
+      "moneyline": {
+        "home": 0.785,
+        "draw": 0.145,
+        "away": 0.075
+      },
+      "slug": "fifwc-prt-uzb-2026-06-23",
+      "volume": 13230,
+      "liquidity": 52704
+    },
+    "1489402": {
+      "moneyline": {
+        "draw": 0.165,
+        "away": 0.105,
+        "home": 0.735
+      },
+      "slug": "fifwc-eng-gha-2026-06-23",
+      "volume": 27490,
+      "liquidity": 59286
+    },
+    "1489403": {
+      "moneyline": {
+        "away": 0.635,
+        "home": 0.135,
+        "draw": 0.235
+      },
+      "slug": "fifwc-pan-hrv-2026-06-23",
+      "volume": 8639,
+      "liquidity": 62004
+    },
+    "1539008": {
+      "moneyline": {
+        "draw": 0.225,
+        "home": 0.665,
+        "away": 0.115
+      },
+      "slug": "fifwc-col-cdr-2026-06-23",
+      "volume": 6809,
+      "liquidity": 48962
+    },
+    "1489408": {
+      "moneyline": {
+        "home": 0.445,
+        "draw": 0.295,
+        "away": 0.275
+      },
+      "slug": "fifwc-che-can-2026-06-24",
+      "volume": 2372,
+      "liquidity": 54822
+    },
+    "1489405": {
+      "moneyline": {
+        "home": 0.745,
+        "draw": 0.175,
+        "away": 0.095
+      },
+      "slug": "fifwc-mar-hai-2026-06-24",
+      "volume": 10791,
+      "liquidity": 59380
+    },
+    "1489406": {
+      "moneyline": {
+        "draw": 0.205,
+        "away": 0.665,
+        "home": 0.14
+      },
+      "slug": "fifwc-sco-bra-2026-06-24",
+      "volume": 12586,
+      "liquidity": 70056
+    },
+    "1539010": {
+      "moneyline": {
+        "home": 0.215,
+        "draw": 0.275,
+        "away": 0.525
+      },
+      "slug": "fifwc-cze-mex-2026-06-24",
+      "volume": 7208,
+      "liquidity": 72453
+    },
+    "1489407": {
+      "moneyline": {
+        "home": 0.235,
+        "draw": 0.275,
+        "away": 0.495
+      },
+      "slug": "fifwc-rsa-kr-2026-06-24",
+      "volume": 3006,
+      "liquidity": 57730
+    },
+    "1489410": {
+      "moneyline": {
+        "draw": 0.245,
+        "away": 0.575,
+        "home": 0.195
+      },
+      "slug": "fifwc-ecu-ger-2026-06-25",
+      "volume": 9763,
+      "liquidity": 63319
+    },
+    "1489409": {
+      "moneyline": {
+        "home": 0.075,
+        "away": 0.785,
+        "draw": 0.145
+      },
+      "slug": "fifwc-kor-civ-2026-06-25",
+      "volume": 4337,
+      "liquidity": 50283
+    },
+    "1539011": {
+      "moneyline": {
+        "draw": 0.285,
+        "home": 0.465,
+        "away": 0.265
+      },
+      "slug": "fifwc-jpn-swe-2026-06-25",
+      "volume": 3565,
+      "liquidity": 65094
+    },
+    "1489412": {
+      "moneyline": {
+        "home": 0.135,
+        "draw": 0.225,
+        "away": 0.665
+      },
+      "slug": "fifwc-tun-nld-2026-06-25",
+      "volume": 9199,
+      "liquidity": 63088
+    },
+    "1539012": {
+      "moneyline": {
+        "draw": 0.275,
+        "home": 0.365,
+        "away": 0.385
+      },
+      "slug": "fifwc-tur-usa-2026-06-25",
+      "volume": 8343,
+      "liquidity": 92327
+    },
+    "1489411": {
+      "moneyline": {
+        "away": 0.265,
+        "home": 0.445,
+        "draw": 0.305
+      },
+      "slug": "fifwc-par-aus-2026-06-25",
+      "volume": 1515,
+      "liquidity": 63843
+    },
+    "1539074": {
+      "moneyline": {
+        "home": 0.685,
+        "away": 0.115,
+        "draw": 0.205
+      },
+      "slug": "fifwc-sen-irq-2026-06-26",
+      "volume": 5296,
+      "liquidity": 42558
+    },
+    "1489416": {
+      "moneyline": {
+        "home": 0.22,
+        "draw": 0.265,
+        "away": 0.535
+      },
+      "slug": "fifwc-nor-fra-2026-06-26",
+      "volume": 10138,
+      "liquidity": 54799
+    },
+    "1489417": {
+      "moneyline": {
+        "home": 0.175,
+        "away": 0.595,
+        "draw": 0.245
+      },
+      "slug": "fifwc-ury-esp-2026-06-26",
+      "volume": 5376,
+      "liquidity": 51161
+    },
+    "1489414": {
+      "moneyline": {
+        "away": 0.265,
+        "home": 0.445,
+        "draw": 0.315
+      },
+      "slug": "fifwc-egy-irn-2026-06-26",
+      "volume": 3904,
+      "liquidity": 48609
+    },
+    "1489415": {
+      "moneyline": {
+        "away": 0.755,
+        "home": 0.085,
+        "draw": 0.155
+      },
+      "slug": "fifwc-nzl-bel-2026-06-26",
+      "volume": 8275,
+      "liquidity": 56278
+    },
+    "1489420": {
+      "moneyline": {
+        "home": 0.595,
+        "draw": 0.255,
+        "away": 0.165
+      },
+      "slug": "fifwc-hrv-gha-2026-06-27",
+      "volume": 2303,
+      "liquidity": 50214
+    },
+    "1489422": {
+      "moneyline": {
+        "draw": 0.155,
+        "away": 0.755,
+        "home": 0.095
+      },
+      "slug": "fifwc-pan-eng-2026-06-27",
+      "volume": 16657,
+      "liquidity": 58599
+    },
+    "1489419": {
+      "moneyline": {
+        "draw": 0.285,
+        "home": 0.28,
+        "away": 0.455
+      },
+      "slug": "fifwc-col-prt-2026-06-27",
+      "volume": 8685,
+      "liquidity": 44839
+    },
+    "1539013": {
+      "moneyline": {
+        "draw": 0.285,
+        "home": 0.425,
+        "away": 0.31
+      },
+      "slug": "fifwc-cdr-uzb-2026-06-27",
+      "volume": 1917,
+      "liquidity": 52211
+    },
+    "1489418": {
+      "moneyline": {
+        "home": 0.265,
+        "draw": 0.305,
+        "away": 0.445
+      },
+      "slug": "fifwc-alg-aut-2026-06-27",
+      "volume": 8324,
+      "liquidity": 68008
+    },
+    "1489421": {
+      "moneyline": {
+        "draw": 0.125,
+        "away": 0.825,
+        "home": 0.0655
+      },
+      "slug": "fifwc-jor-arg-2026-06-27",
+      "volume": 9794,
+      "liquidity": 47113
+    }
+  }
+}

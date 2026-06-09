@@ -1,0 +1,12 @@
+{
+  "params": {
+    "half_life": 1000,
+    "friendly_w": 0.8,
+    "shrink": 4.0,
+    "rho": -0.05,
+    "margin_cap": 99
+  },
+  "cv_logloss": 0.89127,
+  "tuned_on": "4 rolling windows 2022-2026, 4228 matches",
+  "tuned_at": "2026-06-09 19:01 UTC"
+}

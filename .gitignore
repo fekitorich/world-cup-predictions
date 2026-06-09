@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.DS_Store
+.claude/
+.playwright-mcp/
+.api_football_key
+sync_claude_history.sh
+*.log
