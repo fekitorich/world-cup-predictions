@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "docs"   # served by GitHub Pages (main branch /docs)
+BUILD_V = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")  # css cache-buster
 
 teams_data = json.load(open(ROOT / "fifa_world_cup_2026.json"))
 matches_data = json.load(open(ROOT / "fifa_world_cup_2026_group_matches.json"))
@@ -117,7 +118,7 @@ def page(title, body, depth=0, crumb=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{pre}style.css">
+<link rel="stylesheet" href="{pre}style.css?v={BUILD_V}">
 </head>
 <body>
 <header class="masthead">
