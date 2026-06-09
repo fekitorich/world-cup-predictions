@@ -6,3 +6,5 @@ __pycache__/
 .api_football_key
 sync_claude_history.sh
 *.log
+.env
+.env.*
