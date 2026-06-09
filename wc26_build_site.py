@@ -92,7 +92,9 @@ def form_chips(team, count=5):
         f'<i class="f {m["result"]}">{m["result"]}</i>'
         for m in team["last_10_matches"][:count]
     )
-    return f'<span class="form">{chips}</span>'
+    tip = (f"last {count} internationals, most recent first — "
+           "W win, D draw (incl. pen shoot-outs), L loss")
+    return f'<span class="form" title="{tip}">{chips}</span>'
 
 
 def team_link(name, depth=0):
@@ -161,7 +163,10 @@ def build_index():
 
     body = f"""<h1>The twelve groups</h1>
 <p class="standfirst">48 teams, seeded here by FIFA ranking. Click any team for its full dossier.</p>
-<p class="fineprint">The FIFA column is the official 1 April 2026 ranking, shown for orientation only —
+<p class="fineprint">Form = results of the last five internationals, <b>most recent first</b>
+(W win, D draw — penalty shoot-outs count as draws, L loss); the team page shows all ten with
+opponents and competitions. Friendlies are included here but weigh less in the model.
+The FIFA column is the official 1 April 2026 ranking, shown for orientation only —
 the simulation rates teams purely from match results and disagrees in places (France is FIFA #1
 but mid-pack by title odds; the model prefers recent goals to reputation). The <sup class="host">host</sup>
 marker matters beyond ceremony: hosts get a fitted home-crowd boost (~+30% scoring) whenever they
