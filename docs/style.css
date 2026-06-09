@@ -65,6 +65,7 @@ td.num { color: var(--ink-soft); }
 .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 28px 36px; margin-top: 24px; }
 .group h2 { display: flex; align-items: baseline; gap: .5rem; font-size: 1.6rem; font-weight: 900; border-bottom: 2px solid var(--ink); }
 .group h2 span { font-size: .7rem; font-family: "IBM Plex Mono", monospace; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-soft); }
+.group td:last-child, .group th:last-child { text-align: right; }
 .tlink { color: var(--ink); font-weight: 600; }
 .tlink:hover { color: var(--green); }
 sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
