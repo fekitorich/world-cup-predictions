@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606100537">
+<link rel="stylesheet" href="style.css?v=202606101333">
 </head>
 <body>
 <header class="masthead">
@@ -42,6 +42,13 @@ independent Poissons admit. Hosts get a fitted home-crowd boost (~+30% scoring) 
 in their own country. From two expected-goals numbers the model computes the <em>entire</em>
 scoreline probability grid — every market on the match cards is an exact sum over it,
 no sampling.</p>
+<p>One newer input (added 10 June, before matchday 1): a <b>squad-value prior</b>. Fitted
+ratings are nudged by β·z(log squad market value, Transfermarkt) — talent on paper, not just
+results on grass. β=0.35 was chosen by held-out validation, where the prior improved log-loss
+from 0.854 to 0.818 at its optimum — the single largest upgrade in the project — shipped
+slightly below the optimum as a haircut for look-ahead (current values partly reflect past
+results). Structurally it matters most in the knockout rounds, which have no betting market
+to blend with: it gives them the player-awareness the group stage already had.</p>
 <figure><img src="img/grid.svg" alt="Scoreline probability grid for Mexico v South Africa">
 <figcaption>The actual fitted grid for the opening match (probabilities in %).
 Moneyline = the green vs red triangles; over 2.5 = everything below the third
@@ -179,7 +186,7 @@ review, the way odds compilers do it. The model is a fair-value anchor, not an o
 </main>
 <footer>
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
-  <p>Model run: 2026-06-09 19:22 UTC · Polymarket snapshot: 2026-06-09 19:03 UTC · every run archived in runs/</p>
+  <p>Model run: 2026-06-10 13:25 UTC · Polymarket snapshot: 2026-06-09 19:03 UTC · every run archived in runs/</p>
   <p>Data: API-Football · FIFA rankings 2026 · <a href="method.html">how this works</a> ·
   <a href="archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·

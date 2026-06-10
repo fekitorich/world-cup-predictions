@@ -111,3 +111,20 @@ Tournament sims (`wc26_tournament.py`) now include zero-mean anomaly variance:
 - Implementation switched tournament sampling to vectorised plain Poisson
   (DC rho kept for match-card pricing only; ~1% draw-rate effect in sims).
 - Locked bracket unaffected (deterministic mean-model path; shocks are zero-mean).
+
+## Squad-value prior (2026-06-10, pre-matchday-1) — the Nate Silver borrow
+
+Ratings now get `att += B*z/2, def -= B*z/2` where z = standardized log squad
+market value (Transfermarkt, all 211→top-100 teams, minnow default €8m).
+- **Validation** (fit to 2025-06, test on following 1,071 matches): log-loss
+  0.854 → **0.818** at the B=0.4 optimum, clean peak (worse by 1.0). Shipped
+  B=0.35 as a look-ahead haircut (current values partly reflect past results).
+  Single biggest upgrade in the project; reaches ~market-grade calibration.
+- **Caveats**: single-window validation (historical values unavailable);
+  values are a 2026-06 snapshot, refresh wc26_squad_values.json occasionally.
+- **Effect**: France champion 4.0→8.2% (was the documented blind spot),
+  Spain 9.0→14.1, England 6.1→10.5; Japan 6.0→2.9, Colombia 5.0→2.9.
+  Remaining model-vs-market gaps are now defensible disagreements, not
+  blindness. Locked bracket unchanged (it testifies for the old model).
+- Files: wc26_squad_values.json (data), wc26_value_test.py (falsification
+  harness — rerun after value refreshes).

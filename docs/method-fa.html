@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css?v=202606100537">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css?v=202606101333">
 </head>
 <body>
 <header class="masthead">
@@ -47,6 +47,12 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <p>از روی دو مقدار «گل انتظاری»، مدل شبکهٔ کامل احتمال تمام نتایج ممکن را می‌سازد. تمام
 بازارهای هر مسابقه مستقیماً از همین شبکه محاسبه می‌شوند و در این مرحله هیچ شبیه‌سازی‌ای
 انجام نمی‌شود.</p>
+<p>یک ورودی تازه هم از ۱۰ ژوئن (پیش از شروع بازی‌ها) اضافه شد: «پیشینِ ارزش ترکیب».
+امتیاز برازش‌شدهٔ هر تیم به اندازهٔ β×z(لگاریتم ارزش بازاری ترکیب، از Transfermarkt)
+جابه‌جا می‌شود — یعنی استعدادِ روی کاغذ، نه فقط نتایجِ روی چمن. مقدار β=۰٫۳۵ با
+اعتبارسنجی خارج از نمونه انتخاب شد؛ این پیشین لگ‌لاس را از ۰٫۸۵۴ به ۰٫۸۱۸ بهبود داد —
+بزرگ‌ترین ارتقای این پروژه. اثر اصلی آن در مراحل حذفی است که بازاری برای ترکیب‌شدن
+ندارند: همان آگاهی از بازیکنان که مرحلهٔ گروهی از طریق بازار داشت.</p>
 <figure><img src="img/grid.svg" alt="شبکهٔ احتمال نتایج مکزیک و آفریقای جنوبی">
 <figcaption>شبکهٔ واقعی برازش‌شده برای بازی افتتاحیه (احتمال‌ها به درصد). برد مکزیک =
 خانه‌های سبز؛ تساوی = قطر کهربایی؛ برد آفریقای جنوبی = خانه‌های قرمز.</figcaption></figure>
@@ -181,7 +187,7 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 </main>
 <footer>
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
-  <p>Model run: 2026-06-09 19:22 UTC · Polymarket snapshot: 2026-06-09 19:03 UTC · every run archived in runs/</p>
+  <p>Model run: 2026-06-10 13:25 UTC · Polymarket snapshot: 2026-06-09 19:03 UTC · every run archived in runs/</p>
   <p>Data: API-Football · FIFA rankings 2026 · <a href="method.html">how this works</a> ·
   <a href="archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·

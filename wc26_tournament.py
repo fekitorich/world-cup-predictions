@@ -111,6 +111,15 @@ def np_fit(arrs, shrink, w_mult=None, iters=80):
         mu += att.mean() + dfn.mean()
         att -= att.mean()
         dfn -= dfn.mean()
+    # squad-value prior (same as wc26_simulate.apply_value_prior, vectorised)
+    from wc26_simulate import VALUE_BETA, _value_z
+    loaded = _value_z()
+    if loaded and VALUE_BETA:
+        vals, default = loaded
+        lv = np.array([np.log(vals.get(t, default)) for t in teams])
+        z = (lv - lv.mean()) / lv.std()
+        att = att + VALUE_BETA * z / 2
+        dfn = dfn - VALUE_BETA * z / 2
     return att, dfn, mu, hadv
 
 

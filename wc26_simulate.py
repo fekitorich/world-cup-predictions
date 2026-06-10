@@ -30,6 +30,36 @@ DEFAULTS = {"half_life": 548, "friendly_w": 0.6, "shrink": 8.0, "rho": -0.10,
             "margin_cap": 99}
 BLEND_W = 0.35   # weight on market prices in the blended probabilities
 
+# Squad-value prior (Transfermarkt): ratings nudged by beta * z(log value).
+# Validated out-of-sample 2025-06->2026-06: log-loss 0.854 -> 0.818 at the
+# beta=0.4 optimum; shipped at 0.35 as a haircut for the mild look-ahead in
+# using current values to grade past matches. See wc26_value_test.py.
+VALUE_BETA = 0.35
+
+
+def _value_z():
+    try:
+        sv = json.load(open(f"{ROOT}/wc26_squad_values.json"))
+    except FileNotFoundError:
+        return None
+    vals, default = sv["values"], sv["default_for_missing"]
+    return vals, default
+
+
+def apply_value_prior(att, dfn, beta=VALUE_BETA):
+    """Nudge fitted ratings toward squad market value (in place)."""
+    loaded = _value_z()
+    if not loaded or beta == 0:
+        return
+    vals, default = loaded
+    logs = {t: math.log(vals.get(t, default)) for t in att}
+    mu = sum(logs.values()) / len(logs)
+    sd = math.sqrt(sum((v - mu) ** 2 for v in logs.values()) / len(logs))
+    for t in att:
+        zt = (logs[t] - mu) / sd
+        att[t] += beta * zt / 2
+        dfn[t] -= beta * zt / 2
+
 CITY_COUNTRY = {
     "Mexico City": "Mexico", "Guadalajara": "Mexico", "Monterrey": "Mexico",
     "Toronto": "Canada", "Vancouver": "Canada",
@@ -148,6 +178,7 @@ def fit(matches, shrink, iters=80):
             att[t] -= ma
             dfn[t] -= md
         mu += ma + md
+    apply_value_prior(att, dfn)
     return {"att": att, "dfn": dfn, "mu": mu, "hadv": hadv}
 
 

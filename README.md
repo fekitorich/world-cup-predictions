@@ -28,9 +28,11 @@ pre-tournament bracket graded publicly as results land.
 Weighted-Poisson attack/defence ratings (Dixon-Coles) fit on 8,081
 internationals since 2018 (from a 49k-match dataset that we audited and
 patched against the primary source), hyperparameters chosen by 4-window
-rolling cross-validation (CV log-loss 0.891 vs 1.046 baseline). Group-match
-probabilities blend the model with Polymarket prices (log-opinion pool,
-w=0.35); raw model is kept separate for edge-finding. Full write-up:
+rolling cross-validation (CV log-loss 0.891 vs 1.046 baseline), plus a
+**squad-value prior** (Transfermarkt market values, β fitted out-of-sample —
+held-out log-loss 0.854 → 0.818, the project's largest single upgrade).
+Group-match probabilities blend the model with Polymarket prices
+(log-opinion pool, w=0.35); raw model is kept separate for edge-finding. Full write-up:
 [the Method page](http://amirdaraee.com/world-cup-predictions/method.html)
 and [wc26_model_notes.md](wc26_model_notes.md).
 
