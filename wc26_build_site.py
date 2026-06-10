@@ -675,6 +675,13 @@ independent Poissons admit. Hosts get a fitted home-crowd boost (~+30% scoring) 
 in their own country. From two expected-goals numbers the model computes the <em>entire</em>
 scoreline probability grid — every market on the match cards is an exact sum over it,
 no sampling.</p>
+<p>One newer input (added 10 June, before matchday 1): a <b>squad-value prior</b>. Fitted
+ratings are nudged by β·z(log squad market value, Transfermarkt) — talent on paper, not just
+results on grass. β=0.35 was chosen by held-out validation, where the prior improved log-loss
+from 0.854 to 0.818 at its optimum — the single largest upgrade in the project — shipped
+slightly below the optimum as a haircut for look-ahead (current values partly reflect past
+results). Structurally it matters most in the knockout rounds, which have no betting market
+to blend with: it gives them the player-awareness the group stage already had.</p>
 <figure><img src="img/grid.svg" alt="Scoreline probability grid for Mexico v South Africa">
 <figcaption>The actual fitted grid for the opening match (probabilities in %).
 Moneyline = the green vs red triangles; over 2.5 = everything below the third
@@ -842,6 +849,12 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <p>از روی دو مقدار «گل انتظاری»، مدل شبکهٔ کامل احتمال تمام نتایج ممکن را می‌سازد. تمام
 بازارهای هر مسابقه مستقیماً از همین شبکه محاسبه می‌شوند و در این مرحله هیچ شبیه‌سازی‌ای
 انجام نمی‌شود.</p>
+<p>یک ورودی تازه هم از ۱۰ ژوئن (پیش از شروع بازی‌ها) اضافه شد: «پیشینِ ارزش ترکیب».
+امتیاز برازش‌شدهٔ هر تیم به اندازهٔ β×z(لگاریتم ارزش بازاری ترکیب، از Transfermarkt)
+جابه‌جا می‌شود — یعنی استعدادِ روی کاغذ، نه فقط نتایجِ روی چمن. مقدار β=۰٫۳۵ با
+اعتبارسنجی خارج از نمونه انتخاب شد؛ این پیشین لگ‌لاس را از ۰٫۸۵۴ به ۰٫۸۱۸ بهبود داد —
+بزرگ‌ترین ارتقای این پروژه. اثر اصلی آن در مراحل حذفی است که بازاری برای ترکیب‌شدن
+ندارند: همان آگاهی از بازیکنان که مرحلهٔ گروهی از طریق بازار داشت.</p>
 <figure><img src="img/grid.svg" alt="شبکهٔ احتمال نتایج مکزیک و آفریقای جنوبی">
 <figcaption>شبکهٔ واقعی برازش‌شده برای بازی افتتاحیه (احتمال‌ها به درصد). برد مکزیک =
 خانه‌های سبز؛ تساوی = قطر کهربایی؛ برد آفریقای جنوبی = خانه‌های قرمز.</figcaption></figure>
@@ -1007,8 +1020,11 @@ what changes between versions are the simulations, prices, futures and award odd
 def take_snapshot():
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     dst = OUT / "archive" / stamp
-    if dst.exists():
-        shutil.rmtree(dst)
+    k = 2
+    while dst.exists():          # same-day re-snapshots get a suffix —
+        dst = OUT / "archive" / f"{stamp}-{k}"   # never overwrite history
+        k += 1
+    stamp = dst.name
     dst.mkdir(parents=True)
     for item in OUT.iterdir():
         if item.name == "archive":

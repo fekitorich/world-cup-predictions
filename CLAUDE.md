@@ -34,7 +34,8 @@ python3 -m http.server 8742 --directory docs   # browse
 - `wc26_tournament.json` — per-team futures probabilities (win group → champion)
 - `wc26_market_prices.json` — Polymarket moneyline snapshots (re-fetch near kickoff; some
   fixtures get listed late — the script picks them up on re-run)
-- `wc26_model_notes.md` — method R&D, validation numbers, known blind spots
+- `wc26_squad_values.json` — Transfermarkt squad values (refresh occasionally; wc26_value_test.py revalidates beta)
+- `wc26_model_notes.md` — method R- `wc26_model_notes.md` — method R&D, validation numbers, known blind spotsD, validation numbers, known blind spots
 - `docs/` — generated output, never edit by hand
 
 ## Betting module (`betting/`)
