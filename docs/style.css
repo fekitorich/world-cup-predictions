@@ -38,7 +38,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .masthead nav { font-size: .85rem; text-transform: uppercase; letter-spacing: .18em; }
 .masthead nav span { color: var(--rule); margin: 0 10px; }
 .crumb { max-width: 1080px; margin: 10px auto 0; padding: 0 24px; font-size: .78rem; color: var(--ink-soft); }
-.standfirst { color: var(--ink-soft); max-width: 60ch; margin-top: 0; }
+.standfirst { color: var(--ink-soft); margin-top: 0; }
 
 /* tables */
 table { width: 100%; border-collapse: collapse; font-size: .85rem; }
@@ -119,6 +119,7 @@ footer p { margin: .2rem 0; }
   .masthead nav { font-size: .7rem; letter-spacing: .08em; }
   .masthead nav span { margin: 0 5px; }
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .group table { display: table; }   /* narrow enough to render full-width */
   table { font-size: .78rem; }
   td, th { padding: .4rem .45rem .4rem 0; }
   td.num, th.num { white-space: nowrap; }
