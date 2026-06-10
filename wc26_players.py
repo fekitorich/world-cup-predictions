@@ -79,11 +79,14 @@ def fetch_award_prices():
         "golden_glove": "world-cup-golden-glove-winner-20260603195306910",
         "top_scorer_nation": "world-cup-top-scorer-nation",
     }
+    import re
     for key, slug in slugs.items():
         evs = gamma("/events", slug=slug)
         prices = {}
         for mk in (evs[0]["markets"] if evs else []):
             title = mk.get("groupItemTitle") or mk["question"]
+            if re.fullmatch(r"Player [A-Z]{1,2}", title):
+                continue   # unopened placeholder slot, not a real market
             try:
                 prices[title] = float(json.loads(mk["outcomePrices"])[0])
             except (KeyError, ValueError, IndexError):

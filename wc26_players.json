@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-09 19:39 UTC",
+  "fetched_at": "2026-06-10 14:54 UTC",
   "seasons": [
     2024,
     2025,
@@ -742,484 +742,372 @@
         "apps": 41
       }
     ],
-    "Honduras": [
+    "Curaçao": [
       {
-        "name": "A. Güity",
+        "name": "T. Bodak",
         "position": "Goalkeeper",
-        "age": 28,
+        "age": 23,
         "goals": 0,
         "apps": 0
       },
       {
-        "name": "E. Menjívar",
+        "name": "T. Doornbusch",
         "position": "Goalkeeper",
-        "age": 32,
-        "goals": 0,
-        "apps": 22
-      },
-      {
-        "name": "L. Ortiz",
-        "position": "Goalkeeper",
-        "age": 27,
+        "age": 26,
         "goals": 0,
         "apps": 1
       },
       {
-        "name": "Clinton Bennett",
+        "name": "E. Room",
+        "position": "Goalkeeper",
+        "age": 36,
+        "goals": 0,
+        "apps": 18
+      },
+      {
+        "name": "R. Bazoer",
+        "position": "Defender",
+        "age": 29,
+        "goals": 0,
+        "apps": 4
+      },
+      {
+        "name": "J. Brenet",
+        "position": "Defender",
+        "age": 31,
+        "goals": 1,
+        "apps": 25
+      },
+      {
+        "name": "S. Floranus",
+        "position": "Defender",
+        "age": 27,
+        "goals": 0,
+        "apps": 19
+      },
+      {
+        "name": "Deveron Fonville",
+        "position": "Defender",
+        "age": 22,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "J. Gaari",
+        "position": "Defender",
+        "age": 32,
+        "goals": 0,
+        "apps": 21
+      },
+      {
+        "name": "S. Sambo",
+        "position": "Defender",
+        "age": 24,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "R. van Eijma",
+        "position": "Defender",
+        "age": 27,
+        "goals": 1,
+        "apps": 14
+      },
+      {
+        "name": "A. Obispo",
+        "position": "Defender",
+        "age": 26,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "L. Bacuna",
+        "position": "Midfielder",
+        "age": 34,
+        "goals": 2,
+        "apps": 17
+      },
+      {
+        "name": "A. Martha",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 1,
+        "apps": 8
+      },
+      {
+        "name": "T. Noslin",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 1,
+        "apps": 5
+      },
+      {
+        "name": "L. Comenencia",
+        "position": "Midfielder",
+        "age": 21,
+        "goals": 2,
+        "apps": 49
+      },
+      {
+        "name": "K. Felida",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 1,
+        "apps": 4
+      },
+      {
+        "name": "T. Chong",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 3,
+        "apps": 4
+      },
+      {
+        "name": "G. Roemeratoe",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "J. Bacuna",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 8,
+        "apps": 22
+      },
+      {
+        "name": "J. Antonisse",
         "position": "Attacker",
+        "age": 23,
+        "goals": 1,
+        "apps": 37
+      },
+      {
+        "name": "B. Kuwas",
+        "position": "Attacker",
+        "age": 33,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "K. Gorré",
+        "position": "Attacker",
+        "age": 31,
+        "goals": 3,
+        "apps": 16
+      },
+      {
+        "name": "S. Hansen",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 1,
+        "apps": 4
+      },
+      {
+        "name": "G. Kastaneer",
+        "position": "Attacker",
+        "age": 29,
+        "goals": 8,
+        "apps": 13
+      },
+      {
+        "name": "J. Locadia",
+        "position": "Attacker",
+        "age": 32,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "J. Margaritha",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 5,
+        "apps": 18
+      }
+    ],
+    "Haiti": [
+      {
+        "name": "J. Duverger",
+        "position": "Goalkeeper",
         "age": 23,
         "goals": 0,
         "apps": 1
       },
       {
-        "name": "K. Guity",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "J. Martínez",
-        "position": "Defender",
-        "age": 22,
-        "goals": 1,
-        "apps": 11
-      },
-      {
-        "name": "C. Meléndez",
-        "position": "Defender",
-        "age": 28,
+        "name": "A. Pierre",
+        "position": "Goalkeeper",
+        "age": 24,
         "goals": 0,
         "apps": 6
       },
       {
-        "name": "D. Mencia",
-        "position": "Defender",
-        "age": 22,
-        "goals": 1,
-        "apps": 1
-      },
-      {
-        "name": "L. Padilla",
-        "position": "Defender",
-        "age": 16,
+        "name": "J. Placide",
+        "position": "Goalkeeper",
+        "age": 38,
         "goals": 0,
-        "apps": 0
+        "apps": 14
       },
       {
-        "name": "L. Posadas",
+        "name": "C. Arcus",
         "position": "Defender",
-        "age": 20,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Rosales",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 18
-      },
-      {
-        "name": "G. Sacaza",
-        "position": "Defender",
-        "age": 21,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "K. Arriaga",
-        "position": "Midfielder",
-        "age": 27,
-        "goals": 1,
-        "apps": 18
-      },
-      {
-        "name": "D. Flores",
-        "position": "Midfielder",
         "age": 29,
         "goals": 0,
         "apps": 19
       },
       {
-        "name": "L. Palma",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 3,
-        "apps": 19
-      },
-      {
-        "name": "A. Reyes",
-        "position": "Midfielder",
-        "age": 28,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "R. Rivas",
-        "position": "Midfielder",
-        "age": 27,
-        "goals": 1,
-        "apps": 4
-      },
-      {
-        "name": "E. Rodríguez",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 2,
-        "apps": 16
-      },
-      {
-        "name": "L. Vega",
+        "name": "K. Thermoncy",
         "position": "Defender",
-        "age": 23,
+        "age": 20,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "Ricardo Ade",
+        "position": "Defender",
+        "age": 35,
+        "goals": 0,
+        "apps": 33
+      },
+      {
+        "name": "H. Delcroix",
+        "position": "Defender",
+        "age": 26,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "J. Duverne",
+        "position": "Defender",
+        "age": 28,
         "goals": 1,
         "apps": 17
       },
       {
-        "name": "M. Arana",
-        "position": "Attacker",
-        "age": 16,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "E. Arzú",
-        "position": "Attacker",
-        "age": 21,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "J. Benguché",
-        "position": "Attacker",
-        "age": 29,
-        "goals": 1,
-        "apps": 16
-      },
-      {
-        "name": "D. Moncada",
-        "position": "Midfielder",
-        "age": 18,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "E. Puerto",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Vargas",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 4
-      }
-    ],
-    "Jamaica": [
-      {
-        "name": "A. Blake",
-        "position": "Goalkeeper",
-        "age": 35,
-        "goals": 0,
-        "apps": 16
-      },
-      {
-        "name": "C. Boyce-Clarke",
-        "position": "Goalkeeper",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "T. Chambers",
-        "position": "Goalkeeper",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Grant",
-        "position": "Goalkeeper",
-        "age": 18,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Knight",
-        "position": "Goalkeeper",
-        "age": 32,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Waite",
-        "position": "Goalkeeper",
-        "age": 27,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "A. Bell",
-        "position": "Defender",
-        "age": 31,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "C. Clarke",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "R. Edwards",
-        "position": "Defender",
-        "age": 30,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "I. Fray",
-        "position": "Defender",
-        "age": 23,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "R. King",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 27
-      },
-      {
-        "name": "J. Laing",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "D. Lowe",
-        "position": "Defender",
-        "age": 32,
-        "goals": 3,
-        "apps": 42
-      },
-      {
-        "name": "K. Ming",
+        "name": "M. Expérience",
         "position": "Defender",
         "age": 26,
         "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "E. Pinnock",
-        "position": "Defender",
-        "age": 32,
-        "goals": 0,
-        "apps": 15
-      },
-      {
-        "name": "O. Samuels-Smith",
-        "position": "Defender",
-        "age": 19,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "R. Webster",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "M. van de Wetering",
-        "position": "Defender",
-        "age": 17,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "C. Ainsworth",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "Karoy Anderson",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "D. Atkinson",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "A. Brooks",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Brandon Ashley Cover",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "B. De Cordova-Reid",
-        "position": "Midfielder",
-        "age": 32,
-        "goals": 1,
-        "apps": 16
-      },
-      {
-        "name": "Nickalia Fuller",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "T. Hall",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "I. Hayden",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 0,
-        "apps": 11
-      },
-      {
-        "name": "J. Latibeaudiere",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 11
-      },
-      {
-        "name": "Delano McCoy-Splatt\\t",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Palmer",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 1,
-        "apps": 20
-      },
-      {
-        "name": "Dante Plunkett",
-        "position": "Midfielder",
-        "age": 18,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "L. Bailey",
-        "position": "Attacker",
-        "age": 28,
-        "goals": 2,
         "apps": 18
       },
       {
-        "name": "D. Brown",
-        "position": "Attacker",
-        "age": 20,
+        "name": "D. Lacroix",
+        "position": "Defender",
+        "age": 32,
+        "goals": 2,
+        "apps": 14
+      },
+      {
+        "name": "W. Paugain",
+        "position": "Defender",
+        "age": 24,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "J. Bellegarde",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 10
+      },
+      {
+        "name": "D. Jean-Jacques",
+        "position": "Midfielder",
+        "age": 25,
+        "goals": 4,
+        "apps": 54
+      },
+      {
+        "name": "L. Pierre",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 17
+      },
+      {
+        "name": "W. Pierre",
+        "position": "Midfielder",
+        "age": 21,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "C. F. Sainte",
+        "position": "Midfielder",
+        "age": 23,
         "goals": 0,
         "apps": 0
       },
       {
-        "name": "B. Cadamarteri",
-        "position": "Attacker",
-        "age": 20,
-        "goals": 1,
-        "apps": 5
-      },
-      {
-        "name": "N. Campbell",
-        "position": "Attacker",
-        "age": 26,
+        "name": "D. Simon",
+        "position": "Midfielder",
+        "age": 25,
         "goals": 0,
-        "apps": 4
+        "apps": 2
       },
       {
-        "name": "T. Campbell",
+        "name": "J. Casimir",
         "position": "Attacker",
-        "age": 22,
+        "age": 24,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "L. Deedson",
+        "position": "Midfielder",
+        "age": 24,
+        "goals": 16,
+        "apps": 53
+      },
+      {
+        "name": "D. Etienne",
+        "position": "Attacker",
+        "age": 29,
         "goals": 0,
         "apps": 6
       },
       {
-        "name": "R. Cephas",
+        "name": "Y. Fortuné",
         "position": "Attacker",
         "age": 26,
-        "goals": 3,
-        "apps": 27
-      },
-      {
-        "name": "K. Dixon",
-        "position": "Attacker",
-        "age": 21,
-        "goals": 2,
-        "apps": 23
-      },
-      {
-        "name": "N. Ellis",
-        "position": "Attacker",
-        "age": 21,
         "goals": 0,
-        "apps": 0
+        "apps": 4
       },
       {
-        "name": "J. Lowe",
+        "name": "W. Isidor",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 1,
+        "apps": 3
+      },
+      {
+        "name": "L. Joseph",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "D. Nazon",
         "position": "Attacker",
         "age": 31,
-        "goals": 0,
-        "apps": 5
+        "goals": 12,
+        "apps": 24
       },
       {
-        "name": "E. Mason-Clark",
+        "name": "F. Pierrot",
         "position": "Attacker",
-        "age": 26,
-        "goals": 0,
-        "apps": 1
+        "age": 30,
+        "goals": 14,
+        "apps": 39
       },
       {
-        "name": "D. Merrick",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Nicholas Simmonds",
-        "position": "Attacker",
-        "age": 19,
-        "goals": 0,
-        "apps": 0
+        "name": "R. Providence",
+        "position": "Midfielder",
+        "age": 24,
+        "goals": 8,
+        "apps": 34
       }
     ],
     "Argentina": [
@@ -1242,7 +1130,7 @@
         "position": "Goalkeeper",
         "age": 33,
         "goals": 0,
-        "apps": 3
+        "apps": 4
       },
       {
         "name": "L. Balerdi",
@@ -1256,14 +1144,14 @@
         "position": "Defender",
         "age": 27,
         "goals": 1,
-        "apps": 11
+        "apps": 12
       },
       {
         "name": "F. Medina",
         "position": "Defender",
         "age": 26,
         "goals": 0,
-        "apps": 5
+        "apps": 6
       },
       {
         "name": "N. Molina",
@@ -1277,7 +1165,7 @@
         "position": "Defender",
         "age": 28,
         "goals": 1,
-        "apps": 15
+        "apps": 16
       },
       {
         "name": "N. Otamendi",
@@ -1304,36 +1192,36 @@
         "name": "V. Barco",
         "position": "Midfielder",
         "age": 21,
-        "goals": 0,
-        "apps": 3
+        "goals": 1,
+        "apps": 4
       },
       {
         "name": "E. Fernández",
         "position": "Midfielder",
         "age": 24,
         "goals": 4,
-        "apps": 28
+        "apps": 29
       },
       {
         "name": "G. Lo Celso",
         "position": "Midfielder",
         "age": 29,
         "goals": 2,
-        "apps": 23
+        "apps": 24
       },
       {
         "name": "A. Mac Allister",
         "position": "Midfielder",
         "age": 27,
         "goals": 5,
-        "apps": 29
+        "apps": 30
       },
       {
         "name": "E. Palacios",
         "position": "Midfielder",
         "age": 27,
         "goals": 0,
-        "apps": 18
+        "apps": 19
       },
       {
         "name": "L. Paredes",
@@ -1347,7 +1235,7 @@
         "position": "Attacker",
         "age": 27,
         "goals": 2,
-        "apps": 27
+        "apps": 28
       },
       {
         "name": "R. De Paul",
@@ -1360,8 +1248,8 @@
         "name": "T. Almada",
         "position": "Attacker",
         "age": 24,
-        "goals": 3,
-        "apps": 11
+        "goals": 4,
+        "apps": 12
       },
       {
         "name": "J. Álvarez",
@@ -1375,35 +1263,35 @@
         "position": "Attacker",
         "age": 21,
         "goals": 1,
-        "apps": 8
+        "apps": 9
       },
       {
         "name": "J. López",
         "position": "Attacker",
         "age": 25,
         "goals": 0,
-        "apps": 4
+        "apps": 5
       },
       {
         "name": "Lautaro Martínez",
         "position": "Attacker",
         "age": 28,
         "goals": 16,
-        "apps": 28
+        "apps": 29
       },
       {
         "name": "L. Messi",
         "position": "Attacker",
         "age": 38,
-        "goals": 12,
-        "apps": 23
+        "goals": 13,
+        "apps": 24
       },
       {
         "name": "G. Simeone",
         "position": "Midfielder",
         "age": 23,
         "goals": 2,
-        "apps": 12
+        "apps": 13
       }
     ],
     "Brazil": [
@@ -2326,190 +2214,6 @@
         "apps": 20
       }
     ],
-    "Venezuela": [
-      {
-        "name": "J. Camargo",
-        "position": "Goalkeeper",
-        "age": 28,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Contreras",
-        "position": "Goalkeeper",
-        "age": 31,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "C. Varela",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "D. Alfonzo",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Aramburu",
-        "position": "Defender",
-        "age": 23,
-        "goals": 1,
-        "apps": 19
-      },
-      {
-        "name": "A. Araujo",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "L. Balbo",
-        "position": "Defender",
-        "age": 19,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "N. Ferraresi",
-        "position": "Defender",
-        "age": 27,
-        "goals": 0,
-        "apps": 22
-      },
-      {
-        "name": "D. Osio",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Teo Quintero",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "C. Vivas",
-        "position": "Defender",
-        "age": 23,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "W. Carmona",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "C. Cásseres",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 25
-      },
-      {
-        "name": "C. Faya",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "G. González",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "L. González",
-        "position": "Midfielder",
-        "age": 35,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Lamadrid",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "T. Segovia",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 2,
-        "apps": 18
-      },
-      {
-        "name": "C. Sosa",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Yriarte",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 1,
-        "apps": 2
-      },
-      {
-        "name": "J. Bolívar",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "Alejandro Marqués",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "D. Martínez",
-        "position": "Midfielder",
-        "age": 19,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "G. Mendoza",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 1,
-        "apps": 6
-      },
-      {
-        "name": "C. Ramírez",
-        "position": "Attacker",
-        "age": 27,
-        "goals": 1,
-        "apps": 4
-      },
-      {
-        "name": "S. Rondón",
-        "position": "Attacker",
-        "age": 36,
-        "goals": 9,
-        "apps": 30
-      }
-    ],
     "Germany": [
       {
         "name": "O. Baumann",
@@ -3082,21 +2786,21 @@
         "position": "Goalkeeper",
         "age": 28,
         "goals": 0,
-        "apps": 17
+        "apps": 18
       },
       {
         "name": "Pau Cubarsí Paredes",
         "position": "Defender",
         "age": 18,
         "goals": 0,
-        "apps": 11
+        "apps": 12
       },
       {
         "name": "Marc Cucurella",
         "position": "Defender",
         "age": 27,
         "goals": 1,
-        "apps": 20
+        "apps": 21
       },
       {
         "name": "Eric García",
@@ -3117,14 +2821,14 @@
         "position": "Defender",
         "age": 31,
         "goals": 1,
-        "apps": 19
+        "apps": 20
       },
       {
         "name": "Marcos Llorente",
         "position": "Midfielder",
         "age": 30,
         "goals": 0,
-        "apps": 5
+        "apps": 6
       },
       {
         "name": "Pedro Porro",
@@ -3159,14 +2863,14 @@
         "position": "Midfielder",
         "age": 23,
         "goals": 5,
-        "apps": 20
+        "apps": 21
       },
       {
         "name": "Rodri",
         "position": "Midfielder",
         "age": 29,
         "goals": 3,
-        "apps": 13
+        "apps": 14
       },
       {
         "name": "Fabián Ruiz",
@@ -3187,7 +2891,7 @@
         "position": "Midfielder",
         "age": 24,
         "goals": 1,
-        "apps": 14
+        "apps": 15
       },
       {
         "name": "Dani Olmo",
@@ -3222,7 +2926,7 @@
         "position": "Attacker",
         "age": 28,
         "goals": 17,
-        "apps": 24
+        "apps": 25
       },
       {
         "name": "Yeremy Pino",
@@ -3236,7 +2940,7 @@
         "position": "Midfielder",
         "age": 25,
         "goals": 6,
-        "apps": 16
+        "apps": 17
       },
       {
         "name": "Nico Williams",
@@ -3612,183 +3316,6 @@
         "age": 33,
         "goals": 5,
         "apps": 21
-      }
-    ],
-    "Italy": [
-      {
-        "name": "E. Caprile",
-        "position": "Goalkeeper",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Carnesecchi",
-        "position": "Goalkeeper",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "G. Donnarumma",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
-        "apps": 23
-      },
-      {
-        "name": "A. Meret",
-        "position": "Goalkeeper",
-        "age": 28,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Bastoni",
-        "position": "Defender",
-        "age": 26,
-        "goals": 2,
-        "apps": 22
-      },
-      {
-        "name": "A. Buongiorno",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
-        "apps": 10
-      },
-      {
-        "name": "R. Calafiori",
-        "position": "Defender",
-        "age": 23,
-        "goals": 0,
-        "apps": 14
-      },
-      {
-        "name": "A. Cambiaso",
-        "position": "Defender",
-        "age": 25,
-        "goals": 3,
-        "apps": 19
-      },
-      {
-        "name": "F. Dimarco",
-        "position": "Defender",
-        "age": 28,
-        "goals": 1,
-        "apps": 22
-      },
-      {
-        "name": "F. Gatti",
-        "position": "Defender",
-        "age": 27,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "G. Mancini",
-        "position": "Defender",
-        "age": 29,
-        "goals": 2,
-        "apps": 9
-      },
-      {
-        "name": "G. Scalvini",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "L. Spinazzola",
-        "position": "Defender",
-        "age": 32,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "N. Barella",
-        "position": "Midfielder",
-        "age": 28,
-        "goals": 2,
-        "apps": 19
-      },
-      {
-        "name": "B. Cristante",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 0,
-        "apps": 10
-      },
-      {
-        "name": "D. Frattesi",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 4,
-        "apps": 23
-      },
-      {
-        "name": "M. Locatelli",
-        "position": "Midfielder",
-        "age": 27,
-        "goals": 0,
-        "apps": 10
-      },
-      {
-        "name": "M. Palestra",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "N. Pisilli",
-        "position": "Attacker",
-        "age": 21,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "S. Tonali",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 4,
-        "apps": 17
-      },
-      {
-        "name": "F. Esposito",
-        "position": "Attacker",
-        "age": 20,
-        "goals": 5,
-        "apps": 9
-      },
-      {
-        "name": "M. Kean",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 9,
-        "apps": 11
-      },
-      {
-        "name": "M. Politano",
-        "position": "Attacker",
-        "age": 32,
-        "goals": 1,
-        "apps": 8
-      },
-      {
-        "name": "G. Raspadori",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 5,
-        "apps": 22
-      },
-      {
-        "name": "M. Retegui",
-        "position": "Attacker",
-        "age": 26,
-        "goals": 9,
-        "apps": 24
       }
     ],
     "Belgium": [
@@ -4527,668 +4054,740 @@
         "apps": 21
       }
     ],
-    "Poland": [
+    "Norway": [
       {
-        "name": "M. Bułka",
+        "name": "Ø. Nyland",
         "position": "Goalkeeper",
-        "age": 26,
+        "age": 35,
         "goals": 0,
-        "apps": 3
+        "apps": 23
       },
       {
-        "name": "B. Drągowski",
+        "name": "E. Selvik",
         "position": "Goalkeeper",
         "age": 28,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "K. Grabara",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "M. Kochalski",
-        "position": "Goalkeeper",
-        "age": 25,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "J. Bednarek",
-        "position": "Defender",
-        "age": 29,
-        "goals": 0,
-        "apps": 20
-      },
-      {
-        "name": "B. Bereszyński",
-        "position": "Defender",
-        "age": 33,
-        "goals": 0,
-        "apps": 8
-      },
-      {
-        "name": "M. Cash",
-        "position": "Defender",
-        "age": 28,
-        "goals": 2,
-        "apps": 12
-      },
-      {
-        "name": "T. Kędziora",
-        "position": "Defender",
-        "age": 31,
         "goals": 0,
         "apps": 5
       },
       {
-        "name": "J. Kiwior",
-        "position": "Defender",
-        "age": 25,
-        "goals": 1,
-        "apps": 24
-      },
-      {
-        "name": "K. Potulski",
-        "position": "Defender",
-        "age": 18,
+        "name": "S. Tangvik",
+        "position": "Goalkeeper",
+        "age": 23,
         "goals": 0,
         "apps": 0
       },
       {
-        "name": "P. Wiśniewski",
+        "name": "K. Ajer",
         "position": "Defender",
         "age": 27,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "O. Wójcik",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "J. Ziółkowski",
-        "position": "Defender",
-        "age": 20,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "J. Kamiński",
-        "position": "Midfielder",
-        "age": 23,
         "goals": 2,
-        "apps": 17
+        "apps": 21
       },
       {
-        "name": "B. Kapustka",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "K. Kozłowski",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "J. Moder",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 1,
-        "apps": 20
-      },
-      {
-        "name": "J. Piotrowski",
-        "position": "Midfielder",
-        "age": 28,
+        "name": "F. Bjørkan",
+        "position": "Defender",
+        "age": 27,
         "goals": 0,
         "apps": 9
       },
       {
-        "name": "A. Pyrka",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "F. Rózga",
-        "position": "Midfielder",
-        "age": 19,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "B. Slisz",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 0,
-        "apps": 15
-      },
-      {
-        "name": "S. Szymański",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 3,
-        "apps": 20
-      },
-      {
-        "name": "N. Wojtuszek",
+        "name": "H. Falchener",
         "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "N. Zalewski",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 4,
-        "apps": 22
-      },
-      {
-        "name": "P. Zieliński",
-        "position": "Midfielder",
-        "age": 31,
-        "goals": 6,
-        "apps": 19
-      },
-      {
-        "name": "K. Czubak",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Grosicki",
-        "position": "Attacker",
-        "age": 37,
-        "goals": 0,
-        "apps": 8
-      },
-      {
-        "name": "R. Lewandowski",
-        "position": "Attacker",
-        "age": 37,
-        "goals": 8,
-        "apps": 19
-      },
-      {
-        "name": "K. Piątek",
-        "position": "Attacker",
-        "age": 30,
-        "goals": 1,
-        "apps": 12
-      },
-      {
-        "name": "O. Pietuszewski",
-        "position": "Midfielder",
-        "age": 17,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "M. Skóraś",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "K. Świderski",
-        "position": "Attacker",
-        "age": 28,
-        "goals": 6,
-        "apps": 21
-      },
-      {
-        "name": "M. Żukowski",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      }
-    ],
-    "Denmark": [
-      {
-        "name": "M. Hermansen",
-        "position": "Goalkeeper",
-        "age": 25,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "A. Jungdal",
-        "position": "Goalkeeper",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "F. Rønnow",
-        "position": "Goalkeeper",
-        "age": 33,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "J. Andersen",
-        "position": "Defender",
-        "age": 29,
-        "goals": 2,
-        "apps": 22
-      },
-      {
-        "name": "A. Bah",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 14
-      },
-      {
-        "name": "L. Høgsberg",
-        "position": "Defender",
-        "age": 19,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "J. Mæhle",
-        "position": "Defender",
-        "age": 28,
-        "goals": 1,
-        "apps": 17
-      },
-      {
-        "name": "N. Nartey",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "V. Nelsson",
-        "position": "Defender",
-        "age": 27,
-        "goals": 0,
-        "apps": 15
-      },
-      {
-        "name": "O. Provstgaard",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "M. Damsgaard",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 4,
-        "apps": 15
-      },
-      {
-        "name": "C. Eriksen",
-        "position": "Midfielder",
-        "age": 33,
-        "goals": 6,
-        "apps": 25
-      },
-      {
-        "name": "Victor Mow Froholdt",
-        "position": "Midfielder",
-        "age": 19,
-        "goals": 1,
-        "apps": 12
-      },
-      {
-        "name": "M. Hjulmand",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 1,
-        "apps": 24
-      },
-      {
-        "name": "P. Højbjerg",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 4,
-        "apps": 24
-      },
-      {
-        "name": "M. Jensen",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "J. Lindstrøm",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "N. Nartey",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "C. Nørgaard",
-        "position": "Midfielder",
-        "age": 31,
-        "goals": 1,
-        "apps": 17
-      },
-      {
-        "name": "A. Dreyer",
-        "position": "Attacker",
-        "age": 27,
-        "goals": 3,
-        "apps": 7
-      },
-      {
-        "name": "K. Høgh",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 1,
-        "apps": 4
-      },
-      {
-        "name": "R. Højlund",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 6,
-        "apps": 25
-      },
-      {
-        "name": "G. Isaksen",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 6,
-        "apps": 15
-      },
-      {
-        "name": "W. Osula",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 2
-      }
-    ],
-    "Serbia": [
-      {
-        "name": "V. Ilić",
-        "position": "Goalkeeper",
         "age": 22,
         "goals": 0,
         "apps": 1
       },
       {
-        "name": "L. LijeskiÄ",
-        "position": "Goalkeeper",
-        "age": 20,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "V. Milinković-Savić",
-        "position": "Goalkeeper",
-        "age": 28,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "Đ. Petrović",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
-        "apps": 10
-      },
-      {
-        "name": "P. Rajković",
-        "position": "Goalkeeper",
-        "age": 30,
-        "goals": 0,
-        "apps": 14
-      },
-      {
-        "name": "F. Stanković",
-        "position": "Goalkeeper",
-        "age": 23,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "S. Bukinac",
-        "position": "Defender",
-        "age": 20,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "S. Eraković",
+        "name": "S. Langås",
         "position": "Defender",
         "age": 24,
-        "goals": 0,
+        "goals": 1,
         "apps": 16
       },
       {
-        "name": "N. Milenković",
+        "name": "T. Heggem",
         "position": "Defender",
-        "age": 28,
+        "age": 26,
         "goals": 0,
-        "apps": 21
+        "apps": 17
       },
       {
-        "name": "M. Milikic",
+        "name": "L. Østigård",
+        "position": "Defender",
+        "age": 26,
+        "goals": 0,
+        "apps": 20
+      },
+      {
+        "name": "M. Pedersen",
+        "position": "Defender",
+        "age": 25,
+        "goals": 0,
+        "apps": 12
+      },
+      {
+        "name": "D. Møller Wolfe",
         "position": "Defender",
         "age": 23,
-        "goals": 0,
-        "apps": 0
+        "goals": 2,
+        "apps": 23
       },
       {
-        "name": "O. MimoviÄ",
-        "position": "Defender",
+        "name": "T. Aasgaard",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 5,
+        "apps": 9
+      },
+      {
+        "name": "F. Aursnes",
+        "position": "Midfielder",
+        "age": 30,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "P. Berg",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 0,
+        "apps": 23
+      },
+      {
+        "name": "S. Berge",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 26
+      },
+      {
+        "name": "Oscar Bobb",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 1,
+        "apps": 16
+      },
+      {
+        "name": "M. Ødegaard",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 2,
+        "apps": 15
+      },
+      {
+        "name": "M. Thorsby",
+        "position": "Midfielder",
+        "age": 29,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "K. Thorstvedt",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 2,
+        "apps": 49
+      },
+      {
+        "name": "A. Schjelderup",
+        "position": "Attacker",
         "age": 21,
-        "goals": 0,
-        "apps": 8
+        "goals": 1,
+        "apps": 14
       },
       {
-        "name": "K. Nedeljković",
-        "position": "Defender",
+        "name": "J. Hauge",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 1,
+        "apps": 7
+      },
+      {
+        "name": "E. Haaland",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 30,
+        "apps": 23
+      },
+      {
+        "name": "J. Strand Larsen",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 3,
+        "apps": 17
+      },
+      {
+        "name": "A. Nusa",
+        "position": "Attacker",
         "age": 20,
+        "goals": 7,
+        "apps": 20
+      },
+      {
+        "name": "A. Sørloth",
+        "position": "Attacker",
+        "age": 30,
+        "goals": 11,
+        "apps": 23
+      },
+      {
+        "name": "J. Ryerson",
+        "position": "Defender",
+        "age": 28,
+        "goals": 2,
+        "apps": 23
+      }
+    ],
+    "Sweden": [
+      {
+        "name": "V. Johansson",
+        "position": "Goalkeeper",
+        "age": 27,
         "goals": 0,
         "apps": 11
       },
       {
-        "name": "S. Pavlović",
-        "position": "Defender",
-        "age": 24,
-        "goals": 2,
-        "apps": 23
-      },
-      {
-        "name": "P. Petrović",
-        "position": "Defender",
-        "age": 20,
+        "name": "K. Nordfeldt",
+        "position": "Goalkeeper",
+        "age": 36,
         "goals": 0,
-        "apps": 1
+        "apps": 3
       },
       {
-        "name": "N. Simić",
-        "position": "Defender",
-        "age": 19,
+        "name": "J. Widell Zetterström",
+        "position": "Goalkeeper",
+        "age": 27,
         "goals": 0,
-        "apps": 2
+        "apps": 8
       },
       {
-        "name": "A. Terzić",
+        "name": "H. Ekdal",
+        "position": "Defender",
+        "age": 27,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "G. Gudmundsson",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 0,
+        "apps": 18
+      },
+      {
+        "name": "I. Hien",
         "position": "Defender",
         "age": 26,
+        "goals": 0,
+        "apps": 21
+      },
+      {
+        "name": "G. Lagerbielke",
+        "position": "Defender",
+        "age": 25,
         "goals": 1,
         "apps": 9
       },
       {
-        "name": "V. Dragojević",
-        "position": "Midfielder",
-        "age": 19,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "M. Gaćinović",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "N. Gudelj",
-        "position": "Midfielder",
-        "age": 34,
-        "goals": 0,
-        "apps": 15
-      },
-      {
-        "name": "F. Kostić",
-        "position": "Midfielder",
-        "age": 33,
+        "name": "V. Lindelöf",
+        "position": "Defender",
+        "age": 31,
         "goals": 0,
         "apps": 12
       },
       {
-        "name": "V. Kostov",
-        "position": "Midfielder",
-        "age": 17,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "S. Lukić",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 20
-      },
-      {
-        "name": "A. MaksimoviÄ",
-        "position": "Midfielder",
-        "age": 18,
-        "goals": 0,
-        "apps": 9
-      },
-      {
-        "name": "S. Milinković-Savić",
-        "position": "Midfielder",
+        "name": "C. Starfelt",
+        "position": "Defender",
         "age": 30,
-        "goals": 2,
-        "apps": 9
+        "goals": 0,
+        "apps": 11
       },
       {
-        "name": "N. Petrović",
+        "name": "H. Johansson",
         "position": "Midfielder",
-        "age": 26,
+        "age": 28,
         "goals": 0,
         "apps": 3
       },
       {
-        "name": "L. Samardžić",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 1,
-        "apps": 23
-      },
-      {
-        "name": "P. Stanić",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 1,
+        "name": "E. Smith",
+        "position": "Defender",
+        "age": 28,
+        "goals": 0,
         "apps": 2
       },
       {
-        "name": "A. Stanković",
+        "name": "E. Stroud",
         "position": "Midfielder",
-        "age": 20,
-        "goals": 1,
-        "apps": 8
+        "age": 23,
+        "goals": 0,
+        "apps": 1
       },
       {
-        "name": "A. Živković",
-        "position": "Midfielder",
-        "age": 29,
+        "name": "D. Svensson",
+        "position": "Defender",
+        "age": 23,
         "goals": 0,
+        "apps": 13
+      },
+      {
+        "name": "A. Bernhardsson",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 10
+      },
+      {
+        "name": "Y. Ayari",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 3,
         "apps": 19
       },
       {
-        "name": "D. Zukić",
+        "name": "L. Bergvall",
         "position": "Midfielder",
+        "age": 19,
+        "goals": 0,
+        "apps": 22
+      },
+      {
+        "name": "B. Nygren",
+        "position": "Attacker",
         "age": 24,
+        "goals": 3,
+        "apps": 11
+      },
+      {
+        "name": "J. Karlström",
+        "position": "Midfielder",
+        "age": 30,
+        "goals": 0,
+        "apps": 12
+      },
+      {
+        "name": "K. Sema",
+        "position": "Midfielder",
+        "age": 32,
+        "goals": 5,
+        "apps": 15
+      },
+      {
+        "name": "M. Svanberg",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 0,
+        "apps": 9
+      },
+      {
+        "name": "B. Zeneli",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 0,
+        "apps": 8
+      },
+      {
+        "name": "T. Ali",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "A. Elanga",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 3,
+        "apps": 17
+      },
+      {
+        "name": "V. Gyökeres",
+        "position": "Attacker",
+        "age": 27,
+        "goals": 21,
+        "apps": 22
+      },
+      {
+        "name": "A. Isak",
+        "position": "Attacker",
+        "age": 26,
+        "goals": 7,
+        "apps": 16
+      },
+      {
+        "name": "G. Nilsson",
+        "position": "Attacker",
+        "age": 28,
+        "goals": 3,
+        "apps": 8
+      }
+    ],
+    "Czech Republic": [
+      {
+        "name": "L. Hornícek",
+        "position": "Goalkeeper",
+        "age": 23,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "M. Kovár",
+        "position": "Goalkeeper",
+        "age": 25,
+        "goals": 0,
+        "apps": 21
+      },
+      {
+        "name": "J. Stanek",
+        "position": "Goalkeeper",
+        "age": 29,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "S. Chaloupek",
+        "position": "Defender",
+        "age": 22,
         "goals": 0,
         "apps": 3
       },
       {
-        "name": "V. Birmančević",
-        "position": "Midfielder",
-        "age": 27,
+        "name": "V. Coufal",
+        "position": "Defender",
+        "age": 33,
+        "goals": 2,
+        "apps": 26
+      },
+      {
+        "name": "T. Holes",
+        "position": "Defender",
+        "age": 32,
         "goals": 0,
         "apps": 14
       },
       {
-        "name": "M. Ivanović",
-        "position": "Attacker",
-        "age": 21,
-        "goals": 0,
-        "apps": 3
+        "name": "R. Hranác",
+        "position": "Defender",
+        "age": 25,
+        "goals": 1,
+        "apps": 12
       },
       {
-        "name": "D. Joveljić",
+        "name": "D. Jurásek",
+        "position": "Defender",
+        "age": 25,
+        "goals": 1,
+        "apps": 12
+      },
+      {
+        "name": "L. Krejcí",
+        "position": "Defender",
+        "age": 26,
+        "goals": 3,
+        "apps": 27
+      },
+      {
+        "name": "J. Zelený",
+        "position": "Defender",
+        "age": 33,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "D. Zima",
+        "position": "Defender",
+        "age": 25,
+        "goals": 1,
+        "apps": 7
+      },
+      {
+        "name": "D. Doudera",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 1,
+        "apps": 10
+      },
+      {
+        "name": "L. Cerv",
+        "position": "Midfielder",
+        "age": 24,
+        "goals": 2,
+        "apps": 17
+      },
+      {
+        "name": "V. Darida",
+        "position": "Midfielder",
+        "age": 35,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "L. Provod",
         "position": "Attacker",
+        "age": 29,
+        "goals": 1,
+        "apps": 23
+      },
+      {
+        "name": "M. Sadílek",
+        "position": "Midfielder",
         "age": 26,
         "goals": 0,
-        "apps": 3
+        "apps": 13
       },
       {
-        "name": "L. Jović",
+        "name": "H. Sochurek",
+        "position": "Midfielder",
+        "age": 17,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "A. Sojka",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "T. Soucek",
+        "position": "Midfielder",
+        "age": 30,
+        "goals": 4,
+        "apps": 25
+      },
+      {
+        "name": "P. Sulc",
         "position": "Attacker",
-        "age": 28,
-        "goals": 1,
+        "age": 25,
+        "goals": 6,
+        "apps": 22
+      },
+      {
+        "name": "T. Chorý",
+        "position": "Attacker",
+        "age": 30,
+        "goals": 5,
         "apps": 21
       },
       {
-        "name": "A. Mitrović",
+        "name": "M. Chytil",
         "position": "Attacker",
-        "age": 31,
-        "goals": 7,
+        "age": 26,
+        "goals": 2,
+        "apps": 12
+      },
+      {
+        "name": "A. Hlozek",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 5,
+        "apps": 20
+      },
+      {
+        "name": "J. Kuchta",
+        "position": "Attacker",
+        "age": 28,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "P. Schick",
+        "position": "Attacker",
+        "age": 29,
+        "goals": 10,
         "apps": 19
       },
       {
-        "name": "L. Ranđelović",
+        "name": "D. Visinský",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 0,
+        "apps": 0
+      }
+    ],
+    "Bosnia and Herzegovina": [
+      {
+        "name": "M. Jurkas",
+        "position": "Goalkeeper",
+        "age": 29,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "N. Vasilj",
+        "position": "Goalkeeper",
+        "age": 30,
+        "goals": 0,
+        "apps": 20
+      },
+      {
+        "name": "M. Zlomislic",
+        "position": "Goalkeeper",
+        "age": 27,
+        "goals": 0,
+        "apps": 23
+      },
+      {
+        "name": "N. Celik",
+        "position": "Defender",
+        "age": 19,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "A. Dedic",
+        "position": "Defender",
+        "age": 23,
+        "goals": 0,
+        "apps": 24
+      },
+      {
+        "name": "D. Hadzikadunic",
+        "position": "Defender",
+        "age": 27,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "N. Katic",
+        "position": "Defender",
+        "age": 29,
+        "goals": 1,
+        "apps": 18
+      },
+      {
+        "name": "S. Kolasinac",
+        "position": "Defender",
+        "age": 32,
+        "goals": 1,
+        "apps": 17
+      },
+      {
+        "name": "T. Muharemovic",
+        "position": "Defender",
+        "age": 22,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "N. Mujakic",
+        "position": "Defender",
+        "age": 27,
+        "goals": 1,
+        "apps": 8
+      },
+      {
+        "name": "S. Radeljic",
+        "position": "Defender",
+        "age": 28,
+        "goals": 0,
+        "apps": 27
+      },
+      {
+        "name": "I. Basic",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "A. Gigovic",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 2,
+        "apps": 18
+      },
+      {
+        "name": "A. Hadziahmetovic",
         "position": "Midfielder",
         "age": 28,
         "goals": 0,
-        "apps": 2
+        "apps": 4
       },
       {
-        "name": "P. Ratkov",
-        "position": "Attacker",
-        "age": 22,
+        "name": "Ermin Mahmic",
+        "position": "Midfielder",
+        "age": 20,
         "goals": 0,
-        "apps": 2
+        "apps": 0
+      },
+      {
+        "name": "I. Sunjic",
+        "position": "Midfielder",
+        "age": 29,
+        "goals": 0,
+        "apps": 22
+      },
+      {
+        "name": "B. Tahirovic",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 1,
+        "apps": 25
+      },
+      {
+        "name": "A. Memic",
+        "position": "Midfielder",
+        "age": 24,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "D. Burnic",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 21
+      },
+      {
+        "name": "Kerim-Sam Alajbegovic",
+        "position": "Midfielder",
+        "age": 18,
+        "goals": 1,
+        "apps": 7
+      },
+      {
+        "name": "E. Bajraktarevic",
+        "position": "Attacker",
+        "age": 20,
+        "goals": 1,
+        "apps": 15
+      },
+      {
+        "name": "S. Bazdar",
+        "position": "Attacker",
+        "age": 21,
+        "goals": 1,
+        "apps": 12
+      },
+      {
+        "name": "E. Demirovic",
+        "position": "Attacker",
+        "age": 27,
+        "goals": 5,
+        "apps": 24
+      },
+      {
+        "name": "E. Dzeko",
+        "position": "Attacker",
+        "age": 39,
+        "goals": 12,
+        "apps": 28
+      },
+      {
+        "name": "J. Lukic",
+        "position": "Attacker",
+        "age": 27,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "H. Tabakovic",
+        "position": "Attacker",
+        "age": 31,
+        "goals": 3,
+        "apps": 14
       }
     ],
     "Croatia": [
@@ -5743,363 +5342,556 @@
         "apps": 17
       }
     ],
-    "Nigeria": [
+    "Algeria": [
       {
-        "name": "A. Adeleye",
+        "name": "O. Benbot",
+        "position": "Goalkeeper",
+        "age": 31,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "M. Mastil",
         "position": "Goalkeeper",
         "age": 25,
         "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Atata",
-        "position": "Goalkeeper",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "S. Nwabali",
-        "position": "Goalkeeper",
-        "age": 29,
-        "goals": 0,
-        "apps": 21
-      },
-      {
-        "name": "A. Obasogie",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
         "apps": 1
       },
       {
-        "name": "A. Okonkwo",
-        "position": "Goalkeeper",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Okoye",
-        "position": "Goalkeeper",
-        "age": 26,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "F. Uzoho",
+        "name": "L. Zidane",
         "position": "Goalkeeper",
         "age": 27,
         "goals": 0,
-        "apps": 1
+        "apps": 6
       },
       {
-        "name": "S. Ajayi",
+        "name": "A. Abada",
         "position": "Defender",
-        "age": 32,
-        "goals": 1,
-        "apps": 14
-      },
-      {
-        "name": "T. Al Ameen",
-        "position": "Defender",
-        "age": null,
+        "age": 26,
         "goals": 0,
-        "apps": 0
+        "apps": 9
       },
       {
-        "name": "R. Alebiosu",
+        "name": "R. Aït-Nouri",
         "position": "Defender",
         "age": 24,
         "goals": 0,
-        "apps": 1
+        "apps": 17
       },
       {
-        "name": "C. Awaziem",
+        "name": "Z. Belaïd",
         "position": "Defender",
-        "age": 29,
+        "age": 27,
         "goals": 1,
         "apps": 8
       },
       {
-        "name": "C. Bassey",
+        "name": "R. Belghali",
         "position": "Defender",
-        "age": 26,
+        "age": 23,
         "goals": 0,
-        "apps": 13
+        "apps": 10
       },
       {
-        "name": "E. Fernandez",
+        "name": "R. Bensebaïni",
         "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Igboke",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "I. Ogbu",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "S. Onyemaechi",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
+        "age": 30,
+        "goals": 1,
         "apps": 16
       },
       {
-        "name": "C. Oputa",
+        "name": "S. Chergui",
         "position": "Defender",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "B. Osayi-Samuel",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "Z. Sanusi",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "A. Adeoye",
-        "position": "Midfielder",
-        "age": 19,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "E. Akinsanmiro",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "I. Alhassan",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Ayobami",
-        "position": "Midfielder",
         "age": 26,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "O. Azeez",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "F. Dele-Bashiru",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 0,
-        "apps": 11
-      },
-      {
-        "name": "A. Iwobi",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "W. Ndidi",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 1,
-        "apps": 11
-      },
-      {
-        "name": "T. Nnadi",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "C. Nwaiwu",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "R. Onyedika",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 2,
-        "apps": 14
-      },
-      {
-        "name": "F. Onyeka",
-        "position": "Midfielder",
-        "age": 27,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "T. Oyedokun",
-        "position": "Midfielder",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "S. Tijani",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "F. Umole",
-        "position": "Midfielder",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Yusuf",
-        "position": "Midfielder",
-        "age": 25,
         "goals": 0,
         "apps": 3
       },
       {
-        "name": "A. Adams",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 2,
-        "apps": 7
-      },
-      {
-        "name": "A. Bewene",
-        "position": "Midfielder",
-        "age": 21,
+        "name": "J. Hadjam",
+        "position": "Defender",
+        "age": 22,
         "goals": 0,
-        "apps": 0
+        "apps": 10
       },
       {
-        "name": "S. Chukwueze",
-        "position": "Attacker",
-        "age": 26,
-        "goals": 1,
+        "name": "A. Mandi",
+        "position": "Defender",
+        "age": 34,
+        "goals": 2,
         "apps": 18
       },
       {
-        "name": "C. Dessers",
-        "position": "Attacker",
-        "age": 31,
-        "goals": 4,
-        "apps": 14
-      },
-      {
-        "name": "R. Durosinmi",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "C. Ejuke",
-        "position": "Attacker",
-        "age": 27,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "S. Lawal",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "A. Lookman",
-        "position": "Attacker",
-        "age": 28,
-        "goals": 11,
-        "apps": 20
-      },
-      {
-        "name": "T. Moffi",
-        "position": "Attacker",
+        "name": "M. Tougai",
+        "position": "Defender",
         "age": 26,
-        "goals": 0,
-        "apps": 0
+        "goals": 1,
+        "apps": 11
       },
       {
-        "name": "U. Mohammed",
-        "position": "Attacker",
-        "age": 31,
-        "goals": 0,
-        "apps": 0
+        "name": "H. Aouar",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 2,
+        "apps": 10
       },
       {
-        "name": "P. Onuachu",
-        "position": "Attacker",
+        "name": "N. Bentaleb",
+        "position": "Midfielder",
         "age": 31,
         "goals": 1,
         "apps": 6
       },
       {
-        "name": "O. Oseni",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "V. Osimhen",
-        "position": "Attacker",
-        "age": 27,
-        "goals": 6,
-        "apps": 10
-      },
-      {
-        "name": "P. Otele",
+        "name": "H. Boudaoui",
         "position": "Midfielder",
         "age": 26,
         "goals": 0,
-        "apps": 0
+        "apps": 7
       },
       {
-        "name": "M. Simon",
+        "name": "I. Maza",
+        "position": "Midfielder",
+        "age": 20,
+        "goals": 2,
+        "apps": 13
+      },
+      {
+        "name": "Y. Titraoui",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "R. Zerrouki",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 18
+      },
+      {
+        "name": "F. Chaïbi",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 1,
+        "apps": 12
+      },
+      {
+        "name": "M. Amoura",
         "position": "Attacker",
+        "age": 26,
+        "goals": 3,
+        "apps": 15
+      },
+      {
+        "name": "A. Benbouali",
+        "position": "Attacker",
+        "age": 26,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "A. Boulbina",
+        "position": "Attacker",
+        "age": 22,
+        "goals": 7,
+        "apps": 11
+      },
+      {
+        "name": "F. Ghedjemis",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "A. Gouiri",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 5,
+        "apps": 11
+      },
+      {
+        "name": "A. Hadj-Moussa",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 1,
+        "apps": 11
+      },
+      {
+        "name": "R. Mahrez",
+        "position": "Attacker",
+        "age": 34,
+        "goals": 5,
+        "apps": 16
+      }
+    ],
+    "Ghana": [
+      {
+        "name": "B. Asare",
+        "position": "Goalkeeper",
+        "age": 33,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "J. Anang",
+        "position": "Goalkeeper",
+        "age": 25,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "L. Zigi",
+        "position": "Goalkeeper",
+        "age": 29,
+        "goals": 0,
+        "apps": 9
+      },
+      {
+        "name": "J. Adjetey",
+        "position": "Defender",
+        "age": 22,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "D. Luckassen",
+        "position": "Defender",
         "age": 30,
         "goals": 0,
-        "apps": 17
+        "apps": 1
       },
       {
-        "name": "Y. Sor",
+        "name": "G. Mensah",
+        "position": "Defender",
+        "age": 27,
+        "goals": 0,
+        "apps": 10
+      },
+      {
+        "name": "A. Seidu",
+        "position": "Defender",
+        "age": 26,
+        "goals": 1,
+        "apps": 10
+      },
+      {
+        "name": "J. Opoku",
+        "position": "Defender",
+        "age": 27,
+        "goals": 1,
+        "apps": 5
+      },
+      {
+        "name": "K. Peprah Oppong",
+        "position": "Defender",
+        "age": 21,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "A. Mumin",
+        "position": "Defender",
+        "age": 28,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "M. Senaya",
+        "position": "Defender",
+        "age": 24,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "A. Baba",
+        "position": "Defender",
+        "age": 31,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "E. Owusu",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 0,
+        "apps": 10
+      },
+      {
+        "name": "T. Partey",
+        "position": "Midfielder",
+        "age": 32,
+        "goals": 0,
+        "apps": 18
+      },
+      {
+        "name": "K. Sibo",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 5
+      },
+      {
+        "name": "Caleb Marfo Yirenkyi",
+        "position": "Midfielder",
+        "age": 19,
+        "goals": 1,
+        "apps": 7
+      },
+      {
+        "name": "A. Semenyo",
         "position": "Attacker",
         "age": 25,
         "goals": 0,
+        "apps": 9
+      },
+      {
+        "name": "A. Boakye",
+        "position": "Midfielder",
+        "age": 25,
+        "goals": 0,
         "apps": 0
+      },
+      {
+        "name": "A. Fatawu",
+        "position": "Midfielder",
+        "age": 21,
+        "goals": 1,
+        "apps": 10
+      },
+      {
+        "name": "P. Adu",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 0,
+        "apps": 5
+      },
+      {
+        "name": "B. Thomas-Asante",
+        "position": "Attacker",
+        "age": 27,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "J. Ayew",
+        "position": "Attacker",
+        "age": 34,
+        "goals": 4,
+        "apps": 12
+      },
+      {
+        "name": "C. Bonsu Baah",
+        "position": "Attacker",
+        "age": 21,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "I. Williams",
+        "position": "Attacker",
+        "age": 31,
+        "goals": 5,
+        "apps": 19
+      },
+      {
+        "name": "E. Nuamah",
+        "position": "Attacker",
+        "age": 22,
+        "goals": 0,
+        "apps": 8
+      },
+      {
+        "name": "K. Sulemana",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 0,
+        "apps": 5
+      }
+    ],
+    "Cape Verde": [
+      {
+        "name": "Márcio Rosa",
+        "position": "Goalkeeper",
+        "age": 28,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "Vózinha",
+        "position": "Goalkeeper",
+        "age": 39,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "C. dos Santos",
+        "position": "Goalkeeper",
+        "age": 25,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "Diney Borges",
+        "position": "Defender",
+        "age": 30,
+        "goals": 3,
+        "apps": 5
+      },
+      {
+        "name": "Logan Costa",
+        "position": "Defender",
+        "age": 24,
+        "goals": 2,
+        "apps": 13
+      },
+      {
+        "name": "S. Lopes Cabral",
+        "position": "Defender",
+        "age": 23,
+        "goals": 1,
+        "apps": 20
+      },
+      {
+        "name": "Pico",
+        "position": "Defender",
+        "age": 33,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "S. Moreira",
+        "position": "Defender",
+        "age": 31,
+        "goals": 0,
+        "apps": 44
+      },
+      {
+        "name": "Wagner Pina",
+        "position": "Defender",
+        "age": 23,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "Kelvin Pires",
+        "position": "Defender",
+        "age": 25,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "Stopira",
+        "position": "Defender",
+        "age": 37,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "Telmo Arcanjo",
+        "position": "Midfielder",
+        "age": 24,
+        "goals": 1,
+        "apps": 12
+      },
+      {
+        "name": "Deroy Duarte",
+        "position": "Midfielder",
+        "age": 26,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "L. Duarte",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 2,
+        "apps": 30
+      },
+      {
+        "name": "João Paulo",
+        "position": "Midfielder",
+        "age": 27,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "Kevin Pina",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 1,
+        "apps": 26
+      },
+      {
+        "name": "Jamiro Monteiro",
+        "position": "Midfielder",
+        "age": 32,
+        "goals": 0,
+        "apps": 7
+      },
+      {
+        "name": "Yannick Semedo",
+        "position": "Midfielder",
+        "age": 30,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "Garry Rodrigues",
+        "position": "Midfielder",
+        "age": 35,
+        "goals": 1,
+        "apps": 3
+      },
+      {
+        "name": "Nuno da Costa",
+        "position": "Attacker",
+        "age": 34,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "Jovane Cabral",
+        "position": "Attacker",
+        "age": 27,
+        "goals": 2,
+        "apps": 31
+      },
+      {
+        "name": "Willy Semedo",
+        "position": "Midfielder",
+        "age": 31,
+        "goals": 3,
+        "apps": 10
+      },
+      {
+        "name": "Hélio Varela",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 6,
+        "apps": 42
+      },
+      {
+        "name": "Ryan Mendes",
+        "position": "Midfielder",
+        "age": 36,
+        "goals": 5,
+        "apps": 11
+      },
+      {
+        "name": "Gilson Benchimol",
+        "position": "Attacker",
+        "age": 24,
+        "goals": 0,
+        "apps": 23
+      },
+      {
+        "name": "D. Livramento",
+        "position": "Attacker",
+        "age": 24,
+        "goals": 4,
+        "apps": 41
       }
     ],
     "Senegal": [
@@ -6136,7 +5928,7 @@
         "position": "Midfielder",
         "age": 26,
         "goals": 0,
-        "apps": 13
+        "apps": 14
       },
       {
         "name": "K. Koulibaly",
@@ -6150,7 +5942,7 @@
         "position": "Defender",
         "age": 21,
         "goals": 0,
-        "apps": 4
+        "apps": 5
       },
       {
         "name": "M. Niakhaté",
@@ -6206,7 +5998,7 @@
         "position": "Midfielder",
         "age": 36,
         "goals": 0,
-        "apps": 19
+        "apps": 20
       },
       {
         "name": "P. Gueye",
@@ -6227,7 +6019,7 @@
         "position": "Midfielder",
         "age": 23,
         "goals": 0,
-        "apps": 10
+        "apps": 11
       },
       {
         "name": "Assane Diao",
@@ -6241,14 +6033,14 @@
         "position": "Attacker",
         "age": 25,
         "goals": 0,
-        "apps": 3
+        "apps": 4
       },
       {
         "name": "N. Jackson",
         "position": "Attacker",
         "age": 24,
         "goals": 4,
-        "apps": 18
+        "apps": 19
       },
       {
         "name": "S. Mané",
@@ -6262,7 +6054,7 @@
         "position": "Attacker",
         "age": 17,
         "goals": 1,
-        "apps": 10
+        "apps": 11
       },
       {
         "name": "C. Ndiaye",
@@ -6283,7 +6075,7 @@
         "position": "Attacker",
         "age": 27,
         "goals": 4,
-        "apps": 17
+        "apps": 18
       }
     ],
     "Egypt": [
@@ -6654,183 +6446,6 @@
         "apps": 2
       }
     ],
-    "Cameroon": [
-      {
-        "name": "D. Epassy",
-        "position": "Goalkeeper",
-        "age": 32,
-        "goals": 0,
-        "apps": 35
-      },
-      {
-        "name": "S. Ngapandouetnbu",
-        "position": "Goalkeeper",
-        "age": 22,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Blondy Rudolph Nna Noukeu",
-        "position": "Goalkeeper",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "H. Ousmanou",
-        "position": "Goalkeeper",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "S. Eloundou",
-        "position": "Defender",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "O. Kamdem",
-        "position": "Defender",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Keben",
-        "position": "Defender",
-        "age": 21,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "S. Keller",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "S. Kotto",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "C. Malone",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "E. Moungam",
-        "position": "Defender",
-        "age": 19,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Nagida",
-        "position": "Defender",
-        "age": 20,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "D. Yongwa",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "F. Ambina",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "A. Avom",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "R. Fosso",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Arnold Mael Kamdem",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "F. Monyebe",
-        "position": "Midfielder",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "K. Nifanso",
-        "position": "Midfielder",
-        "age": null,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "Etta Eyong",
-        "position": "Attacker",
-        "age": 22,
-        "goals": 1,
-        "apps": 4
-      },
-      {
-        "name": "Christian Kofane",
-        "position": "Attacker",
-        "age": 19,
-        "goals": 2,
-        "apps": 4
-      },
-      {
-        "name": "B. Mbeumo",
-        "position": "Attacker",
-        "age": 26,
-        "goals": 2,
-        "apps": 10
-      },
-      {
-        "name": "D. Namaso",
-        "position": "Attacker",
-        "age": 25,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "J. Tchatchoua",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "Matah Yondjio",
-        "position": "Attacker",
-        "age": 18,
-        "goals": 0,
-        "apps": 0
-      }
-    ],
     "South Africa": [
       {
         "name": "S. Chaine",
@@ -7035,7 +6650,7 @@
         "position": "Goalkeeper",
         "age": 31,
         "goals": 0,
-        "apps": 6
+        "apps": 8
       },
       {
         "name": "D. Batubinsika",
@@ -7049,140 +6664,140 @@
         "position": "Defender",
         "age": 28,
         "goals": 0,
-        "apps": 5
+        "apps": 6
       },
       {
         "name": "S. Kapuadi",
         "position": "Defender",
         "age": 27,
         "goals": 0,
-        "apps": 0
+        "apps": 1
       },
       {
         "name": "J. Kayembe",
         "position": "Defender",
         "age": 31,
-        "goals": 0,
-        "apps": 10
+        "goals": 1,
+        "apps": 12
       },
       {
         "name": "A. Masuaku",
         "position": "Defender",
         "age": 32,
         "goals": 1,
-        "apps": 11
+        "apps": 12
       },
       {
         "name": "C. Mbemba",
         "position": "Defender",
         "age": 31,
         "goals": 0,
-        "apps": 10
+        "apps": 12
       },
       {
         "name": "A. Tuanzebe",
         "position": "Defender",
         "age": 28,
         "goals": 1,
-        "apps": 6
+        "apps": 8
       },
       {
         "name": "A. Wan-Bissaka",
         "position": "Defender",
         "age": 28,
         "goals": 0,
-        "apps": 4
+        "apps": 6
       },
       {
         "name": "E. Kayembe",
         "position": "Midfielder",
         "age": 27,
         "goals": 1,
-        "apps": 9
+        "apps": 11
       },
       {
         "name": "S. Moutoussamy",
         "position": "Midfielder",
         "age": 29,
         "goals": 0,
-        "apps": 12
+        "apps": 14
       },
       {
         "name": "N. Mukau",
         "position": "Midfielder",
         "age": 21,
         "goals": 0,
-        "apps": 7
+        "apps": 9
       },
       {
         "name": "C. Pickel",
         "position": "Midfielder",
         "age": 28,
         "goals": 0,
-        "apps": 8
+        "apps": 9
       },
       {
         "name": "N. Sadiki",
         "position": "Midfielder",
         "age": 21,
         "goals": 0,
-        "apps": 11
+        "apps": 13
       },
       {
         "name": "A. Tshibola",
         "position": "Midfielder",
         "age": 30,
         "goals": 0,
-        "apps": 0
+        "apps": 1
       },
       {
         "name": "N. Mbuku",
         "position": "Midfielder",
         "age": 23,
         "goals": 1,
-        "apps": 8
+        "apps": 10
       },
       {
         "name": "T. Bongonda",
         "position": "Midfielder",
         "age": 30,
         "goals": 2,
-        "apps": 13
+        "apps": 14
       },
       {
         "name": "C. Bakambu",
         "position": "Attacker",
         "age": 34,
         "goals": 1,
-        "apps": 7
+        "apps": 9
       },
       {
         "name": "S. Banza",
         "position": "Attacker",
         "age": 29,
         "goals": 2,
-        "apps": 7
+        "apps": 8
       },
       {
         "name": "B. Cipenga",
         "position": "Attacker",
         "age": 27,
         "goals": 0,
-        "apps": 3
+        "apps": 4
       },
       {
         "name": "M. Elia",
         "position": "Attacker",
         "age": 28,
         "goals": 2,
-        "apps": 13
+        "apps": 14
       },
       {
         "name": "G. Kakuta",
         "position": "Attacker",
         "age": 34,
         "goals": 2,
-        "apps": 3
+        "apps": 4
       },
       {
         "name": "F. Mayele",
@@ -7196,7 +6811,7 @@
         "position": "Attacker",
         "age": 29,
         "goals": 0,
-        "apps": 3
+        "apps": 5
       }
     ],
     "Tunisia": [
@@ -7381,274 +6996,6 @@
         "age": 26,
         "goals": 0,
         "apps": 8
-      }
-    ],
-    "Mali": [
-      {
-        "name": "D. Diarra",
-        "position": "Goalkeeper",
-        "age": 30,
-        "goals": 0,
-        "apps": 11
-      },
-      {
-        "name": "I. Diawara",
-        "position": "Goalkeeper",
-        "age": 31,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Samassa",
-        "position": "Goalkeeper",
-        "age": 35,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "N. Traore",
-        "position": "Goalkeeper",
-        "age": 25,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "O. Camara",
-        "position": "Defender",
-        "age": 22,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "I. Cissé",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "W. Coulibaly",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "A. Danté",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "A. Diaby",
-        "position": "Defender",
-        "age": 25,
-        "goals": 0,
-        "apps": 10
-      },
-      {
-        "name": "F. Doucouré",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 7
-      },
-      {
-        "name": "M. Fofana",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 8
-      },
-      {
-        "name": "N. Gassama",
-        "position": "Defender",
-        "age": 24,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "S. Niakaté",
-        "position": "Defender",
-        "age": 26,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "A. Sissoko",
-        "position": "Defender",
-        "age": 28,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "H. Traoré",
-        "position": "Defender",
-        "age": 33,
-        "goals": 0,
-        "apps": 3
-      },
-      {
-        "name": "Y. Bissouma",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 2,
-        "apps": 10
-      },
-      {
-        "name": "M. Camara",
-        "position": "Midfielder",
-        "age": 24,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "M. Camara",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "L. Coulibaly",
-        "position": "Midfielder",
-        "age": 29,
-        "goals": 0,
-        "apps": 8
-      },
-      {
-        "name": "S. Diabaté",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "G. Diakité",
-        "position": "Midfielder",
-        "age": 20,
-        "goals": 0,
-        "apps": 4
-      },
-      {
-        "name": "M. Diakité",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "O. Diakité",
-        "position": "Midfielder",
-        "age": 25,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "A. Dieng",
-        "position": "Midfielder",
-        "age": 28,
-        "goals": 0,
-        "apps": 13
-      },
-      {
-        "name": "K. Doumbia",
-        "position": "Midfielder",
-        "age": 22,
-        "goals": 3,
-        "apps": 7
-      },
-      {
-        "name": "M. Doumbia",
-        "position": "Midfielder",
-        "age": 21,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "A. Haidara",
-        "position": "Midfielder",
-        "age": 27,
-        "goals": 0,
-        "apps": 6
-      },
-      {
-        "name": "M. Maiga",
-        "position": "Midfielder",
-        "age": 30,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "N. Dorgeles",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 4,
-        "apps": 9
-      },
-      {
-        "name": "M. Sangaré",
-        "position": "Midfielder",
-        "age": 23,
-        "goals": 0,
-        "apps": 9
-      },
-      {
-        "name": "K. Sidibé",
-        "position": "Midfielder",
-        "age": 26,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "I. Sissoko",
-        "position": "Midfielder",
-        "age": 28,
-        "goals": 0,
-        "apps": 2
-      },
-      {
-        "name": "M. Camara",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 0,
-        "apps": 1
-      },
-      {
-        "name": "G. Diarra",
-        "position": "Attacker",
-        "age": 23,
-        "goals": 0,
-        "apps": 5
-      },
-      {
-        "name": "M. Doumbia",
-        "position": "Attacker",
-        "age": 19,
-        "goals": 1,
-        "apps": 4
-      },
-      {
-        "name": "W. Samaké",
-        "position": "Attacker",
-        "age": 21,
-        "goals": 0,
-        "apps": 0
-      },
-      {
-        "name": "L. Sinayoko",
-        "position": "Attacker",
-        "age": 26,
-        "goals": 3,
-        "apps": 7
-      },
-      {
-        "name": "E. Touré",
-        "position": "Attacker",
-        "age": 24,
-        "goals": 3,
-        "apps": 10
       }
     ],
     "Japan": [
@@ -8428,7 +7775,7 @@
         "position": "Defender",
         "age": 26,
         "goals": 0,
-        "apps": 15
+        "apps": 16
       },
       {
         "name": "Abdulelah Al Amri",
@@ -8449,14 +7796,14 @@
         "position": "Defender",
         "age": 33,
         "goals": 2,
-        "apps": 17
+        "apps": 18
       },
       {
         "name": "Ali Lajami",
         "position": "Defender",
         "age": 29,
         "goals": 1,
-        "apps": 14
+        "apps": 15
       },
       {
         "name": "Ali Majrashi",
@@ -8491,7 +7838,7 @@
         "position": "Midfielder",
         "age": 31,
         "goals": 1,
-        "apps": 28
+        "apps": 29
       },
       {
         "name": "Ziyad Al Johani",
@@ -8526,14 +7873,14 @@
         "position": "Attacker",
         "age": 25,
         "goals": 0,
-        "apps": 3
+        "apps": 4
       },
       {
         "name": "Sultan Mandash",
         "position": "Attacker",
         "age": 31,
         "goals": 1,
-        "apps": 4
+        "apps": 5
       },
       {
         "name": "Ayman Yahya",
@@ -9123,6 +8470,190 @@
         "apps": 12
       }
     ],
+    "Iraq": [
+      {
+        "name": "Ahmed Basil",
+        "position": "Goalkeeper",
+        "age": 29,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "Jalal Hassan Hachim",
+        "position": "Goalkeeper",
+        "age": 34,
+        "goals": 0,
+        "apps": 22
+      },
+      {
+        "name": "Fahad Talib",
+        "position": "Goalkeeper",
+        "age": 31,
+        "goals": 0,
+        "apps": 1
+      },
+      {
+        "name": "Hussein Ali",
+        "position": "Defender",
+        "age": 23,
+        "goals": 0,
+        "apps": 21
+      },
+      {
+        "name": "Merchas Doski",
+        "position": "Defender",
+        "age": 26,
+        "goals": 1,
+        "apps": 21
+      },
+      {
+        "name": "Frans Putros",
+        "position": "Defender",
+        "age": 32,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "Mustafa Saadoun",
+        "position": "Defender",
+        "age": 24,
+        "goals": 0,
+        "apps": 11
+      },
+      {
+        "name": "Rebin Solaka",
+        "position": "Defender",
+        "age": 33,
+        "goals": 0,
+        "apps": 19
+      },
+      {
+        "name": "Zayed Tahseen",
+        "position": "Defender",
+        "age": 24,
+        "goals": 0,
+        "apps": 19
+      },
+      {
+        "name": "A. Yahya",
+        "position": "Defender",
+        "age": 30,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "Munaf Younus",
+        "position": "Defender",
+        "age": 29,
+        "goals": 0,
+        "apps": 14
+      },
+      {
+        "name": "Akam Rahman",
+        "position": "Defender",
+        "age": 27,
+        "goals": 1,
+        "apps": 8
+      },
+      {
+        "name": "Amir Al Ammari",
+        "position": "Midfielder",
+        "age": 28,
+        "goals": 2,
+        "apps": 53
+      },
+      {
+        "name": "Youssef Amyn",
+        "position": "Attacker",
+        "age": 22,
+        "goals": 5,
+        "apps": 52
+      },
+      {
+        "name": "Ibraheem Bayesh",
+        "position": "Midfielder",
+        "age": 25,
+        "goals": 7,
+        "apps": 55
+      },
+      {
+        "name": "Zidane Iqbal",
+        "position": "Midfielder",
+        "age": 22,
+        "goals": 1,
+        "apps": 18
+      },
+      {
+        "name": "Z. Ismaeel",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 0,
+        "apps": 2
+      },
+      {
+        "name": "A. Sher",
+        "position": "Midfielder",
+        "age": 23,
+        "goals": 0,
+        "apps": 6
+      },
+      {
+        "name": "Kevin Yakob",
+        "position": "Midfielder",
+        "age": 25,
+        "goals": 3,
+        "apps": 30
+      },
+      {
+        "name": "A. Jasim",
+        "position": "Attacker",
+        "age": 21,
+        "goals": 0,
+        "apps": 20
+      },
+      {
+        "name": "Ali Al Hamadi",
+        "position": "Attacker",
+        "age": 23,
+        "goals": 0,
+        "apps": 9
+      },
+      {
+        "name": "M. Farji",
+        "position": "Midfielder",
+        "age": 21,
+        "goals": 1,
+        "apps": 29
+      },
+      {
+        "name": "Aymen Hussein",
+        "position": "Attacker",
+        "age": 29,
+        "goals": 6,
+        "apps": 26
+      },
+      {
+        "name": "Meme",
+        "position": "Attacker",
+        "age": 25,
+        "goals": 0,
+        "apps": 0
+      },
+      {
+        "name": "A. Qasem",
+        "position": "Attacker",
+        "age": 22,
+        "goals": 0,
+        "apps": 3
+      },
+      {
+        "name": "A. Y. Hashim",
+        "position": "Attacker",
+        "age": 29,
+        "goals": 0,
+        "apps": 2
+      }
+    ],
     "New Zealand": [
       {
         "name": "M. Crocombe",
@@ -9310,141 +8841,141 @@
   },
   "market": {
     "golden_boot": {
-      "Kylian Mbappe": 0.165,
-      "Harry Kane": 0.135,
+      "Kylian Mbappe": 0.145,
+      "Harry Kane": 0.125,
       "Mikel Oyarzabal": 0.075,
-      "Erling Haaland": 0.065,
-      "Cristiano Ronaldo": 0.0485,
-      "Lionel Messi": 0.0445,
-      "Michael Olise": 0.0385,
-      "Julian Alvarez": 0.0385,
-      "Raphinha": 0.0365,
-      "Lamine Yamal": 0.0355,
-      "Vinicius Junior": 0.0275,
-      "Ferran Torres": 0.0255,
-      "Ousmane Dembele": 0.024,
-      "Lautaro Martinez": 0.023,
-      "Cody Gakpo": 0.0205,
-      "Igor Thiago": 0.019,
+      "Erling Haaland": 0.055,
+      "Michael Olise": 0.048,
+      "Cristiano Ronaldo": 0.0435,
+      "Julian Alvarez": 0.0435,
+      "Lionel Messi": 0.0415,
+      "Raphinha": 0.0345,
+      "Lamine Yamal": 0.0335,
+      "Vinicius Junior": 0.027,
+      "Ousmane Dembele": 0.0235,
+      "Lautaro Martinez": 0.0225,
+      "Cody Gakpo": 0.022,
+      "Ferran Torres": 0.0205,
+      "Igor Thiago": 0.02,
       "Luis Diaz": 0.0125,
-      "Deniz Undav": 0.01,
-      "Bruno Fernandes": 0.009,
-      "Luis Javier Suárez": 0.008,
-      "Viktor Gyökeres": 0.007,
-      "Depay Memphis": 0.0065,
+      "Deniz Undav": 0.0105,
+      "Bruno Fernandes": 0.0095,
+      "Depay Memphis": 0.0075,
+      "Viktor Gyökeres": 0.0075,
+      "Luis Javier Suárez": 0.0075,
       "Desire Doue": 0.006,
       "Mohamed Salah": 0.0055,
-      "Bukayo Saka": 0.0055,
       "Edin Džeko": 0.005,
       "Dani Olmo": 0.005,
+      "Bukayo Saka": 0.005,
       "Heung-Min Son": 0.0045,
       "Jude Bellingham": 0.0035,
       "Rafael Leao": 0.0035,
       "Pedri": 0.0035,
       "Sadio Mane": 0.003,
-      "Scott McTominay": 0.0025,
-      "Marcus Thuram": 0.0025,
       "Ivan Perišić": 0.0025,
-      "Antoine Semenyo": 0.0025,
-      "Federico Valverde": 0.0025,
-      "Noah Okafor": 0.002,
+      "Bradley Barcola": 0.0025,
+      "Scott McTominay": 0.002,
+      "Marcus Thuram": 0.002,
+      "Andrej Kramarić": 0.002,
+      "Antoine Semenyo": 0.002,
+      "Federico Valverde": 0.002,
+      "Noah Okafor": 0.0015,
       "Rodrygo": 0.0015,
       "Amad Diallo": 0.0015,
-      "Andrej Kramarić": 0.0015,
-      "Bradley Barcola": 0.0015,
       "Serge Gnabry": 0.0005,
       "Dion Beljo": 0.0005
     },
     "golden_ball": {
       "Other": 0.5,
-      "Lamine Yamal": 0.11,
+      "Lamine Yamal": 0.115,
       "Kylian Mbappé": 0.095,
       "Michael Olise": 0.08,
-      "Harry Kane": 0.075,
-      "Lionel Messi": 0.065,
-      "Bruno Fernandes": 0.06,
-      "Pedri": 0.055,
-      "Vitinha": 0.04,
-      "Vinícius Jr.": 0.037,
-      "Ousmane Dembélé": 0.036,
-      "Cristiano Ronaldo": 0.0265,
-      "Erling Haaland": 0.0265,
-      "Rayan Cherki": 0.0255,
-      "Jude Bellingham": 0.025,
+      "Harry Kane": 0.07,
+      "Lionel Messi": 0.07,
+      "Bruno Fernandes": 0.065,
+      "Pedri": 0.06,
+      "Vinícius Jr.": 0.0375,
+      "Vitinha": 0.0375,
+      "Ousmane Dembélé": 0.033,
+      "Florian Wirtz": 0.033,
+      "Cristiano Ronaldo": 0.0325,
+      "Rayan Cherki": 0.0265,
+      "Erling Haaland": 0.026,
+      "Jude Bellingham": 0.0255,
       "Declan Rice": 0.022,
-      "Florian Wirtz": 0.0175,
-      "Rodri": 0.0145,
       "Bukayo Saka": 0.012,
-      "Neymar": 0.006,
+      "Rodri": 0.0105,
+      "Neymar": 0.0065,
       "Gavi": 0.0045
     },
     "golden_glove": {
       "Other": 0.5,
-      "Emiliano Martínez": 0.18,
+      "Emiliano Martínez": 0.19,
       "Alisson Becker": 0.165,
-      "Unai Simón": 0.155,
-      "Jordan Pickford": 0.14,
-      "Mike Maignan": 0.13,
-      "Diogo Costa": 0.13,
-      "Manuel Neuer": 0.13,
+      "Jordan Pickford": 0.16,
+      "Mike Maignan": 0.145,
+      "Diogo Costa": 0.145,
+      "Unai Simón": 0.125,
+      "Manuel Neuer": 0.125,
+      "Bart Verbruggen": 0.125,
       "Ederson": 0.12,
-      "Bart Verbruggen": 0.115,
+      "Joan García": 0.106,
+      "Thibaut Courtois": 0.08,
       "David Raya": 0.075,
-      "Thibaut Courtois": 0.075,
+      "Matt Freese": 0.0615,
       "Sergio Rochet": 0.06,
-      "Matt Freese": 0.055,
       "Gregor Kobel": 0.04,
-      "Ørjan Nyland": 0.04,
+      "Ørjan Nyland": 0.039,
       "Senne Lammens": 0.034,
       "Yassine Bounou": 0.03,
-      "Oliver Baumann": 0.025,
-      "Joan García": 0.0145,
+      "Oliver Baumann": 0.0245,
       "Guillermo Ochoa": 0.007
     },
     "top_scorer_nation": {
-      "Spain": 0.185,
-      "France": 0.185,
-      "England": 0.135,
-      "Germany": 0.13,
-      "Brazil": 0.08,
-      "Argentina": 0.0645,
-      "Norway": 0.0595,
-      "Portugal": 0.0585,
-      "Belgium": 0.042,
+      "Spain": 0.205,
+      "France": 0.165,
+      "England": 0.125,
+      "Germany": 0.115,
+      "Brazil": 0.095,
+      "Argentina": 0.0665,
+      "Norway": 0.056,
+      "Portugal": 0.0555,
+      "Belgium": 0.0405,
       "Netherlands": 0.032,
-      "Switzerland": 0.0115,
-      "Colombia": 0.011,
-      "Morocco": 0.0075,
-      "Türkiye": 0.0065,
-      "Scotland": 0.0055,
-      "Mexico": 0.0055,
-      "Senegal": 0.005,
-      "Uruguay": 0.005,
-      "United States": 0.0045,
-      "Austria": 0.0045,
-      "Croatia": 0.004,
-      "Japan": 0.004,
-      "Algeria": 0.004,
-      "Iraq": 0.004,
+      "Cape Verde": 0.014,
+      "Switzerland": 0.0135,
+      "Mexico": 0.011,
+      "Colombia": 0.0105,
+      "United States": 0.009,
+      "Japan": 0.0075,
+      "Türkiye": 0.005,
+      "Canada": 0.004,
       "Sweden": 0.004,
-      "Ecuador": 0.004,
-      "Egypt": 0.0035,
-      "Australia": 0.0035,
-      "Canada": 0.0035,
-      "Ghana": 0.0035,
-      "Ivory Coast": 0.003,
+      "Uruguay": 0.004,
+      "Morocco": 0.0035,
+      "Ecuador": 0.0035,
+      "Scotland": 0.003,
+      "Algeria": 0.003,
+      "Austria": 0.003,
       "Saudi Arabia": 0.003,
-      "South Korea": 0.003,
+      "Senegal": 0.003,
       "Jordan": 0.003,
-      "Bosnia and Herzegovina": 0.0025,
-      "Qatar": 0.0025,
+      "Croatia": 0.0025,
+      "Australia": 0.0025,
+      "Ghana": 0.0025,
+      "Bosnia and Herzegovina": 0.002,
+      "Ivory Coast": 0.002,
+      "Qatar": 0.002,
+      "New Zealand": 0.002,
+      "South Korea": 0.002,
       "Czechia": 0.0015,
+      "Iran": 0.0015,
       "Paraguay": 0.0015,
+      "Egypt": 0.0015,
+      "Iraq": 0.0015,
       "Uzbekistan": 0.0015,
-      "New Zealand": 0.001,
-      "Cape Verde": 0.0005,
       "Curaçao": 0.0005,
-      "Iran": 0.0005,
       "South Africa": 0.0005,
       "Tunisia": 0.0005,
       "Haiti": 0.0005,
