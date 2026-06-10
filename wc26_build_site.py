@@ -8,6 +8,7 @@ Re-run after refreshing data; output is fully regenerated.
 import json
 import re
 import shutil
+import sys
 from html import escape
 from pathlib import Path
 from datetime import datetime, timezone
@@ -134,6 +135,7 @@ def page(title, body, depth=0, crumb=""):
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
   <p>Model run: {SIM_AT or "—"} · Polymarket snapshot: {PRICES_AT or "—"} · every run archived in runs/</p>
   <p>Data: API-Football · FIFA rankings 2026 · <a href="{pre}method.html">how this works</a> ·
+  <a href="{pre}archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·
   personal research, verify before staking.</p>
 </footer>
@@ -719,6 +721,55 @@ review, the way odds compilers do it. The model is a fair-value anchor, not an o
     (OUT / "method.html").write_text(page("Method", body))
 
 
+# ---------- version archive ----------
+def build_archive_index():
+    arch = OUT / "archive"
+    snaps = sorted([d.name for d in arch.iterdir() if d.is_dir()],
+                   reverse=True) if arch.exists() else []
+    if snaps:
+        rows = "".join(
+            f'<tr><td class="num">{len(snaps) - i}</td>'
+            f'<td><a href="archive/{s}/index.html">{s}</a></td></tr>'
+            for i, s in enumerate(snaps))
+        table = f"""<table class="ko" style="max-width:420px">
+<thead><tr><th class="num">#</th><th>Snapshot</th></tr></thead>
+<tbody>{rows}</tbody></table>"""
+    else:
+        table = '<p class="standfirst">No snapshots yet — the first will be taken before kickoff.</p>'
+    body = f"""<h1>Previous versions</h1>
+<p class="standfirst">The model recalculates after every matchday, but predictions shouldn't
+vanish when they age — each snapshot below is the complete site, frozen as it stood that day.
+Compare any past view against what actually happened.</p>
+<p class="fineprint">Snapshots are immutable copies (every page and stylesheet). The live site
+always reflects the latest data; the locked bracket on the live site never changes by design —
+what changes between versions are the simulations, prices, futures and award odds.</p>
+{table}"""
+    (OUT / "archive.html").write_text(page("Versions", body))
+
+
+def take_snapshot():
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    dst = OUT / "archive" / stamp
+    if dst.exists():
+        shutil.rmtree(dst)
+    dst.mkdir(parents=True)
+    for item in OUT.iterdir():
+        if item.name == "archive":
+            continue
+        if item.is_dir():
+            shutil.copytree(item, dst / item.name)
+        else:
+            shutil.copy(item, dst / item.name)
+    # banner on every archived page, linking back to the live site
+    for f in dst.rglob("*.html"):
+        depth = len(f.relative_to(dst).parts) - 1
+        up = "../" * (2 + depth)
+        banner = (f'<div class="snapnote">Snapshot of {stamp} — predictions as they '
+                  f'stood then. <a href="{up}index.html">Back to the latest →</a></div>')
+        f.write_text(f.read_text().replace("<body>", f"<body>\n{banner}", 1))
+    print(f"snapshot frozen: docs/archive/{stamp}/")
+
+
 CSS = """/* WC26 Form Book — editorial racing-form aesthetic */
 :root {
   --paper: #f6f1e6;
@@ -901,13 +952,22 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .76rem; color: var(--ink-soft); line-height: 1.55;
   border-left: 3px solid var(--rule); padding-left: .9rem; margin: .4rem 0 1.4rem;
 }
+.snapnote {
+  background: var(--amber); color: var(--paper); text-align: center;
+  font-size: .78rem; padding: .5em 1em;
+}
+.snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
 .sim .fineprint { margin-left: auto; margin-right: auto; }
 """
 
 if OUT.exists():
-    shutil.rmtree(OUT)
-(OUT / "teams").mkdir(parents=True)
-(OUT / "matches").mkdir()
+    # keep the archive across rebuilds; regenerate everything else
+    for item in OUT.iterdir():
+        if item.name == "archive":
+            continue
+        shutil.rmtree(item) if item.is_dir() else item.unlink()
+(OUT / "teams").mkdir(parents=True, exist_ok=True)
+(OUT / "matches").mkdir(exist_ok=True)
 (OUT / "style.css").write_text(CSS)
 build_index()
 build_matches_list()
@@ -917,5 +977,11 @@ build_futures()
 build_bracket()
 build_awards()
 build_method()
-n = sum(1 for _ in OUT.rglob("*.html"))
-print(f"built {n} pages in {OUT}")
+build_archive_index()
+if "snapshot" in sys.argv:
+    take_snapshot()
+    build_archive_index()   # live index now lists the new snapshot
+n = len(list(OUT.glob("*.html"))) + len(list((OUT / "teams").glob("*.html"))) \
+    + len(list((OUT / "matches").glob("*.html")))
+snaps = len(list((OUT / "archive").iterdir())) if (OUT / "archive").exists() else 0
+print(f"built {n} live pages in {OUT} ({snaps} archived snapshots)")
