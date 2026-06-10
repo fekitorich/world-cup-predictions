@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,10 +8,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606100500">
+<link rel="stylesheet" href="style.css?v=202606100511">
 </head>
 <body>
 <header class="masthead">
+  <div class="langsw"><a href="method-fa.html">فارسی</a></div>
   <div class="kicker">The Form Book — research edition</div>
   <a class="wordmark" href="index.html">World&nbsp;Cup&nbsp;26</a>
   <nav><a href="index.html">Groups</a><span>·</span><a href="matches.html">Matches</a><span>·</span><a href="futures.html">Futures</a><span>·</span><a href="awards.html">Awards</a><span>·</span><a href="bracket.html">Bracket</a><span>·</span><a href="method.html">Method</a></nav>
@@ -83,12 +84,76 @@ rate, exact scores, and probability quality (Brier / log-loss) for model, market
 Every calculation run is archived with a timestamp. A prediction you can revise afterwards
 isn't a prediction.</p>
 
+<h2>The science, in more depth</h2>
+
+<h3>Why Poisson?</h3>
+<p>Goals are rare events: ~2.7 per 90 minutes, arriving in any minute with small, roughly
+independent probability. Counting processes like that converge to the <b>Poisson
+distribution</b> — one number, the rate λ ("expected goals"), determines the probability of
+0, 1, 2… goals: P(k) = λᵏe^(−λ)/k!. So the whole model reduces to estimating two rates per
+match. The rates come from a <b>log-linear model</b>: log λ<sub>home</sub> = μ + attack
+<sub>home</sub> + defence<sub>away</sub> (+ home advantage) — additive on the log scale,
+multiplicative on goals, which is why a strong attack against a leaky defence compounds.</p>
+
+<h3>The Dixon-Coles correction</h3>
+<p>Two independent Poissons slightly mispredict reality in one corner: real football produces
+more 0-0 and 1-1 draws than independence allows (teams settle, sit deep, kill games).
+Dixon &amp; Coles (1997) patched exactly the four low-score cells of the grid with one
+correlation parameter ρ — ours is −0.05, fitted, modest. This 30-year-old model family is
+still the backbone of professional odds compilation.</p>
+
+<h3>Fitting: weighted maximum likelihood</h3>
+<p><b>Maximum likelihood</b> asks: which ratings make the observed 8,081 results least
+surprising? Each match enters the likelihood with a weight: exponential <b>time decay</b>
+(a result loses half its influence every 1,000 days — recency matters, but slowly for
+national teams) and ×0.8 for friendlies. <b>Shrinkage</b> adds a few phantom "average"
+matches to every team, pulling thin-data teams (Curaçao has far fewer internationals than
+Brazil) toward the middle — the bias-variance trade: a slightly biased estimate beats a
+wildly noisy one.</p>
+
+<h3>Honest validation: cross-validation and scoring rules</h3>
+<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>: fit on
+matches up to a cutoff, predict the next 12 months, repeat over four rolling windows (4,228
+held-out matches). Quality is measured with <b>proper scoring rules</b> — functions a
+forecaster can only optimise by reporting its true beliefs: <b>log-loss</b> (−log of the
+probability given to what happened; brutal on confident errors) and the <b>Brier score</b>
+(mean squared error of probabilities). Ours: log-loss 0.891 vs 1.046 for always guessing
+base rates. Accuracy percentages are <em>not</em> proper scores — a forecaster can game them
+by always picking favourites — which is why the scorecard leads with Brier and log-loss.</p>
+
+<h3>Monte Carlo and the law of large numbers</h3>
+<p>The tournament has no closed-form answer — group tiebreakers, third-place allocation and
+bracket paths interact too messily. <b>Monte Carlo</b> sidesteps the math: simulate the whole
+tournament 100,000 times and count. The <b>law of large numbers</b> guarantees the counts
+converge to the true model probabilities; at N=100,000 the standard error of a championship
+estimate is √(p(1−p)/N) ≈ ±0.12pp. We verified it empirically: two independent runs agreed on
+every favourite within 0.2pp.</p>
+
+<h3>The bootstrap: knowing what we don't know</h3>
+<p>One fitted model pretends its ratings are exact. They aren't — they're estimates from
+finite data. The <b>bootstrap</b> measures that: re-weight the dataset at random
+(each match's weight multiplied by an exponential draw), refit, repeat 200 times. The spread
+of those 200 models <em>is</em> the parameter uncertainty, and every simulated tournament
+draws one of them. Effect: favourites' odds shrink toward the field — overconfidence
+removed before it costs money.</p>
+
+<h3>Combining forecasters: the opinion pool</h3>
+<p>The model and the market know different things (goals history vs lineups and news). The
+<b>logarithmic opinion pool</b> — multiply the probabilities, each raised to a weight, then
+renormalise — is the standard way to merge them: p ∝ p<sub>model</sub>^0.65 ·
+p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities compound, and
+the weight is an explicit, testable choice: the scorecard grades model, market and blend
+separately, so the data itself will tell us if 0.35 was wrong.</p>
+
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
 no weather or altitude terms (magnitudes unfittable from our data — treated as caution flags,
 not model inputs); no within-match simulation (final scores only); anomaly magnitudes are
 stated assumptions, not estimates; matchday-3 dead-rubber motivation is handled by manual
 review, the way odds compilers do it. The model is a fair-value anchor, not an oracle.</p>
+
+<p class="fineprint">این صفحه به فارسی هم در دسترس است —
+<a href="method-fa.html">نسخهٔ فارسی</a>.</p>
 </main>
 <footer>
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>

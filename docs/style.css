@@ -185,4 +185,17 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .78rem; padding: .5em 1em;
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
+
+/* language switcher + Farsi (RTL) */
+.masthead { position: relative; }
+.langsw { position: absolute; top: 14px; right: 18px; font-size: .8rem; }
+.langsw a { border: 1px solid var(--ink); border-radius: 999px; padding: .15em .8em; color: var(--ink); }
+.langsw a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+html[dir="rtl"] body, html[dir="rtl"] main, html[dir="rtl"] h1, html[dir="rtl"] h2,
+html[dir="rtl"] h3, html[dir="rtl"] footer { font-family: "Vazirmatn", "IBM Plex Mono", sans-serif; }
+html[dir="rtl"] h1 { font-weight: 800; letter-spacing: 0; }
+html[dir="rtl"] h2, html[dir="rtl"] h3 { font-weight: 700; letter-spacing: 0; }
+html[dir="rtl"] .fineprint { border-left: 0; border-right: 3px solid var(--rule);
+  padding-left: 0; padding-right: .9rem; }
+h3 { font-family: "Fraunces", serif; font-size: 1.02rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
 .sim .fineprint { margin-left: auto; margin-right: auto; }

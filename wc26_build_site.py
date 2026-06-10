@@ -105,12 +105,16 @@ def team_link(name, depth=0):
     return f'<a class="tlink" href="{pre}teams/{slug(name)}.html">{escape(name)}</a>'
 
 
-def page(title, body, depth=0, crumb=""):
+def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
     pre = "../" * depth
     # our title= attrs become CSS tooltips (instant, styled, tap-friendly)
     body = body.replace(' title="', ' data-tip="')
+    fa_font = ('<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">'
+               if rtl else "")
+    switcher = (f'<div class="langsw"><a href="{alt_lang[0]}">{alt_lang[1]}</a></div>'
+                if alt_lang else "")
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="{lang}" dir="{'rtl' if rtl else 'ltr'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -119,10 +123,11 @@ def page(title, body, depth=0, crumb=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{pre}style.css?v={BUILD_V}">
+{fa_font}<link rel="stylesheet" href="{pre}style.css?v={BUILD_V}">
 </head>
 <body>
 <header class="masthead">
+  {switcher}
   <div class="kicker">The Form Book — research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
   <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}method.html">Method</a></nav>
@@ -712,13 +717,199 @@ rate, exact scores, and probability quality (Brier / log-loss) for model, market
 Every calculation run is archived with a timestamp. A prediction you can revise afterwards
 isn't a prediction.</p>
 
+<h2>The science, in more depth</h2>
+
+<h3>Why Poisson?</h3>
+<p>Goals are rare events: ~2.7 per 90 minutes, arriving in any minute with small, roughly
+independent probability. Counting processes like that converge to the <b>Poisson
+distribution</b> — one number, the rate λ ("expected goals"), determines the probability of
+0, 1, 2… goals: P(k) = λᵏe^(−λ)/k!. So the whole model reduces to estimating two rates per
+match. The rates come from a <b>log-linear model</b>: log λ<sub>home</sub> = μ + attack
+<sub>home</sub> + defence<sub>away</sub> (+ home advantage) — additive on the log scale,
+multiplicative on goals, which is why a strong attack against a leaky defence compounds.</p>
+
+<h3>The Dixon-Coles correction</h3>
+<p>Two independent Poissons slightly mispredict reality in one corner: real football produces
+more 0-0 and 1-1 draws than independence allows (teams settle, sit deep, kill games).
+Dixon &amp; Coles (1997) patched exactly the four low-score cells of the grid with one
+correlation parameter ρ — ours is −0.05, fitted, modest. This 30-year-old model family is
+still the backbone of professional odds compilation.</p>
+
+<h3>Fitting: weighted maximum likelihood</h3>
+<p><b>Maximum likelihood</b> asks: which ratings make the observed 8,081 results least
+surprising? Each match enters the likelihood with a weight: exponential <b>time decay</b>
+(a result loses half its influence every 1,000 days — recency matters, but slowly for
+national teams) and ×0.8 for friendlies. <b>Shrinkage</b> adds a few phantom "average"
+matches to every team, pulling thin-data teams (Curaçao has far fewer internationals than
+Brazil) toward the middle — the bias-variance trade: a slightly biased estimate beats a
+wildly noisy one.</p>
+
+<h3>Honest validation: cross-validation and scoring rules</h3>
+<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>: fit on
+matches up to a cutoff, predict the next 12 months, repeat over four rolling windows (4,228
+held-out matches). Quality is measured with <b>proper scoring rules</b> — functions a
+forecaster can only optimise by reporting its true beliefs: <b>log-loss</b> (−log of the
+probability given to what happened; brutal on confident errors) and the <b>Brier score</b>
+(mean squared error of probabilities). Ours: log-loss 0.891 vs 1.046 for always guessing
+base rates. Accuracy percentages are <em>not</em> proper scores — a forecaster can game them
+by always picking favourites — which is why the scorecard leads with Brier and log-loss.</p>
+
+<h3>Monte Carlo and the law of large numbers</h3>
+<p>The tournament has no closed-form answer — group tiebreakers, third-place allocation and
+bracket paths interact too messily. <b>Monte Carlo</b> sidesteps the math: simulate the whole
+tournament 100,000 times and count. The <b>law of large numbers</b> guarantees the counts
+converge to the true model probabilities; at N=100,000 the standard error of a championship
+estimate is √(p(1−p)/N) ≈ ±0.12pp. We verified it empirically: two independent runs agreed on
+every favourite within 0.2pp.</p>
+
+<h3>The bootstrap: knowing what we don't know</h3>
+<p>One fitted model pretends its ratings are exact. They aren't — they're estimates from
+finite data. The <b>bootstrap</b> measures that: re-weight the dataset at random
+(each match's weight multiplied by an exponential draw), refit, repeat 200 times. The spread
+of those 200 models <em>is</em> the parameter uncertainty, and every simulated tournament
+draws one of them. Effect: favourites' odds shrink toward the field — overconfidence
+removed before it costs money.</p>
+
+<h3>Combining forecasters: the opinion pool</h3>
+<p>The model and the market know different things (goals history vs lineups and news). The
+<b>logarithmic opinion pool</b> — multiply the probabilities, each raised to a weight, then
+renormalise — is the standard way to merge them: p ∝ p<sub>model</sub>^0.65 ·
+p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities compound, and
+the weight is an explicit, testable choice: the scorecard grades model, market and blend
+separately, so the data itself will tell us if 0.35 was wrong.</p>
+
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
 no weather or altitude terms (magnitudes unfittable from our data — treated as caution flags,
 not model inputs); no within-match simulation (final scores only); anomaly magnitudes are
 stated assumptions, not estimates; matchday-3 dead-rubber motivation is handled by manual
-review, the way odds compilers do it. The model is a fair-value anchor, not an oracle.</p>"""
-    (OUT / "method.html").write_text(page("Method", body))
+review, the way odds compilers do it. The model is a fair-value anchor, not an oracle.</p>
+
+<p class="fineprint">این صفحه به فارسی هم در دسترس است —
+<a href="method-fa.html">نسخهٔ فارسی</a>.</p>"""
+    (OUT / "method.html").write_text(
+        page("Method", body, alt_lang=("method-fa.html", "فارسی")))
+
+
+def build_method_fa():
+    try:
+        prm = json.load(open(ROOT / "wc26_params.json"))
+        P = prm["params"]
+    except FileNotFoundError:
+        prm, P = {}, {}
+    body = f"""<h1>اعداد چگونه ساخته می‌شوند</h1>
+<p class="standfirst">همهٔ آنچه در این سایت می‌بینید با کدِ باز و از داده‌های عمومی تولید شده —
+نه نتیجه‌ای دست‌چین شده و نه حدس و گمان. کد کامل در
+<a href="https://github.com/amirdaraee/world-cup-predictions">گیت‌هاب</a> است؛
+این صفحه توضیح به زبان ساده است.</p>
+
+<h2>داده‌ها</h2>
+<p>سه منبع. <b>۴۹٬۴۵۰ بازی ملی از سال ۱۸۷۲</b> (مجموعهٔ متن‌باز martj42) — مدل روی
+<b>۸٬۰۸۱ بازیِ از ۲۰۱۸ به بعد</b> آموزش می‌بیند. فرم تیم‌ها و برنامهٔ بازی‌ها از
+<b>API-Football</b> می‌آید و قیمت‌های لحظه‌ای بازار از API عمومی <b>پالی‌مارکت</b>.
+دادهٔ آموزشی با منبع اصلی مقابله شد: چهار نتیجهٔ غلط پیدا و اصلاح شد
+(فایل اصلاحات در مخزن موجود است).</p>
+
+<h2>مدل بازی</h2>
+<p>یک مدل <b>پواسونِ وزن‌دار دیکسون–کولز</b> — مدل کلاسیک شرط‌بندی: هر تیم یک امتیاز حمله و
+یک امتیاز دفاع می‌گیرد که از روی این‌که مقابل چه تیم‌هایی گل زده و خورده برآورد می‌شود؛
+بازی‌های اخیر وزن بیشتری دارند (نیمه‌عمر {P.get('half_life', '؟')} روز)، دوستانه‌ها
+کم‌وزن‌ترند (×{P.get('friendly_w', '؟')})، تیم‌های کم‌داده به میانگین نزدیک نگه داشته
+می‌شوند، و یک تصحیح نتایج کم‌گل (ρ={P.get('rho', '؟')}) اضافه می‌شود چون فوتبال واقعی
+بیش از آنچه پواسونِ مستقل اجازه می‌دهد ۰-۰ و ۱-۱ تولید می‌کند. میزبان‌ها وقتی در کشور
+خودشان بازی می‌کنند تقویت زمین خانگی می‌گیرند (حدوداً ‎+۳۰٪ گل‌زنی).
+از دو عدد «گل انتظاری»، مدل کل شبکهٔ احتمال نتایج را می‌سازد — همهٔ بازارهای صفحهٔ هر
+بازی جمعِ دقیق روی همین شبکه‌اند، بدون شبیه‌سازی.</p>
+<p class="fineprint">ابرپارامترها دستی انتخاب نشده‌اند: با اعتبارسنجی متقابل روی چهار
+پنجرهٔ ۱۲ ماههٔ غلتان و ۴٬۲۲۸ بازیِ خارج از نمونه انتخاب شدند. لگ‌لاس اعتبارسنجی
+<b>{prm.get('cv_logloss', '؟')}</b> در برابر ۱٫۰۴۶ برای حدسِ همیشگیِ نرخ پایه
+(کمتر بهتر است). دو ایده هم در آزمون رد شدند: سقف‌گذاری روی بردهای پرگل، و حافظهٔ کوتاه‌تر.</p>
+
+<h2>ترکیب با بازار</h2>
+<p>برای پیش‌بینی بازی‌های گروهی، احتمال‌های مدل با قیمت‌های لحظه‌ای پالی‌مارکت ترکیب
+می‌شوند (میانگین‌گیری لگاریتمی با وزن ۳۵٪ برای بازار) — بازار ساعت‌ها قبل از آن‌که
+دادهٔ گل چیزی بفهمد، از ترکیب و مصدومیت خبر دارد. مدلِ خام جداگانه برای یافتن
+ارزش (اختلاف با بازار) نگه داشته می‌شود و <a href="bracket.html">کارنامه</a> مدل، بازار
+و ترکیب را جداگانه با نتایج واقعی نمره می‌دهد.</p>
+
+<h2>شبیه‌سازی تورنمنت</h2>
+<p><b>۱۰۰٬۰۰۰ تورنمنت کامل در هر اجرا</b> — حدود ۱۰ میلیون بازی شبیه‌سازی‌شده — روی
+براکت رسمی فیفا، شامل قالب دور ۳۲ تیمی و قیدهای جایگذاری تیم‌های سوم. هر تورنمنتِ
+شبیه‌سازی‌شده یکی از <b>۲۰۰ مدلِ بازنمونه‌گیری‌شده (بوت‌استرپ)</b> را برمی‌دارد تا
+عدم‌قطعیتِ پارامترها وارد احتمال‌ها شود؛ به‌علاوهٔ شوک‌های تصادفیِ میانگین-صفر:
+شوک فرم هر تیم در هر تورنمنت (مصدومیت، هماهنگی — σ=۰٫۰۶)، فرسایش حذفی
+(۱۰٪ احتمال آسیب ماندگار در هر بازی حذفی) و جریمهٔ خستگی پس از بازی‌های ۱۲۰ دقیقه‌ای.
+هیچ‌کدام به‌طور میانگین به نفع کسی نیست؛ همه به نفع تیم‌های کوچک‌ترند، چون آشوب همیشه
+مالیاتش را از مدعیان می‌گیرد.</p>
+
+<h2>کمی علم: مفاهیم و اصطلاح‌ها</h2>
+
+<h3>چرا پواسون؟</h3>
+<p>گل رخدادی کمیاب است: حدود ۲٫۷ گل در ۹۰ دقیقه، و در هر دقیقه با احتمالی کوچک و تقریباً
+مستقل. شمارش چنین رخدادهایی به <b>توزیع پواسون</b> می‌رسد — یک عدد، نرخ λ («گل انتظاری»)،
+احتمال ۰، ۱، ۲… گل را کامل تعیین می‌کند. پس کل مسئله به برآورد دو نرخ برای هر بازی
+ساده می‌شود؛ و این نرخ‌ها از مدلی <b>لگ-خطی</b> می‌آیند: لگاریتمِ نرخ = پایه + حملهٔ
+تیم + ضعف دفاع حریف (+ امتیاز میزبانی).</p>
+
+<h3>تصحیح دیکسون–کولز</h3>
+<p>دو پواسونِ مستقل در یک گوشه از واقعیت خطا می‌کند: فوتبال واقعی بیشتر از استقلالِ آماری
+۰-۰ و ۱-۱ می‌سازد (تیم‌ها بازی را می‌خوابانند). دیکسون و کولز (۱۹۹۷) دقیقاً همان چهار
+خانهٔ کم‌گلِ شبکه را با یک پارامتر همبستگی ρ وصله کردند. این خانوادهٔ مدلِ سی‌ساله هنوز
+ستون فقرات محاسبهٔ ضرایب حرفه‌ای است.</p>
+
+<h3>برازش: درست‌نمایی بیشینهٔ وزن‌دار</h3>
+<p><b>درست‌نمایی بیشینه</b> می‌پرسد: کدام امتیازها نتایجِ مشاهده‌شده را کمتر از همه
+«غافلگیرکننده» می‌کنند؟ هر بازی با وزنی وارد می‌شود: <b>افت زمانی</b> نمایی (هر نتیجه هر
+۱٬۰۰۰ روز نصف اثرش را از دست می‌دهد) و ×۰٫۸ برای دوستانه‌ها. <b>انقباض (Shrinkage)</b>
+به هر تیم چند بازیِ خیالیِ «متوسط» اضافه می‌کند تا تیم‌های کم‌داده به میانه کشیده شوند —
+همان مصالحهٔ اریب-واریانس: برآوردِ کمی اریب بهتر از برآوردِ پرنوسان است.</p>
+
+<h3>اعتبارسنجی صادقانه و قواعد نمره‌دهی</h3>
+<p>مدلی که روی دادهٔ آموزش خودش نمره بگیرد، خودش را فریب می‌دهد. ما <b>خارج از نمونه</b>
+نمره می‌دهیم: تا یک تاریخ برازش، ۱۲ ماه بعد پیش‌بینی، و تکرار روی چهار پنجره. کیفیت با
+<b>قواعد نمره‌دهی سَره</b> سنجیده می‌شود — توابعی که فقط با گفتنِ باور واقعی بهینه
+می‌شوند: <b>لگ‌لاس</b> (منفیِ لگاریتمِ احتمالی که به رخدادِ واقعی داده بودید؛ با خطای
+بااعتمادبه‌نفس بی‌رحم است) و <b>نمرهٔ برایر</b> (میانگین مربع خطای احتمال‌ها). درصدِ
+«پیش‌بینی درست» قاعدهٔ سَره نیست — با همیشه فاوریت‌گرفتن قابل بازی‌دادن است — برای همین
+کارنامه با برایر و لگ‌لاس شروع می‌شود.</p>
+
+<h3>مونت‌کارلو و قانون اعداد بزرگ</h3>
+<p>تورنمنت جواب فرمولی ندارد — قوانین تساوی گروه‌ها، جایگذاری تیم‌های سوم و مسیر براکت
+بیش از حد در هم تنیده‌اند. <b>مونت‌کارلو</b> دور می‌زند: کل تورنمنت را ۱۰۰٬۰۰۰ بار
+شبیه‌سازی کن و بشمار. <b>قانون اعداد بزرگ</b> تضمین می‌کند شمارش‌ها به احتمال واقعیِ مدل
+همگرا شوند؛ خطای استاندارد برآورد قهرمانی در این مقیاس حدود ‎±۰٫۱۲ واحد درصد است —
+و تجربی هم تأیید شد: دو اجرای مستقل روی همهٔ مدعیان کمتر از ۰٫۲ واحد اختلاف داشتند.</p>
+
+<h3>بوت‌استرپ: دانستنِ آنچه نمی‌دانیم</h3>
+<p>یک مدلِ برازش‌شده وانمود می‌کند امتیازهایش دقیق‌اند؛ نیستند — برآوردند، از دادهٔ محدود.
+<b>بوت‌استرپ</b> همین را اندازه می‌گیرد: وزن بازی‌ها را تصادفی تغییر بده، دوباره برازش
+کن، ۲۰۰ بار. پراکندگیِ آن ۲۰۰ مدل، خودِ عدم‌قطعیت پارامترهاست و هر تورنمنتِ
+شبیه‌سازی‌شده یکی از آن‌ها را برمی‌دارد. اثرش: شانس مدعیان به سمت بقیه می‌چربد —
+اعتمادبه‌نفسِ کاذب پیش از آن‌که هزینه داشته باشد حذف می‌شود.</p>
+
+<h3>ترکیب پیش‌بینی‌گرها: میانگین لگاریتمی</h3>
+<p>مدل و بازار چیزهای متفاوتی می‌دانند (تاریخچهٔ گل در برابر ترکیب و اخبار). <b>میانگین
+لگاریتمیِ</b> احتمال‌ها — ضربِ احتمال‌ها با توان‌های وزنی و نرمال‌سازی — راه استاندارد
+ادغام است؛ و وزنِ ۰٫۳۵ انتخابی صریح و آزمون‌پذیر است: کارنامه هر سه را جدا نمره می‌دهد
+تا خودِ داده بگوید این وزن درست بود یا نه.</p>
+
+<h2>پاسخ‌گویی</h2>
+<p>براکتِ کامل — هر ۷۲ بازی گروهی و همهٔ مراحل حذفی تا قهرمان — <b>پیش از شروع تورنمنت
+قفل شد</b> و با رسیدن نتایج، علنی نمره می‌خورد. هر اجرای محاسبات با مهر زمانی آرشیو
+می‌شود و نسخه‌های روزانهٔ سایت در بخش
+<a href="archive.html">نسخه‌های قبلی</a> منجمد می‌مانند.
+پیش‌بینی‌ای که بشود بعداً عوضش کرد، پیش‌بینی نیست.</p>
+
+<h2>نقاط کور شناخته‌شده</h2>
+<p class="fineprint">ترکیب، مصدومیت و محرومیت در مدل نیست (ترکیب با بازار آن را حمل
+می‌کند)؛ آب‌وهوا و ارتفاع ضریب ندارند (با دادهٔ ما برآوردشدنی نیستند — فقط پرچم احتیاط)؛
+شبیه‌سازی درون-بازی نداریم (فقط نتیجهٔ نهایی)؛ بزرگیِ شوک‌های تصادفی فرضِ
+اعلام‌شده‌اند نه برآورد؛ و انگیزهٔ بازی‌های بی‌اهمیتِ هفتهٔ سوم با بازبینی دستی مدیریت
+می‌شود، همان‌طور که محاسبه‌گرهای ضرایب حرفه‌ای عمل می‌کنند. مدل لنگرِ ارزش منصفانه است،
+نه پیشگو.</p>"""
+    (OUT / "method-fa.html").write_text(
+        page("روش‌شناسی", body, lang="fa", rtl=True,
+             alt_lang=("method.html", "English")))
 
 
 # ---------- version archive ----------
@@ -957,6 +1148,19 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .78rem; padding: .5em 1em;
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
+
+/* language switcher + Farsi (RTL) */
+.masthead { position: relative; }
+.langsw { position: absolute; top: 14px; right: 18px; font-size: .8rem; }
+.langsw a { border: 1px solid var(--ink); border-radius: 999px; padding: .15em .8em; color: var(--ink); }
+.langsw a:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+html[dir="rtl"] body, html[dir="rtl"] main, html[dir="rtl"] h1, html[dir="rtl"] h2,
+html[dir="rtl"] h3, html[dir="rtl"] footer { font-family: "Vazirmatn", "IBM Plex Mono", sans-serif; }
+html[dir="rtl"] h1 { font-weight: 800; letter-spacing: 0; }
+html[dir="rtl"] h2, html[dir="rtl"] h3 { font-weight: 700; letter-spacing: 0; }
+html[dir="rtl"] .fineprint { border-left: 0; border-right: 3px solid var(--rule);
+  padding-left: 0; padding-right: .9rem; }
+h3 { font-family: "Fraunces", serif; font-size: 1.02rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
 .sim .fineprint { margin-left: auto; margin-right: auto; }
 """
 
@@ -977,6 +1181,7 @@ build_futures()
 build_bracket()
 build_awards()
 build_method()
+build_method_fa()
 build_archive_index()
 if "snapshot" in sys.argv:
     take_snapshot()
