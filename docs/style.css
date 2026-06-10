@@ -116,8 +116,8 @@ footer p { margin: .2rem 0; }
   h1 { font-size: 1.9rem; }
   .wordmark { font-size: 2.1rem; }
   .masthead { padding: 18px 8px 10px; }
-  .masthead nav { font-size: .7rem; letter-spacing: .08em; }
-  .masthead nav span { margin: 0 5px; }
+  .masthead nav { font-size: .66rem; letter-spacing: .03em; }
+  .masthead nav span { margin: 0 4px; }
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .group table { display: table; }   /* narrow enough to render full-width */
   table { font-size: .78rem; }
@@ -133,6 +133,9 @@ footer p { margin: .2rem 0; }
   .champ { font-size: 1.15rem; padding: .6rem .8rem; }
   .fineprint { font-size: .72rem; }
   .twocol { gap: 20px; }
+  .langsw { top: 8px; right: 8px; font-size: .72rem; }
+  figure { margin: 1rem auto; }
+  h3 { font-size: .95rem; }
 }
 
 /* simulation section */
@@ -185,10 +188,11 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .78rem; padding: .5em 1em;
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
-figure { margin: 1.3rem 0; }
+figure { margin: 1.3rem auto; text-align: center; }
 figure img { width: 100%; max-width: 660px; height: auto; display: block;
-  border: 1px solid var(--rule); }
-figcaption { font-size: .72rem; color: var(--ink-soft); margin-top: .35rem; max-width: 660px; }
+  margin: 0 auto; border: 1px solid var(--rule); }
+figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
+  max-width: 600px; text-align: center; }
 
 /* language switcher + Farsi (RTL) */
 .masthead { position: relative; }
