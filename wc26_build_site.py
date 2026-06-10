@@ -125,6 +125,12 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)} · WC26 Form Book</title>
+<meta property="og:title" content="{escape(title)} · WC26 Form Book">
+<meta property="og:description" content="World Cup 2026 probabilities from an open statistical model: match fair prices vs the betting market, tournament odds, and a locked bracket graded in public.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://amirdaraee.com/world-cup-predictions/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://amirdaraee.com/world-cup-predictions/img/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23211d16'/%3E%3Cpath d='M8 4l3 2.2-1.1 3.6H6.1L5 6.2z' fill='%23f6f1e6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,14 +152,15 @@ function toggleTheme() {{
 </head>
 <body>
 <header class="masthead">
-  <button class="themebtn" onclick="toggleTheme()" title="light / dark">◐</button>
+  <a class="skip" href="#main">skip to content</a>
+  <button class="themebtn" onclick="toggleTheme()" title="light / dark" aria-label="toggle light or dark theme">◐</button>
   {switcher}
   <div class="kicker">The Form Book - research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
   <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}method.html">Method</a></nav>
 </header>
 {f'<div class="crumb">{crumb}</div>' if crumb else ''}
-<main>
+<main id="main">
 {body}
 </main>
 <footer>
@@ -176,6 +183,27 @@ def build_index():
 
     cards = []
     for g in sorted(groups):
+        standings = group_standings(g)
+        if standings:
+            rows = []
+            for pos, (name, r) in enumerate(standings, 1):
+                t = TEAMS[name]
+                host = ' <sup class="host">host</sup>' if t.get("host") else ""
+                cls = "q1" if pos <= 2 else "q3" if pos == 3 else ""
+                rows.append(
+                    f'<tr class="{cls}"><td>{team_link(name)}{host}</td>'
+                    f'<td class="num">{r["p"]}</td>'
+                    f'<td class="num">{r["gf"] - r["ga"]:+d}</td>'
+                    f'<td class="num"><b>{r["pts"]}</b></td>'
+                    f"<td>{form_chips(t)}</td></tr>")
+            cards.append(f"""<section class="group" id="group-{g.lower()}">
+<h2><span>Group</span> {g}</h2>
+<table>
+<thead><tr><th scope="col">Team</th><th scope="col" class="num" title="matches played">P</th><th scope="col" class="num" title="goal difference">GD</th><th scope="col" class="num" title="points - top two advance, the eight best thirds join them">Pts</th><th scope="col" title="last 5 internationals, most recent first">Form</th></tr></thead>
+<tbody>{''.join(rows)}</tbody>
+</table>
+</section>""")
+            continue
         rows = []
         for name in sorted(groups[g], key=lambda n: TEAMS[n]["fifa_ranking"]):
             t = TEAMS[name]
@@ -185,10 +213,10 @@ def build_index():
                 f'<td class="num">{t["fifa_ranking"]}</td>'
                 f"<td>{form_chips(t)}</td></tr>"
             )
-        cards.append(f"""<section class="group">
+        cards.append(f"""<section class="group" id="group-{g.lower()}">
 <h2><span>Group</span> {g}</h2>
 <table>
-<thead><tr><th>Team</th><th class="num" title="official FIFA ranking, 1 Apr 2026 - shown for orientation; the model does not use it">FIFA</th><th title="last 5 internationals, most recent first - W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
+<thead><tr><th scope="col">Team</th><th scope="col" class="num" title="official FIFA ranking, 1 Apr 2026 - shown for orientation; the model does not use it">FIFA</th><th scope="col" title="last 5 internationals, most recent first - W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -217,6 +245,8 @@ def build_index():
                     == actual_result(m["score"])
                 verdict = (f'<b class="score">{m["score"]}</b> '
                            + ('<i class="f W">✓</i>' if hit else '<i class="f L">✗</i>'))
+            elif is_live(m):
+                verdict = LIVE_CHIP
             else:
                 verdict = f'{time_} UTC'
             rows.append(
@@ -259,16 +289,23 @@ def build_matches_list():
         rows = []
         for m in sorted(by_day[day], key=lambda x: x["date_utc"]):
             _, time_ = fmt_date(m["date_utc"])
+            if m.get("score"):
+                res = f'<b class="score">{m["score"]}</b>'
+            elif is_live(m):
+                res = LIVE_CHIP
+            else:
+                res = '<span class="dim">-</span>'
             rows.append(f"""<tr>
 <td class="num">{time_}</td>
-<td><b class="gchip">{m['group']}</b></td>
+<td><a class="gchip" href="index.html#group-{m['group'].lower()}">{m['group']}</a></td>
 <td class="fixture"><a href="matches/{match_slug(m)}.html">{escape(m['home'])} <em>v</em> {escape(m['away'])}</a></td>
+<td class="num">{res}</td>
 <td class="venue">{escape(m['venue'])}, {escape(m['city'])}</td>
 </tr>""")
         sections.append(f"""<section class="matchday">
 <h2>{date_label}</h2>
 <table>
-<thead><tr><th class="num" title="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th title="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" title="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th title="group A-L">Grp</th><th>Fixture</th><th class="num">Result</th><th>Venue</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -372,7 +409,7 @@ def build_team_pages():
         body = f"""<div class="teamhead">
 <h1>{escape(name)}</h1>
 <p class="meta">
-<span class="chip">Group {g}</span>
+<a class="chip" href="../index.html#group-{g.lower()}">Group {g}</a>
 <span class="chip">FIFA #{t['fifa_ranking']}</span>
 <span class="chip">{t['confederation']}</span>
 {host}
@@ -435,6 +472,42 @@ def pct(p):
 def actual_result(score):
     h, a = (int(x) for x in score.split("-"))
     return "home" if h > a else "away" if a > h else "draw"
+
+
+NOT_LIVE = {None, "", "Not Started", "Match Finished", "Match Postponed",
+            "Match Cancelled", "Time to be defined", "Match Abandoned"}
+
+
+def is_live(m):
+    return not m.get("score") and m.get("status") not in NOT_LIVE
+
+
+LIVE_CHIP = '<b class="livechip">LIVE</b>'
+
+
+def group_standings(g):
+    """Real standings for a group once any of its matches have finished.
+    Returns ordered rows or None if nothing played yet."""
+    rows = {t: {"p": 0, "gf": 0, "ga": 0, "pts": 0}
+            for m in MATCHES if m["group"] == g
+            for t in (m["home"], m["away"])}
+    played = 0
+    for m in MATCHES:
+        if m["group"] != g or not m.get("score"):
+            continue
+        played += 1
+        hg, ag = (int(x) for x in m["score"].split("-"))
+        for t, f, a in ((m["home"], hg, ag), (m["away"], ag, hg)):
+            r = rows[t]
+            r["p"] += 1
+            r["gf"] += f
+            r["ga"] += a
+            r["pts"] += 3 if f > a else 1 if f == a else 0
+    if not played:
+        return None
+    return sorted(rows.items(),
+                  key=lambda kv: (-kv[1]["pts"], -(kv[1]["gf"] - kv[1]["ga"]),
+                                  -kv[1]["gf"], kv[0]))
 
 
 def match_grid_svg(sim):
@@ -596,10 +669,12 @@ def build_futures():
         if name not in TEAMS:
             continue
         cells = "".join(
-            f'<td class="num{" hot" if p[k] >= 0.5 else ""}">{p[k] * 100:.1f}%</td>'
+            f'<td class="num bar{" hot" if p[k] >= 0.5 else ""}" '
+            f'style="--p:{p[k] * 100:.1f}%">{p[k] * 100:.1f}%</td>'
             for k in ("win_group", "r32", "qf", "sf", "final", "champion"))
+        g = team_group.get(name, "?")
         rows.append(f'<tr><td>{team_link(name)}</td>'
-                    f'<td><b class="gchip">{team_group.get(name, "?")}</b></td>{cells}</tr>')
+                    f'<td><a class="gchip" href="index.html#group-{g.lower()}">{g}</a></td>{cells}</tr>')
     body = f"""<h1>Tournament futures</h1>
 <p class="standfirst">100,000 Monte Carlo tournaments on a 200-model bootstrap ensemble,
 using the official FIFA bracket.</p>
@@ -1314,7 +1389,7 @@ CSS = """/* WC26 Form Book - editorial racing-form aesthetic */
   --rule: #cfc4ab;
   --green: #14633f;
   --red: #a72a1e;
-  --amber: #9a7b2d;
+  --amber: #856a1d;
 }
 * { box-sizing: border-box; }
 body {
@@ -1501,6 +1576,32 @@ figure img, figure svg { width: 100%; max-width: 660px; height: auto; display: b
 figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
   max-width: 600px; text-align: center; }
 
+/* standings shading, live chip, micro-bars, sticky heads, a11y, print */
+tr.q1 td { background: color-mix(in srgb, var(--green) 9%, transparent); }
+tr.q3 td { background: color-mix(in srgb, var(--amber) 10%, transparent); }
+.livechip {
+  color: var(--paper); background: var(--red); font-size: .68rem;
+  padding: .1em .5em; border-radius: 2px; letter-spacing: .08em;
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse { 50% { opacity: .55; } }
+.futures td.bar { background: linear-gradient(90deg,
+  color-mix(in srgb, var(--green) 16%, transparent) var(--p), transparent var(--p)); }
+@media (min-width: 701px) {
+  thead th { position: sticky; top: 0; background: var(--paper); z-index: 5; }
+}
+.skip { position: absolute; left: -999px; top: 6px; }
+.skip:focus { left: 8px; background: var(--ink); color: var(--paper); padding: .4em .8em; z-index: 50; }
+a.gchip { color: var(--ink); }
+@media print {
+  .masthead nav, .themebtn, .langsw, footer, .snapnote, .skip { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11px; }
+  .mlbar .seg, .f { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  main { max-width: none; padding: 0; }
+  h1 { font-size: 1.6rem; }
+  section { break-inside: avoid; }
+}
+
 /* today strip, verdicts, match grids, key players */
 .todaybox { border: 3px double var(--ink); padding: .2rem 1rem .8rem; margin: 1.2rem 0; }
 .todaybox h2 { border-bottom: 1px solid var(--rule); font-size: 1rem;
@@ -1566,7 +1667,7 @@ if OUT.exists():
 (OUT / "matches").mkdir(exist_ok=True)
 if (ROOT / "charts").exists():   # method-page charts (generated by wc26_charts.py)
     (OUT / "img").mkdir(exist_ok=True)
-    for f in (ROOT / "charts").glob("*.svg"):
+    for f in list((ROOT / "charts").glob("*.svg")) + list((ROOT / "charts").glob("*.png")):
         shutil.copy(f, OUT / "img" / f.name)
 (OUT / "style.css").write_text(CSS)
 build_index()
