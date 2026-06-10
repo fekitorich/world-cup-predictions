@@ -8,27 +8,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606101526">
+<link rel="stylesheet" href="style.css?v=202606101638">
+<script>
+(function() {
+  var t = localStorage.getItem("theme");
+  if (t) document.documentElement.dataset.theme = t;
+})();
+function toggleTheme() {
+  var el = document.documentElement;
+  var dark = el.dataset.theme === "dark" ||
+    (!el.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  el.dataset.theme = dark ? "light" : "dark";
+  localStorage.setItem("theme", el.dataset.theme);
+}
+</script>
 </head>
 <body>
 <header class="masthead">
+  <button class="themebtn" onclick="toggleTheme()" title="light / dark">◐</button>
   
-  <div class="kicker">The Form Book — research edition</div>
+  <div class="kicker">The Form Book - research edition</div>
   <a class="wordmark" href="index.html">World&nbsp;Cup&nbsp;26</a>
   <nav><a href="index.html">Groups</a><span>·</span><a href="matches.html">Matches</a><span>·</span><a href="futures.html">Futures</a><span>·</span><a href="awards.html">Awards</a><span>·</span><a href="bracket.html">Bracket</a><span>·</span><a href="method.html">Method</a></nav>
 </header>
 
 <main>
-<h1>Group stage — all 72 fixtures</h1>
+<h1>Group stage - all 72 fixtures</h1>
 <p class="standfirst">Every match links to a head-to-head card comparing both teams' last ten.</p>
-<p class="fineprint">Kick-offs are UTC — the 00:00–02:00 oddities are evening games in US/Mexico time
+<p class="fineprint">Kick-offs are UTC - the 00:00–02:00 oddities are evening games in US/Mexico time
 zones, landing a calendar day later than the local date Polymarket uses in its market slugs.
 On matchday 3 both games in a group kick off simultaneously (FIFA's anti-collusion rule since 1982),
 so their in-play prices move together.</p>
 <section class="matchday">
 <h2>11 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">19:00</td>
 <td><b class="gchip">A</b></td>
@@ -39,7 +53,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>12 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">A</b></td>
@@ -55,7 +69,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>13 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">D</b></td>
@@ -76,7 +90,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>14 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">C</b></td>
@@ -107,7 +121,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>15 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">F</b></td>
@@ -133,7 +147,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>16 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">G</b></td>
@@ -154,7 +168,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>17 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">J</b></td>
@@ -185,7 +199,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>18 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">K</b></td>
@@ -211,7 +225,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>19 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">A</b></td>
@@ -232,7 +246,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>20 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">00:30</td>
 <td><b class="gchip">C</b></td>
@@ -258,7 +272,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>21 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">00:00</td>
 <td><b class="gchip">E</b></td>
@@ -289,7 +303,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>22 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">G</b></td>
@@ -310,7 +324,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>23 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">00:00</td>
 <td><b class="gchip">I</b></td>
@@ -341,7 +355,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>24 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">K</b></td>
@@ -372,7 +386,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>25 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">01:00</td>
 <td><b class="gchip">A</b></td>
@@ -408,7 +422,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>26 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">D</b></td>
@@ -434,7 +448,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>27 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">00:00</td>
 <td><b class="gchip">H</b></td>
@@ -480,7 +494,7 @@ so their in-play prices move together.</p>
 </section><section class="matchday">
 <h2>28 Jun 2026</h2>
 <table>
-<thead><tr><th class="num" data-tip="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" data-tip="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th data-tip="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody><tr>
 <td class="num">02:00</td>
 <td><b class="gchip">J</b></td>

@@ -42,6 +42,12 @@ try:
     AWARDS = json.load(open(ROOT / "wc26_awards.json"))
 except FileNotFoundError:
     AWARDS = None
+try:
+    PLAYERS = json.load(open(ROOT / "wc26_players.json"))["squads"]
+except FileNotFoundError:
+    PLAYERS = {}
+from wc26_simulate import params as _params, score_grid as _score_grid
+RHO = _params()["rho"]
 
 TEAMS = {t["country"]: t for t in teams_data["teams"]}
 MATCHES = matches_data["matches"]
@@ -94,7 +100,7 @@ def form_chips(team, count=5):
         f'<i class="f {m["result"]}">{m["result"]}</i>'
         for m in team["last_10_matches"][:count]
     )
-    tip = (f"last {count} internationals, most recent first — "
+    tip = (f"last {count} internationals, most recent first - "
            "W win, D draw (incl. pen shoot-outs), L loss")
     return f'<span class="form" title="{tip}">{chips}</span>'
 
@@ -124,11 +130,25 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 {fa_font}<link rel="stylesheet" href="{pre}style.css?v={BUILD_V}">
+<script>
+(function() {{
+  var t = localStorage.getItem("theme");
+  if (t) document.documentElement.dataset.theme = t;
+}})();
+function toggleTheme() {{
+  var el = document.documentElement;
+  var dark = el.dataset.theme === "dark" ||
+    (!el.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  el.dataset.theme = dark ? "light" : "dark";
+  localStorage.setItem("theme", el.dataset.theme);
+}}
+</script>
 </head>
 <body>
 <header class="masthead">
+  <button class="themebtn" onclick="toggleTheme()" title="light / dark">◐</button>
   {switcher}
-  <div class="kicker">The Form Book — research edition</div>
+  <div class="kicker">The Form Book - research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
   <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}method.html">Method</a></nav>
 </header>
@@ -138,7 +158,7 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 </main>
 <footer>
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
-  <p>Model run: {SIM_AT or "—"} · Polymarket snapshot: {PRICES_AT or "—"} · every run archived in runs/</p>
+  <p>Model run: {SIM_AT or "-"} · Polymarket snapshot: {PRICES_AT or "-"} · every run archived in runs/</p>
   <p>Data: API-Football · FIFA rankings 2026 · <a href="{pre}method.html">how this works</a> ·
   <a href="{pre}archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·
@@ -168,17 +188,57 @@ def build_index():
         cards.append(f"""<section class="group">
 <h2><span>Group</span> {g}</h2>
 <table>
-<thead><tr><th>Team</th><th class="num" title="official FIFA ranking, 1 Apr 2026 — shown for orientation; the model does not use it">FIFA</th><th title="last 5 internationals, most recent first — W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
+<thead><tr><th>Team</th><th class="num" title="official FIFA ranking, 1 Apr 2026 - shown for orientation; the model does not use it">FIFA</th><th title="last 5 internationals, most recent first - W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
 
+    # --- today / next matchday strip ---
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    days = sorted({m["date_utc"][:10] for m in MATCHES if m["date_utc"][:10] >= today})
+    strip = ""
+    if days:
+        day = days[0]
+        label = "Today" if day == today else f"Next: {fmt_date(day + 'T00:00:00')[0]}"
+        rows = []
+        for m in sorted((x for x in MATCHES if x["date_utc"][:10] == day),
+                        key=lambda x: x["date_utc"]):
+            sim = SIMS.get(str(m["match_id"]))
+            _, time_ = fmt_date(m["date_utc"])
+            if sim:
+                ml = sim["moneyline"]
+                pick = max(ml, key=ml.get)
+                pick_label = {"home": m["home"], "away": m["away"], "draw": "Draw"}[pick]
+                call = f'{escape(pick_label)} {ml[pick]*100:.0f}%'
+            else:
+                call = "-"
+            if m.get("score"):
+                hit = sim and max(sim["moneyline"], key=sim["moneyline"].get) \
+                    == actual_result(m["score"])
+                verdict = (f'<b class="score">{m["score"]}</b> '
+                           + ('<i class="f W">✓</i>' if hit else '<i class="f L">✗</i>'))
+            else:
+                verdict = f'{time_} UTC'
+            rows.append(
+                f'<tr><td class="fixture"><a href="matches/{match_slug(m)}.html">'
+                f'{escape(m["home"])} <em>v</em> {escape(m["away"])}</a></td>'
+                f'<td><b class="gchip">{m["group"]}</b></td>'
+                f'<td>{call}</td><td class="num">{verdict}</td></tr>')
+        strip = f"""<section class="todaybox">
+<h2>{label}</h2>
+<table><thead><tr><th>Fixture</th><th>Grp</th>
+<th title="the model's most likely outcome and its probability">Model call</th>
+<th class="num" title="kick-off, or final score with the model's verdict">Status</th></tr></thead>
+<tbody>{''.join(rows)}</tbody></table>
+</section>"""
+
     body = f"""<h1>The twelve groups</h1>
+{strip}
 <p class="standfirst">48 teams, seeded here by FIFA ranking. Click any team for its full dossier.</p>
 <p class="fineprint">Form = results of the last five internationals, <b>most recent first</b>
-(W win, D draw — penalty shoot-outs count as draws, L loss); the team page shows all ten with
+(W win, D draw - penalty shoot-outs count as draws, L loss); the team page shows all ten with
 opponents and competitions. Friendlies are included here but weigh less in the model.
-The FIFA column is the official 1 April 2026 ranking, shown for orientation only —
+The FIFA column is the official 1 April 2026 ranking, shown for orientation only -
 the simulation rates teams purely from match results and disagrees in places (France is FIFA #1
 but mid-pack by title odds; the model prefers recent goals to reputation). The <sup class="host">host</sup>
 marker matters beyond ceremony: hosts get a fitted home-crowd boost (~+30% scoring) whenever they
@@ -208,14 +268,14 @@ def build_matches_list():
         sections.append(f"""<section class="matchday">
 <h2>{date_label}</h2>
 <table>
-<thead><tr><th class="num" title="kick-off time, UTC — 00:00-02:00 games are US/Mexico evenings">UTC</th><th title="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
+<thead><tr><th class="num" title="kick-off time, UTC - 00:00-02:00 games are US/Mexico evenings">UTC</th><th title="group A-L">Grp</th><th>Fixture</th><th>Venue</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
 
-    body = f"""<h1>Group stage — all 72 fixtures</h1>
+    body = f"""<h1>Group stage - all 72 fixtures</h1>
 <p class="standfirst">Every match links to a head-to-head card comparing both teams' last ten.</p>
-<p class="fineprint">Kick-offs are UTC — the 00:00–02:00 oddities are evening games in US/Mexico time
+<p class="fineprint">Kick-offs are UTC - the 00:00–02:00 oddities are evening games in US/Mexico time
 zones, landing a calendar day later than the local date Polymarket uses in its market slugs.
 On matchday 3 both games in a group kick off simultaneously (FIFA's anti-collusion rule since 1982),
 so their in-play prices move together.</p>
@@ -248,9 +308,50 @@ def stat_strip(s):
 <div><dt title="goals scored per game, last 10">Goals / game</dt><dd>{s['gf_pg']:.1f}</dd></div>
 <div><dt title="goals conceded per game, last 10">Conceded / game</dt><dd>{s['ga_pg']:.1f}</dd></div>
 <div><dt title="games without conceding, last 10">Clean sheets</dt><dd>{s['cs']}/{s['n']}</dd></div>
-<div><dt title="games with 3+ total goals — the standard totals betting line">Over 2.5</dt><dd>{s['o25']}/{s['n']}</dd></div>
-<div><dt title="both teams scored — a standard prediction-market category">BTTS</dt><dd>{s['btts']}/{s['n']}</dd></div>
+<div><dt title="games with 3+ total goals - the standard totals betting line">Over 2.5</dt><dd>{s['o25']}/{s['n']}</dd></div>
+<div><dt title="both teams scored - a standard prediction-market category">BTTS</dt><dd>{s['btts']}/{s['n']}</dd></div>
 </dl>"""
+
+
+def futures_row(name):
+    f = TOURNEY.get(name)
+    if not f:
+        return ""
+    cells = "".join(
+        f'<div><dt>{lbl}</dt><dd>{f[k]*100:.1f}%</dd></div>'
+        for lbl, k in (("Win group", "win_group"), ("Reach R32", "r32"),
+                       ("QF", "qf"), ("SF", "sf"), ("Final", "final"),
+                       ("Champion", "champion")))
+    return f'<dl class="stats odds" title="from 100,000 simulated tournaments - see Futures">{cells}</dl>'
+
+
+def key_players(name):
+    squad = PLAYERS.get(name)
+    if not squad:
+        return ""
+    total = sum(p["goals"] for p in squad) or 1
+    scorers = sorted(squad, key=lambda p: -p["goals"])[:4]
+    gks = [p for p in squad if p["position"] == "Goalkeeper"]
+    gk = max(gks, key=lambda p: p["apps"]) if gks else None
+    rows = "".join(
+        f'<tr><td>{escape(p["name"])}</td><td>{p["position"]}</td>'
+        f'<td class="num">{p["age"]}</td><td class="num">{p["goals"]}</td>'
+        f'<td class="num">{p["goals"]/total*100:.0f}%</td>'
+        f'<td class="num">{p["apps"]}</td></tr>'
+        for p in scorers if p["goals"] > 0)
+    if gk:
+        rows += (f'<tr><td>{escape(gk["name"])}</td><td>Goalkeeper</td>'
+                 f'<td class="num">{gk["age"]}</td><td class="num">-</td>'
+                 f'<td class="num">-</td><td class="num">{gk["apps"]}</td></tr>')
+    if not rows:
+        return ""
+    return f"""<h2>Key players</h2>
+<table class="ko">
+<thead><tr><th>Player</th><th>Position</th><th class="num">Age</th>
+<th class="num" title="international goals 2024-26">Goals 24–26</th>
+<th class="num" title="share of the team's international goals - the Golden Boot model's input">Share</th>
+<th class="num" title="international appearances 2024-26">Apps</th></tr></thead>
+<tbody>{rows}</tbody></table>"""
 
 
 def build_team_pages():
@@ -278,10 +379,12 @@ def build_team_pages():
 </p>
 {form_chips(t, 10)}
 </div>
+{futures_row(name)}
+{key_players(name)}
 {stat_strip(stats(t))}
 <p class="fineprint">Over 2.5 (three-plus total goals) and BTTS (both teams scored) are counted
 here because they're the totals categories prediction markets actually trade. Caveat on the
-last ten: a few teams padded theirs with friendlies against club or B-team opposition — those
+last ten: a few teams padded theirs with friendlies against club or B-team opposition - those
 rows say little, and the model's training data excludes non-international opponents entirely.
 Matches decided on penalties are recorded as draws (with a note): that's how FIFA counts them
 and how the model scores them.</p>
@@ -311,8 +414,8 @@ def compare_rows(h, a):
         ("Both teams scored", f"{sh['btts']}/10", f"{sa['btts']}/10"),
     ]
     tips = {
-        "FIFA ranking": "official FIFA ranking, 1 Apr 2026 — not used by the model",
-        "Form (last 5)": "most recent first — W win, D draw, L loss",
+        "FIFA ranking": "official FIFA ranking, 1 Apr 2026 - not used by the model",
+        "Form (last 5)": "most recent first - W win, D draw, L loss",
         "Record (10)": "wins-draws-losses over the last 10 internationals",
         "Clean sheets": "games without conceding, of the last 10",
         "Over 2.5 goals": "games with 3+ total goals, of the last 10",
@@ -329,14 +432,71 @@ def pct(p):
     return f"{p * 100:.0f}¢"
 
 
+def actual_result(score):
+    h, a = (int(x) for x in score.split("-"))
+    return "home" if h > a else "away" if a > h else "draw"
+
+
+def match_grid_svg(sim):
+    """Compact scoreline heatmap for one match card."""
+    g = _score_grid(sim["xg"]["home"], sim["xg"]["away"], RHO)
+    K = 5
+    cell = 52
+    L, T = 64, 56
+    W = L + (K + 1) * cell + 16
+    H = T + (K + 1) * cell + 40
+    pmax = max(max(row[:K + 1]) for row in g[:K + 1])
+    s = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">'
+         f'<rect width="{W}" height="{H}" fill="var(--paper, #f6f1e6)"/>')
+    font = 'font-family="ui-monospace,Menlo,monospace"'
+    s += (f'<text x="{L-10}" y="{T-30}" font-size="11" fill="var(--ink-soft, #6b6353)" '
+          f'text-anchor="end" {font}>{escape(sim["home"][:14])} ↓</text>')
+    s += (f'<text x="{L+(K+1)*cell}" y="{T-30}" font-size="11" fill="var(--ink-soft, #6b6353)" '
+          f'text-anchor="end" {font}>{escape(sim["away"][:14])} →</text>')
+    for k in range(K + 1):
+        s += (f'<text x="{L + k*cell + cell/2 - 1}" y="{T-8}" font-size="11" '
+              f'fill="var(--ink-soft, #6b6353)" text-anchor="middle" {font}>{k}</text>')
+        s += (f'<text x="{L-10}" y="{T + k*cell + cell/2 + 4}" font-size="11" '
+              f'fill="var(--ink-soft, #6b6353)" text-anchor="end" {font}>{k}</text>')
+    for i in range(K + 1):
+        for j in range(K + 1):
+            p = g[i][j]
+            col = ("var(--green, #14633f)" if i > j else "var(--red, #a72a1e)" if j > i else "var(--amber, #9a7b2d)")
+            op = max(min(p / pmax, 1.0) * 0.92, 0.04)
+            x, y = L + j * cell, T + i * cell
+            s += (f'<rect x="{x}" y="{y}" width="{cell-3}" height="{cell-3}" '
+                  f'fill="{col}" opacity="{op:.3f}"/>')
+            if p >= 0.015:
+                fill = "var(--paper, #f6f1e6)" if op > 0.45 else "var(--ink, #211d16)"
+                s += (f'<text x="{x + (cell-3)/2}" y="{y + cell/2 + 3}" '
+                      f'font-size="11" fill="{fill}" text-anchor="middle" '
+                      f'{font}>{p*100:.0f}</text>')
+    return s + "</svg>"
+
+
 def sim_section(m):
     sim = SIMS.get(str(m["match_id"]))
     if not sim:
         return ""
     ml = sim["moneyline"]
+    # post-match verdict banner
+    verdict = ""
+    if m.get("score"):
+        res = actual_result(m["score"])
+        pick = max(ml, key=ml.get)
+        hit = pick == res
+        res_label = {"home": m["home"], "away": m["away"], "draw": "a draw"}[res]
+        mkt = PRICES.get(str(m["match_id"]), {}).get("moneyline", {})
+        mkt_note = (f" - the market had it at {mkt[res]*100:.0f}¢"
+                    if mkt.get(res) is not None else "")
+        verdict = (f'<div class="verdict {"hit" if hit else "miss"}">'
+                   f'Final {m["score"]}: {escape(res_label)} - the model gave that '
+                   f'{ml[res]*100:.0f}%{mkt_note} '
+                   f'{"✓ called it" if hit else "✗ model leaned " + ({"home": m["home"], "away": m["away"], "draw": "draw"}[pick])}'
+                   f'</div>')
     hf = (f'<p class="meta center">Home-field advantage applied to {escape(sim["home_field"])}.</p>'
           if sim.get("home_field") else
-          '<p class="meta center">Neutral venue — no home-field advantage.</p>')
+          '<p class="meta center">Neutral venue - no home-field advantage.</p>')
     bar = f"""<div class="mlbar">
 <span class="seg home" style="flex:{ml['home']:.4f}"><b>{escape(m['home'])}</b> {pct(ml['home'])}</span>
 <span class="seg draw" style="flex:{ml['draw']:.4f}"><b>Draw</b> {pct(ml['draw'])}</span>
@@ -351,7 +511,7 @@ def sim_section(m):
         ("Over 1.5 goals", t["over_1.5"], None), ("Under 1.5 goals", 1 - t["over_1.5"], None),
         ("Over 2.5 goals", t["over_2.5"], None), ("Under 2.5 goals", 1 - t["over_2.5"], None),
         ("Over 3.5 goals", t["over_3.5"], None), ("Under 3.5 goals", 1 - t["over_3.5"], None),
-        ("Both teams score — Yes", sim["btts"], None), ("Both teams score — No", 1 - sim["btts"], None),
+        ("Both teams score - Yes", sim["btts"], None), ("Both teams score - No", 1 - sim["btts"], None),
         (f"{m['home']} −1.5 (win by 2+)", sim["spread"]["home_-1.5"], None),
         (f"{m['away']} −1.5 (win by 2+)", sim["spread"]["away_-1.5"], None),
     ]
@@ -363,7 +523,7 @@ def sim_section(m):
             mkt_cell = f'<td class="num">{price * 100:.1f}¢</td>' \
                        f'<td class="num edge {cls}">{edge:+.1f}¢</td>'
         else:
-            mkt_cell = '<td class="num dim">—</td><td class="num dim">—</td>'
+            mkt_cell = '<td class="num dim">-</td><td class="num dim">-</td>'
         market_rows.append(
             f'<tr><td>{escape(k)}</td><td class="num">{v * 100:.1f}%</td>'
             f'<td class="num fair">{pct(v)}</td>{mkt_cell}</tr>')
@@ -374,21 +534,24 @@ def sim_section(m):
     scorelines = " · ".join(
         f"<b>{s['score']}</b> <small>{s['p'] * 100:.0f}%</small>" for s in sim["top_scores"])
     bt = f" · backtest log-loss {SIM_LOGLOSS} vs 1.046 baseline on 1,071 matches" if SIM_LOGLOSS else ""
+    grid_inline = match_grid_svg(sim)
     return f"""<section class="sim">
-<h2>Simulation — fair prices vs market</h2>
-<p class="fineprint">Fair price is the model's probability written in Polymarket cents — a 56¢
+<h2>Simulation - fair prices vs market</h2>
+{verdict}
+<p class="fineprint">Fair price is the model's probability written in Polymarket cents - a 56¢
 fair price means 56%, and a share bought below it profits on average <em>if the model is right</em>.
 Edge = fair minus market: green means the market sells the outcome cheaper than the model values it.
 xG here is Dixon-Coles expected goals from attack/defence ratings, not the shot-based xG of
 broadcast graphics. Spread −1.5 = win by two or more clear goals.</p>
 {hf}
-<p class="meta center">Model expected goals: {escape(m['home'])} {sim['xg']['home']} — {sim['xg']['away']} {escape(m['away'])}</p>
+<p class="meta center">Model expected goals: {escape(m['home'])} {sim['xg']['home']} - {sim['xg']['away']} {escape(m['away'])}</p>
 {bar}
 <table class="markets">
-<thead><tr><th>Market</th><th class="num" title="model probability of this outcome">Probability</th><th class="num" title="the model probability written as a share price — buy below this and you profit on average if the model is right">Fair</th><th class="num" title="live Polymarket YES price at last snapshot">Polymarket</th><th class="num" title="fair minus market — positive (green) means the market sells it cheaper than the model values it">Edge</th></tr></thead>
+<thead><tr><th>Market</th><th class="num" title="model probability of this outcome">Probability</th><th class="num" title="the model probability written as a share price - buy below this and you profit on average if the model is right">Fair</th><th class="num" title="live Polymarket YES price at last snapshot">Polymarket</th><th class="num" title="fair minus market - positive (green) means the market sells it cheaper than the model values it">Edge</th></tr></thead>
 <tbody>{''.join(market_rows)}</tbody>
 </table>
 {market_note}
+<figure class="matchgrid">{grid_inline}</figure>
 <p class="scorelines">Most likely scorelines: {scorelines}</p>
 <p class="modelnote">Dixon-Coles weighted Poisson · internationals 2018–2026, tuned
 hyperparameters{bt}.
@@ -415,8 +578,8 @@ def build_match_pages():
 </div>
 {sim_section(m)}
 <div class="twocol">
-<section><h2>{escape(m['home'])} — last ten</h2>{last10_table(h)}</section>
-<section><h2>{escape(m['away'])} — last ten</h2>{last10_table(a)}</section>
+<section><h2>{escape(m['home'])} - last ten</h2>{last10_table(h)}</section>
+<section><h2>{escape(m['away'])} - last ten</h2>{last10_table(a)}</section>
 </div>"""
         crumb = (f'<a href="../matches.html">Matches</a> / Matchday {m["matchday"]} / '
                  f'{escape(m["home"])} v {escape(m["away"])}')
@@ -440,22 +603,69 @@ def build_futures():
     body = f"""<h1>Tournament futures</h1>
 <p class="standfirst">100,000 Monte Carlo tournaments on a 200-model bootstrap ensemble,
 using the official FIFA bracket.</p>
-<p class="fineprint">Reach R32 is not the same as win group — eight third-placed teams advance
+<p class="fineprint">Reach R32 is not the same as win group - eight third-placed teams advance
 too, which is why mid-tier teams clear 70% there. Columns nest (champion ⊂ final ⊂ SF…), and
 each column sums across all 48 teams to the slots available: 12 group wins, 2 finalists, 1 champion.
 Read every percentage as a fair Polymarket price for that future. The ensemble matters: simulating
 with 200 bootstrap refits instead of one model widens uncertainty and shaves points off the
-favourite — that haircut is honesty, not noise. Anomalies are modelled too, as zero-mean
+favourite - that haircut is honesty, not noise. Anomalies are modelled too, as zero-mean
 randomness with assumed magnitudes: a per-tournament form shock (injuries, chemistry) on every
-team, knockout attrition (a 10% chance each tie leaves lasting damage — cards, knocks), and a
+team, knockout attrition (a 10% chance each tie leaves lasting damage - cards, knocks), and a
 fatigue penalty after 120-minute matches. None of it favours anyone on average; all of it
 favours outsiders, because chaos always does.</p>
 <table class="futures">
-<thead><tr><th>Team</th><th title="group A-L">Grp</th><th class="num" title="finish top of the group">Win group</th><th class="num" title="advance to the round of 32 — top two per group plus the eight best third-placed teams">Reach R32</th>
-<th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament — column sums to 100% across all teams">Champion</th></tr></thead>
+<thead><tr><th>Team</th><th title="group A-L">Grp</th><th class="num" title="finish top of the group">Win group</th><th class="num" title="advance to the round of 32 - top two per group plus the eight best third-placed teams">Reach R32</th>
+<th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament - column sums to 100% across all teams">Champion</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>"""
     (OUT / "futures.html").write_text(page("Futures", body))
+
+
+def trend_chart():
+    """Cumulative log-loss of model vs market vs blend as matches grade."""
+    import math
+    graded = sorted((p for p in (PRED or {}).get("group_matches", [])
+                     if "actual_score" in p and p.get("p_market")),
+                    key=lambda p: p["date_utc"])
+    if len(graded) < 3:
+        return ('<p class="fineprint">The model-vs-market trend chart draws '
+                'itself here once a few matches have been graded.</p>')
+    series = {"model": [], "market": [], "blend": []}
+    tot = {k: 0.0 for k in series}
+    for i, p in enumerate(graded, 1):
+        res = {"H": "H", "D": "D", "A": "A"}[p["actual_result"]]
+        msum = sum(p["p_market"].values())
+        probs = {"model": p["p_model"][res],
+                 "market": p["p_market"][res] / msum,
+                 "blend": p["p"][res]}
+        for k, v in probs.items():
+            tot[k] -= math.log(max(v, 1e-9))
+            series[k].append(tot[k] / i)
+    W, H_, L, R, T, B = 660, 300, 56, 14, 26, 36
+    pw, ph = W - L - R, H_ - T - B
+    lo = min(min(s) for s in series.values()) * 0.97
+    hi = max(max(s) for s in series.values()) * 1.03
+    cols = {"model": "var(--green, #14633f)", "market": "var(--red, #a72a1e)", "blend": "var(--amber, #9a7b2d)"}
+    s = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H_}" '
+         f'style="max-width:660px;width:100%">'
+         f'<rect width="{W}" height="{H_}" fill="var(--paper, #f6f1e6)"/>')
+    font = 'font-family="ui-monospace,Menlo,monospace"'
+    n = len(graded)
+    for k, vals in series.items():
+        pts = " ".join(
+            f"{L + pw * i / max(n - 1, 1):.1f},"
+            f"{T + ph * (1 - (v - lo) / (hi - lo)):.1f}"
+            for i, v in enumerate(vals))
+        s += (f'<polyline points="{pts}" fill="none" stroke="{cols[k]}" '
+              f'stroke-width="2"/>')
+        s += (f'<text x="{L + pw + 2}" y="{T + ph * (1 - (vals[-1] - lo) / (hi - lo)) + 4}" '
+              f'font-size="10" fill="{cols[k]}" {font}>{k}</text>')
+    s += (f'<text x="{L}" y="16" font-size="12" fill="var(--ink, #211d16)" {font}>'
+          f'running log-loss after {n} graded matches (lower = better forecaster)</text>')
+    s += (f'<text x="{L}" y="{H_-10}" font-size="10" fill="var(--ink-soft, #6b6353)" {font}>'
+          f'{graded[0]["date_utc"][:10]} → {graded[-1]["date_utc"][:10]}</text>')
+    return f'<figure>{s}</svg><figcaption>The whole experiment in one line: ' \
+           f'whichever curve is lowest is winning the forecasting contest.</figcaption></figure>'
 
 
 # ---------- bracket / predictions page ----------
@@ -479,12 +689,12 @@ def build_bracket():
                 f'<td class="num">{v["logloss"]}</td></tr>'
                 for src, v in acc["compare"].items())
             acc_html += f"""<table class="ko">
-<thead><tr><th>Probability source</th><th class="num" title="mean squared error of the probabilities — lower is better; guessing equally scores 0.667">Brier</th><th class="num" title="penalises confident wrong calls hardest — lower is better; guessing equally scores 1.099">Log-loss</th></tr></thead>
+<thead><tr><th>Probability source</th><th class="num" title="mean squared error of the probabilities - lower is better; guessing equally scores 0.667">Brier</th><th class="num" title="penalises confident wrong calls hardest - lower is better; guessing equally scores 1.099">Log-loss</th></tr></thead>
 <tbody>{comp_rows}</tbody></table>
-<p class="meta center">Lower is better — this settles whether the model, the market,
+<p class="meta center">Lower is better - this settles whether the model, the market,
 or the blend prices matches best (market graded on {acc['market_priced_matches']} priced matches).</p>"""
     else:
-        acc_html = ('<p class="standfirst">No matches graded yet — run '
+        acc_html = ('<p class="standfirst">No matches graded yet - run '
                     '<code>wc26_update_results.py</code> then rebuild once games finish.</p>')
 
     rounds = {}
@@ -502,7 +712,7 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
             f'<td class="num">{k["p_pick"] * 100:.0f}%</td></tr>'
             for k in rounds[rname])
         ko_html += f"""<section><h2>{rname}</h2>
-<table class="ko"><thead><tr><th class="num" title="official FIFA match number">#</th><th>Tie (predicted)</th><th>Pick</th><th class="num" title="the model's own probability for its pick — 50% means a forced coin-flip call">Conf.</th></tr></thead>
+<table class="ko"><thead><tr><th class="num" title="official FIFA match number">#</th><th>Tie (predicted)</th><th>Pick</th><th class="num" title="the model's own probability for its pick - 50% means a forced coin-flip call">Conf.</th></tr></thead>
 <tbody>{lines}</tbody></table></section>"""
 
     gt_html = ""
@@ -521,7 +731,7 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
             mark = '<i class="f W">✓</i>' if p["hit"] else '<i class="f L">✗</i>'
             actual = f'<td class="num score">{p["actual_score"]}</td><td>{mark}</td>'
         else:
-            actual = '<td class="num dim">—</td><td class="dim">—</td>'
+            actual = '<td class="num dim">-</td><td class="dim">-</td>'
         conf = p["p"][p["pred_result"]] * 100
         rows.append(
             f'<tr><td class="num">{p["date_utc"][:10]}</td>'
@@ -535,19 +745,20 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
 <tbody>{''.join(rows)}</tbody></table>"""
 
     body = f"""<h1>The predicted tournament</h1>
-<p class="standfirst">Every match called in advance — locked {PRED['locked_at']},
+<p class="standfirst">Every match called in advance - locked {PRED['locked_at']},
 graded against reality as results land. Picks are modal outcomes from the mean model;
 the official FIFA bracket decides who meets whom.</p>
 <div class="champ">Predicted champion: <b>{team_link(PRED['champion'])}</b></div>
-<p class="fineprint">A locked bracket never updates — when reality diverges, the picks stay frozen,
+<p class="fineprint">A locked bracket never updates - when reality diverges, the picks stay frozen,
 because a prediction you can revise isn't a prediction. The Conf column is the model's own
 probability for its pick: a 50% pick is a coin flip it was forced to call, so judge the model by
 the scorecard's probability metrics, not the ✓/✗ column. Brier and log-loss score the
-probabilities themselves (lower is better; guessing ⅓-⅓-⅓ scores 0.667 Brier, 1.099 log-loss) —
+probabilities themselves (lower is better; guessing ⅓-⅓-⅓ scores 0.667 Brier, 1.099 log-loss) -
 and the model/market/blend comparison is the real experiment here: it settles which forecaster
 deserves your trust with actual match results.</p>
 <h2>Scorecard</h2>
 {acc_html}
+{trend_chart()}
 {ko_html}
 <h2>Predicted group tables</h2>
 <div class="groups">{gt_html}</div>
@@ -558,7 +769,7 @@ deserves your trust with actual match results.</p>
 
 # ---------- awards page ----------
 def fmt_cents(v):
-    return f"{v * 100:.1f}¢" if v is not None else "—"
+    return f"{v * 100:.1f}¢" if v is not None else "-"
 
 
 def build_awards():
@@ -567,7 +778,7 @@ def build_awards():
 
     def edge_cell(e):
         if e is None:
-            return '<td class="num dim">—</td>'
+            return '<td class="num dim">-</td>'
         cls = "pos" if e >= 0.03 else "neg" if e <= -0.03 else ""
         return f'<td class="num edge {cls}">{e * 100:+.1f}¢</td>'
 
@@ -593,48 +804,48 @@ def build_awards():
         for i, g in enumerate(AWARDS["golden_glove"][:12]))
     ball_rows = "".join(
         f'<tr><td>{escape(b["player"])}</td>'
-        f'<td>{team_link(b["team"]) if b["team"] else "—"}</td>'
+        f'<td>{team_link(b["team"]) if b["team"] else "-"}</td>'
         f'<td class="num">{fmt_cents(b["market"])}</td>'
         f'<td class="num">{b["team_champion_p"] * 100:.1f}%'
         f'</td></tr>' if b["team_champion_p"] is not None else
-        f'<tr><td>{escape(b["player"])}</td><td>—</td>'
-        f'<td class="num">{fmt_cents(b["market"])}</td><td class="num dim">—</td></tr>'
+        f'<tr><td>{escape(b["player"])}</td><td>-</td>'
+        f'<td class="num">{fmt_cents(b["market"])}</td><td class="num dim">-</td></tr>'
         for b in AWARDS["golden_ball"][:12])
 
     body = f"""<h1>The honours board</h1>
-<p class="standfirst">Golden Boot and top-scoring nation are modelled — each player's
+<p class="standfirst">Golden Boot and top-scoring nation are modelled - each player's
 goals simulated across the same 100,000 tournaments behind the Futures page, using his
 share of his team's international goals since 2024. Glove and Ball are softer ground:
 one is a labelled heuristic, the other pure market.</p>
 
-<h2>Golden Boot — modelled</h2>
+<h2>Golden Boot - modelled</h2>
 <p class="fineprint">xG (tourn.) is the player's expected tournament goals: his share of his
 team's international goals since 2024, applied to his team's goal count in each simulated
-tournament — so deep-run odds are baked in, and a striker on a likely semi-finalist beats an
+tournament - so deep-run odds are baked in, and a striker on a likely semi-finalist beats an
 equal scorer on a group-stage exit. The share is not adjusted for opposition quality, which is
-why CONCACAF strikers rate high and the market disagrees. A "—" market means Polymarket simply
+why CONCACAF strikers rate high and the market disagrees. A "-" market means Polymarket simply
 hasn't listed the player: the model's co-favourite is unpriced, which is either an oversight
 or a verdict.</p>
 <table class="ko">
-<thead><tr><th>Player</th><th>Team</th><th class="num" title="international goals 2024-26, all competitions — the basis of his share of team goals">Intl goals 24–26</th>
-<th class="num" title="expected tournament goals: his share applied to his team's goals across 100k simulated tournaments — deep runs included">xG (tourn.)</th><th class="num" title="probability of winning the Golden Boot, as a fair price">Model</th><th class="num" title="live Polymarket YES price">Polymarket</th><th class="num" title="model minus market — positive means underpriced">Edge</th></tr></thead>
+<thead><tr><th>Player</th><th>Team</th><th class="num" title="international goals 2024-26, all competitions - the basis of his share of team goals">Intl goals 24–26</th>
+<th class="num" title="expected tournament goals: his share applied to his team's goals across 100k simulated tournaments - deep runs included">xG (tourn.)</th><th class="num" title="probability of winning the Golden Boot, as a fair price">Model</th><th class="num" title="live Polymarket YES price">Polymarket</th><th class="num" title="model minus market - positive means underpriced">Edge</th></tr></thead>
 <tbody>{boot_rows}</tbody></table>
 
-<h2>Top scoring nation — modelled</h2>
+<h2>Top scoring nation - modelled</h2>
 <table class="ko">
 <thead><tr><th>Team</th><th class="num">Exp. goals</th><th class="num">Model</th>
 <th class="num">Polymarket</th><th class="num">Edge</th></tr></thead>
 <tbody>{nation_rows}</tbody></table>
 
-<h2>Golden Glove — heuristic lean</h2>
+<h2>Golden Glove - heuristic lean</h2>
 <p class="standfirst">Rank = P(reach final) × defensive record. Not a calibrated
 probability; the market column is the bettable number.</p>
 <table class="ko">
-<thead><tr><th class="num" title="heuristic rank: reach-final probability x defensive record — not a calibrated probability">#</th><th>Keeper</th><th>Team</th><th class="num" title="team's probability of reaching the final (Glove winners almost always come from finalists)">P(final)</th>
+<thead><tr><th class="num" title="heuristic rank: reach-final probability x defensive record - not a calibrated probability">#</th><th>Keeper</th><th>Team</th><th class="num" title="team's probability of reaching the final (Glove winners almost always come from finalists)">P(final)</th>
 <th class="num" title="team goals conceded per game, last 10">Conceded/g</th><th class="num" title="live Polymarket YES price">Polymarket</th></tr></thead>
 <tbody>{glove_rows}</tbody></table>
 
-<h2>Golden Ball — market only</h2>
+<h2>Golden Ball - market only</h2>
 <p class="standfirst">Best-player awards are voted, not scored; we show the market
 with each candidate's team title odds for context.</p>
 <table class="ko">
@@ -646,6 +857,14 @@ with each candidate's team title odds for context.</p>
 
 
 # ---------- methodology page ----------
+def inline_svg(name):
+    """Inline a generated chart so it inherits the page theme (CSS vars)."""
+    try:
+        return (ROOT / "charts" / f"{name}.svg").read_text()
+    except FileNotFoundError:
+        return f'<img src="img/{name}.svg" alt="{name} chart">'
+
+
 def build_method():
     try:
         prm = json.load(open(ROOT / "wc26_params.json"))
@@ -653,36 +872,58 @@ def build_method():
     except FileNotFoundError:
         prm, P = {}, {}
     body = f"""<h1>How the numbers are made</h1>
-<p class="standfirst">Everything on this site is generated by open code from public data —
+<p class="standfirst">Everything on this site is generated by open code from public data -
 no hand-picked scores, no vibes. The full pipeline is on
 <a href="https://github.com/amirdaraee/world-cup-predictions">GitHub</a>; this page is the
 plain-language tour.</p>
 
+<h2>In plain words (no math, promise)</h2>
+<p>Imagine you watched every football match a team played for years, and every time they
+scored you put a pebble in their jar. Teams with heavy jars are strong. Recent pebbles
+count more than old ones, because teams change. That's the heart of it: <b>we weigh
+pebble jars.</b></p>
+<p>We also peek at what each team's players would cost to buy - a team full of expensive
+stars gets a little extra credit even if they've had a quiet year, the way you'd still
+pick the tall kid for basketball.</p>
+<p>For any match, the model is like rolling two weighted dice - one for each team's goals.
+Roll them once, you get one possible score. We let a computer roll them for the
+<em>entire World Cup</em>, all the way to the final… then do the whole tournament again,
+one hundred thousand times. If Argentina lifts the trophy in 19,000 of those imaginary
+tournaments, we say: 19%.</p>
+<p>One more trick: thousands of people bet real money on these games, and their prices are
+the crowd's best guess. We listen to the crowd a little, because the crowd hears news -
+injuries, line-ups - before any goal statistics can.</p>
+<p>And the honesty rule: we wrote down every prediction <b>before</b> the tournament,
+locked the page, and grade ourselves in public as the real results come in. No erasing,
+no "we knew it all along." A percentage is a promise about <em>how often</em> we should
+be right - when the model says 70%, it should be wrong about 3 times in 10, and we
+count those too.</p>
+
 <h2>The data</h2>
 <p>Three sources. <b>49,450 international matches since 1872</b> (the community-maintained
-martj42 dataset) — the model trains on the <b>8,081 played since 2018</b>. Team form and
+martj42 dataset) - the model trains on the <b>8,081 played since 2018</b>. Team form and
 fixtures come from <b>API-Football</b>. Live market prices come from <b>Polymarket's</b> public
 API. The training data was audited against the primary source: four wrong scores were found,
 adjudicated, and patched (the corrections file and methodology are in the repo).</p>
 
 <h2>The match model</h2>
-<p>A <b>Dixon-Coles weighted Poisson</b> — the classic bookmaking model: every team gets an
+<p>A <b>Dixon-Coles weighted Poisson</b> - the classic bookmaking model: every team gets an
 attack and a defence rating fitted to who they scored against and conceded to, recent matches
 counting more (half-life {P.get('half_life', '?')} days), friendlies down-weighted
 (×{P.get('friendly_w', '?')}), thin-data teams shrunk toward average, and a low-score
 correction (ρ={P.get('rho', '?')}) because real football produces more 0-0s and 1-1s than
 independent Poissons admit. Hosts get a fitted home-crowd boost (~+30% scoring) when playing
 in their own country. From two expected-goals numbers the model computes the <em>entire</em>
-scoreline probability grid — every market on the match cards is an exact sum over it,
+scoreline probability grid - every market on the match cards is an exact sum over it,
 no sampling.</p>
 <p>One newer input (added 10 June, before matchday 1): a <b>squad-value prior</b>. Fitted
-ratings are nudged by β·z(log squad market value, Transfermarkt) — talent on paper, not just
+ratings are nudged by β·z(log squad market value, Transfermarkt) - talent on paper, not just
 results on grass. β=0.35 was chosen by held-out validation, where the prior improved log-loss
-from 0.854 to 0.818 at its optimum — the single largest upgrade in the project — shipped
+from 0.854 to 0.818 at its optimum - the single largest upgrade in the project - shipped
 slightly below the optimum as a haircut for look-ahead (current values partly reflect past
 results). Structurally it matters most in the knockout rounds, which have no betting market
 to blend with: it gives them the player-awareness the group stage already had.</p>
-<figure><img src="img/grid.svg" alt="Scoreline probability grid for Mexico v South Africa">
+<figure>{inline_svg("grid")}
 <figcaption>The actual fitted grid for the opening match (probabilities in %).
 Moneyline = the green vs red triangles; over 2.5 = everything below the third
 anti-diagonal; BTTS = everything outside row 0 and column 0.</figcaption></figure>
@@ -691,38 +932,38 @@ on four rolling 12-month windows, 4,228 held-out matches ({prm.get('tuned_on', '
 Validation log-loss <b>{prm.get('cv_logloss', '?')}</b> against a 1.046 always-guess-the-base-rates
 baseline (lower is better; this is bookmaker-grade calibration for internationals).
 Two ideas the data rejected along the way: capping blowout scorelines, and shorter memory.
-Both lost on held-out matches — the tune log is in the repo.</p>
+Both lost on held-out matches - the tune log is in the repo.</p>
 
 <h2>Market blending</h2>
 <p>For group-match picks, model probabilities are blended with live Polymarket prices
-(a log-opinion pool, 35% weight on the market) — the market knows about lineups and injuries
+(a log-opinion pool, 35% weight on the market) - the market knows about lineups and injuries
 hours before any goals data can. The raw model is kept separate for edge-finding, and the
 <a href="bracket.html">scorecard</a> grades <b>model, market, and blend independently</b> as
 results arrive, so the tournament itself decides which forecaster deserves trust.</p>
 
 <h2>The tournament simulation</h2>
-<p><b>100,000 full tournaments per run</b> — about 10 million simulated matches — on the
+<p><b>100,000 full tournaments per run</b> - about 10 million simulated matches - on the
 official FIFA bracket, including the round-of-32 template and third-place allocation
 constraints. Each simulated tournament draws one of <b>200 bootstrap-refitted models</b>
 (so parameter uncertainty flows into the odds), plus zero-mean anomaly shocks: a per-team
-tournament form shock (injuries, chemistry — σ=0.06 on scoring rates), knockout attrition
+tournament form shock (injuries, chemistry - σ=0.06 on scoring rates), knockout attrition
 (10% chance per tie of lasting damage), and a fatigue penalty after 120-minute matches.
 None of it favours anyone on average; all of it favours outsiders, because variance always
 taxes the favourite.</p>
 <p class="fineprint">Monte Carlo noise at this scale: a 16.6% championship estimate carries a
-standard error of about ±0.12 percentage points. Verified empirically — two independent
+standard error of about ±0.12 percentage points. Verified empirically - two independent
 100,000-tournament runs agreed on every favourite within 0.0–0.2pp. More simulations would not
 change the numbers; every meaningful uncertainty lives in the model, not the dice.</p>
 
 <h2>Player awards</h2>
 <p>Golden Boot and top-scoring-nation odds are simulated on top of the same 100k tournaments:
 each player's tournament goals are drawn from his share of his team's international goals
-since 2024, applied to his team's goal count in each simulated run — so reaching a final
+since 2024, applied to his team's goal count in each simulated run - so reaching a final
 buys more chances to score. Shares are not opposition-adjusted (stated limitation).
 Golden Ball and Glove have no calibrated model and are shown market-priced only.</p>
 
 <h2>Accountability</h2>
-<p>The complete bracket — all 72 group matches and every knockout round to the champion —
+<p>The complete bracket - all 72 group matches and every knockout round to the champion -
 was <b>locked before the tournament</b> and is graded publicly as results land: result hit
 rate, exact scores, and probability quality (Brier / log-loss) for model, market, and blend.
 Every calculation run is archived with a timestamp. A prediction you can revise afterwards
@@ -734,12 +975,12 @@ isn't a prediction.</p>
 <p>Goals are rare events: ~2.7 per 90 minutes, arriving in any minute with small, roughly
 independent probability. Counting processes like that converge to the
 <a href="https://en.wikipedia.org/wiki/Poisson_distribution"><b>Poisson
-distribution</b></a> — one number, the rate λ ("expected goals"), determines the probability of
+distribution</b></a> - one number, the rate λ ("expected goals"), determines the probability of
 0, 1, 2… goals: P(k) = λᵏe^(−λ)/k!. So the whole model reduces to estimating two rates per
 match. The rates come from a <b>log-linear model</b>: log λ<sub>home</sub> = μ + attack
-<sub>home</sub> + defence<sub>away</sub> (+ home advantage) — additive on the log scale,
+<sub>home</sub> + defence<sub>away</sub> (+ home advantage) - additive on the log scale,
 multiplicative on goals, which is why a strong attack against a leaky defence compounds.</p>
-<figure><img src="img/poisson.svg" alt="Observed goals per team per match vs the Poisson distribution">
+<figure>{inline_svg("poisson")}
 <figcaption>Why the assumption holds: goals per team per match across the 8,081 training
 internationals (bars) against the Poisson curve at the same mean (dots).</figcaption></figure>
 
@@ -747,21 +988,21 @@ internationals (bars) against the Poisson curve at the same mean (dots).</figcap
 <p>Two independent Poissons slightly mispredict reality in one corner: real football produces
 more 0-0 and 1-1 draws than independence allows (teams settle, sit deep, kill games).
 Dixon &amp; Coles (1997) patched exactly the four low-score cells of the grid with one
-correlation parameter ρ — ours is −0.05, fitted, modest. This 30-year-old model family is
+correlation parameter ρ - ours is −0.05, fitted, modest. This 30-year-old model family is
 still the backbone of professional odds compilation.</p>
 
 <h3>Fitting: weighted maximum likelihood</h3>
 <p><a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation"><b>Maximum
 likelihood</b></a> asks: which ratings make the observed 8,081 results least
 surprising? Each match enters the likelihood with a weight: exponential <b>time decay</b>
-(a result loses half its influence every 1,000 days — recency matters, but slowly for
+(a result loses half its influence every 1,000 days - recency matters, but slowly for
 national teams) and ×0.8 for friendlies. <b>Shrinkage</b> adds a few phantom "average"
 matches to every team, pulling thin-data teams (Curaçao has far fewer internationals than
-Brazil) toward the middle — the
+Brazil) toward the middle - the
 <a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">bias-variance
 trade</a>: a slightly biased estimate beats a wildly noisy one.</p>
-<figure><img src="img/decay.svg" alt="Exponential time-decay weighting curve">
-<figcaption>How much a result counts in the fit, by age — the tuned 1,000-day half-life
+<figure>{inline_svg("decay")}
+<figcaption>How much a result counts in the fit, by age - the tuned 1,000-day half-life
 means a 2023 thrashing still whispers, but recent form speaks.</figcaption></figure>
 
 <h3>Honest validation: cross-validation and scoring rules</h3>
@@ -769,19 +1010,19 @@ means a 2023 thrashing still whispers, but recent form speaks.</figcaption></fig
 (<a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a>):
 fit on matches up to a cutoff, predict the next 12 months, repeat over four rolling windows
 (4,228 held-out matches). Quality is measured with
-<a href="https://en.wikipedia.org/wiki/Scoring_rule"><b>proper scoring rules</b></a> —
+<a href="https://en.wikipedia.org/wiki/Scoring_rule"><b>proper scoring rules</b></a> -
 functions a forecaster can only optimise by reporting its true beliefs: <b>log-loss</b>
 (−log of the probability given to what happened; brutal on confident errors) and the
 <a href="https://en.wikipedia.org/wiki/Brier_score"><b>Brier score</b></a>
 (mean squared error of probabilities). Ours: log-loss 0.891 vs 1.046 for always guessing
-base rates. Accuracy percentages are <em>not</em> proper scores — a forecaster can game them
-by always picking favourites — which is why the scorecard leads with Brier and log-loss.</p>
-<figure><img src="img/calibration.svg" alt="Calibration curve on held-out matches">
+base rates. Accuracy percentages are <em>not</em> proper scores - a forecaster can game them
+by always picking favourites - which is why the scorecard leads with Brier and log-loss.</p>
+<figure>{inline_svg("calibration")}
 <figcaption>Calibration on the held-out year: each dot is a probability bucket; on the
 dashed diagonal, claimed confidence equals observed reality.</figcaption></figure>
 
 <h3>Monte Carlo and the law of large numbers</h3>
-<p>The tournament has no closed-form answer — group tiebreakers, third-place allocation and
+<p>The tournament has no closed-form answer - group tiebreakers, third-place allocation and
 bracket paths interact too messily. <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><b>Monte Carlo</b></a>
 sidesteps the math: simulate the whole tournament 100,000 times and count. The
 <a href="https://en.wikipedia.org/wiki/Law_of_large_numbers"><b>law of large
@@ -790,42 +1031,63 @@ estimate is √(p(1−p)/N) ≈ ±0.12pp. We verified it empirically: two indepe
 every favourite within 0.2pp.</p>
 
 <h3>The bootstrap: knowing what we don't know</h3>
-<p>One fitted model pretends its ratings are exact. They aren't — they're estimates from
+<p>One fitted model pretends its ratings are exact. They aren't - they're estimates from
 finite data. The
 <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)"><b>bootstrap</b></a>
 measures that: re-weight the dataset at random
 (each match's weight multiplied by an exponential draw), refit, repeat 200 times. The spread
 of those 200 models <em>is</em> the parameter uncertainty, and every simulated tournament
-draws one of them. Effect: favourites' odds shrink toward the field — overconfidence
+draws one of them. Effect: favourites' odds shrink toward the field - overconfidence
 removed before it costs money.</p>
 
 <h3>Combining forecasters: the opinion pool</h3>
 <p>The model and the market know different things (goals history vs lineups and news). The
-<b>logarithmic opinion pool</b> — multiply the probabilities, each raised to a weight, then
-renormalise — is the standard way to merge them: p ∝ p<sub>model</sub>^0.65 ·
+<b>logarithmic opinion pool</b> - multiply the probabilities, each raised to a weight, then
+renormalise - is the standard way to merge them: p ∝ p<sub>model</sub>^0.65 ·
 p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities compound, and
 the weight is an explicit, testable choice: the scorecard grades model, market and blend
 separately, so the data itself will tell us if 0.35 was wrong.</p>
 
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
-no weather or altitude terms (magnitudes unfittable from our data — treated as caution flags,
+no weather or altitude terms (magnitudes unfittable from our data - treated as caution flags,
 not model inputs); no within-match simulation (final scores only); anomaly magnitudes are
 stated assumptions, not estimates; matchday-3 dead-rubber motivation is handled by manual
 review, the way odds compilers do it. The model is a fair-value anchor, not an oracle.</p>
 
-<p class="fineprint">این صفحه به فارسی هم در دسترس است —
+<p class="fineprint">این صفحه به فارسی هم در دسترس است -
 <a href="method-fa.html">نسخهٔ فارسی</a>.</p>"""
     (OUT / "method.html").write_text(
         page("Method", body, alt_lang=("method-fa.html", "فارسی")))
 
 
 def build_method_fa():
-    body = '''<h1>اعداد چگونه ساخته می‌شوند</h1>
+    body = f'''<h1>اعداد چگونه ساخته می‌شوند</h1>
 <p class="standfirst">همهٔ آنچه در این سایت می‌بینید با کدِ باز و داده‌های عمومی ساخته شده است؛
 نه نتیجه‌ای که دستی انتخاب شده باشد و نه حاصل حدس و گمان. کد کامل پروژه روی
 <a href="https://github.com/amirdaraee/world-cup-predictions">گیت‌هاب</a> در دسترس است.
 این صفحه فقط توضیح می‌دهد که این اعداد از کجا می‌آیند و پشت صحنهٔ آن‌ها چه می‌گذرد.</p>
+
+<h2>به زبان خیلی ساده (بدون ریاضی، قول می‌دهیم)</h2>
+<p>تصور کنید سال‌ها همهٔ بازی‌های یک تیم را تماشا کرده‌اید و برای هر گلی که زده، یک سنگریزه
+در شیشه‌اش انداخته‌اید. تیم‌هایی که شیشهٔ سنگین‌تری دارند قوی‌ترند. سنگریزه‌های تازه از
+قدیمی‌ها مهم‌ترند، چون تیم‌ها عوض می‌شوند. قلب ماجرا همین است: <b>ما شیشه‌های سنگریزه را
+وزن می‌کنیم.</b></p>
+<p>یک نگاهی هم به قیمت بازیکنان هر تیم می‌اندازیم - تیمی که پر از ستاره‌های گران است حتی
+اگر سال آرامی داشته، کمی اعتبار اضافه می‌گیرد؛ همان‌طور که برای بسکتبال باز هم بچهٔ
+قدبلند را انتخاب می‌کنید.</p>
+<p>برای هر مسابقه، مدل مثل انداختن دو تاسِ دستکاری‌شده است - یکی برای گل‌های هر تیم. یک بار
+بیندازید، یک نتیجهٔ ممکن می‌گیرید. ما به کامپیوتر می‌گوییم این تاس‌ها را برای <em>کلِ
+جام جهانی</em> بیندازد، تا خود فینال… و بعد کل تورنمنت را دوباره از اول، صدهزار بار.
+اگر آرژانتین در ۱۹هزار تا از آن جام‌های خیالی قهرمان شود، می‌گوییم: ۱۹٪.</p>
+<p>یک ترفند دیگر: هزاران نفر روی همین بازی‌ها پول واقعی شرط می‌بندند و قیمت‌هایشان بهترین
+حدسِ جمعیت است. ما کمی هم به جمعیت گوش می‌دهیم، چون جمعیت خبرها - مصدومیت، ترکیب - را
+زودتر از هر آمارِ گلی می‌شنود.</p>
+<p>و قانون صداقت: همهٔ پیش‌بینی‌ها را <b>قبل از</b> شروع تورنمنت نوشتیم، صفحه را قفل کردیم
+و با رسیدن نتایج واقعی، جلوی چشم همه به خودمان نمره می‌دهیم. نه پاک‌کردنی در کار است نه
+«از اول می‌دانستیم». درصدْ قولی است دربارهٔ این‌که <em>چند وقت یک‌بار</em> باید درست
+بگوییم - وقتی مدل می‌گوید ۷۰٪، یعنی باید از هر ۱۰ بار حدوداً ۳ بار هم اشتباه کند، و آن
+اشتباه‌ها را هم می‌شماریم.</p>
 
 <h2>داده‌ها</h2>
 <p>سه منبع داده داریم. مهم‌ترین آن‌ها مجموعهٔ متن‌باز martj42 است که ۴۹٬۴۵۰ بازی ملی از سال
@@ -851,11 +1113,11 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 انجام نمی‌شود.</p>
 <p>یک ورودی تازه هم از ۱۰ ژوئن (پیش از شروع بازی‌ها) اضافه شد: «پیشینِ ارزش ترکیب».
 امتیاز برازش‌شدهٔ هر تیم به اندازهٔ β×z(لگاریتم ارزش بازاری ترکیب، از Transfermarkt)
-جابه‌جا می‌شود — یعنی استعدادِ روی کاغذ، نه فقط نتایجِ روی چمن. مقدار β=۰٫۳۵ با
-اعتبارسنجی خارج از نمونه انتخاب شد؛ این پیشین لگ‌لاس را از ۰٫۸۵۴ به ۰٫۸۱۸ بهبود داد —
+جابه‌جا می‌شود - یعنی استعدادِ روی کاغذ، نه فقط نتایجِ روی چمن. مقدار β=۰٫۳۵ با
+اعتبارسنجی خارج از نمونه انتخاب شد؛ این پیشین لگ‌لاس را از ۰٫۸۵۴ به ۰٫۸۱۸ بهبود داد -
 بزرگ‌ترین ارتقای این پروژه. اثر اصلی آن در مراحل حذفی است که بازاری برای ترکیب‌شدن
 ندارند: همان آگاهی از بازیکنان که مرحلهٔ گروهی از طریق بازار داشت.</p>
-<figure><img src="img/grid.svg" alt="شبکهٔ احتمال نتایج مکزیک و آفریقای جنوبی">
+<figure>{inline_svg("grid")}
 <figcaption>شبکهٔ واقعی برازش‌شده برای بازی افتتاحیه (احتمال‌ها به درصد). برد مکزیک =
 خانه‌های سبز؛ تساوی = قطر کهربایی؛ برد آفریقای جنوبی = خانه‌های قرمز.</figcaption></figure>
 <p class="fineprint">ابرپارامترها به‌صورت دستی انتخاب نشده‌اند. آن‌ها با اعتبارسنجی متقابل
@@ -898,7 +1160,7 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 کافی است. در نتیجه کل مسئله به تخمین دو نرخ برای هر مسابقه تقلیل پیدا می‌کند؛ نرخ‌هایی
 که از یک مدل لگ-خطی به دست می‌آیند:</p>
 <p>لگاریتم نرخ = پایه + قدرت حملهٔ تیم + ضعف دفاع حریف (+ مزیت میزبانی)</p>
-<figure><img src="img/poisson.svg" alt="مقایسهٔ گل‌های واقعی با توزیع پواسون">
+<figure>{inline_svg("poisson")}
 <figcaption>چرا این فرض درست است: توزیع گلِ هر تیم در هر بازی در ۸٬۰۸۱ مسابقهٔ آموزشی
 (ستون‌ها) در برابر منحنی پواسون با همان میانگین (نقطه‌ها).</figcaption></figure>
 
@@ -916,8 +1178,8 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 غافلگیرکننده می‌کند؟</p>
 <p>هر مسابقه با وزن خاص خود وارد مدل می‌شود: افت زمانی نمایی (هر نتیجه پس از ۱٬۰۰۰ روز نیمی
 از اثر خود را از دست می‌دهد) و ضریب ×۰٫۸ برای مسابقات دوستانه.</p>
-<figure><img src="img/decay.svg" alt="منحنی افت زمانی وزن نتایج">
-<figcaption>سهم هر نتیجه در برازش بر حسب قدمت آن — با نیمه‌عمر ۱٬۰۰۰ روزه، نتایج قدیمی
+<figure>{inline_svg("decay")}
+<figcaption>سهم هر نتیجه در برازش بر حسب قدمت آن - با نیمه‌عمر ۱٬۰۰۰ روزه، نتایج قدیمی
 زمزمه می‌کنند و فرم اخیر بلند حرف می‌زند.</figcaption></figure>
 <p>انقباض (Shrinkage) نیز برای هر تیم چند مسابقهٔ خیالیِ «متوسط» اضافه می‌کند تا تیم‌هایی
 که دادهٔ کمی دارند بیش از حد از میانگین فاصله نگیرند. این همان مصالحهٔ کلاسیک بین اریب و
@@ -935,7 +1197,7 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 میانگین مربع خطای احتمال‌ها را اندازه می‌گیرد.</p>
 <p>درصد «پیش‌بینی درست» یک معیار سَره نیست، چون با انتخاب همیشگی فاوریت می‌توان آن را
 دستکاری کرد. به همین دلیل کارنامهٔ مدل با برایر و لگ‌لاس شروع می‌شود.</p>
-<figure><img src="img/calibration.svg" alt="منحنی کالیبراسیون روی بازی‌های خارج از نمونه">
+<figure>{inline_svg("calibration")}
 <figcaption>کالیبراسیون روی سالِ خارج از نمونه: هر نقطه یک دستهٔ احتمال است؛ روی قطرِ
 خط‌چین، اطمینانِ ادعاشده با واقعیتِ مشاهده‌شده برابر است.</figcaption></figure>
 
@@ -1005,13 +1267,13 @@ def build_archive_index():
 <thead><tr><th class="num">#</th><th>Snapshot</th></tr></thead>
 <tbody>{rows}</tbody></table>"""
     else:
-        table = '<p class="standfirst">No snapshots yet — the first will be taken before kickoff.</p>'
+        table = '<p class="standfirst">No snapshots yet - the first will be taken before kickoff.</p>'
     body = f"""<h1>Previous versions</h1>
 <p class="standfirst">The model recalculates after every matchday, but predictions shouldn't
-vanish when they age — each snapshot below is the complete site, frozen as it stood that day.
+vanish when they age - each snapshot below is the complete site, frozen as it stood that day.
 Compare any past view against what actually happened.</p>
 <p class="fineprint">Snapshots are immutable copies (every page and stylesheet). The live site
-always reflects the latest data; the locked bracket on the live site never changes by design —
+always reflects the latest data; the locked bracket on the live site never changes by design -
 what changes between versions are the simulations, prices, futures and award odds.</p>
 {table}"""
     (OUT / "archive.html").write_text(page("Versions", body))
@@ -1021,7 +1283,7 @@ def take_snapshot():
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     dst = OUT / "archive" / stamp
     k = 2
-    while dst.exists():          # same-day re-snapshots get a suffix —
+    while dst.exists():          # same-day re-snapshots get a suffix -
         dst = OUT / "archive" / f"{stamp}-{k}"   # never overwrite history
         k += 1
     stamp = dst.name
@@ -1037,13 +1299,13 @@ def take_snapshot():
     for f in dst.rglob("*.html"):
         depth = len(f.relative_to(dst).parts) - 1
         up = "../" * (2 + depth)
-        banner = (f'<div class="snapnote">Snapshot of {stamp} — predictions as they '
+        banner = (f'<div class="snapnote">Snapshot of {stamp} - predictions as they '
                   f'stood then. <a href="{up}index.html">Back to the latest →</a></div>')
         f.write_text(f.read_text().replace("<body>", f"<body>\n{banner}", 1))
     print(f"snapshot frozen: docs/archive/{stamp}/")
 
 
-CSS = """/* WC26 Form Book — editorial racing-form aesthetic */
+CSS = """/* WC26 Form Book - editorial racing-form aesthetic */
 :root {
   --paper: #f6f1e6;
   --paper-2: #efe8d8;
@@ -1234,10 +1496,49 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
 figure { margin: 1.3rem auto; text-align: center; }
-figure img { width: 100%; max-width: 660px; height: auto; display: block;
+figure img, figure svg { width: 100%; max-width: 660px; height: auto; display: block;
   margin: 0 auto; border: 1px solid var(--rule); }
 figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
   max-width: 600px; text-align: center; }
+
+/* today strip, verdicts, match grids, key players */
+.todaybox { border: 3px double var(--ink); padding: .2rem 1rem .8rem; margin: 1.2rem 0; }
+.todaybox h2 { border-bottom: 1px solid var(--rule); font-size: 1rem;
+  text-transform: uppercase; letter-spacing: .15em; font-family: "IBM Plex Mono", monospace; }
+.verdict { max-width: 640px; margin: .8rem auto; padding: .6rem .9rem; font-size: .85rem;
+  border: 2px solid var(--green); }
+.verdict.miss { border-color: var(--red); }
+.matchgrid svg { max-width: 400px; }
+.stats.odds dd { color: var(--green); }
+
+/* dark mode: paper-on-ink - follows the OS unless the button overrides */
+.themebtn {
+  position: absolute; top: 14px; left: 18px; cursor: pointer;
+  background: none; border: 1px solid var(--ink); border-radius: 999px;
+  color: var(--ink); font-size: .95rem; width: 1.9em; height: 1.9em; line-height: 1;
+}
+.themebtn:hover { background: var(--ink); color: var(--paper); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --paper: #181510; --paper-2: #211d16; --ink: #e9e2d2; --ink-soft: #a39a86;
+    --rule: #423c2f; --green: #4aa377; --red: #d05548; --amber: #c79a3d;
+  }
+  html:not([data-theme="light"]) body { background-image:
+    repeating-linear-gradient(0deg, transparent 0 2px, rgba(233,226,210,.012) 2px 4px); }
+  html:not([data-theme="light"]) .f,
+  html:not([data-theme="light"]) .mlbar .seg,
+  html:not([data-theme="light"]) .snapnote { color: #181510; }
+}
+html[data-theme="dark"] {
+  --paper: #181510; --paper-2: #211d16; --ink: #e9e2d2; --ink-soft: #a39a86;
+  --rule: #423c2f; --green: #4aa377; --red: #d05548; --amber: #c79a3d;
+}
+html[data-theme="dark"] body { background-image:
+  repeating-linear-gradient(0deg, transparent 0 2px, rgba(233,226,210,.012) 2px 4px); }
+html[data-theme="dark"] .f,
+html[data-theme="dark"] .mlbar .seg,
+html[data-theme="dark"] .snapnote { color: #181510; }
+
 
 /* language switcher + Farsi (RTL) */
 .masthead { position: relative; }
@@ -1250,6 +1551,7 @@ html[dir="rtl"] h1 { font-weight: 800; letter-spacing: 0; }
 html[dir="rtl"] h2, html[dir="rtl"] h3 { font-weight: 700; letter-spacing: 0; }
 html[dir="rtl"] .fineprint { border-left: 0; border-right: 3px solid var(--rule);
   padding-left: 0; padding-right: .9rem; }
+html[dir="rtl"] figure svg { direction: ltr; }
 h3 { font-family: "Fraunces", serif; font-size: 1.02rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
 .sim .fineprint { margin-left: auto; margin-right: auto; }
 """

@@ -1,4 +1,4 @@
-/* WC26 Form Book — editorial racing-form aesthetic */
+/* WC26 Form Book - editorial racing-form aesthetic */
 :root {
   --paper: #f6f1e6;
   --paper-2: #efe8d8;
@@ -189,10 +189,49 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
 figure { margin: 1.3rem auto; text-align: center; }
-figure img { width: 100%; max-width: 660px; height: auto; display: block;
+figure img, figure svg { width: 100%; max-width: 660px; height: auto; display: block;
   margin: 0 auto; border: 1px solid var(--rule); }
 figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
   max-width: 600px; text-align: center; }
+
+/* today strip, verdicts, match grids, key players */
+.todaybox { border: 3px double var(--ink); padding: .2rem 1rem .8rem; margin: 1.2rem 0; }
+.todaybox h2 { border-bottom: 1px solid var(--rule); font-size: 1rem;
+  text-transform: uppercase; letter-spacing: .15em; font-family: "IBM Plex Mono", monospace; }
+.verdict { max-width: 640px; margin: .8rem auto; padding: .6rem .9rem; font-size: .85rem;
+  border: 2px solid var(--green); }
+.verdict.miss { border-color: var(--red); }
+.matchgrid svg { max-width: 400px; }
+.stats.odds dd { color: var(--green); }
+
+/* dark mode: paper-on-ink - follows the OS unless the button overrides */
+.themebtn {
+  position: absolute; top: 14px; left: 18px; cursor: pointer;
+  background: none; border: 1px solid var(--ink); border-radius: 999px;
+  color: var(--ink); font-size: .95rem; width: 1.9em; height: 1.9em; line-height: 1;
+}
+.themebtn:hover { background: var(--ink); color: var(--paper); }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --paper: #181510; --paper-2: #211d16; --ink: #e9e2d2; --ink-soft: #a39a86;
+    --rule: #423c2f; --green: #4aa377; --red: #d05548; --amber: #c79a3d;
+  }
+  html:not([data-theme="light"]) body { background-image:
+    repeating-linear-gradient(0deg, transparent 0 2px, rgba(233,226,210,.012) 2px 4px); }
+  html:not([data-theme="light"]) .f,
+  html:not([data-theme="light"]) .mlbar .seg,
+  html:not([data-theme="light"]) .snapnote { color: #181510; }
+}
+html[data-theme="dark"] {
+  --paper: #181510; --paper-2: #211d16; --ink: #e9e2d2; --ink-soft: #a39a86;
+  --rule: #423c2f; --green: #4aa377; --red: #d05548; --amber: #c79a3d;
+}
+html[data-theme="dark"] body { background-image:
+  repeating-linear-gradient(0deg, transparent 0 2px, rgba(233,226,210,.012) 2px 4px); }
+html[data-theme="dark"] .f,
+html[data-theme="dark"] .mlbar .seg,
+html[data-theme="dark"] .snapnote { color: #181510; }
+
 
 /* language switcher + Farsi (RTL) */
 .masthead { position: relative; }
@@ -205,5 +244,6 @@ html[dir="rtl"] h1 { font-weight: 800; letter-spacing: 0; }
 html[dir="rtl"] h2, html[dir="rtl"] h3 { font-weight: 700; letter-spacing: 0; }
 html[dir="rtl"] .fineprint { border-left: 0; border-right: 3px solid var(--rule);
   padding-left: 0; padding-right: .9rem; }
+html[dir="rtl"] figure svg { direction: ltr; }
 h3 { font-family: "Fraunces", serif; font-size: 1.02rem; font-weight: 600; margin: 1.4rem 0 .3rem; }
 .sim .fineprint { margin-left: auto; margin-right: auto; }
