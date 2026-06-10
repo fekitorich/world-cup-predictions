@@ -185,6 +185,10 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .78rem; padding: .5em 1em;
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
+figure { margin: 1.3rem 0; }
+figure img { width: 100%; max-width: 660px; height: auto; display: block;
+  border: 1px solid var(--rule); }
+figcaption { font-size: .72rem; color: var(--ink-soft); margin-top: .35rem; max-width: 660px; }
 
 /* language switcher + Farsi (RTL) */
 .masthead { position: relative; }

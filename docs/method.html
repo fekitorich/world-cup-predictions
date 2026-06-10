@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606100524">
+<link rel="stylesheet" href="style.css?v=202606100534">
 </head>
 <body>
 <header class="masthead">
@@ -42,6 +42,10 @@ independent Poissons admit. Hosts get a fitted home-crowd boost (~+30% scoring) 
 in their own country. From two expected-goals numbers the model computes the <em>entire</em>
 scoreline probability grid — every market on the match cards is an exact sum over it,
 no sampling.</p>
+<figure><img src="img/grid.svg" alt="Scoreline probability grid for Mexico v South Africa">
+<figcaption>The actual fitted grid for the opening match (probabilities in %).
+Moneyline = the green vs red triangles; over 2.5 = everything below the third
+anti-diagonal; BTTS = everything outside row 0 and column 0.</figcaption></figure>
 <p class="fineprint">Hyperparameters were not hand-picked: they were chosen by cross-validation
 on four rolling 12-month windows, 4,228 held-out matches (4 rolling windows 2022-2026, 4228 matches).
 Validation log-loss <b>0.89127</b> against a 1.046 always-guess-the-base-rates
@@ -88,12 +92,16 @@ isn't a prediction.</p>
 
 <h3>Why Poisson?</h3>
 <p>Goals are rare events: ~2.7 per 90 minutes, arriving in any minute with small, roughly
-independent probability. Counting processes like that converge to the <b>Poisson
-distribution</b> — one number, the rate λ ("expected goals"), determines the probability of
+independent probability. Counting processes like that converge to the
+<a href="https://en.wikipedia.org/wiki/Poisson_distribution"><b>Poisson
+distribution</b></a> — one number, the rate λ ("expected goals"), determines the probability of
 0, 1, 2… goals: P(k) = λᵏe^(−λ)/k!. So the whole model reduces to estimating two rates per
 match. The rates come from a <b>log-linear model</b>: log λ<sub>home</sub> = μ + attack
 <sub>home</sub> + defence<sub>away</sub> (+ home advantage) — additive on the log scale,
 multiplicative on goals, which is why a strong attack against a leaky defence compounds.</p>
+<figure><img src="img/poisson.svg" alt="Observed goals per team per match vs the Poisson distribution">
+<figcaption>Why the assumption holds: goals per team per match across the 8,081 training
+internationals (bars) against the Poisson curve at the same mean (dots).</figcaption></figure>
 
 <h3>The Dixon-Coles correction</h3>
 <p>Two independent Poissons slightly mispredict reality in one corner: real football produces
@@ -103,35 +111,49 @@ correlation parameter ρ — ours is −0.05, fitted, modest. This 30-year-old m
 still the backbone of professional odds compilation.</p>
 
 <h3>Fitting: weighted maximum likelihood</h3>
-<p><b>Maximum likelihood</b> asks: which ratings make the observed 8,081 results least
+<p><a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation"><b>Maximum
+likelihood</b></a> asks: which ratings make the observed 8,081 results least
 surprising? Each match enters the likelihood with a weight: exponential <b>time decay</b>
 (a result loses half its influence every 1,000 days — recency matters, but slowly for
 national teams) and ×0.8 for friendlies. <b>Shrinkage</b> adds a few phantom "average"
 matches to every team, pulling thin-data teams (Curaçao has far fewer internationals than
-Brazil) toward the middle — the bias-variance trade: a slightly biased estimate beats a
-wildly noisy one.</p>
+Brazil) toward the middle — the
+<a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">bias-variance
+trade</a>: a slightly biased estimate beats a wildly noisy one.</p>
+<figure><img src="img/decay.svg" alt="Exponential time-decay weighting curve">
+<figcaption>How much a result counts in the fit, by age — the tuned 1,000-day half-life
+means a 2023 thrashing still whispers, but recent form speaks.</figcaption></figure>
 
 <h3>Honest validation: cross-validation and scoring rules</h3>
-<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>: fit on
-matches up to a cutoff, predict the next 12 months, repeat over four rolling windows (4,228
-held-out matches). Quality is measured with <b>proper scoring rules</b> — functions a
-forecaster can only optimise by reporting its true beliefs: <b>log-loss</b> (−log of the
-probability given to what happened; brutal on confident errors) and the <b>Brier score</b>
+<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>
+(<a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a>):
+fit on matches up to a cutoff, predict the next 12 months, repeat over four rolling windows
+(4,228 held-out matches). Quality is measured with
+<a href="https://en.wikipedia.org/wiki/Scoring_rule"><b>proper scoring rules</b></a> —
+functions a forecaster can only optimise by reporting its true beliefs: <b>log-loss</b>
+(−log of the probability given to what happened; brutal on confident errors) and the
+<a href="https://en.wikipedia.org/wiki/Brier_score"><b>Brier score</b></a>
 (mean squared error of probabilities). Ours: log-loss 0.891 vs 1.046 for always guessing
 base rates. Accuracy percentages are <em>not</em> proper scores — a forecaster can game them
 by always picking favourites — which is why the scorecard leads with Brier and log-loss.</p>
+<figure><img src="img/calibration.svg" alt="Calibration curve on held-out matches">
+<figcaption>Calibration on the held-out year: each dot is a probability bucket; on the
+dashed diagonal, claimed confidence equals observed reality.</figcaption></figure>
 
 <h3>Monte Carlo and the law of large numbers</h3>
 <p>The tournament has no closed-form answer — group tiebreakers, third-place allocation and
-bracket paths interact too messily. <b>Monte Carlo</b> sidesteps the math: simulate the whole
-tournament 100,000 times and count. The <b>law of large numbers</b> guarantees the counts
-converge to the true model probabilities; at N=100,000 the standard error of a championship
+bracket paths interact too messily. <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><b>Monte Carlo</b></a>
+sidesteps the math: simulate the whole tournament 100,000 times and count. The
+<a href="https://en.wikipedia.org/wiki/Law_of_large_numbers"><b>law of large
+numbers</b></a> guarantees the counts converge to the true model probabilities; at N=100,000 the standard error of a championship
 estimate is √(p(1−p)/N) ≈ ±0.12pp. We verified it empirically: two independent runs agreed on
 every favourite within 0.2pp.</p>
 
 <h3>The bootstrap: knowing what we don't know</h3>
 <p>One fitted model pretends its ratings are exact. They aren't — they're estimates from
-finite data. The <b>bootstrap</b> measures that: re-weight the dataset at random
+finite data. The
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)"><b>bootstrap</b></a>
+measures that: re-weight the dataset at random
 (each match's weight multiplied by an exponential draw), refit, repeat 200 times. The spread
 of those 200 models <em>is</em> the parameter uncertainty, and every simulated tournament
 draws one of them. Effect: favourites' odds shrink toward the field — overconfidence

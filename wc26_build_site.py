@@ -675,6 +675,10 @@ independent Poissons admit. Hosts get a fitted home-crowd boost (~+30% scoring) 
 in their own country. From two expected-goals numbers the model computes the <em>entire</em>
 scoreline probability grid — every market on the match cards is an exact sum over it,
 no sampling.</p>
+<figure><img src="img/grid.svg" alt="Scoreline probability grid for Mexico v South Africa">
+<figcaption>The actual fitted grid for the opening match (probabilities in %).
+Moneyline = the green vs red triangles; over 2.5 = everything below the third
+anti-diagonal; BTTS = everything outside row 0 and column 0.</figcaption></figure>
 <p class="fineprint">Hyperparameters were not hand-picked: they were chosen by cross-validation
 on four rolling 12-month windows, 4,228 held-out matches ({prm.get('tuned_on', '')}).
 Validation log-loss <b>{prm.get('cv_logloss', '?')}</b> against a 1.046 always-guess-the-base-rates
@@ -721,12 +725,16 @@ isn't a prediction.</p>
 
 <h3>Why Poisson?</h3>
 <p>Goals are rare events: ~2.7 per 90 minutes, arriving in any minute with small, roughly
-independent probability. Counting processes like that converge to the <b>Poisson
-distribution</b> — one number, the rate λ ("expected goals"), determines the probability of
+independent probability. Counting processes like that converge to the
+<a href="https://en.wikipedia.org/wiki/Poisson_distribution"><b>Poisson
+distribution</b></a> — one number, the rate λ ("expected goals"), determines the probability of
 0, 1, 2… goals: P(k) = λᵏe^(−λ)/k!. So the whole model reduces to estimating two rates per
 match. The rates come from a <b>log-linear model</b>: log λ<sub>home</sub> = μ + attack
 <sub>home</sub> + defence<sub>away</sub> (+ home advantage) — additive on the log scale,
 multiplicative on goals, which is why a strong attack against a leaky defence compounds.</p>
+<figure><img src="img/poisson.svg" alt="Observed goals per team per match vs the Poisson distribution">
+<figcaption>Why the assumption holds: goals per team per match across the 8,081 training
+internationals (bars) against the Poisson curve at the same mean (dots).</figcaption></figure>
 
 <h3>The Dixon-Coles correction</h3>
 <p>Two independent Poissons slightly mispredict reality in one corner: real football produces
@@ -736,35 +744,49 @@ correlation parameter ρ — ours is −0.05, fitted, modest. This 30-year-old m
 still the backbone of professional odds compilation.</p>
 
 <h3>Fitting: weighted maximum likelihood</h3>
-<p><b>Maximum likelihood</b> asks: which ratings make the observed 8,081 results least
+<p><a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation"><b>Maximum
+likelihood</b></a> asks: which ratings make the observed 8,081 results least
 surprising? Each match enters the likelihood with a weight: exponential <b>time decay</b>
 (a result loses half its influence every 1,000 days — recency matters, but slowly for
 national teams) and ×0.8 for friendlies. <b>Shrinkage</b> adds a few phantom "average"
 matches to every team, pulling thin-data teams (Curaçao has far fewer internationals than
-Brazil) toward the middle — the bias-variance trade: a slightly biased estimate beats a
-wildly noisy one.</p>
+Brazil) toward the middle — the
+<a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">bias-variance
+trade</a>: a slightly biased estimate beats a wildly noisy one.</p>
+<figure><img src="img/decay.svg" alt="Exponential time-decay weighting curve">
+<figcaption>How much a result counts in the fit, by age — the tuned 1,000-day half-life
+means a 2023 thrashing still whispers, but recent form speaks.</figcaption></figure>
 
 <h3>Honest validation: cross-validation and scoring rules</h3>
-<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>: fit on
-matches up to a cutoff, predict the next 12 months, repeat over four rolling windows (4,228
-held-out matches). Quality is measured with <b>proper scoring rules</b> — functions a
-forecaster can only optimise by reporting its true beliefs: <b>log-loss</b> (−log of the
-probability given to what happened; brutal on confident errors) and the <b>Brier score</b>
+<p>A model graded on data it trained on flatters itself. We grade <b>out-of-sample</b>
+(<a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">cross-validation</a>):
+fit on matches up to a cutoff, predict the next 12 months, repeat over four rolling windows
+(4,228 held-out matches). Quality is measured with
+<a href="https://en.wikipedia.org/wiki/Scoring_rule"><b>proper scoring rules</b></a> —
+functions a forecaster can only optimise by reporting its true beliefs: <b>log-loss</b>
+(−log of the probability given to what happened; brutal on confident errors) and the
+<a href="https://en.wikipedia.org/wiki/Brier_score"><b>Brier score</b></a>
 (mean squared error of probabilities). Ours: log-loss 0.891 vs 1.046 for always guessing
 base rates. Accuracy percentages are <em>not</em> proper scores — a forecaster can game them
 by always picking favourites — which is why the scorecard leads with Brier and log-loss.</p>
+<figure><img src="img/calibration.svg" alt="Calibration curve on held-out matches">
+<figcaption>Calibration on the held-out year: each dot is a probability bucket; on the
+dashed diagonal, claimed confidence equals observed reality.</figcaption></figure>
 
 <h3>Monte Carlo and the law of large numbers</h3>
 <p>The tournament has no closed-form answer — group tiebreakers, third-place allocation and
-bracket paths interact too messily. <b>Monte Carlo</b> sidesteps the math: simulate the whole
-tournament 100,000 times and count. The <b>law of large numbers</b> guarantees the counts
-converge to the true model probabilities; at N=100,000 the standard error of a championship
+bracket paths interact too messily. <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method"><b>Monte Carlo</b></a>
+sidesteps the math: simulate the whole tournament 100,000 times and count. The
+<a href="https://en.wikipedia.org/wiki/Law_of_large_numbers"><b>law of large
+numbers</b></a> guarantees the counts converge to the true model probabilities; at N=100,000 the standard error of a championship
 estimate is √(p(1−p)/N) ≈ ±0.12pp. We verified it empirically: two independent runs agreed on
 every favourite within 0.2pp.</p>
 
 <h3>The bootstrap: knowing what we don't know</h3>
 <p>One fitted model pretends its ratings are exact. They aren't — they're estimates from
-finite data. The <b>bootstrap</b> measures that: re-weight the dataset at random
+finite data. The
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)"><b>bootstrap</b></a>
+measures that: re-weight the dataset at random
 (each match's weight multiplied by an exponential draw), refit, repeat 200 times. The spread
 of those 200 models <em>is</em> the parameter uncertainty, and every simulated tournament
 draws one of them. Effect: favourites' odds shrink toward the field — overconfidence
@@ -820,6 +842,9 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <p>از روی دو مقدار «گل انتظاری»، مدل شبکهٔ کامل احتمال تمام نتایج ممکن را می‌سازد. تمام
 بازارهای هر مسابقه مستقیماً از همین شبکه محاسبه می‌شوند و در این مرحله هیچ شبیه‌سازی‌ای
 انجام نمی‌شود.</p>
+<figure><img src="img/grid.svg" alt="شبکهٔ احتمال نتایج مکزیک و آفریقای جنوبی">
+<figcaption>شبکهٔ واقعی برازش‌شده برای بازی افتتاحیه (احتمال‌ها به درصد). برد مکزیک =
+خانه‌های سبز؛ تساوی = قطر کهربایی؛ برد آفریقای جنوبی = خانه‌های قرمز.</figcaption></figure>
 <p class="fineprint">ابرپارامترها به‌صورت دستی انتخاب نشده‌اند. آن‌ها با اعتبارسنجی متقابل
 روی چهار پنجرهٔ غلتان ۱۲ ماهه و ۴٬۲۲۸ بازی خارج از نمونه انتخاب شده‌اند. لگ‌لاس
 اعتبارسنجی ۰٫۸۹۱۲۷ بود، در حالی که حدسِ همیشگی بر اساس نرخ پایه به ۱٫۰۴۶ می‌رسید
@@ -854,11 +879,15 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <h3>چرا پواسون؟</h3>
 <p>گل یک رخداد نسبتاً کمیاب است: به‌طور متوسط حدود ۲٫۷ گل در هر ۹۰ دقیقه و در هر دقیقه با
 احتمالی کوچک و تقریباً مستقل.</p>
-<p>شمارش چنین رخدادهایی به توزیع پواسون منجر می‌شود. در این توزیع، یک عدد یعنی نرخ λ
-(«گل انتظاری») برای تعیین کامل احتمال ۰، ۱، ۲ و تعداد بیشتری گل کافی است. در نتیجه کل
-مسئله به تخمین دو نرخ برای هر مسابقه تقلیل پیدا می‌کند؛ نرخ‌هایی که از یک مدل لگ-خطی
-به دست می‌آیند:</p>
+<p>شمارش چنین رخدادهایی به
+<a href="https://fa.wikipedia.org/wiki/توزیع_پواسون">توزیع پواسون</a> منجر می‌شود. در این
+توزیع، یک عدد یعنی نرخ λ («گل انتظاری») برای تعیین کامل احتمال ۰، ۱، ۲ و تعداد بیشتری گل
+کافی است. در نتیجه کل مسئله به تخمین دو نرخ برای هر مسابقه تقلیل پیدا می‌کند؛ نرخ‌هایی
+که از یک مدل لگ-خطی به دست می‌آیند:</p>
 <p>لگاریتم نرخ = پایه + قدرت حملهٔ تیم + ضعف دفاع حریف (+ مزیت میزبانی)</p>
+<figure><img src="img/poisson.svg" alt="مقایسهٔ گل‌های واقعی با توزیع پواسون">
+<figcaption>چرا این فرض درست است: توزیع گلِ هر تیم در هر بازی در ۸٬۰۸۱ مسابقهٔ آموزشی
+(ستون‌ها) در برابر منحنی پواسون با همان میانگین (نقطه‌ها).</figcaption></figure>
 
 <h3>تصحیح دیکسون–کولز</h3>
 <p>دو پواسون مستقل در یک بخش مهم از واقعیت دچار خطا می‌شوند. فوتبال واقعی بیشتر از چیزی که
@@ -869,17 +898,23 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 اصلی محاسبهٔ ضرایب حرفه‌ای فوتبال است.</p>
 
 <h3>برازش: درست‌نمایی بیشینهٔ وزن‌دار</h3>
-<p>درست‌نمایی بیشینه به این سؤال پاسخ می‌دهد: چه مجموعه‌ای از پارامترها نتایج مشاهده‌شده
-را کمترین میزان غافلگیرکننده می‌کند؟</p>
+<p><a href="https://fa.wikipedia.org/wiki/برآورد_درست‌نمایی_بیشینه">درست‌نمایی بیشینه</a>
+به این سؤال پاسخ می‌دهد: چه مجموعه‌ای از پارامترها نتایج مشاهده‌شده را کمترین میزان
+غافلگیرکننده می‌کند؟</p>
 <p>هر مسابقه با وزن خاص خود وارد مدل می‌شود: افت زمانی نمایی (هر نتیجه پس از ۱٬۰۰۰ روز نیمی
 از اثر خود را از دست می‌دهد) و ضریب ×۰٫۸ برای مسابقات دوستانه.</p>
+<figure><img src="img/decay.svg" alt="منحنی افت زمانی وزن نتایج">
+<figcaption>سهم هر نتیجه در برازش بر حسب قدمت آن — با نیمه‌عمر ۱٬۰۰۰ روزه، نتایج قدیمی
+زمزمه می‌کنند و فرم اخیر بلند حرف می‌زند.</figcaption></figure>
 <p>انقباض (Shrinkage) نیز برای هر تیم چند مسابقهٔ خیالیِ «متوسط» اضافه می‌کند تا تیم‌هایی
 که دادهٔ کمی دارند بیش از حد از میانگین فاصله نگیرند. این همان مصالحهٔ کلاسیک بین اریب و
 واریانس است: یک برآورد کمی اریب معمولاً از یک برآورد پرنوسان بهتر عمل می‌کند.</p>
 
 <h3>اعتبارسنجی صادقانه و قواعد نمره‌دهی</h3>
 <p>مدلی که روی داده‌های آموزشی خودش ارزیابی شود، در واقع دارد خودش را فریب می‌دهد.</p>
-<p>به همین دلیل ارزیابی خارج از نمونه انجام می‌شود: تا یک تاریخ مشخص مدل برازش می‌شود،
+<p>به همین دلیل ارزیابی خارج از نمونه
+(<a href="https://fa.wikipedia.org/wiki/اعتبارسنجی_متقابل">اعتبارسنجی متقابل</a>)
+انجام می‌شود: تا یک تاریخ مشخص مدل برازش می‌شود،
 ۱۲ ماه بعد پیش‌بینی می‌کند و این فرایند روی چهار پنجره تکرار می‌شود.</p>
 <p>کیفیت پیش‌بینی‌ها با قواعد نمره‌دهی سَره سنجیده می‌شود؛ یعنی معیارهایی که فقط در صورت
 بیان صادقانهٔ باور واقعی بهینه می‌شوند. لگ‌لاس (منفی لگاریتم احتمالی که به رخداد واقعی
@@ -887,13 +922,17 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 میانگین مربع خطای احتمال‌ها را اندازه می‌گیرد.</p>
 <p>درصد «پیش‌بینی درست» یک معیار سَره نیست، چون با انتخاب همیشگی فاوریت می‌توان آن را
 دستکاری کرد. به همین دلیل کارنامهٔ مدل با برایر و لگ‌لاس شروع می‌شود.</p>
+<figure><img src="img/calibration.svg" alt="منحنی کالیبراسیون روی بازی‌های خارج از نمونه">
+<figcaption>کالیبراسیون روی سالِ خارج از نمونه: هر نقطه یک دستهٔ احتمال است؛ روی قطرِ
+خط‌چین، اطمینانِ ادعاشده با واقعیتِ مشاهده‌شده برابر است.</figcaption></figure>
 
 <h3>مونت‌کارلو و قانون اعداد بزرگ</h3>
 <p>برای یک تورنمنت راه‌حل بسته و فرمولی وجود ندارد. قوانین تساوی گروه‌ها، جایگذاری تیم‌های
 سوم و مسیر براکت بیش از حد پیچیده و درهم‌تنیده‌اند.</p>
-<p>روش مونت‌کارلو این مشکل را دور می‌زند: کل تورنمنت را ۱۰۰٬۰۰۰ بار شبیه‌سازی کن و نتایج
-را بشمار.</p>
-<p>قانون اعداد بزرگ تضمین می‌کند که این شمارش‌ها به احتمال واقعی مدل همگرا شوند. خطای
+<p><a href="https://fa.wikipedia.org/wiki/روش_مونت-کارلو">روش مونت‌کارلو</a>
+این مشکل را دور می‌زند: کل تورنمنت را ۱۰۰٬۰۰۰ بار شبیه‌سازی کن و نتایج را بشمار.</p>
+<p><a href="https://fa.wikipedia.org/wiki/قانون_اعداد_بزرگ">قانون اعداد بزرگ</a>
+تضمین می‌کند که این شمارش‌ها به احتمال واقعی مدل همگرا شوند. خطای
 استاندارد برآورد شانس قهرمانی در این مقیاس حدود ±۰٫۱۲ واحد درصد است و در عمل نیز تأیید
 شده است: دو اجرای مستقل برای همهٔ مدعیان کمتر از ۰٫۲ واحد درصد اختلاف داشتند.</p>
 
@@ -1175,6 +1214,10 @@ span.form[data-tip]:hover::after { left: auto; right: 0; }
   font-size: .78rem; padding: .5em 1em;
 }
 .snapnote a { color: var(--paper); font-weight: 600; text-decoration: underline; }
+figure { margin: 1.3rem 0; }
+figure img { width: 100%; max-width: 660px; height: auto; display: block;
+  border: 1px solid var(--rule); }
+figcaption { font-size: .72rem; color: var(--ink-soft); margin-top: .35rem; max-width: 660px; }
 
 /* language switcher + Farsi (RTL) */
 .masthead { position: relative; }
@@ -1199,6 +1242,10 @@ if OUT.exists():
         shutil.rmtree(item) if item.is_dir() else item.unlink()
 (OUT / "teams").mkdir(parents=True, exist_ok=True)
 (OUT / "matches").mkdir(exist_ok=True)
+if (ROOT / "charts").exists():   # method-page charts (generated by wc26_charts.py)
+    (OUT / "img").mkdir(exist_ok=True)
+    for f in (ROOT / "charts").glob("*.svg"):
+        shutil.copy(f, OUT / "img" / f.name)
 (OUT / "style.css").write_text(CSS)
 build_index()
 build_matches_list()
