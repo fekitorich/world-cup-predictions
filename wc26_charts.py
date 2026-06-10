@@ -13,13 +13,13 @@ from collections import Counter
 from wc26_simulate import (ROOT, TODAY, SPLIT, params, load_matches, fit,
                            lambdas, score_grid, one_x_two, test_set)
 
-INK = "#211d16"
-PAPER = "#f6f1e6"
-SOFT = "#6b6353"
-RULE = "#cfc4ab"
-GREEN = "#14633f"
-RED = "#a72a1e"
-AMBER = "#9a7b2d"
+INK = "var(--ink, #211d16)"
+PAPER = "var(--paper, #f6f1e6)"
+SOFT = "var(--ink-soft, #6b6353)"
+RULE = "var(--rule, #cfc4ab)"
+GREEN = "var(--green, #14633f)"
+RED = "var(--red, #a72a1e)"
+AMBER = "var(--amber, #9a7b2d)"
 FONT = 'font-family="ui-monospace,Menlo,monospace"'
 
 import os
@@ -126,7 +126,7 @@ def chart_grid():
     H = T + cell * (K + 1) + 30
     s = svg_open(W, H)
     s += text(L, 22, "the score grid: Mexico v South Africa", 14, INK)
-    s += text(L, 42, f"model xG {l1:.2f} — {l2:.2f}; every market is a sum "
+    s += text(L, 42, f"model xG {l1:.2f} - {l2:.2f}; every market is a sum "
                      "over these cells", 11, SOFT)
     pmax = g[1][0]
     for i in range(K + 1):          # Mexico goals (rows)
