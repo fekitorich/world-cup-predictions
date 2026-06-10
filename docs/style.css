@@ -7,7 +7,7 @@
   --rule: #cfc4ab;
   --green: #14633f;
   --red: #a72a1e;
-  --amber: #9a7b2d;
+  --amber: #856a1d;
 }
 * { box-sizing: border-box; }
 body {
@@ -193,6 +193,32 @@ figure img, figure svg { width: 100%; max-width: 660px; height: auto; display: b
   margin: 0 auto; border: 1px solid var(--rule); }
 figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
   max-width: 600px; text-align: center; }
+
+/* standings shading, live chip, micro-bars, sticky heads, a11y, print */
+tr.q1 td { background: color-mix(in srgb, var(--green) 9%, transparent); }
+tr.q3 td { background: color-mix(in srgb, var(--amber) 10%, transparent); }
+.livechip {
+  color: var(--paper); background: var(--red); font-size: .68rem;
+  padding: .1em .5em; border-radius: 2px; letter-spacing: .08em;
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse { 50% { opacity: .55; } }
+.futures td.bar { background: linear-gradient(90deg,
+  color-mix(in srgb, var(--green) 16%, transparent) var(--p), transparent var(--p)); }
+@media (min-width: 701px) {
+  thead th { position: sticky; top: 0; background: var(--paper); z-index: 5; }
+}
+.skip { position: absolute; left: -999px; top: 6px; }
+.skip:focus { left: 8px; background: var(--ink); color: var(--paper); padding: .4em .8em; z-index: 50; }
+a.gchip { color: var(--ink); }
+@media print {
+  .masthead nav, .themebtn, .langsw, footer, .snapnote, .skip { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11px; }
+  .mlbar .seg, .f { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  main { max-width: none; padding: 0; }
+  h1 { font-size: 1.6rem; }
+  section { break-inside: avoid; }
+}
 
 /* today strip, verdicts, match grids, key players */
 .todaybox { border: 3px double var(--ink); padding: .2rem 1rem .8rem; margin: 1.2rem 0; }
