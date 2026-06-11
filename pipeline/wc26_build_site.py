@@ -676,17 +676,28 @@ def sim_section(m):
 <span class="seg away" style="flex:{ml['away']:.4f}"><b>{escape(m['away'])}</b> {pct(ml['away'])}</span>
 </div>"""
     t = sim["totals"]
-    mkt = PRICES.get(str(m["match_id"]), {}).get("moneyline", {})
+    rec = PRICES.get(str(m["match_id"]), {})
+    mkt = rec.get("moneyline", {})
+    mt = rec.get("totals", {})         # Polymarket "-more-markets" book
+    mb = rec.get("btts")
+    ms = rec.get("spread", {})
+
+    def flip(p):   # market price of the No/Under side of a binary
+        return None if p is None else 1 - p
     rows = [
         (f"{m['home']} to win", ml["home"], mkt.get("home")),
         ("Draw", ml["draw"], mkt.get("draw")),
         (f"{m['away']} to win", ml["away"], mkt.get("away")),
-        ("Over 1.5 goals", t["over_1.5"], None), ("Under 1.5 goals", 1 - t["over_1.5"], None),
-        ("Over 2.5 goals", t["over_2.5"], None), ("Under 2.5 goals", 1 - t["over_2.5"], None),
-        ("Over 3.5 goals", t["over_3.5"], None), ("Under 3.5 goals", 1 - t["over_3.5"], None),
-        ("Both teams score - Yes", sim["btts"], None), ("Both teams score - No", 1 - sim["btts"], None),
-        (f"{m['home']} −1.5 (win by 2+)", sim["spread"]["home_-1.5"], None),
-        (f"{m['away']} −1.5 (win by 2+)", sim["spread"]["away_-1.5"], None),
+        ("Over 1.5 goals", t["over_1.5"], mt.get("over_1.5")),
+        ("Under 1.5 goals", 1 - t["over_1.5"], flip(mt.get("over_1.5"))),
+        ("Over 2.5 goals", t["over_2.5"], mt.get("over_2.5")),
+        ("Under 2.5 goals", 1 - t["over_2.5"], flip(mt.get("over_2.5"))),
+        ("Over 3.5 goals", t["over_3.5"], mt.get("over_3.5")),
+        ("Under 3.5 goals", 1 - t["over_3.5"], flip(mt.get("over_3.5"))),
+        ("Both teams score - Yes", sim["btts"], mb),
+        ("Both teams score - No", 1 - sim["btts"], flip(mb)),
+        (f"{m['home']} −1.5 (win by 2+)", sim["spread"]["home_-1.5"], ms.get("home_-1.5")),
+        (f"{m['away']} −1.5 (win by 2+)", sim["spread"]["away_-1.5"], ms.get("away_-1.5")),
     ]
     market_rows = []
     for k, v, price in rows:

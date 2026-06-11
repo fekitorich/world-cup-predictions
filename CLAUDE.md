@@ -50,7 +50,8 @@ python3 -m http.server 8742 --directory docs  # browse
   + `exact_scores`: the 17-cell book 0-0..3-3 + other, matching Polymarket's shape)
 - `wc26_tournament.json` — per-team futures probabilities (win group → champion)
 - `wc26_market_prices.json` — Polymarket snapshots: moneylines + exact-score books
-  (re-fetch near kickoff; late-listed fixtures get picked up on re-run)
+  + totals/BTTS/spread (from the per-match `-more-markets` sibling event;
+  re-fetch near kickoff; late-listed fixtures get picked up on re-run)
 - `wc26_squad_values.json` — Transfermarkt squad values (refresh occasionally;
   pipeline/wc26_value_test.py revalidates beta)
 - `wc26_predictions.json` — LOCKED bracket (see Conventions)
@@ -62,9 +63,12 @@ python3 -m http.server 8742 --directory docs  # browse
   review `betting/state/plan.json` → `place_bets.py` (dry-run default,
   `--live` to execute, `--limit N` for partial batches). Uses the
   py-clob-client-v2 SDK (Polymarket migrated exchanges 2026-04-28).
-- Categories are gated in config `include`; `exact_score` ships OFF in the
-  committed config (a test enforces it) — enable only via config.local.json.
-  Started matches are never scanned (pre-match model vs in-play prices).
+- Categories are gated in config `include`; `exact_score`, `totals`, `btts`
+  and `spread` ship OFF in the committed config (a test enforces it) —
+  enable only via config.local.json. Started matches are never scanned
+  (pre-match model vs in-play prices), and illiquid/placeholder books are
+  rejected (`min_liquidity_usdc` / `max_book_spread` — untraded lines sit
+  at ~50/50 and fake a fat edge).
 - ALL personal betting data is gitignored and must stay that way:
   `betting/.env` (wallet key + API creds), `betting/config.local.json`
   (real caps), `betting/state/` (plans + ledger). The committed

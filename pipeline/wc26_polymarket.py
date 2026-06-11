@@ -82,6 +82,74 @@ def parse_score_question(q, home, away):
     return None
 
 
+OU_RE = re.compile(r":\s*O/U (\d+\.5)\??$")        # full-match totals only:
+SPREAD_RE = re.compile(r"^Spread: (.+?) \((-\d+\.5)\)\??$")   # team/half lines
+                                                   # have words between : and O/U
+
+
+def classify_more_market(q, home, away):
+    """'United States vs. Paraguay: O/U 2.5' -> ('totals', 'over_2.5');
+    '...: Both Teams to Score' -> ('btts', None);
+    'Spread: United States (-1.5)' -> ('spread', 'home_-1.5');
+    team totals and half markets -> None (no model for them)."""
+    m = OU_RE.search(q)
+    if m:
+        return "totals", f"over_{m.group(1)}"
+    if q.rstrip("?").endswith("Both Teams to Score"):
+        return "btts", None
+    m = SPREAD_RE.match(q)
+    if m:
+        name = m.group(1).lower()
+        side = ("home" if any(n in name for n in names_for(home)) else
+                "away" if any(n in name for n in names_for(away)) else None)
+        if side:
+            return "spread", f"{side}_{m.group(2)}"
+    return None
+
+
+def parse_more_markets(ev, home, away):
+    """Full-match totals, BTTS and spreads from the -more-markets event."""
+    totals, spread, btts = {}, {}, None
+    for mk in ev.get("markets", []):
+        cls = classify_more_market(mk.get("question", ""), home, away)
+        if not cls:
+            continue
+        try:
+            yes = float(json.loads(mk["outcomePrices"])[0])
+            first = json.loads(mk.get("outcomes") or '["Yes"]')[0]
+        except (KeyError, ValueError, IndexError):
+            continue
+        cat, key = cls
+        if cat == "totals" and first == "Over":
+            totals[key] = yes
+        elif cat == "btts" and first == "Yes":
+            btts = yes
+        elif cat == "spread":
+            spread[key] = yes
+    out = {}
+    if totals:
+        out["totals"] = totals
+    if btts is not None:
+        out["btts"] = btts
+    if spread:
+        out["spread"] = spread
+    return out
+
+
+def fetch_more_markets(base_slug, home, away):
+    """Totals/BTTS/spread prices from the {slug}-more-markets sibling."""
+    slug = f"{base_slug}-more-markets"
+    try:
+        evs = get("/events", slug=slug)
+    except Exception as e:
+        print(f"  more-markets fetch failed {slug}: {e}", flush=True)
+        return None, None
+    if not evs:
+        return None, None
+    parsed = parse_more_markets(evs[0], home, away)
+    return (slug, parsed) if parsed else (None, None)
+
+
 def fetch_exact_scores(base_slug, home, away):
     """Yes-price per scoreline cell from the {slug}-exact-score sibling."""
     slug = f"{base_slug}-exact-score"
@@ -180,6 +248,10 @@ def main():
                 r["exact_score_slug"] = es_slug
                 r["exact_score"] = cells
                 n_es += 1
+            mm_slug, mm = fetch_more_markets(r["slug"], m["home"], m["away"])
+            if mm:
+                r["more_markets_slug"] = mm_slug
+                r.update(mm)   # totals / btts / spread
             out[str(m["match_id"])] = r
         else:
             misses.append(f"{m['home']} v {m['away']} {m['date_utc'][:10]}")
@@ -189,8 +261,9 @@ def main():
               open(f"{DATA}/wc26_market_prices.json", "w"), indent=2)
     from wc26_simulate import save_versioned
     save_versioned(f"{DATA}/wc26_market_prices.json")
+    n_mm = sum(1 for r in out.values() if "more_markets_slug" in r)
     print(f"got prices for {len(out)}/{len(fixtures)} fixtures "
-          f"({n_es} with exact-score books)")
+          f"({n_es} with exact-score books, {n_mm} with totals/BTTS/spread)")
     if misses:
         print("missing:", "; ".join(misses))
 

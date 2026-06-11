@@ -118,11 +118,12 @@ class TestExactScoreScanner(unittest.TestCase):
         self.assertFalse(started("2", times))
         self.assertFalse(started("3", times))   # unknown id: no guard claim
 
-    def test_exact_score_ships_disabled(self):
-        """Committed config must keep exact_score off; enabling is a local,
-        deliberate opt-in (config.local.json)."""
+    def test_new_categories_ship_disabled(self):
+        """Committed config must keep all non-moneyline match categories
+        off; enabling is a local, deliberate opt-in (config.local.json)."""
         committed = json.load(open(os.path.join(ROOT, "betting", "config.json")))
-        self.assertIs(committed["include"]["exact_score"], False)
+        for cat in ("exact_score", "totals", "btts", "spread"):
+            self.assertIs(committed["include"][cat], False, cat)
         self.assertGreaterEqual(committed["min_edge_score"],
                                 committed["min_edge_match"])
 

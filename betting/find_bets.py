@@ -7,11 +7,11 @@ free Gamma API, compares against the RAW model (never the blend — the
 blend already contains the market), sizes stakes with fractional Kelly
 under the caps in betting/config.json.
 
-Only positive-edge YES buys are planned. Golden Ball / Glove are never
-bet (no calibrated model). Exact-score scanning is gated off by default
-(include.exact_score) — the grid backtests calibrated, but cell edges are
-the model's thinnest-evidence claims. Started matches are never scanned:
-our probabilities are pre-match and in-play prices know the current score.
+Only positive-edge buys are planned (either side of a binary). Golden
+Ball / Glove are never bet (no calibrated model). Exact-score, totals,
+BTTS and spread scanning are gated off by default in config include —
+opt in deliberately. Started matches are never scanned: our probabilities
+are pre-match and in-play prices know the current score.
 Review the plan before running place_bets.py.
 """
 import json
@@ -26,7 +26,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
 sys.path.insert(0, os.path.join(ROOT, "pipeline"))
-from wc26_polymarket import ALIASES, names_for, parse_score_question  # noqa: E402
+from wc26_polymarket import (ALIASES, names_for, parse_score_question,
+                             classify_more_market)  # noqa: E402
 
 CFG = json.load(open(f"{HERE}/config.json"))
 if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
@@ -55,6 +56,15 @@ def kelly_stake(q, p, bankroll, fraction=None):
     if fraction is None:
         fraction = CFG["kelly_fraction"]
     return bankroll * fraction * f_star
+
+
+def tradeable(mk):
+    """Reject placeholder/illiquid books: an untraded line sits at ~50/50
+    with no depth, and its 'price' is fiction — a fat fake edge."""
+    liq = float(mk.get("liquidityNum") or 0)
+    spread = float(mk.get("spread") or 1)
+    return (liq >= CFG.get("min_liquidity_usdc", 1000) and
+            spread <= CFG.get("max_book_spread", 0.06))
 
 
 def kickoff_times():
@@ -90,6 +100,8 @@ def match_candidates():
             continue
         for mk in evs[0]["markets"]:
             ql = mk["question"].lower()
+            if not tradeable(mk):
+                continue
             side = ("draw" if "draw" in ql else
                     "home" if any(f"will {n} win" in ql for n in names_for(sim["home"])) else
                     "away" if any(f"will {n} win" in ql for n in names_for(sim["away"])) else None)
@@ -135,7 +147,7 @@ def exact_score_candidates():
         for mk in evs[0]["markets"]:
             cell = parse_score_question(mk.get("question", ""),
                                         sim["home"], sim["away"])
-            if not cell or cell == "other":   # "other" is a basket, not a cell
+            if not cell or cell == "other" or not tradeable(mk):
                 continue
             try:
                 price = float(json.loads(mk["outcomePrices"])[0])
@@ -151,6 +163,61 @@ def exact_score_candidates():
                     "model_p": round(q, 4), "market_p": price,
                     "edge": round(q - price, 4),
                 })
+        time.sleep(0.12)
+    return out
+
+
+def more_markets_candidates():
+    """Totals / BTTS / spread edges from the -more-markets books. Both
+    sides of each binary are checked (an underpriced Under is a buy of
+    outcome token 1)."""
+    sims = json.load(open(f"{DATA}/wc26_simulations.json"))["simulations"]
+    snap = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
+    times = kickoff_times()
+    include = CFG["include"]
+    out = []
+    for mid, rec in snap.items():
+        sim = sims.get(mid)
+        slug = rec.get("more_markets_slug")
+        if not slug or not sim or started(mid, times):
+            continue
+        try:
+            evs = gamma("/events", slug=slug)
+        except Exception as e:
+            print(f"  fetch failed {slug}: {e}")
+            continue
+        if not evs:
+            continue
+        for mk in evs[0]["markets"]:
+            cls = classify_more_market(mk.get("question", ""),
+                                       sim["home"], sim["away"])
+            if not cls or not include.get(cls[0]) or not tradeable(mk):
+                continue
+            cat, key = cls
+            model_yes = (sim["totals"].get(key) if cat == "totals" else
+                         sim["btts"] if cat == "btts" else
+                         sim["spread"].get(key))
+            if model_yes is None:   # market line the model doesn't price
+                continue
+            try:
+                prices = [float(p) for p in json.loads(mk["outcomePrices"])]
+                tokens = json.loads(mk["clobTokenIds"])
+                outcomes = json.loads(mk.get("outcomes") or '["Yes","No"]')
+            except (KeyError, ValueError, IndexError):
+                continue
+            for idx, q in ((0, model_yes), (1, 1 - model_yes)):
+                if idx >= min(len(prices), len(tokens), len(outcomes)):
+                    continue
+                if q - prices[idx] >= CFG["min_edge_match"]:
+                    out.append({
+                        "category": cat,
+                        "bet": f"{sim['home']} v {sim['away']}: "
+                               f"{mk['question'].split(': ')[-1]} "
+                               f"— {outcomes[idx]}",
+                        "question": mk["question"], "token_id": tokens[idx],
+                        "model_p": round(q, 4), "market_p": prices[idx],
+                        "edge": round(q - prices[idx], 4),
+                    })
         time.sleep(0.12)
     return out
 
@@ -201,7 +268,7 @@ def build_plan(cands, cfg):
     Returns (sized candidates, total stake)."""
     cands = sorted(cands, key=lambda c: -c["edge"])
     max_bets = cfg.get("max_bets", 12)
-    per_match = ("moneyline", "exact_score")
+    per_match = ("moneyline", "exact_score", "totals", "btts", "spread")
     awards = [c for c in cands if c["category"] not in per_match]
     mlines = [c for c in cands if c["category"] in per_match]
     cands = awards + mlines[:max(max_bets - len(awards), 0)]
@@ -232,6 +299,9 @@ def main():
     if CFG["include"].get("exact_score"):
         print("scanning exact-score books...", flush=True)
         cands += exact_score_candidates()
+    if any(CFG["include"].get(c) for c in ("totals", "btts", "spread")):
+        print("scanning totals/BTTS/spread books...", flush=True)
+        cands += more_markets_candidates()
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     cands, total = build_plan(cands, CFG)
