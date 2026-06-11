@@ -1,4 +1,17 @@
 {
-  "fetched_fixtures": [],
-  "scorers": {}
+  "fetched_fixtures": [
+    1489369
+  ],
+  "scorers": {
+    "J. Quinones": {
+      "team": "Mexico",
+      "goals": 1,
+      "assists_from": []
+    },
+    "R. Jimenez": {
+      "team": "Mexico",
+      "goals": 1,
+      "assists_from": []
+    }
+  }
 }

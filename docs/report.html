@@ -21,7 +21,7 @@ gtag('config', 'G-EG56KHB1SX');
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606112129">
+<link rel="stylesheet" href="style.css?v=202606112133">
 <script>
 (function() {
   var t = localStorage.getItem("theme");
@@ -48,18 +48,43 @@ function toggleTheme() {
 
 <main id="main">
 <h1>The report card</h1>
-<p class="standfirst">Every prediction on this site was locked before the tournament;
-this page grades them against reality after every matchday. Nothing here yet -
-the first results arrive tonight, and the first report follows the first grading run.</p>
-<p class="fineprint">What will appear: result hit rate and proper scores (Brier,
-log-loss) for the model, the market and the blend; the running trend of who is
-forecasting best; calibration buckets; the sharpest and roughest calls; and a
-matchday-by-matchday breakdown. The locked picks themselves are on the
-<a href="bracket.html">Bracket</a> page.</p>
+<p class="standfirst">Locked predictions, graded after every matchday. Re-generated
+automatically by the nightly run; previous editions live in the
+<a href="archive.html">versions archive</a>.</p>
+<dl class="stats"><div><dt>Matches graded</dt><dd>1</dd></div><div><dt>Results called</dt><dd>1 (100%)</dd></div><div><dt>Exact scores</dt><dd>0</dd></div><div><dt>Brier (blend)</dt><dd>0.1902</dd></div></dl>
+<h2>Who forecasts best so far</h2>
+<table class="ko"><thead><tr><th>Source</th>
+<th class="num" data-tip="mean squared error - guessing equally scores 0.667">Brier</th>
+<th class="num" data-tip="penalises confident errors - guessing equally scores 1.099">Log-loss</th></tr></thead>
+<tbody><tr><td>Blend</td><td class="num">0.1902</td><td class="num">0.4323</td></tr><tr><td>Model</td><td class="num">0.2167</td><td class="num">0.4702</td></tr><tr><td>Market</td><td class="num">0.1477</td><td class="num">0.3688</td></tr></tbody></table>
+<p class="fineprint">Market graded on its 1 priced
+matches. Lower is better; the gap between these rows is this whole project's thesis
+being settled in public.</p>
+<p class="fineprint">The model-vs-market trend chart draws itself here once a few matches have been graded.</p>
+<h2>Matchday by matchday</h2>
+<table class="ko"><thead><tr><th>Stage</th><th class="num">Played</th>
+<th class="num">Results called</th><th class="num">Exact scores</th>
+<th class="num">Log-loss (blend)</th></tr></thead><tbody><tr><td>Matchday 1</td><td class="num">1</td><td class="num">1/1</td><td class="num">0</td><td class="num">0.432</td></tr></tbody></table>
+<h2>Sharpest calls (model saw it, market didn't)</h2>
+<table class="ko"><thead><tr><th>Match</th><th>Outcome</th>
+<th class="num">Model gave it</th><th class="num">Market gave it</th>
+<th class="num">Edge realised</th></tr></thead>
+<tbody><tr><td>Mexico v South Africa <b class="score">2-0</b></td><td>Mexico</td><td class="num">62%</td><td class="num">69%</td><td class="num">-7pp</td></tr></tbody></table>
+<h2>Roughest calls (market saw it, model didn't)</h2>
+<table class="ko"><thead><tr><th>Match</th><th>Outcome</th>
+<th class="num">Model gave it</th><th class="num">Market gave it</th>
+<th class="num">Edge realised</th></tr></thead>
+<tbody><tr><td>Mexico v South Africa <b class="score">2-0</b></td><td>Mexico</td><td class="num">62%</td><td class="num">69%</td><td class="num">-7pp</td></tr></tbody></table>
+<h2>Calibration so far</h2>
+<table class="ko"><thead><tr><th>Claimed probability</th><th class="num">Claims</th>
+<th class="num">Average claim</th><th class="num">Actually happened</th></tr></thead>
+<tbody><tr><td>0-20%</td><td class="num">1</td><td class="num">13%</td><td class="num">0%</td></tr><tr><td>20-40%</td><td class="num">1</td><td class="num">24%</td><td class="num">0%</td></tr><tr><td>60-80%</td><td class="num">1</td><td class="num">62%</td><td class="num">100%</td></tr></tbody></table>
+<p class="fineprint">A calibrated forecaster's last two columns match. Early-tournament
+samples are small - judge after a full group stage.</p>
 </main>
 <footer>
   <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
-  <p>Model run: 2026-06-11 20:41 UTC · Polymarket snapshot: 2026-06-11 21:29 UTC · every run archived in runs/</p>
+  <p>Model run: 2026-06-11 21:33 UTC · Polymarket snapshot: 2026-06-11 21:32 UTC · every run archived in runs/</p>
   <p>Data: API-Football · FIFA rankings 2026 · <a href="method.html">how this works</a> ·
   <a href="archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·
