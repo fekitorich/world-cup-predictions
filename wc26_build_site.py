@@ -215,6 +215,13 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 <meta name="twitter:image" content="https://amirdaraee.com/world-cup-predictions/img/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23211d16'/%3E%3Cpath d='M8 4l3 2.2-1.1 3.6H6.1L5 6.2z' fill='%23f6f1e6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LLXG680BZ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){{dataLayer.push(arguments);}}
+gtag('js', new Date());
+gtag('config', 'G-4LLXG680BZ');
+</script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 {fa_font}<link rel="stylesheet" href="{pre}style.css?v={BUILD_V}">
