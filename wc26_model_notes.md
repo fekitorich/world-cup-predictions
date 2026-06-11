@@ -128,3 +128,29 @@ market value (Transfermarkt, all 211→top-100 teams, minnow default €8m).
   blindness. Locked bracket unchanged (it testifies for the old model).
 - Files: wc26_squad_values.json (data), wc26_value_test.py (falsification
   harness — rerun after value refreshes).
+
+## Exact-score grid calibration (2026-06-11, matchday 1) — a clean negative
+
+Polymarket listed per-match exact-score books (sibling events,
+`{slug}-exact-score`, 17 cells: 0-0..3-3 + other), so the score grid is now
+a bettable surface, not just bracket decoration. Audit before betting it:
+- **New harness**: `wc26_simulate.py gridtest` — 17-class log-loss +
+  per-cell observed/predicted on the holdout; `tuneboost` fits a `min2_boost`
+  multiplier on cells where both sides score 2+ (the region DC's tau
+  doesn't reach), trained on the 2022-25 windows.
+- **Holdout (1,071 matches, 2025-06→2026-06)**: 17-class log-loss 2.4247.
+  Tuned rho=-0.05 leaves its four target cells essentially perfect
+  (0-0/1-0/0-1/1-1 obs/pred 0.98-1.02). The min2 region looked 28% hot
+  (2-2 obs/pred 1.42) — **but it doesn't replicate**: training windows give
+  ratios 0.93/1.16/0.93, and the fitted boost is exactly 1.0 (likelihood
+  degrades monotonically above it). The holdout blip was a ~2σ window fluke.
+- **Conclusion**: the DC grid is already calibrated for exact scores; no
+  correction shipped (`min2_boost` stays 1.0 in params, plumbing kept in
+  score_grid/grid_np for re-checks as tournament data accrues).
+- **Betting**: `exact_scores` (17 cells) now emitted per match in
+  wc26_simulations.json; wc26_polymarket.py snapshots the books
+  (64/64 listed fixtures on day 1); find_bets.py scans them behind
+  `include.exact_score` — **ships OFF**. Cell edges are the model's
+  thinnest-evidence claims and mostly re-express the 1X2 opinion; the
+  moneyline is usually the better instrument for the same view. Started
+  matches are never scanned (pre-match model vs in-play prices).

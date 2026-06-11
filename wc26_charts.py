@@ -118,7 +118,7 @@ def chart_grid():
     m = next(v for v in sims.values()
              if v["home"] == "Mexico" and v["away"] == "South Africa")
     l1, l2 = m["xg"]["home"], m["xg"]["away"]
-    g = score_grid(l1, l2, P["rho"])
+    g = score_grid(l1, l2, P["rho"], P["min2_boost"])
     K = 6
     W = 560
     L, T = 110, 84
@@ -164,7 +164,7 @@ def chart_calibration():
             continue
         l1, l2 = lambdas(model, r["home_team"], r["away_team"],
                          r["neutral"] != "TRUE")
-        pH, pD, pA = one_x_two(score_grid(l1, l2, P["rho"]))
+        pH, pD, pA = one_x_two(score_grid(l1, l2, P["rho"], P["min2_boost"]))
         res = "H" if int(r["home_score"]) > int(r["away_score"]) else \
               "A" if int(r["away_score"]) > int(r["home_score"]) else "D"
         for k, p in (("H", pH), ("D", pD), ("A", pA)):

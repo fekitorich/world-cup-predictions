@@ -27,7 +27,7 @@ MAX_GOALS = 12
 SINCE = "2018-01-01"
 
 DEFAULTS = {"half_life": 548, "friendly_w": 0.6, "shrink": 8.0, "rho": -0.10,
-            "margin_cap": 99}
+            "margin_cap": 99, "min2_boost": 1.0}
 BLEND_W = 0.35   # weight on market prices in the blended probabilities
 
 # Squad-value prior (Transfermarkt): ratings nudged by beta * z(log value).
@@ -190,13 +190,20 @@ def poisson_row(lmbda):
     return out
 
 
-def score_grid(l1, l2, rho):
+def score_grid(l1, l2, rho, boost=1.0):
+    """DC-corrected Poisson grid. boost (min2_boost) inflates cells where
+    both sides score 2+ — the positive goal correlation the DC tau misses
+    above the low-score corner (backtest: those cells run ~28% hot)."""
     ph, pa = poisson_row(l1), poisson_row(l2)
     g = [[ph[i] * pa[j] for j in range(MAX_GOALS + 1)] for i in range(MAX_GOALS + 1)]
     g[0][0] *= 1 - l1 * l2 * rho
     g[1][0] *= 1 + l2 * rho
     g[0][1] *= 1 + l1 * rho
     g[1][1] *= 1 - rho
+    if boost != 1.0:
+        for i in range(2, MAX_GOALS + 1):
+            for j in range(2, MAX_GOALS + 1):
+                g[i][j] *= boost
     s = sum(map(sum, g))
     return [[v / s for v in row] for row in g]
 
@@ -344,6 +351,94 @@ def backtest(p):
     return lls[p["rho"]]
 
 
+SCORE_CAP = 3   # exact-score cells 0-0..3-3 (+ "other"), Polymarket's book shape
+
+
+def grid_cells(grid):
+    """Collapse a full grid to the 17-cell exact-score book: 16 cells + other."""
+    cells = {f"{i}-{j}": grid[i][j]
+             for i in range(SCORE_CAP + 1) for j in range(SCORE_CAP + 1)}
+    cells["other"] = 1.0 - sum(cells.values())
+    return cells
+
+
+def cell_of(hg, ag):
+    return f"{hg}-{ag}" if hg <= SCORE_CAP and ag <= SCORE_CAP else "other"
+
+
+def grid_backtest(p, variants=None):
+    """Exact-score calibration: 17-class log-loss + observed vs predicted
+    frequency per cell, out of sample (train < SPLIT, test >= SPLIT).
+    variants: list of (rho, boost) grids to compare."""
+    variants = variants or [(p["rho"], 1.0), (p["rho"], p["min2_boost"])]
+    model = fit(load_matches(SPLIT, p["half_life"], p["friendly_w"],
+                             p["margin_cap"]), p["shrink"])
+    test = test_set()
+    stats = {v: {"ll": 0.0, "pred": {}, "obs": {}} for v in variants}
+    n = 0
+    for r in test:
+        if r["home_team"] not in model["att"] or r["away_team"] not in model["att"]:
+            continue
+        l1, l2 = lambdas(model, r["home_team"], r["away_team"],
+                         r["neutral"] != "TRUE")
+        actual = cell_of(int(r["home_score"]), int(r["away_score"]))
+        for v in variants:
+            cells = grid_cells(score_grid(l1, l2, *v))
+            st = stats[v]
+            st["ll"] -= math.log(max(cells[actual], 1e-9))
+            for c, val in cells.items():
+                st["pred"][c] = st["pred"].get(c, 0.0) + val
+            st["obs"][actual] = st["obs"].get(actual, 0) + 1
+        n += 1
+    for v in variants:
+        st = stats[v]
+        print(f"\nrho={v[0]} boost={v[1]}: {n} matches, 17-class log-loss "
+              f"{st['ll'] / n:.4f}")
+        print(f"{'cell':>6} {'pred%':>7} {'obs%':>7} {'obs/pred':>9}")
+        for c in sorted(st["pred"], key=lambda c: -st["pred"][c]):
+            pr, ob = st["pred"][c] / n, st["obs"].get(c, 0) / n
+            print(f"{c:>6} {100 * pr:>6.2f} {100 * ob:>6.2f} "
+                  f"{ob / pr:>8.2f}")
+    return stats, n
+
+
+def tune_boost():
+    """Fit min2_boost by exact-score likelihood on the 2022-2025 windows
+    (holdout 2025-06+ untouched; validate with gridtest), update params."""
+    p = params()
+    cands = [round(1.0 + 0.05 * k, 2) for k in range(11)]   # 1.00 .. 1.50
+    obs = []   # (l1, l2, hg, ag) across training windows
+    for cut, start, end in TUNE_WINDOWS[:3]:
+        model = fit(load_matches(cut, p["half_life"], p["friendly_w"],
+                                 p["margin_cap"]), p["shrink"], iters=60)
+        for r in test_set(start, end):
+            if r["home_team"] not in model["att"] or \
+                    r["away_team"] not in model["att"]:
+                continue
+            l1, l2 = lambdas(model, r["home_team"], r["away_team"],
+                             r["neutral"] != "TRUE")
+            obs.append((l1, l2, min(int(r["home_score"]), MAX_GOALS),
+                        min(int(r["away_score"]), MAX_GOALS)))
+    lls = {}
+    for b in cands:
+        ll = 0.0
+        for l1, l2, hg, ag in obs:
+            g = score_grid(l1, l2, p["rho"], b)
+            ll -= math.log(max(g[hg][ag], 1e-9))
+        lls[b] = ll / len(obs)
+        print(f"  boost={b:.2f} exact-score ll={lls[b]:.5f}", flush=True)
+    best = min(lls, key=lls.get)
+    p["min2_boost"] = best
+    doc = json.load(open(f"{ROOT}/wc26_params.json"))
+    doc["params"]["min2_boost"] = best
+    doc["min2_boost_note"] = (f"fit on {len(obs)} matches 2022-2025, "
+                              f"exact-score ll {lls[1.0]:.5f} -> {lls[best]:.5f}")
+    doc["tuned_at"] = now_utc()
+    json.dump(doc, open(f"{ROOT}/wc26_params.json", "w"), indent=2)
+    save_versioned(f"{ROOT}/wc26_params.json")
+    print(f"TUNED min2_boost={best} -> wc26_params.json", flush=True)
+
+
 TEAM_SET = set()
 
 
@@ -378,7 +473,8 @@ def main():
         if away_field:
             l2a, l1a = lambdas(model, m["away"], m["home"], True)
             l1, l2 = l1a, l2a
-        pH, pD, pA, totals, btts, spread, scores = markets(score_grid(l1, l2, p["rho"]))
+        grid = score_grid(l1, l2, p["rho"], p["min2_boost"])
+        pH, pD, pA, totals, btts, spread, scores = markets(grid)
         mkt = MKT.get(str(m["match_id"]), {}).get("moneyline")
         blended = blend({"home": pH, "draw": pD, "away": pA}, mkt) if mkt else None
         sims[str(m["match_id"])] = {
@@ -393,6 +489,7 @@ def main():
             "btts": round(btts, 4),
             "spread": {k: round(v, 4) for k, v in spread.items()},
             "top_scores": [{"score": s, "p": round(p_, 4)} for s, p_ in scores],
+            "exact_scores": {c: round(v, 4) for c, v in grid_cells(grid).items()},
         }
     out = {
         "method": f"Dixon-Coles weighted Poisson, params {p}; blend w={BLEND_W} "
@@ -409,5 +506,9 @@ def main():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "tune":
         tune()
+    elif len(sys.argv) > 1 and sys.argv[1] == "gridtest":
+        grid_backtest(params())
+    elif len(sys.argv) > 1 and sys.argv[1] == "tuneboost":
+        tune_boost()
     else:
         main()

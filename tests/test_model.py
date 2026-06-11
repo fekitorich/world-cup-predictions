@@ -6,7 +6,7 @@ import unittest
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from wc26_simulate import (params, score_grid, one_x_two, markets, blend,
-                           load_matches, SPLIT, BLEND_W)
+                           load_matches, grid_cells, cell_of, SPLIT, BLEND_W)
 
 P = params()
 
@@ -43,6 +43,38 @@ class TestScoreGrid(unittest.TestCase):
         b = one_x_two(score_grid(0.9, 1.8, P["rho"]))
         self.assertAlmostEqual(a[0], b[2], places=9)
         self.assertAlmostEqual(a[1], b[1], places=9)
+
+
+class TestExactScores(unittest.TestCase):
+    def test_grid_cells_shape_and_sum(self):
+        cells = grid_cells(score_grid(1.5, 1.1, P["rho"]))
+        self.assertEqual(len(cells), 17)   # 0-0..3-3 + other
+        self.assertAlmostEqual(sum(cells.values()), 1.0, places=9)
+        self.assertGreater(cells["other"], 0)
+
+    def test_cell_of(self):
+        self.assertEqual(cell_of(2, 1), "2-1")
+        self.assertEqual(cell_of(3, 3), "3-3")
+        self.assertEqual(cell_of(4, 0), "other")
+        self.assertEqual(cell_of(0, 5), "other")
+
+    def test_boost_direction(self):
+        """min2_boost > 1 must raise both-score-2+ cells, sum stays 1."""
+        plain = score_grid(1.4, 1.3, P["rho"])
+        boosted = score_grid(1.4, 1.3, P["rho"], 1.3)
+        self.assertAlmostEqual(sum(map(sum, boosted)), 1.0, places=9)
+        self.assertGreater(boosted[2][2] / boosted[1][1],
+                           plain[2][2] / plain[1][1])
+        self.assertLess(boosted[1][0], plain[1][0])   # renormalisation
+
+    def test_boost_one_is_identity(self):
+        a = score_grid(1.4, 1.3, P["rho"])
+        b = score_grid(1.4, 1.3, P["rho"], 1.0)
+        self.assertEqual(a, b)
+
+    def test_default_param_present(self):
+        self.assertIn("min2_boost", P)
+        self.assertGreaterEqual(P["min2_boost"], 1.0)
 
 
 class TestBlend(unittest.TestCase):

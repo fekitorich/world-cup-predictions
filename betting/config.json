@@ -4,12 +4,14 @@
   "kelly_fraction": 0.4,
   "min_edge_match": 0.08,
   "min_edge_award": 0.03,
+  "min_edge_score": 0.08,
   "include": {
     "moneyline": true,
+    "exact_score": false,
     "golden_boot": true,
     "top_scorer_nation": true
   },
-  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them.",
+  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them. exact_score ships OFF: the grid backtests calibrated, but per-cell edges are the model's thinnest claims — opt in deliberately.",
   "max_bets": 40,
   "min_stake_usdc": 1
 }

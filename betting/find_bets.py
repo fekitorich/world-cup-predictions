@@ -8,7 +8,11 @@ blend already contains the market), sizes stakes with fractional Kelly
 under the caps in betting/config.json.
 
 Only positive-edge YES buys are planned. Golden Ball / Glove are never
-bet (no calibrated model). Review the plan before running place_bets.py.
+bet (no calibrated model). Exact-score scanning is gated off by default
+(include.exact_score) — the grid backtests calibrated, but cell edges are
+the model's thinnest-evidence claims. Started matches are never scanned:
+our probabilities are pre-match and in-play prices know the current score.
+Review the plan before running place_bets.py.
 """
 import json
 import os
@@ -16,11 +20,12 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
-from wc26_polymarket import ALIASES, names_for  # noqa: E402
+from wc26_polymarket import ALIASES, names_for, parse_score_question  # noqa: E402
 
 CFG = json.load(open(f"{HERE}/config.json"))
 if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
@@ -49,13 +54,29 @@ def kelly_stake(q, p, bankroll):
     return bankroll * CFG["kelly_fraction"] * f_star
 
 
+def kickoff_times():
+    fx = json.load(
+        open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+    try:
+        fx += json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+    except FileNotFoundError:
+        pass
+    return {str(m["match_id"]): m["date_utc"] for m in fx}
+
+
+def started(mid, times):
+    ko = times.get(mid)
+    return ko and datetime.now(timezone.utc) >= datetime.fromisoformat(ko)
+
+
 def match_candidates():
     sims = json.load(open(f"{ROOT}/wc26_simulations.json"))["simulations"]
     snap = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+    times = kickoff_times()
     out = []
     for mid, rec in snap.items():
         sim = sims.get(mid)
-        if not sim:
+        if not sim or started(mid, times):
             continue
         try:
             evs = gamma("/events", slug=rec["slug"])
@@ -82,6 +103,47 @@ def match_candidates():
                 out.append({
                     "category": "moneyline",
                     "bet": f"{sim['home']} v {sim['away']}: {label} (YES)",
+                    "question": mk["question"], "token_id": token,
+                    "model_p": round(q, 4), "market_p": price,
+                    "edge": round(q - price, 4),
+                })
+        time.sleep(0.12)
+    return out
+
+
+def exact_score_candidates():
+    sims = json.load(open(f"{ROOT}/wc26_simulations.json"))["simulations"]
+    snap = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+    times = kickoff_times()
+    out = []
+    for mid, rec in snap.items():
+        sim = sims.get(mid)
+        slug = rec.get("exact_score_slug")
+        if not slug or not sim or "exact_scores" not in sim or \
+                started(mid, times):
+            continue
+        try:
+            evs = gamma("/events", slug=slug)
+        except Exception as e:
+            print(f"  fetch failed {slug}: {e}")
+            continue
+        if not evs:
+            continue
+        for mk in evs[0]["markets"]:
+            cell = parse_score_question(mk.get("question", ""),
+                                        sim["home"], sim["away"])
+            if not cell or cell == "other":   # "other" is a basket, not a cell
+                continue
+            try:
+                price = float(json.loads(mk["outcomePrices"])[0])
+                token = json.loads(mk["clobTokenIds"])[0]   # YES token
+            except (KeyError, ValueError, IndexError):
+                continue
+            q = sim["exact_scores"].get(cell, 0.0)
+            if q - price >= CFG["min_edge_score"]:
+                out.append({
+                    "category": "exact_score",
+                    "bet": f"{sim['home']} v {sim['away']}: {cell} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
                     "edge": round(q - price, 4),
@@ -133,14 +195,18 @@ def main():
     if CFG["include"].get("moneyline"):
         print("scanning match moneylines...", flush=True)
         cands += match_candidates()
+    if CFG["include"].get("exact_score"):
+        print("scanning exact-score books...", flush=True)
+        cands += exact_score_candidates()
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     cands.sort(key=lambda c: -c["edge"])
     # category breadth: award bets that qualify always make the plan,
-    # moneyline fills the remaining slots by edge
+    # per-match bets (moneyline/exact score) fill remaining slots by edge
     max_bets = CFG.get("max_bets", 12)
-    awards = [c for c in cands if c["category"] != "moneyline"]
-    mlines = [c for c in cands if c["category"] == "moneyline"]
+    per_match = ("moneyline", "exact_score")
+    awards = [c for c in cands if c["category"] not in per_match]
+    mlines = [c for c in cands if c["category"] in per_match]
     cands = awards + mlines[:max(max_bets - len(awards), 0)]
     cands.sort(key=lambda c: -c["edge"])
 

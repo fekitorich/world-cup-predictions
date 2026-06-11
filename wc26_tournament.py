@@ -123,7 +123,7 @@ def np_fit(arrs, shrink, w_mult=None, iters=80):
     return att, dfn, mu, hadv
 
 
-def grid_np(l1, l2, rho):
+def grid_np(l1, l2, rho, boost=1.0):
     k = np.arange(MAX_G + 1)
     from math import lgamma
     lg = np.array([lgamma(i + 1) for i in range(MAX_G + 1)])
@@ -134,6 +134,8 @@ def grid_np(l1, l2, rho):
     g[1, 0] *= 1 + l2 * rho
     g[0, 1] *= 1 + l1 * rho
     g[1, 1] *= 1 - rho
+    if boost != 1.0:
+        g[2:, 2:] *= boost
     return g / g.sum()
 
 
@@ -187,7 +189,8 @@ def ko_win(model, a, b, round_no, _b=None):
     """P(a beats b) — cached per bootstrap model index when given."""
     key = (a, b, round_no <= 2, _b)
     if key not in _ko_cache:
-        pH, pD, pA = hda(grid_np(*ko_lams(model, a, b, round_no), P["rho"]))
+        pH, pD, pA = hda(grid_np(*ko_lams(model, a, b, round_no), P["rho"],
+                                 P["min2_boost"]))
         _ko_cache[key] = pH + pD * pH / (pH + pA)
     return _ko_cache[key]
 
@@ -367,7 +370,7 @@ def predict_bracket():
     xgd = {}
     for m in FIXTURES:
         l1, l2 = fixture_lams(MEAN, m["home"], m["away"], m["city"])
-        g = grid_np(l1, l2, P["rho"])
+        g = grid_np(l1, l2, P["rho"], P["min2_boost"])
         pH, pD, pA = hda(g)
         p_model = {"H": pH, "D": pD, "A": pA}
         mkt = MKT.get(str(m["match_id"]), {}).get("moneyline")

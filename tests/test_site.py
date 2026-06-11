@@ -88,6 +88,16 @@ class TestCompleteness(unittest.TestCase):
             self.assertGreaterEqual(t["over_1.5"] + 1e-9, t["over_2.5"])
             self.assertGreaterEqual(t["over_2.5"] + 1e-9, t["over_3.5"])
 
+    def test_sims_exact_scores_valid(self):
+        for mid, s in b.SIMS.items():
+            es = s["exact_scores"]
+            self.assertEqual(len(es), 17, mid)   # 0-0..3-3 + other
+            self.assertAlmostEqual(sum(es.values()), 1.0, places=2, msg=mid)
+            top = s["top_scores"][0]   # mode can exceed 3 goals in blowouts
+            if top["score"] in es:
+                self.assertAlmostEqual(es[top["score"]], top["p"],
+                                       places=4, msg=mid)
+
 
 class TestBuiltSite(unittest.TestCase):
     """Integration: build and audit the artifact."""

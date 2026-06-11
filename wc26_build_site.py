@@ -67,6 +67,7 @@ except FileNotFoundError:
     TEAM_IDS = {}
 from wc26_simulate import params as _params, score_grid as _score_grid
 RHO = _params()["rho"]
+BOOST = _params()["min2_boost"]
 import unicodedata
 
 
@@ -610,7 +611,7 @@ def group_standings(g):
 
 def match_grid_svg(sim):
     """Compact scoreline heatmap for one match card."""
-    g = _score_grid(sim["xg"]["home"], sim["xg"]["away"], RHO)
+    g = _score_grid(sim["xg"]["home"], sim["xg"]["away"], RHO, BOOST)
     K = 5
     cell = 52
     L, T = 64, 56

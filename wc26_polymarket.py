@@ -2,11 +2,14 @@
 
 Free Gamma API, no key. Event slug pattern: fifwc-{home}-{away}-{YYYY-MM-DD}
 with lowercase FIFA trigrams. Falls back to public-search on slug miss.
+Exact-score books live in sibling events at {slug}-exact-score; snapshotted
+alongside the moneyline when listed.
 
 Writes wc26_market_prices.json keyed by our match_id.
 """
 import json
 import os
+import re
 import time
 import urllib.request
 import urllib.parse
@@ -54,6 +57,52 @@ ALIASES = {
 
 def names_for(team):
     return ALIASES.get(team, (team.lower(),))
+
+
+SCORE_RE = re.compile(r"(\d+)\s*-\s*(\d+)")
+
+
+def parse_score_question(q, home, away):
+    """'Exact Score: Mexico 2 - 1 South Africa?' -> '2-1' (home goals first,
+    whichever side Polymarket names first); 'Any Other Score?' -> 'other'."""
+    ql = q.lower()
+    if "exact score" not in ql:
+        return None
+    if "any other" in ql:
+        return "other"
+    m = SCORE_RE.search(ql)
+    if not m:
+        return None
+    left = ql[:m.start()]
+    if any(n in left for n in names_for(home)):
+        return f"{m.group(1)}-{m.group(2)}"
+    if any(n in left for n in names_for(away)):
+        return f"{m.group(2)}-{m.group(1)}"
+    return None
+
+
+def fetch_exact_scores(base_slug, home, away):
+    """Yes-price per scoreline cell from the {slug}-exact-score sibling."""
+    slug = f"{base_slug}-exact-score"
+    try:
+        evs = get("/events", slug=slug)
+    except Exception as e:
+        print(f"  exact-score fetch failed {slug}: {e}", flush=True)
+        return None, None
+    if not evs:
+        return None, None
+    cells = {}
+    for mk in evs[0].get("markets", []):
+        cell = parse_score_question(mk.get("question", ""), home, away)
+        if not cell:
+            continue
+        try:
+            cells[cell] = float(json.loads(mk["outcomePrices"])[0])
+        except (KeyError, ValueError, IndexError):
+            continue
+    if len(cells) < 5:   # half-listed book: not a usable price surface
+        return None, None
+    return slug, cells
 
 
 def parse_event(ev, home, away):
@@ -121,9 +170,15 @@ def main():
     except FileNotFoundError:
         pass
     out, misses = {}, []
+    n_es = 0
     for m in fixtures:
         r = fetch_fixture(m)
         if r:
+            es_slug, cells = fetch_exact_scores(r["slug"], m["home"], m["away"])
+            if cells:
+                r["exact_score_slug"] = es_slug
+                r["exact_score"] = cells
+                n_es += 1
             out[str(m["match_id"])] = r
         else:
             misses.append(f"{m['home']} v {m['away']} {m['date_utc'][:10]}")
@@ -133,7 +188,8 @@ def main():
               open(f"{ROOT}/wc26_market_prices.json", "w"), indent=2)
     from wc26_simulate import save_versioned
     save_versioned(f"{ROOT}/wc26_market_prices.json")
-    print(f"got prices for {len(out)}/{len(fixtures)} fixtures")
+    print(f"got prices for {len(out)}/{len(fixtures)} fixtures "
+          f"({n_es} with exact-score books)")
     if misses:
         print("missing:", "; ".join(misses))
 
