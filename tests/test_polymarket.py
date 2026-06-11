@@ -29,9 +29,9 @@ class TestFifaCodes(unittest.TestCase):
             self.assertIn(t["country"], FIFA_CODE, t["country"])
         self.assertGreaterEqual(len(FIFA_CODE), 48)   # 49: Italy lingers
 
-    def test_codes_are_lowercase_trigrams(self):
-        for team, code in FIFA_CODE.items():
-            self.assertRegex(code, r"^[a-z]{3}$", team)
+    def test_codes_are_lowercase_short(self):
+        for team, code in FIFA_CODE.items():   # kr (South Korea) is 2 chars
+            self.assertRegex(code, r"^[a-z]{2,3}$", team)
 
     def test_names_for_lowercase(self):
         for team in FIFA_CODE:

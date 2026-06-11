@@ -24,12 +24,12 @@ FIFA_CODE = {
     "Colombia": "col", "Uruguay": "uru", "Ecuador": "ecu", "Paraguay": "par",
     "Germany": "ger", "England": "eng", "France": "fra", "Spain": "esp",
     "Portugal": "por", "Netherlands": "ned", "Italy": "ita", "Belgium": "bel",
-    "Austria": "aut", "Switzerland": "sui", "Turkey": "tur", "Norway": "nor",
+    "Austria": "aut", "Switzerland": "che", "Turkey": "tur", "Norway": "nor",
     "Sweden": "swe", "Czech Republic": "cze", "Bosnia and Herzegovina": "bih",
     "Croatia": "cro", "Scotland": "sco", "Morocco": "mar", "Senegal": "sen",
     "Egypt": "egy", "Ivory Coast": "civ", "South Africa": "rsa",
     "DR Congo": "cod", "Tunisia": "tun", "Algeria": "alg", "Ghana": "gha",
-    "Cape Verde": "cpv", "Japan": "jpn", "South Korea": "kor", "Iran": "irn",
+    "Cape Verde": "cvi", "Japan": "jpn", "South Korea": "kr", "Iran": "irn",
     "Australia": "aus", "Saudi Arabia": "ksa", "Uzbekistan": "uzb",
     "Jordan": "jor", "Qatar": "qat", "Iraq": "irq", "New Zealand": "nzl",
 }
@@ -50,8 +50,9 @@ ALIASES = {
     "Czech Republic": ("czechia", "czech republic"),
     "Iran": ("ir iran", "iran"),
     "United States": ("united states", "usa"),
-    "Bosnia and Herzegovina": ("bosnia",),
+    "Bosnia and Herzegovina": ("bosnia-herzegovina", "bosnia and herzegovina"),
     "Curaçao": ("curaçao", "curacao"),
+    "Cape Verde": ("cabo verde", "cape verde"),
     "DR Congo": ("dr congo", "congo dr"),
 }
 
