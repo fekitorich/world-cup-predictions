@@ -95,6 +95,38 @@ def main():
     print(f"{len(fixtures)} WC fixtures known, {len(finished)} finished")
     update_scorers(finished)
 
+    # ---- knockout fixtures (appear with real teams once the R32 is set) ----
+    ko = []
+    for f in fixtures:
+        rnd = f["league"]["round"]
+        if "Group" in rnd:
+            continue
+        h = norm(f["teams"]["home"]["name"] or "")
+        a = norm(f["teams"]["away"]["name"] or "")
+        if not h or not a or "winner" in h.lower() or "winner" in a.lower():
+            continue   # placeholder pairings, teams not decided yet
+        played = f["fixture"]["status"]["short"] in FINISHED
+        ko.append({
+            "match_id": f["fixture"]["id"], "round": rnd,
+            "date_utc": f["fixture"]["date"],
+            "home": h, "away": a,
+            "venue": (f["fixture"]["venue"] or {}).get("name", ""),
+            "city": (f["fixture"]["venue"] or {}).get("city", ""),
+            "status": f["fixture"]["status"]["long"],
+            "score": (f"{f['goals']['home']}-{f['goals']['away']}"
+                      if played else None),
+            "penalties": (f"{f['score']['penalty']['home']}-{f['score']['penalty']['away']}"
+                          if played and f["score"]["penalty"]["home"] is not None
+                          else None),
+        })
+    ko.sort(key=lambda m: m["date_utc"])
+    json.dump({"updated": __import__("time").strftime("%Y-%m-%d %H:%M UTC",
+                                                      __import__("time").gmtime()),
+               "matches": ko},
+              open(f"{ROOT}/wc26_knockout_matches.json", "w"),
+              indent=2, ensure_ascii=False)
+    print(f"knockout fixtures with confirmed teams: {len(ko)}")
+
     # ---- refresh group matches file ----
     gm_path = f"{ROOT}/fifa_world_cup_2026_group_matches.json"
     gm = json.load(open(gm_path))

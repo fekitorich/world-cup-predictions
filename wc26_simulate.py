@@ -344,16 +344,27 @@ def backtest(p):
     return lls[p["rho"]]
 
 
+TEAM_SET = set()
+
+
 def main():
+    global TEAM_SET
     p = params()
     print("params:", p)
     bt_ll = backtest(p)
     model = fit(load_matches(TODAY.isoformat(), p["half_life"], p["friendly_w"],
                              p["margin_cap"]), p["shrink"])
+    TEAM_SET = set(model["att"])
     print(f"model: mu={model['mu']:.3f} home_adv={model['hadv']:.3f} "
           f"teams={len(model['att'])}")
 
     fixtures = json.load(open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+    try:
+        kos = json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+        fixtures = fixtures + [m for m in kos
+                               if m["home"] in TEAM_SET and m["away"] in TEAM_SET]
+    except FileNotFoundError:
+        pass
     try:
         MKT = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
     except FileNotFoundError:
@@ -372,6 +383,7 @@ def main():
         blended = blend({"home": pH, "draw": pD, "away": pA}, mkt) if mkt else None
         sims[str(m["match_id"])] = {
             "home": m["home"], "away": m["away"],
+            "round": m.get("round"),
             "home_field": m["home"] if home_field else (m["away"] if away_field else None),
             "xg": {"home": round(l1, 2), "away": round(l2, 2)},
             "moneyline": {"home": round(pH, 4), "draw": round(pD, 4), "away": round(pA, 4)},

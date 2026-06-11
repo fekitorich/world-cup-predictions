@@ -26,6 +26,10 @@ def norm(s):
 
 
 fixtures = json.load(open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+try:
+    fixtures += json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+except FileNotFoundError:
+    pass
 days = sorted({m["date_utc"][:10].replace("-", "") for m in fixtures})
 events = []
 for day in days:
@@ -54,6 +58,6 @@ for m in fixtures:
 
 json.dump({"fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
            "ids": out}, open(f"{ROOT}/wc26_espn_ids.json", "w"), indent=2)
-print(f"mapped {len(out)}/72")
+print(f"mapped {len(out)}/{len(fixtures)}")
 for x in missing[:8]:
     print("  missing:", x)
