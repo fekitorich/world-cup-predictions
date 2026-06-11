@@ -101,6 +101,36 @@ class TestBuiltSite(unittest.TestCase):
             + list((cls.docs / "matches").glob("*.html")) \
             + list((cls.docs / "players").glob("*.html"))
 
+    def test_report_page_graded_mode(self):
+        """Inject synthetic results and verify every report section renders."""
+        import copy
+        saved = copy.deepcopy(b.PRED)
+        try:
+            for p in b.PRED["group_matches"][:6]:
+                p["actual_score"] = "2-1"
+                p["actual_result"] = "H"
+                p["hit"] = p["pred_result"] == "H"
+            b.PRED["accuracy"] = {
+                "graded_group_matches": 6, "result_hits": 4,
+                "result_pct": 0.667, "exact_score_hits": 1,
+                "exact_score_pct": 0.167, "brier": 0.55,
+                "market_priced_matches": 5,
+                "compare": {"blend": {"brier": 0.55, "logloss": 0.9},
+                            "model": {"brier": 0.56, "logloss": 0.92},
+                            "market": {"brier": 0.54, "logloss": 0.89}},
+                "stages": {}, "champion_correct": None}
+            b.build_report()
+            html = (Path(b.OUT) / "report.html").read_text()
+            for needle in ("Who forecasts best", "Matchday by matchday",
+                           "Sharpest calls", "Calibration so far"):
+                self.assertIn(needle, html)
+            self.assertNotIn("{", html.split("<main")[1].split("</main>")[0]
+                             .replace("{ ", ""))
+        finally:
+            b.PRED.clear()
+            b.PRED.update(saved)
+            b.build_report()
+
     def test_page_counts(self):
         self.assertEqual(len(list((self.docs / "teams").glob("*.html"))), 48)
         self.assertEqual(len(list((self.docs / "matches").glob("*.html"))),
@@ -108,7 +138,7 @@ class TestBuiltSite(unittest.TestCase):
         self.assertGreaterEqual(
             len(list((self.docs / "players").glob("*.html"))), 30)
         for p in ("index", "matches", "futures", "awards", "bracket",
-                  "method", "method-fa", "archive"):
+                  "report", "method", "method-fa", "archive"):
             self.assertTrue((self.docs / f"{p}.html").exists(), p)
 
     def test_no_template_leaks(self):
