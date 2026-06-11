@@ -93,6 +93,14 @@ def player_link(name, depth=0):
 
 TEAMS = {t["country"]: t for t in teams_data["teams"]}
 MATCHES = matches_data["matches"]
+try:
+    KOS = [m for m in json.load(open(ROOT / "wc26_knockout_matches.json"))["matches"]
+           if m["home"] in TEAMS and m["away"] in TEAMS]
+except FileNotFoundError:
+    KOS = []
+ROUND_SHORT = {"Round of 32": "R32", "Round of 16": "R16",
+               "Quarter-finals": "QF", "Semi-finals": "SF",
+               "3rd Place Final": "3rd", "Final": "Final"}
 
 team_group = {}
 for m in MATCHES:
@@ -134,7 +142,10 @@ def slug(name):
 
 
 def match_slug(m):
-    return f"{slug(m['home'])}-vs-{slug(m['away'])}"
+    base = f"{slug(m['home'])}-vs-{slug(m['away'])}"
+    if m.get("round"):
+        base += "-" + slug(ROUND_SHORT.get(m["round"], m["round"]))
+    return base
 
 
 def fmt_date(iso):
@@ -296,13 +307,14 @@ def build_index():
 
     # --- today / next matchday strip ---
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    days = sorted({m["date_utc"][:10] for m in MATCHES if m["date_utc"][:10] >= today})
+    allm = MATCHES + KOS
+    days = sorted({m["date_utc"][:10] for m in allm if m["date_utc"][:10] >= today})
     strip = ""
     if days:
         day = days[0]
         label = "Today" if day == today else f"Next: {fmt_date(day + 'T00:00:00')[0]}"
         rows = []
-        for m in sorted((x for x in MATCHES if x["date_utc"][:10] == day),
+        for m in sorted((x for x in allm if x["date_utc"][:10] == day),
                         key=lambda x: x["date_utc"]):
             sim = SIMS.get(str(m["match_id"]))
             _, time_ = fmt_date(m["date_utc"])
@@ -325,7 +337,7 @@ def build_index():
             rows.append(
                 f'<tr><td class="fixture"><a href="matches/{match_slug(m)}.html">'
                 f'{escape(m["home"])} <em>v</em> {escape(m["away"])}</a></td>'
-                f'<td><b class="gchip">{m["group"]}</b></td>'
+                f'<td><b class="gchip">{m["group"] if not m.get("round") else ROUND_SHORT.get(m["round"], "KO")}</b></td>'
                 f'<td>{call}</td><td class="num">{verdict}</td></tr>')
         strip = f"""<section class="todaybox">
 <h2>{label}</h2>
@@ -353,7 +365,7 @@ play in their own country, which is most of their matches.</p>
 # ---------- matches list ----------
 def build_matches_list():
     by_day = {}
-    for m in MATCHES:
+    for m in MATCHES + KOS:
         by_day.setdefault(m["date_utc"][:10], []).append(m)
 
     sections = []
@@ -370,7 +382,7 @@ def build_matches_list():
                 res = '<span class="dim">-</span>'
             rows.append(f"""<tr>
 <td class="num">{time_}</td>
-<td><a class="gchip" href="index.html#group-{m['group'].lower()}">{m['group']}</a></td>
+<td>{('<b class="gchip">' + ROUND_SHORT.get(m["round"], "KO") + '</b>') if m.get("round") else ('<a class="gchip" href="index.html#group-' + m['group'].lower() + '">' + m['group'] + '</a>')}</td>
 <td class="fixture"><a href="matches/{match_slug(m)}.html">{escape(m['home'])} <em>v</em> {escape(m['away'])}</a></td>
 <td class="num">{res}</td>
 <td class="venue">{escape(m['venue'])}, {escape(m['city'])}</td>
@@ -712,10 +724,12 @@ injuries, lineups or motivation.</p>
 
 
 def build_match_pages():
-    for m in MATCHES:
+    for m in MATCHES + KOS:
         h, a = TEAMS[m["home"]], TEAMS[m["away"]]
         date_label, time_ = fmt_date(m["date_utc"])
         score = f'<div class="bigscore">{m["score"]}</div>' if m["score"] else ""
+        if m.get("penalties"):
+            score += f'<p class="meta center">{escape(m["penalties"])} on penalties</p>' 
         pride = (m["home"], m["away"]) == ("Egypt", "Iran")
         pride_html = ("""<div class="pridebar" role="presentation"></div>
 <p class="meta center pridenote">Seattle's host committee designated this fixture its
@@ -736,7 +750,7 @@ football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-ir
                          f'target="_blank" rel="noopener">ESPN live ↗</a>')
         ext = '<p class="meta center extlinks">' + " · ".join(links) + "</p>"
         body = f"""{pride_html}{wrap_open}<div class="card">
-<p class="meta center">Group {m['group']} · Matchday {m['matchday']} · {date_label}, {time_} UTC<br>
+<p class="meta center">{(escape(m["round"]) if m.get("round") else f"Group {m['group']} · Matchday {m['matchday']}")} · {date_label}, {time_} UTC<br>
 {escape(m['venue'])}, {escape(m['city'])}</p>
 {ext}
 <div class="versus">
@@ -752,7 +766,8 @@ football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-ir
 <section><h2>{escape(m['home'])} - last ten</h2>{last10_table(h)}</section>
 <section><h2>{escape(m['away'])} - last ten</h2>{last10_table(a)}</section>
 </div>{wrap_close}"""
-        crumb = (f'<a href="../matches.html">Matches</a> / Matchday {m["matchday"]} / '
+        stage = m["round"] if m.get("round") else f'Matchday {m["matchday"]}'
+        crumb = (f'<a href="../matches.html">Matches</a> / {escape(stage)} / '
                  f'{escape(m["home"])} v {escape(m["away"])}')
         (OUT / "matches" / f"{match_slug(m)}.html").write_text(
             page(f"{m['home']} v {m['away']}", body, depth=1, crumb=crumb))
