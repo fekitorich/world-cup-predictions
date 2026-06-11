@@ -10,7 +10,7 @@ import json
 import math
 from collections import Counter
 
-from wc26_simulate import (ROOT, TODAY, SPLIT, params, load_matches, fit,
+from wc26_simulate import (ROOT, DATA, TODAY, SPLIT, params, load_matches, fit,
                            lambdas, score_grid, one_x_two, test_set)
 
 INK = "var(--ink, #211d16)"
@@ -114,7 +114,7 @@ def chart_poisson():
 
 # ---------------- 3. score-grid heatmap ----------------
 def chart_grid():
-    sims = json.load(open(f"{ROOT}/wc26_simulations.json"))["simulations"]
+    sims = json.load(open(f"{DATA}/wc26_simulations.json"))["simulations"]
     m = next(v for v in sims.values()
              if v["home"] == "Mexico" and v["away"] == "South Africa")
     l1, l2 = m["xg"]["home"], m["xg"]["away"]

@@ -14,7 +14,8 @@ import time
 import urllib.request
 import urllib.parse
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 BASE = "https://gamma-api.polymarket.com"
 
 FIFA_CODE = {
@@ -163,10 +164,10 @@ def fetch_fixture(m):
 
 def main():
     fixtures = json.load(
-        open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+        open(f"{DATA}/fifa_world_cup_2026_group_matches.json"))["matches"]
     try:
         fixtures += json.load(
-            open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+            open(f"{DATA}/wc26_knockout_matches.json"))["matches"]
     except FileNotFoundError:
         pass
     out, misses = {}, []
@@ -185,9 +186,9 @@ def main():
         time.sleep(0.15)
     json.dump({"fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
                "source": "Polymarket Gamma API", "prices": out},
-              open(f"{ROOT}/wc26_market_prices.json", "w"), indent=2)
+              open(f"{DATA}/wc26_market_prices.json", "w"), indent=2)
     from wc26_simulate import save_versioned
-    save_versioned(f"{ROOT}/wc26_market_prices.json")
+    save_versioned(f"{DATA}/wc26_market_prices.json")
     print(f"got prices for {len(out)}/{len(fixtures)} fixtures "
           f"({n_es} with exact-score books)")
     if misses:

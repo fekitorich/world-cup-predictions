@@ -14,7 +14,8 @@ import unicodedata
 import urllib.parse
 import urllib.request
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 KEY = os.environ.get("API_FOOTBALL_KEY") or \
     open(f"{ROOT}/.api_football_key").read().strip()
 SEASONS = (2024, 2025, 2026)
@@ -43,7 +44,7 @@ def norm(s):
 
 
 def candidates():
-    a = json.load(open(f"{ROOT}/wc26_awards.json"))
+    a = json.load(open(f"{DATA}/wc26_awards.json"))
     out = []
     for b in a["golden_boot"]:
         out.append((b["player"], b["team"]))
@@ -63,7 +64,7 @@ def candidates():
 
 def main():
     ids = {name: d["team_id"]
-           for name, d in json.load(open(f"{ROOT}/wc26_matches.json")).items()}
+           for name, d in json.load(open(f"{DATA}/wc26_matches.json")).items()}
     squads = {}     # team -> [(id, api name)]
     profiles = {}
     cands = candidates()
@@ -124,10 +125,10 @@ def main():
               f"{ng} goals all comps", flush=True)
     out = {"fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
            "profiles": profiles}
-    json.dump(out, open(f"{ROOT}/wc26_player_profiles.json", "w"),
+    json.dump(out, open(f"{DATA}/wc26_player_profiles.json", "w"),
               indent=2, ensure_ascii=False)
     from wc26_simulate import save_versioned
-    save_versioned(f"{ROOT}/wc26_player_profiles.json")
+    save_versioned(f"{DATA}/wc26_player_profiles.json")
     print(f"wrote {len(profiles)} profiles")
 
 

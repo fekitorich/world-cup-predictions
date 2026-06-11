@@ -9,7 +9,8 @@ import time
 import urllib.request
 import urllib.parse
 
-_DIR = os.path.dirname(os.path.abspath(__file__))
+_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(_DIR, "data")
 KEY = os.environ.get("API_FOOTBALL_KEY") or \
     open(os.path.join(_DIR, ".api_football_key")).read().strip()
 BASE = "https://v3.football.api-sports.io"
@@ -160,7 +161,7 @@ def main():
             continue
         out[name] = {"team_id": team_id, "matches": parse_fixtures(data, team_id)}
         # checkpoint so partial progress survives a crash
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "wc26_matches.json"), "w") as f:
+        with open(os.path.join(DATA, "wc26_matches.json"), "w") as f:
             json.dump(out, f, indent=2, ensure_ascii=False)
     print("DONE", flush=True)
 

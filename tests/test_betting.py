@@ -4,11 +4,20 @@ import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, _ROOT)
+sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-from betting.find_bets import kelly_stake, started, CFG
+from betting.find_bets import kelly_stake, started, build_plan, CFG
 from wc26_polymarket import parse_score_question
+
+
+def cand(category, edge, model_p=None, market_p=0.30):
+    return {"category": category, "bet": f"{category}@{edge}",
+            "question": "?", "token_id": "t",
+            "model_p": model_p if model_p is not None else market_p + edge,
+            "market_p": market_p, "edge": edge}
 
 
 class TestKelly(unittest.TestCase):
@@ -35,6 +44,48 @@ class TestConfig(unittest.TestCase):
                              CFG["max_total_stake_usdc"])
         self.assertTrue(0 < CFG["kelly_fraction"] <= 1)
         self.assertTrue(0 < CFG["min_edge_match"] < 0.5)
+
+
+class TestBuildPlan(unittest.TestCase):
+    CFG = {"max_total_stake_usdc": 100.0, "max_per_bet_usdc": 10.0,
+           "kelly_fraction": 0.4, "min_stake_usdc": 1.0, "max_bets": 3}
+
+    def test_awards_always_make_the_plan(self):
+        cands = [cand("moneyline", 0.20), cand("moneyline", 0.18),
+                 cand("moneyline", 0.15), cand("golden_boot", 0.04)]
+        plan, _ = build_plan(cands, self.CFG)
+        cats = [c["category"] for c in plan]
+        self.assertIn("golden_boot", cats)
+        self.assertEqual(len(plan), 3)   # max_bets, award kept a slot
+
+    def test_per_match_slots_filled_by_edge(self):
+        cands = [cand("moneyline", e) for e in (0.10, 0.30, 0.20)] + \
+                [cand("exact_score", 0.25)]
+        plan, _ = build_plan(cands, self.CFG)
+        self.assertEqual([c["edge"] for c in plan], [0.30, 0.25, 0.20])
+
+    def test_per_bet_cap_respected(self):
+        plan, _ = build_plan([cand("moneyline", 0.40, market_p=0.10)],
+                             self.CFG)
+        self.assertLessEqual(plan[0]["stake_usdc"],
+                             self.CFG["max_per_bet_usdc"])
+
+    def test_min_stake_floor(self):
+        plan, _ = build_plan([cand("moneyline", 0.005, market_p=0.50)],
+                             self.CFG)
+        self.assertGreaterEqual(plan[0]["stake_usdc"],
+                                self.CFG["min_stake_usdc"])
+
+    def test_total_cap_scaling(self):
+        cfg = dict(self.CFG, max_bets=40, max_total_stake_usdc=20.0)
+        cands = [cand("moneyline", 0.30, market_p=0.10) for _ in range(20)]
+        plan, total = build_plan(cands, cfg)
+        self.assertLessEqual(total, 20.0 + 0.05)
+        self.assertEqual(len(plan), 20)
+
+    def test_empty_plan(self):
+        plan, total = build_plan([], self.CFG)
+        self.assertEqual((plan, total), ([], 0.0))
 
 
 class TestExactScoreScanner(unittest.TestCase):

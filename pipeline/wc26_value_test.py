@@ -12,11 +12,11 @@ matches — mild look-ahead, values move slowly.
 import json
 import math
 
-from wc26_simulate import (ROOT, SPLIT, params, load_matches, fit, test_set,
+from wc26_simulate import (ROOT, DATA, SPLIT, params, load_matches, fit, test_set,
                            evaluate)
 
 P = params()
-sv = json.load(open(f"{ROOT}/wc26_squad_values.json"))
+sv = json.load(open(f"{DATA}/wc26_squad_values.json"))
 VALUES, DEFAULT = sv["values"], sv["default_for_missing"]
 
 print("fitting base model on data to", SPLIT, "...")

@@ -13,56 +13,57 @@ from html import escape
 from pathlib import Path
 from datetime import datetime, timezone
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
 OUT = ROOT / "docs"   # served by GitHub Pages (main branch /docs)
 DOMAIN = "wcformbook.com"   # custom domain; build emits docs/CNAME for Pages
 BUILD_V = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")  # css cache-buster
 
-teams_data = json.load(open(ROOT / "fifa_world_cup_2026.json"))
-matches_data = json.load(open(ROOT / "fifa_world_cup_2026_group_matches.json"))
+teams_data = json.load(open(DATA / "fifa_world_cup_2026.json"))
+matches_data = json.load(open(DATA / "fifa_world_cup_2026_group_matches.json"))
 try:
-    _sim = json.load(open(ROOT / "wc26_simulations.json"))
+    _sim = json.load(open(DATA / "wc26_simulations.json"))
     SIMS, SIM_LOGLOSS = _sim["simulations"], _sim.get("backtest_logloss")
     SIM_AT = _sim.get("generated")
 except FileNotFoundError:
     SIMS, SIM_LOGLOSS, SIM_AT = {}, None, None
 try:
-    _mkt = json.load(open(ROOT / "wc26_market_prices.json"))
+    _mkt = json.load(open(DATA / "wc26_market_prices.json"))
     PRICES, PRICES_AT = _mkt["prices"], _mkt["fetched_at"]
 except FileNotFoundError:
     PRICES, PRICES_AT = {}, None
 try:
-    TOURNEY = json.load(open(ROOT / "wc26_tournament.json"))["teams"]
+    TOURNEY = json.load(open(DATA / "wc26_tournament.json"))["teams"]
 except FileNotFoundError:
     TOURNEY = {}
 try:
-    PRED = json.load(open(ROOT / "wc26_predictions.json"))
+    PRED = json.load(open(DATA / "wc26_predictions.json"))
 except FileNotFoundError:
     PRED = None
 try:
-    AWARDS = json.load(open(ROOT / "wc26_awards.json"))
+    AWARDS = json.load(open(DATA / "wc26_awards.json"))
 except FileNotFoundError:
     AWARDS = None
 try:
-    PLAYERS = json.load(open(ROOT / "wc26_players.json"))["squads"]
+    PLAYERS = json.load(open(DATA / "wc26_players.json"))["squads"]
 except FileNotFoundError:
     PLAYERS = {}
 try:
-    _prof = json.load(open(ROOT / "wc26_player_profiles.json"))
+    _prof = json.load(open(DATA / "wc26_player_profiles.json"))
     PROFILES, PROFILES_AT = _prof["profiles"], _prof["fetched_at"]
 except FileNotFoundError:
     PROFILES, PROFILES_AT = {}, None
 try:
-    SCORERS = json.load(open(ROOT / "wc26_scorers.json"))["scorers"]
+    SCORERS = json.load(open(DATA / "wc26_scorers.json"))["scorers"]
 except FileNotFoundError:
     SCORERS = {}
 try:
-    ESPN_IDS = json.load(open(ROOT / "wc26_espn_ids.json"))["ids"]
+    ESPN_IDS = json.load(open(DATA / "wc26_espn_ids.json"))["ids"]
 except FileNotFoundError:
     ESPN_IDS = {}
 try:
     TEAM_IDS = {n: d["team_id"]
-                for n, d in json.load(open(ROOT / "wc26_matches.json")).items()}
+                for n, d in json.load(open(DATA / "wc26_matches.json")).items()}
 except FileNotFoundError:
     TEAM_IDS = {}
 from wc26_simulate import params as _params, score_grid as _score_grid
@@ -96,7 +97,7 @@ def player_link(name, depth=0):
 TEAMS = {t["country"]: t for t in teams_data["teams"]}
 MATCHES = matches_data["matches"]
 try:
-    KOS = [m for m in json.load(open(ROOT / "wc26_knockout_matches.json"))["matches"]
+    KOS = [m for m in json.load(open(DATA / "wc26_knockout_matches.json"))["matches"]
            if m["home"] in TEAMS and m["away"] in TEAMS]
 except FileNotFoundError:
     KOS = []
@@ -1296,7 +1297,7 @@ def inline_svg(name):
 
 def build_method():
     try:
-        prm = json.load(open(ROOT / "wc26_params.json"))
+        prm = json.load(open(DATA / "wc26_params.json"))
         P = prm["params"]
     except FileNotFoundError:
         prm, P = {}, {}

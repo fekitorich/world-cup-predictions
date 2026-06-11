@@ -16,15 +16,16 @@ import unicodedata
 
 import numpy as np
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 
-players = json.load(open(f"{ROOT}/wc26_players.json"))
+players = json.load(open(f"{DATA}/wc26_players.json"))
 teams_meta = {t["country"]: t
-              for t in json.load(open(f"{ROOT}/fifa_world_cup_2026.json"))["teams"]}
-fut = json.load(open(f"{ROOT}/wc26_tournament.json"))["teams"]
+              for t in json.load(open(f"{DATA}/fifa_world_cup_2026.json"))["teams"]}
+fut = json.load(open(f"{DATA}/wc26_tournament.json"))["teams"]
 # npz written by our own wc26_tournament.py; plain int16/unicode arrays,
 # so no pickle needed
-npz = np.load(f"{ROOT}/wc26_team_goals.npz")
+npz = np.load(f"{DATA}/wc26_team_goals.npz")
 GOALS, TEAMS = npz["goals"], list(npz["teams"])
 S = GOALS.shape[0]
 
@@ -154,8 +155,8 @@ out = {
     "golden_ball": ball[:15],
     "prices_at": players["fetched_at"],
 }
-json.dump(out, open(f"{ROOT}/wc26_awards.json", "w"), indent=2, ensure_ascii=False)
-save_versioned(f"{ROOT}/wc26_awards.json")
+json.dump(out, open(f"{DATA}/wc26_awards.json", "w"), indent=2, ensure_ascii=False)
+save_versioned(f"{DATA}/wc26_awards.json")
 print("golden boot top 5:")
 for b in boot[:5]:
     print(f"  {b['player']} ({b['team']}): {b['p_model']:.1%} model, "

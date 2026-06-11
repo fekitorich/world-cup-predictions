@@ -23,7 +23,7 @@ import sys
 
 import numpy as np
 
-from wc26_simulate import (ROOT, TODAY, CITY_COUNTRY, params, load_matches,
+from wc26_simulate import (ROOT, DATA, TODAY, CITY_COUNTRY, params, load_matches,
                            blend, now_utc, save_versioned)
 
 N_BOOT = 200
@@ -151,7 +151,7 @@ BOOT = [np_fit(ARRS, P["shrink"], rng.exponential(1.0, len(raw)), iters=60)
 print(f"ensemble of {N_BOOT} models fitted", flush=True)
 
 FIXTURES = json.load(
-    open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+    open(f"{DATA}/fifa_world_cup_2026_group_matches.json"))["matches"]
 GROUPS = sorted({m["group"] for m in FIXTURES})
 GROUP_TEAMS = {g: set() for g in GROUPS}
 for m in FIXTURES:
@@ -336,7 +336,7 @@ def run_futures():
             goals_mat[s, t_idx[t]] = g
         if s % 20000 == 19999:
             print(f"  {s + 1}/{N_SIMS} sims", flush=True)
-    np.savez_compressed(f"{ROOT}/wc26_team_goals.npz",
+    np.savez_compressed(f"{DATA}/wc26_team_goals.npz",
                         goals=goals_mat, teams=np.array(all_teams))
     print("saved per-sim team goal tallies -> wc26_team_goals.npz", flush=True)
     teams = sorted(count, key=lambda t: -count[t]["champion"])
@@ -350,9 +350,9 @@ def run_futures():
         "teams": {t: {s: round(count[t][s] / N_SIMS, 4) for s in stages}
                   for t in teams},
     }
-    json.dump(out, open(f"{ROOT}/wc26_tournament.json", "w"), indent=2,
+    json.dump(out, open(f"{DATA}/wc26_tournament.json", "w"), indent=2,
               ensure_ascii=False)
-    save_versioned(f"{ROOT}/wc26_tournament.json")
+    save_versioned(f"{DATA}/wc26_tournament.json")
     print("favourites:", ", ".join(
         f"{t} {out['teams'][t]['champion']:.1%}" for t in teams[:8]), flush=True)
 
@@ -362,7 +362,7 @@ def predict_bracket():
     # group matches: model probs blended with Polymarket where priced;
     # picks and expected points come from the blend (market sees lineups).
     try:
-        MKT = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+        MKT = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
     except FileNotFoundError:
         MKT = {}
     group_preds = []
@@ -454,7 +454,7 @@ def predict_bracket():
 
 
 if __name__ == "__main__":
-    pred_path = f"{ROOT}/wc26_predictions.json"
+    pred_path = f"{DATA}/wc26_predictions.json"
     if os.path.exists(pred_path) and "--force" not in sys.argv:
         print("predictions already locked (use --force to overwrite)")
     else:

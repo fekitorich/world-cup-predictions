@@ -3,10 +3,13 @@ import os
 import sys
 import unittest
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, _ROOT)
+sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 
 from wc26_simulate import (params, score_grid, one_x_two, markets, blend,
-                           load_matches, grid_cells, cell_of, SPLIT, BLEND_W)
+                           load_matches, grid_cells, cell_of, poisson_row,
+                           SPLIT, BLEND_W, MAX_GOALS)
 
 P = params()
 
@@ -77,6 +80,20 @@ class TestExactScores(unittest.TestCase):
         self.assertGreaterEqual(P["min2_boost"], 1.0)
 
 
+class TestPoissonRow(unittest.TestCase):
+    def test_row_sums_to_one(self):
+        """Truncated at MAX_GOALS, so the tail loss must stay negligible."""
+        for lam in (0.3, 1.5, 4.0):
+            self.assertAlmostEqual(sum(poisson_row(lam)), 1.0, places=3)
+
+    def test_row_length(self):
+        self.assertEqual(len(poisson_row(1.0)), MAX_GOALS + 1)
+
+    def test_mode_near_lambda(self):
+        row = poisson_row(2.0)
+        self.assertIn(row.index(max(row)), (1, 2))
+
+
 class TestBlend(unittest.TestCase):
     MODEL = {"home": 0.5, "draw": 0.3, "away": 0.2}
     MARKET = {"home": 0.7, "draw": 0.2, "away": 0.15}   # overround on purpose
@@ -96,6 +113,10 @@ class TestBlend(unittest.TestCase):
 
     def test_weight_constant_sane(self):
         self.assertTrue(0 < BLEND_W < 1)
+
+    def test_full_weight_returns_market(self):
+        out = blend(self.MODEL, self.MARKET, w=1)
+        self.assertAlmostEqual(out["home"], 0.7 / 1.05, places=9)
 
 
 class TestDataPatches(unittest.TestCase):

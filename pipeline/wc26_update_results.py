@@ -14,7 +14,8 @@ import json
 import os
 import urllib.request
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 KEY = os.environ.get("API_FOOTBALL_KEY") or \
     open(os.path.join(ROOT, ".api_football_key")).read().strip()
 
@@ -49,7 +50,7 @@ def update_scorers(finished):
     """Tally tournament goalscorers from fixture events (Golden Boot race).
     Caches per-fixture events so each finished match is fetched once."""
     import time
-    path = f"{ROOT}/wc26_scorers.json"
+    path = f"{DATA}/wc26_scorers.json"
     try:
         data = json.load(open(path))
     except FileNotFoundError:
@@ -123,12 +124,12 @@ def main():
     json.dump({"updated": __import__("time").strftime("%Y-%m-%d %H:%M UTC",
                                                       __import__("time").gmtime()),
                "matches": ko},
-              open(f"{ROOT}/wc26_knockout_matches.json", "w"),
+              open(f"{DATA}/wc26_knockout_matches.json", "w"),
               indent=2, ensure_ascii=False)
     print(f"knockout fixtures with confirmed teams: {len(ko)}")
 
     # ---- refresh group matches file ----
-    gm_path = f"{ROOT}/fifa_world_cup_2026_group_matches.json"
+    gm_path = f"{DATA}/fifa_world_cup_2026_group_matches.json"
     gm = json.load(open(gm_path))
     by_id = {f["fixture"]["id"]: f for f in fixtures}
     for m in gm["matches"]:
@@ -140,7 +141,7 @@ def main():
     json.dump(gm, open(gm_path, "w"), indent=2, ensure_ascii=False)
 
     # ---- grade predictions ----
-    pred_path = f"{ROOT}/wc26_predictions.json"
+    pred_path = f"{DATA}/wc26_predictions.json"
     if not os.path.exists(pred_path):
         print("no locked predictions file; run wc26_tournament.py first")
         return

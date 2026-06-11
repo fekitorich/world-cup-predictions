@@ -20,7 +20,8 @@ import sys
 import time
 from datetime import date
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 TODAY = date(2026, 6, 9)
 SPLIT = "2025-06-01"          # backtest train/test split
 MAX_GOALS = 12
@@ -39,7 +40,7 @@ VALUE_BETA = 0.35
 
 def _value_z():
     try:
-        sv = json.load(open(f"{ROOT}/wc26_squad_values.json"))
+        sv = json.load(open(f"{DATA}/wc26_squad_values.json"))
     except FileNotFoundError:
         return None
     vals, default = sv["values"], sv["default_for_missing"]
@@ -82,7 +83,7 @@ def save_versioned(path):
 
 def params():
     try:
-        loaded = json.load(open(f"{ROOT}/wc26_params.json"))["params"]
+        loaded = json.load(open(f"{DATA}/wc26_params.json"))["params"]
         return {**DEFAULTS, **loaded}
     except FileNotFoundError:
         return dict(DEFAULTS)
@@ -92,14 +93,14 @@ def load_matches(cutoff, half_life, friendly_w, margin_cap=99):
     # corrections + missing matches, adjudicated against API-Football
     # (see wc26_data_patches.json); survive CSV re-downloads
     try:
-        patches = json.load(open(f"{ROOT}/wc26_data_patches.json"))
+        patches = json.load(open(f"{DATA}/wc26_data_patches.json"))
     except FileNotFoundError:
         patches = {"score_fixes": [], "additions": []}
     fixes = {(f["date"], f["home_team"], f["away_team"]):
              (f["home_score"], f["away_score"]) for f in patches["score_fixes"]}
     out = []
     cut = date.fromisoformat(cutoff)
-    rows = list(csv.DictReader(open(f"{ROOT}/international_results.csv")))
+    rows = list(csv.DictReader(open(f"{DATA}/international_results.csv")))
     seen = {(r["date"], r["home_team"], r["away_team"]) for r in rows}
     for a in patches["additions"]:
         if (a["date"], a["home_team"], a["away_team"]) not in seen:
@@ -240,7 +241,7 @@ def markets(grid):
 def test_set(start=SPLIT, end=None):
     end = end or TODAY.isoformat()
     out = []
-    for r in csv.DictReader(open(f"{ROOT}/international_results.csv")):
+    for r in csv.DictReader(open(f"{DATA}/international_results.csv")):
         if r["home_score"] == "NA" or not (start <= r["date"] < end):
             continue
         out.append(r)
@@ -320,8 +321,8 @@ def tune():
     json.dump({"params": best, "cv_logloss": round(final_ll, 5),
                "tuned_on": f"4 rolling windows 2022-2026, {sum(len(t) for _, t in tests)} matches",
                "tuned_at": now_utc()},
-              open(f"{ROOT}/wc26_params.json", "w"), indent=2)
-    save_versioned(f"{ROOT}/wc26_params.json")
+              open(f"{DATA}/wc26_params.json", "w"), indent=2)
+    save_versioned(f"{DATA}/wc26_params.json")
     print(f"TUNED {best} cv-ll={final_ll:.5f} -> wc26_params.json", flush=True)
 
 
@@ -429,13 +430,13 @@ def tune_boost():
         print(f"  boost={b:.2f} exact-score ll={lls[b]:.5f}", flush=True)
     best = min(lls, key=lls.get)
     p["min2_boost"] = best
-    doc = json.load(open(f"{ROOT}/wc26_params.json"))
+    doc = json.load(open(f"{DATA}/wc26_params.json"))
     doc["params"]["min2_boost"] = best
     doc["min2_boost_note"] = (f"fit on {len(obs)} matches 2022-2025, "
                               f"exact-score ll {lls[1.0]:.5f} -> {lls[best]:.5f}")
     doc["tuned_at"] = now_utc()
-    json.dump(doc, open(f"{ROOT}/wc26_params.json", "w"), indent=2)
-    save_versioned(f"{ROOT}/wc26_params.json")
+    json.dump(doc, open(f"{DATA}/wc26_params.json", "w"), indent=2)
+    save_versioned(f"{DATA}/wc26_params.json")
     print(f"TUNED min2_boost={best} -> wc26_params.json", flush=True)
 
 
@@ -453,15 +454,15 @@ def main():
     print(f"model: mu={model['mu']:.3f} home_adv={model['hadv']:.3f} "
           f"teams={len(model['att'])}")
 
-    fixtures = json.load(open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+    fixtures = json.load(open(f"{DATA}/fifa_world_cup_2026_group_matches.json"))["matches"]
     try:
-        kos = json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+        kos = json.load(open(f"{DATA}/wc26_knockout_matches.json"))["matches"]
         fixtures = fixtures + [m for m in kos
                                if m["home"] in TEAM_SET and m["away"] in TEAM_SET]
     except FileNotFoundError:
         pass
     try:
-        MKT = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+        MKT = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
     except FileNotFoundError:
         MKT = {}
     sims = {}
@@ -498,8 +499,8 @@ def main():
         "generated": now_utc(),
         "simulations": sims,
     }
-    json.dump(out, open(f"{ROOT}/wc26_simulations.json", "w"), indent=2, ensure_ascii=False)
-    save_versioned(f"{ROOT}/wc26_simulations.json")
+    json.dump(out, open(f"{DATA}/wc26_simulations.json", "w"), indent=2, ensure_ascii=False)
+    save_versioned(f"{DATA}/wc26_simulations.json")
     print(f"wrote {len(sims)} simulations (archived in runs/)")
 
 

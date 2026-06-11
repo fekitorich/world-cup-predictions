@@ -10,7 +10,8 @@ import time
 import unicodedata
 import urllib.request
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 ALIAS = {"czechia": "czech republic", "usa": "united states",
          "bosnia-herzegovina": "bosnia and herzegovina",
          "dr congo": "dr congo", "congo dr": "dr congo",
@@ -25,9 +26,9 @@ def norm(s):
     return ALIAS.get(s, s)
 
 
-fixtures = json.load(open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+fixtures = json.load(open(f"{DATA}/fifa_world_cup_2026_group_matches.json"))["matches"]
 try:
-    fixtures += json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+    fixtures += json.load(open(f"{DATA}/wc26_knockout_matches.json"))["matches"]
 except FileNotFoundError:
     pass
 days = sorted({m["date_utc"][:10].replace("-", "") for m in fixtures})
@@ -57,7 +58,7 @@ for m in fixtures:
         missing.append(f'{m["home"]} v {m["away"]} {m["date_utc"]}')
 
 json.dump({"fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
-           "ids": out}, open(f"{ROOT}/wc26_espn_ids.json", "w"), indent=2)
+           "ids": out}, open(f"{DATA}/wc26_espn_ids.json", "w"), indent=2)
 print(f"mapped {len(out)}/{len(fixtures)}")
 for x in missing[:8]:
     print("  missing:", x)

@@ -24,7 +24,8 @@ from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-sys.path.insert(0, ROOT)
+DATA = os.path.join(ROOT, "data")
+sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from wc26_polymarket import ALIASES, names_for, parse_score_question  # noqa: E402
 
 CFG = json.load(open(f"{HERE}/config.json"))
@@ -48,17 +49,19 @@ def norm(s):
     return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
 
 
-def kelly_stake(q, p, bankroll):
+def kelly_stake(q, p, bankroll, fraction=None):
     """Quarter(-ish) Kelly stake for buying YES at price p with belief q."""
     f_star = (q - p) / (1 - p)
-    return bankroll * CFG["kelly_fraction"] * f_star
+    if fraction is None:
+        fraction = CFG["kelly_fraction"]
+    return bankroll * fraction * f_star
 
 
 def kickoff_times():
     fx = json.load(
-        open(f"{ROOT}/fifa_world_cup_2026_group_matches.json"))["matches"]
+        open(f"{DATA}/fifa_world_cup_2026_group_matches.json"))["matches"]
     try:
-        fx += json.load(open(f"{ROOT}/wc26_knockout_matches.json"))["matches"]
+        fx += json.load(open(f"{DATA}/wc26_knockout_matches.json"))["matches"]
     except FileNotFoundError:
         pass
     return {str(m["match_id"]): m["date_utc"] for m in fx}
@@ -70,8 +73,8 @@ def started(mid, times):
 
 
 def match_candidates():
-    sims = json.load(open(f"{ROOT}/wc26_simulations.json"))["simulations"]
-    snap = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+    sims = json.load(open(f"{DATA}/wc26_simulations.json"))["simulations"]
+    snap = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
     times = kickoff_times()
     out = []
     for mid, rec in snap.items():
@@ -112,8 +115,8 @@ def match_candidates():
 
 
 def exact_score_candidates():
-    sims = json.load(open(f"{ROOT}/wc26_simulations.json"))["simulations"]
-    snap = json.load(open(f"{ROOT}/wc26_market_prices.json"))["prices"]
+    sims = json.load(open(f"{DATA}/wc26_simulations.json"))["simulations"]
+    snap = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
     times = kickoff_times()
     out = []
     for mid, rec in snap.items():
@@ -153,7 +156,7 @@ def exact_score_candidates():
 
 
 def award_candidates():
-    awards = json.load(open(f"{ROOT}/wc26_awards.json"))
+    awards = json.load(open(f"{DATA}/wc26_awards.json"))
     out = []
     model_by_cat = {
         "golden_boot": {norm(b["player"]): b["p_model"] for b in awards["golden_boot"]},
@@ -190,6 +193,37 @@ def award_candidates():
     return out
 
 
+def build_plan(cands, cfg):
+    """Select and size candidates under the caps (pure: no I/O).
+
+    Award bets that qualify always make the plan; per-match bets
+    (moneyline/exact score) fill the remaining max_bets slots by edge.
+    Returns (sized candidates, total stake)."""
+    cands = sorted(cands, key=lambda c: -c["edge"])
+    max_bets = cfg.get("max_bets", 12)
+    per_match = ("moneyline", "exact_score")
+    awards = [c for c in cands if c["category"] not in per_match]
+    mlines = [c for c in cands if c["category"] in per_match]
+    cands = awards + mlines[:max(max_bets - len(awards), 0)]
+    cands.sort(key=lambda c: -c["edge"])
+
+    bankroll = cfg["max_total_stake_usdc"]
+    for c in cands:
+        stake = min(kelly_stake(c["model_p"], c["market_p"], bankroll,
+                                cfg.get("kelly_fraction")),
+                    cfg["max_per_bet_usdc"])
+        # floor qualifying bets at min_stake for breadth across categories
+        c["stake_usdc"] = round(max(stake, cfg.get("min_stake_usdc", 1)), 2)
+    # scale down if the plan exceeds the total cap
+    planned = sum(c["stake_usdc"] for c in cands)
+    if planned > bankroll:
+        scale = bankroll / planned
+        for c in cands:
+            c["stake_usdc"] = round(c["stake_usdc"] * scale, 2)
+        planned = sum(c["stake_usdc"] for c in cands)
+    return cands, round(planned, 2)
+
+
 def main():
     cands = []
     if CFG["include"].get("moneyline"):
@@ -200,31 +234,7 @@ def main():
         cands += exact_score_candidates()
     print("scanning award markets...", flush=True)
     cands += award_candidates()
-    cands.sort(key=lambda c: -c["edge"])
-    # category breadth: award bets that qualify always make the plan,
-    # per-match bets (moneyline/exact score) fill remaining slots by edge
-    max_bets = CFG.get("max_bets", 12)
-    per_match = ("moneyline", "exact_score")
-    awards = [c for c in cands if c["category"] not in per_match]
-    mlines = [c for c in cands if c["category"] in per_match]
-    cands = awards + mlines[:max(max_bets - len(awards), 0)]
-    cands.sort(key=lambda c: -c["edge"])
-
-    bankroll = CFG["max_total_stake_usdc"]
-    total = 0.0
-    for c in cands:
-        stake = min(kelly_stake(c["model_p"], c["market_p"], bankroll),
-                    CFG["max_per_bet_usdc"])
-        # floor qualifying bets at min_stake for breadth across categories
-        c["stake_usdc"] = round(max(stake, CFG.get("min_stake_usdc", 1)), 2)
-    # scale down if the plan exceeds the total cap
-    planned = sum(c["stake_usdc"] for c in cands)
-    if planned > bankroll:
-        scale = bankroll / planned
-        for c in cands:
-            c["stake_usdc"] = round(c["stake_usdc"] * scale, 2)
-        planned = sum(c["stake_usdc"] for c in cands)
-    total = round(planned, 2)
+    cands, total = build_plan(cands, CFG)
 
     plan = {
         "created": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),

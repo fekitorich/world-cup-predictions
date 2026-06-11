@@ -9,7 +9,9 @@ import sys
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, _ROOT)
+sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 
 import wc26_build_site as b
 
@@ -72,7 +74,7 @@ class TestCompleteness(unittest.TestCase):
 
     def test_every_team_has_squad_value(self):
         import json
-        vals = json.load(open(Path(b.ROOT) / "wc26_squad_values.json"))["values"]
+        vals = json.load(open(Path(b.DATA) / "wc26_squad_values.json"))["values"]
         for t in b.TEAMS:
             self.assertIn(t, vals, f"no Transfermarkt value for {t}")
 
@@ -178,6 +180,16 @@ class TestBuiltSite(unittest.TestCase):
     def test_og_tags_everywhere(self):
         for p in self.pages[:20]:
             self.assertIn('property="og:title"', p.read_text(), p.name)
+
+    def test_cname_emitted(self):
+        """Pages custom domain: build must emit docs/CNAME every rebuild."""
+        self.assertEqual((self.docs / "CNAME").read_text().strip(),
+                         "wcformbook.com")
+
+    def test_og_image_on_custom_domain(self):
+        html = (self.docs / "index.html").read_text()
+        self.assertIn('property="og:image" '
+                      'content="https://wcformbook.com/', html)
 
 
 if __name__ == "__main__":

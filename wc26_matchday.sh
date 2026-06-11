@@ -16,13 +16,13 @@ git pull -q --ff-only
 # test gate: red tests = no publish, failure stays in this log
 python3 -m unittest discover -s tests -q || { echo "TESTS FAILED - aborting publish"; exit 1; }
 
-python3 wc26_update_results.py          # results, grading, scorers, KO fixtures
-python3 wc26_polymarket.py              # fresh market prices (also new KO/late markets)
-python3 wc26_espn_ids.py                # live-link ids (picks up KO fixtures)
-python3 wc26_simulate.py                # refit on latest results
-.venv/bin/python3 wc26_tournament.py    # 100k tournament sims (lock untouched)
-.venv/bin/python3 wc26_awards.py        # boot/awards odds
-python3 wc26_build_site.py snapshot     # rebuild + freeze today's archive copy
+python3 pipeline/wc26_update_results.py          # results, grading, scorers, KO fixtures
+python3 pipeline/wc26_polymarket.py              # fresh market prices (also new KO/late markets)
+python3 pipeline/wc26_espn_ids.py                # live-link ids (picks up KO fixtures)
+python3 pipeline/wc26_simulate.py                # refit on latest results
+.venv/bin/python3 pipeline/wc26_tournament.py    # 100k tournament sims (lock untouched)
+.venv/bin/python3 pipeline/wc26_awards.py        # boot/awards odds
+python3 pipeline/wc26_build_site.py snapshot     # rebuild + freeze today's archive copy
 
 if [[ -n "$(git status --porcelain -- . ':!experiments')" ]]; then
   git add -A -- ':!experiments'

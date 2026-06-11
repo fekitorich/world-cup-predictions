@@ -13,7 +13,8 @@ import time
 import urllib.parse
 import urllib.request
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
 KEY = os.environ.get("API_FOOTBALL_KEY") or \
     open(os.path.join(ROOT, ".api_football_key")).read().strip()
 SEASONS = (2024, 2025, 2026)
@@ -101,7 +102,7 @@ def fetch_award_prices():
 def main():
     # resolve team ids from the fetch cache (already mapped during last-10 fetch)
     ids = {name: d["team_id"]
-           for name, d in json.load(open(f"{ROOT}/wc26_matches.json")).items()}
+           for name, d in json.load(open(f"{DATA}/wc26_matches.json")).items()}
     teams = {}
     for i, (name, tid) in enumerate(ids.items(), 1):
         teams[name] = fetch_team(name, tid)
@@ -114,10 +115,10 @@ def main():
         "squads": teams,
         "market": fetch_award_prices(),
     }
-    json.dump(out, open(f"{ROOT}/wc26_players.json", "w"), indent=2,
+    json.dump(out, open(f"{DATA}/wc26_players.json", "w"), indent=2,
               ensure_ascii=False)
     from wc26_simulate import save_versioned
-    save_versioned(f"{ROOT}/wc26_players.json")
+    save_versioned(f"{DATA}/wc26_players.json")
     print("wrote wc26_players.json")
 
 

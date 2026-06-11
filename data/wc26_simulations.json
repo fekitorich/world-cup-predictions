@@ -1,7 +1,7 @@
 {
   "method": "Dixon-Coles weighted Poisson, params {'half_life': 1000, 'friendly_w': 0.8, 'shrink': 4.0, 'rho': -0.05, 'margin_cap': 99, 'min2_boost': 1.0}; blend w=0.35 on Polymarket where priced",
   "backtest_logloss": 0.8185,
-  "generated": "2026-06-11 20:19 UTC",
+  "generated": "2026-06-11 20:41 UTC",
   "simulations": {
     "1489369": {
       "home": "Mexico",
@@ -18,9 +18,9 @@
         "away": 0.0855
       },
       "moneyline_blend": {
-        "home": 0.7103,
-        "draw": 0.1976,
-        "away": 0.0921
+        "home": 0.7825,
+        "draw": 0.1638,
+        "away": 0.0537
       },
       "totals": {
         "over_1.5": 0.7417,
@@ -223,9 +223,9 @@
         "away": 0.1894
       },
       "moneyline_blend": {
-        "home": 0.531,
-        "draw": 0.2679,
-        "away": 0.2011
+        "home": 0.5293,
+        "draw": 0.2689,
+        "away": 0.2018
       },
       "totals": {
         "over_1.5": 0.6973,
@@ -294,9 +294,9 @@
         "away": 0.8086
       },
       "moneyline_blend": {
-        "home": 0.0622,
-        "draw": 0.1319,
-        "away": 0.8058
+        "home": 0.0617,
+        "draw": 0.132,
+        "away": 0.8063
       },
       "totals": {
         "over_1.5": 0.861,
@@ -436,9 +436,9 @@
         "away": 0.4587
       },
       "moneyline_blend": {
-        "home": 0.231,
-        "draw": 0.251,
-        "away": 0.518
+        "home": 0.2317,
+        "draw": 0.2517,
+        "away": 0.5166
       },
       "totals": {
         "over_1.5": 0.7689,
@@ -507,9 +507,9 @@
         "away": 0.3335
       },
       "moneyline_blend": {
-        "home": 0.2982,
-        "draw": 0.2867,
-        "away": 0.4151
+        "home": 0.2974,
+        "draw": 0.286,
+        "away": 0.4166
       },
       "totals": {
         "over_1.5": 0.6969,
@@ -578,9 +578,9 @@
         "away": 0.0262
       },
       "moneyline_blend": {
-        "home": 0.9134,
-        "draw": 0.0621,
-        "away": 0.0245
+        "home": 0.913,
+        "draw": 0.0617,
+        "away": 0.0253
       },
       "totals": {
         "over_1.5": 0.9138,
@@ -649,9 +649,9 @@
         "away": 0.369
       },
       "moneyline_blend": {
-        "home": 0.3864,
-        "draw": 0.2829,
-        "away": 0.3307
+        "home": 0.3899,
+        "draw": 0.2834,
+        "away": 0.3267
       },
       "totals": {
         "over_1.5": 0.7136,
@@ -1071,9 +1071,9 @@
         "away": 0.255
       },
       "moneyline_blend": {
-        "home": 0.4917,
-        "draw": 0.2759,
-        "away": 0.2324
+        "home": 0.49,
+        "draw": 0.2768,
+        "away": 0.2332
       },
       "totals": {
         "over_1.5": 0.7129,
@@ -1213,9 +1213,9 @@
         "away": 0.7099
       },
       "moneyline_blend": {
-        "home": 0.0758,
-        "draw": 0.1755,
-        "away": 0.7487
+        "home": 0.08,
+        "draw": 0.1747,
+        "away": 0.7453
       },
       "totals": {
         "over_1.5": 0.7285,
@@ -1497,9 +1497,9 @@
         "away": 0.1554
       },
       "moneyline_blend": {
-        "home": 0.5742,
-        "draw": 0.2582,
-        "away": 0.1675
+        "home": 0.576,
+        "draw": 0.259,
+        "away": 0.165
       },
       "totals": {
         "over_1.5": 0.6678,
@@ -1568,9 +1568,9 @@
         "away": 0.2786
       },
       "moneyline_blend": {
-        "home": 0.4432,
-        "draw": 0.2825,
-        "away": 0.2743
+        "home": 0.4397,
+        "draw": 0.2824,
+        "away": 0.2779
       },
       "totals": {
         "over_1.5": 0.6954,
@@ -1710,9 +1710,9 @@
         "away": 0.2329
       },
       "moneyline_blend": {
-        "home": 0.4789,
-        "draw": 0.2913,
-        "away": 0.2297
+        "home": 0.5019,
+        "draw": 0.2821,
+        "away": 0.216
       },
       "totals": {
         "over_1.5": 0.6445,
@@ -2128,9 +2128,9 @@
         "away": 0.032
       },
       "moneyline_blend": {
-        "home": 0.8874,
-        "draw": 0.0784,
-        "away": 0.0343
+        "home": 0.89,
+        "draw": 0.0756,
+        "away": 0.0344
       },
       "totals": {
         "over_1.5": 0.9053,
@@ -2270,9 +2270,9 @@
         "away": 0.1584
       },
       "moneyline_blend": {
-        "home": 0.6174,
-        "draw": 0.2187,
-        "away": 0.1638
+        "home": 0.6154,
+        "draw": 0.218,
+        "away": 0.1665
       },
       "totals": {
         "over_1.5": 0.8141,
@@ -2412,9 +2412,9 @@
         "away": 0.0553
       },
       "moneyline_blend": {
-        "home": 0.7819,
-        "draw": 0.1618,
-        "away": 0.0563
+        "home": 0.7775,
+        "draw": 0.1613,
+        "away": 0.0612
       },
       "totals": {
         "over_1.5": 0.7044,
@@ -2554,9 +2554,9 @@
         "away": 0.029
       },
       "moneyline_blend": {
-        "home": 0.872,
-        "draw": 0.096,
-        "away": 0.032
+        "home": 0.8713,
+        "draw": 0.0959,
+        "away": 0.0329
       },
       "totals": {
         "over_1.5": 0.8352,
@@ -2625,9 +2625,9 @@
         "away": 0.1624
       },
       "moneyline_blend": {
-        "home": 0.6373,
-        "draw": 0.2227,
-        "away": 0.1399
+        "home": 0.6321,
+        "draw": 0.2231,
+        "away": 0.1447
       },
       "totals": {
         "over_1.5": 0.7431,
@@ -2763,9 +2763,9 @@
         "away": 0.4522
       },
       "moneyline_blend": {
-        "home": 0.2255,
-        "draw": 0.2873,
-        "away": 0.4872
+        "home": 0.2262,
+        "draw": 0.2882,
+        "away": 0.4856
       },
       "totals": {
         "over_1.5": 0.624,
@@ -2834,9 +2834,9 @@
         "away": 0.0876
       },
       "moneyline_blend": {
-        "home": 0.6686,
-        "draw": 0.2213,
-        "away": 0.1102
+        "home": 0.6692,
+        "draw": 0.2208,
+        "away": 0.11
       },
       "totals": {
         "over_1.5": 0.6934,
@@ -2905,9 +2905,9 @@
         "away": 0.0386
       },
       "moneyline_blend": {
-        "home": 0.8421,
-        "draw": 0.1205,
-        "away": 0.0374
+        "home": 0.8415,
+        "draw": 0.1204,
+        "away": 0.0381
       },
       "totals": {
         "over_1.5": 0.789,
@@ -3189,9 +3189,9 @@
         "away": 0.0583
       },
       "moneyline_blend": {
-        "home": 0.7627,
-        "draw": 0.1678,
-        "away": 0.0695
+        "home": 0.7636,
+        "draw": 0.1672,
+        "away": 0.0692
       },
       "totals": {
         "over_1.5": 0.742,
@@ -3260,9 +3260,9 @@
         "away": 0.6816
       },
       "moneyline_blend": {
-        "home": 0.1232,
-        "draw": 0.2145,
-        "away": 0.6623
+        "home": 0.122,
+        "draw": 0.2136,
+        "away": 0.6644
       },
       "totals": {
         "over_1.5": 0.7803,
@@ -3331,9 +3331,9 @@
         "away": 0.1391
       },
       "moneyline_blend": {
-        "home": 0.6046,
-        "draw": 0.2616,
-        "away": 0.1337
+        "home": 0.6084,
+        "draw": 0.2578,
+        "away": 0.1339
       },
       "totals": {
         "over_1.5": 0.5873,
@@ -3402,9 +3402,9 @@
         "away": 0.4317
       },
       "moneyline_blend": {
-        "home": 0.3472,
-        "draw": 0.2799,
-        "away": 0.3729
+        "home": 0.3478,
+        "draw": 0.2787,
+        "away": 0.3736
       },
       "totals": {
         "over_1.5": 0.7491,
@@ -3611,9 +3611,9 @@
         "away": 0.7876
       },
       "moneyline_blend": {
-        "home": 0.0848,
-        "draw": 0.1658,
-        "away": 0.7494
+        "home": 0.0867,
+        "draw": 0.1655,
+        "away": 0.7479
       },
       "totals": {
         "over_1.5": 0.8099,
@@ -3753,9 +3753,9 @@
         "away": 0.5844
       },
       "moneyline_blend": {
-        "home": 0.176,
-        "draw": 0.2682,
-        "away": 0.5558
+        "home": 0.1665,
+        "draw": 0.2618,
+        "away": 0.5716
       },
       "totals": {
         "over_1.5": 0.6659,
@@ -3824,9 +3824,9 @@
         "away": 0.3894
       },
       "moneyline_blend": {
-        "home": 0.2563,
-        "draw": 0.2956,
-        "away": 0.4481
+        "home": 0.2574,
+        "draw": 0.2963,
+        "away": 0.4462
       },
       "totals": {
         "over_1.5": 0.6056,
@@ -3895,9 +3895,9 @@
         "away": 0.7592
       },
       "moneyline_blend": {
-        "home": 0.0697,
-        "draw": 0.1629,
-        "away": 0.7674
+        "home": 0.0696,
+        "draw": 0.1626,
+        "away": 0.7678
       },
       "totals": {
         "over_1.5": 0.7515,
@@ -3966,9 +3966,9 @@
         "away": 0.1539
       },
       "moneyline_blend": {
-        "home": 0.5677,
-        "draw": 0.2439,
-        "away": 0.1884
+        "home": 0.5659,
+        "draw": 0.2455,
+        "away": 0.1885
       },
       "totals": {
         "over_1.5": 0.7641,
@@ -4037,9 +4037,9 @@
         "away": 0.6421
       },
       "moneyline_blend": {
-        "home": 0.1279,
-        "draw": 0.2286,
-        "away": 0.6435
+        "home": 0.1265,
+        "draw": 0.229,
+        "away": 0.6445
       },
       "totals": {
         "over_1.5": 0.6986,
@@ -4108,9 +4108,9 @@
         "away": 0.5303
       },
       "moneyline_blend": {
-        "home": 0.2805,
-        "draw": 0.2435,
-        "away": 0.476
+        "home": 0.2827,
+        "draw": 0.2443,
+        "away": 0.473
       },
       "totals": {
         "over_1.5": 0.8298,
@@ -4321,9 +4321,9 @@
         "away": 0.5419
       },
       "moneyline_blend": {
-        "home": 0.2144,
-        "draw": 0.2531,
-        "away": 0.5325
+        "home": 0.214,
+        "draw": 0.2544,
+        "away": 0.5316
       },
       "totals": {
         "over_1.5": 0.7478,
@@ -4392,9 +4392,9 @@
         "away": 0.5229
       },
       "moneyline_blend": {
-        "home": 0.1807,
-        "draw": 0.2725,
-        "away": 0.5468
+        "home": 0.1813,
+        "draw": 0.2733,
+        "away": 0.5453
       },
       "totals": {
         "over_1.5": 0.6201,
@@ -4530,9 +4530,9 @@
         "away": 0.3295
       },
       "moneyline_blend": {
-        "home": 0.374,
-        "draw": 0.3205,
-        "away": 0.3055
+        "home": 0.372,
+        "draw": 0.3223,
+        "away": 0.3058
       },
       "totals": {
         "over_1.5": 0.5893,
@@ -4601,9 +4601,9 @@
         "away": 0.7206
       },
       "moneyline_blend": {
-        "home": 0.0936,
-        "draw": 0.1721,
-        "away": 0.7344
+        "home": 0.0934,
+        "draw": 0.1718,
+        "away": 0.7348
       },
       "totals": {
         "over_1.5": 0.8026,
@@ -4672,9 +4672,9 @@
         "away": 0.1684
       },
       "moneyline_blend": {
-        "home": 0.5789,
-        "draw": 0.258,
-        "away": 0.1631
+        "home": 0.5765,
+        "draw": 0.2602,
+        "away": 0.1633
       },
       "totals": {
         "over_1.5": 0.6853,
@@ -4743,9 +4743,9 @@
         "away": 0.8621
       },
       "moneyline_blend": {
-        "home": 0.0482,
-        "draw": 0.1213,
-        "away": 0.8305
+        "home": 0.0498,
+        "draw": 0.1211,
+        "away": 0.829
       },
       "totals": {
         "over_1.5": 0.8448,
@@ -4814,9 +4814,9 @@
         "away": 0.4316
       },
       "moneyline_blend": {
-        "home": 0.2788,
-        "draw": 0.2828,
-        "away": 0.4384
+        "home": 0.28,
+        "draw": 0.2823,
+        "away": 0.4376
       },
       "totals": {
         "over_1.5": 0.7005,
@@ -4885,9 +4885,9 @@
         "away": 0.3255
       },
       "moneyline_blend": {
-        "home": 0.3323,
-        "draw": 0.3427,
-        "away": 0.325
+        "home": 0.3298,
+        "draw": 0.345,
+        "away": 0.3252
       },
       "totals": {
         "over_1.5": 0.45,
@@ -4956,9 +4956,9 @@
         "away": 0.2793
       },
       "moneyline_blend": {
-        "home": 0.3653,
-        "draw": 0.3006,
-        "away": 0.3341
+        "home": 0.3647,
+        "draw": 0.3017,
+        "away": 0.3336
       },
       "totals": {
         "over_1.5": 0.688,
@@ -5027,9 +5027,9 @@
         "away": 0.915
       },
       "moneyline_blend": {
-        "home": 0.0274,
-        "draw": 0.0853,
-        "away": 0.8874
+        "home": 0.0273,
+        "draw": 0.0827,
+        "away": 0.89
       },
       "totals": {
         "over_1.5": 0.8837,
