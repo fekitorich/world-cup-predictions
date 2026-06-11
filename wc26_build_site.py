@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "docs"   # served by GitHub Pages (main branch /docs)
+DOMAIN = "wcformbook.com"   # custom domain; build emits docs/CNAME for Pages
 BUILD_V = datetime.now(timezone.utc).strftime("%Y%m%d%H%M")  # css cache-buster
 
 teams_data = json.load(open(ROOT / "fifa_world_cup_2026.json"))
@@ -210,9 +211,9 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 <meta property="og:title" content="{escape(title)} · WC26 Form Book">
 <meta property="og:description" content="World Cup 2026 probabilities from an open statistical model: match fair prices vs the betting market, tournament odds, and a locked bracket graded in public.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://amirdaraee.com/world-cup-predictions/img/og.png">
+<meta property="og:image" content="https://{DOMAIN}/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://amirdaraee.com/world-cup-predictions/img/og.png">
+<meta name="twitter:image" content="https://{DOMAIN}/img/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23211d16'/%3E%3Cpath d='M8 4l3 2.2-1.1 3.6H6.1L5 6.2z' fill='%23f6f1e6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EG56KHB1SX"></script>
@@ -2043,6 +2044,7 @@ def build_all(snapshot=False):
         for f in list((ROOT / "charts").glob("*.svg")) + list((ROOT / "charts").glob("*.png")):
             shutil.copy(f, OUT / "img" / f.name)
     (OUT / "style.css").write_text(CSS)
+    (OUT / "CNAME").write_text(DOMAIN + "\n")   # Pages custom domain
     build_index()
     build_matches_list()
     build_team_pages()

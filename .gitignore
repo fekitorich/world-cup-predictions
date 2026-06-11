@@ -11,3 +11,4 @@ sync_claude_history.sh
 betting/state/
 betting/config.local.json
 logs/
+.vscode/
