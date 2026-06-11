@@ -239,7 +239,7 @@ function toggleTheme() {{
   {switcher}
   <div class="kicker">The Form Book - research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
-  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}method.html">Method</a></nav>
+  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}report.html">Report</a><span>·</span><a href="{pre}method.html">Method</a></nav>
 </header>
 {f'<div class="crumb">{crumb}</div>' if crumb else ''}
 <main id="main">
@@ -946,7 +946,8 @@ and the model/market/blend comparison is the real experiment here: it settles wh
 deserves your trust with actual match results.</p>
 <h2>Scorecard</h2>
 {acc_html}
-{trend_chart()}
+<p class="fineprint">The full accuracy analysis - trends, calibration, sharpest and
+roughest calls, matchday breakdowns - lives on the <a href="report.html">Report</a> page.</p>
 {ko_html}
 <h2>Predicted group tables</h2>
 <div class="groups">{gt_html}</div>
@@ -1136,6 +1137,143 @@ def boot_race_table():
 <th class="num" title="model Golden Boot odds">Model</th>
 <th class="num">Polymarket</th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>"""
+
+
+
+# ---------- accuracy report page ----------
+def build_report():
+    md_of = {m["match_id"]: m["matchday"] for m in MATCHES}
+    graded = sorted((p for p in (PRED or {}).get("group_matches", [])
+                     if "actual_score" in p), key=lambda p: p["date_utc"])
+    acc = (PRED or {}).get("accuracy") or {}
+
+    if not graded:
+        body = """<h1>The report card</h1>
+<p class="standfirst">Every prediction on this site was locked before the tournament;
+this page grades them against reality after every matchday. Nothing here yet -
+the first results arrive tonight, and the first report follows the first grading run.</p>
+<p class="fineprint">What will appear: result hit rate and proper scores (Brier,
+log-loss) for the model, the market and the blend; the running trend of who is
+forecasting best; calibration buckets; the sharpest and roughest calls; and a
+matchday-by-matchday breakdown. The locked picks themselves are on the
+<a href="bracket.html">Bracket</a> page.</p>"""
+        (OUT / "report.html").write_text(page("Report", body))
+        return
+
+    # headline strip
+    st = "".join(
+        f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in (
+            ("Matches graded", acc.get("graded_group_matches", len(graded))),
+            ("Results called", f"{acc.get('result_hits', 0)} "
+             f"({(acc.get('result_pct') or 0) * 100:.0f}%)"),
+            ("Exact scores", acc.get("exact_score_hits", 0)),
+            ("Brier (blend)", acc.get("brier", "-")),
+        ))
+    head = f'<dl class="stats">{st}</dl>'
+
+    comp = ""
+    if acc.get("compare"):
+        rows = "".join(
+            f'<tr><td>{srcn.title()}</td><td class="num">{v["brier"]}</td>'
+            f'<td class="num">{v["logloss"]}</td></tr>'
+            for srcn, v in acc["compare"].items())
+        comp = f"""<h2>Who forecasts best so far</h2>
+<table class="ko"><thead><tr><th>Source</th>
+<th class="num" title="mean squared error - guessing equally scores 0.667">Brier</th>
+<th class="num" title="penalises confident errors - guessing equally scores 1.099">Log-loss</th></tr></thead>
+<tbody>{rows}</tbody></table>
+<p class="fineprint">Market graded on its {acc.get("market_priced_matches", 0)} priced
+matches. Lower is better; the gap between these rows is this whole project's thesis
+being settled in public.</p>"""
+
+    # matchday breakdown
+    by_md = {}
+    for p in graded:
+        by_md.setdefault(md_of.get(p["match_id"], "?"), []).append(p)
+    md_rows = ""
+    for md in sorted(by_md):
+        ps = by_md[md]
+        hits = sum(1 for p in ps if p.get("hit"))
+        ex = sum(1 for p in ps if p["pred_score"] == p.get("actual_score"))
+        import math as _m
+        ll = -sum(_m.log(max(p["p"][p["actual_result"]], 1e-9))
+                  for p in ps) / len(ps)
+        md_rows += (f'<tr><td>Matchday {md}</td><td class="num">{len(ps)}</td>'
+                    f'<td class="num">{hits}/{len(ps)}</td>'
+                    f'<td class="num">{ex}</td><td class="num">{ll:.3f}</td></tr>')
+    md_html = f"""<h2>Matchday by matchday</h2>
+<table class="ko"><thead><tr><th>Stage</th><th class="num">Played</th>
+<th class="num">Results called</th><th class="num">Exact scores</th>
+<th class="num">Log-loss (blend)</th></tr></thead><tbody>{md_rows}</tbody></table>"""
+
+    # sharpest / roughest calls vs the market
+    scored = []
+    for p in graded:
+        if not p.get("p_market"):
+            continue
+        msum = sum(p["p_market"].values())
+        res = p["actual_result"]
+        scored.append((p["p_model"][res] - p["p_market"][res] / msum, p))
+    scored.sort(key=lambda x: -x[0])
+
+    def call_rows(items):
+        out = ""
+        for delta, p in items:
+            res_label = {"H": p["home"], "A": p["away"], "D": "Draw"}[p["actual_result"]]
+            out += (f'<tr><td>{escape(p["home"])} v {escape(p["away"])} '
+                    f'<b class="score">{p["actual_score"]}</b></td>'
+                    f'<td>{escape(res_label)}</td>'
+                    f'<td class="num">{p["p_model"][p["actual_result"]] * 100:.0f}%</td>'
+                    f'<td class="num">{p["p_market"][p["actual_result"]] / sum(p["p_market"].values()) * 100:.0f}%</td>'
+                    f'<td class="num">{delta * 100:+.0f}pp</td></tr>')
+        return out
+
+    calls = ""
+    if scored:
+        calls = f"""<h2>Sharpest calls (model saw it, market didn't)</h2>
+<table class="ko"><thead><tr><th>Match</th><th>Outcome</th>
+<th class="num">Model gave it</th><th class="num">Market gave it</th>
+<th class="num">Edge realised</th></tr></thead>
+<tbody>{call_rows(scored[:5])}</tbody></table>
+<h2>Roughest calls (market saw it, model didn't)</h2>
+<table class="ko"><thead><tr><th>Match</th><th>Outcome</th>
+<th class="num">Model gave it</th><th class="num">Market gave it</th>
+<th class="num">Edge realised</th></tr></thead>
+<tbody>{call_rows(list(reversed(scored[-5:])))}</tbody></table>"""
+
+    # calibration buckets (model probabilities, all three outcomes pooled)
+    buckets = {}
+    for p in graded:
+        for k in ("H", "D", "A"):
+            q = p["p_model"][k]
+            b = min(int(q * 5), 4)
+            hit = 1 if p["actual_result"] == k else 0
+            buckets.setdefault(b, []).append((q, hit))
+    cal_rows = ""
+    for b in sorted(buckets):
+        qs = buckets[b]
+        cal_rows += (f'<tr><td>{b * 20}-{b * 20 + 20}%</td>'
+                     f'<td class="num">{len(qs)}</td>'
+                     f'<td class="num">{sum(q for q, _ in qs) / len(qs) * 100:.0f}%</td>'
+                     f'<td class="num">{sum(h for _, h in qs) / len(qs) * 100:.0f}%</td></tr>')
+    cal = f"""<h2>Calibration so far</h2>
+<table class="ko"><thead><tr><th>Claimed probability</th><th class="num">Claims</th>
+<th class="num">Average claim</th><th class="num">Actually happened</th></tr></thead>
+<tbody>{cal_rows}</tbody></table>
+<p class="fineprint">A calibrated forecaster's last two columns match. Early-tournament
+samples are small - judge after a full group stage.</p>"""
+
+    body = f"""<h1>The report card</h1>
+<p class="standfirst">Locked predictions, graded after every matchday. Re-generated
+automatically by the nightly run; previous editions live in the
+<a href="archive.html">versions archive</a>.</p>
+{head}
+{comp}
+{trend_chart()}
+{md_html}
+{calls}
+{cal}"""
+    (OUT / "report.html").write_text(page("Report", body))
 
 
 # ---------- methodology page ----------
@@ -1710,8 +1848,8 @@ footer p { margin: .2rem 0; }
   h1 { font-size: 1.9rem; }
   .wordmark { font-size: 2.1rem; }
   .masthead { padding: 18px 8px 10px; }
-  .masthead nav { font-size: .66rem; letter-spacing: .03em; }
-  .masthead nav span { margin: 0 4px; }
+  .masthead nav { font-size: .62rem; letter-spacing: .02em; }
+  .masthead nav span { margin: 0 3px; }
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .group table { display: table; }   /* narrow enough to render full-width */
   table { font-size: .78rem; }
@@ -1906,6 +2044,7 @@ def build_all(snapshot=False):
     build_bracket()
     build_awards()
     build_player_pages()
+    build_report()
     build_method()
     build_method_fa()
     build_archive_index()

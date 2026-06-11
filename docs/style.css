@@ -121,8 +121,8 @@ footer p { margin: .2rem 0; }
   h1 { font-size: 1.9rem; }
   .wordmark { font-size: 2.1rem; }
   .masthead { padding: 18px 8px 10px; }
-  .masthead nav { font-size: .66rem; letter-spacing: .03em; }
-  .masthead nav span { margin: 0 4px; }
+  .masthead nav { font-size: .62rem; letter-spacing: .02em; }
+  .masthead nav span { margin: 0 3px; }
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .group table { display: table; }   /* narrow enough to render full-width */
   table { font-size: .78rem; }
