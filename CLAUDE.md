@@ -22,6 +22,7 @@ python3 wc26_espn_ids.py     # (once) ESPN gameId mapping for live links
 python3 wc26_update_results.py  # during tournament: pull actual results, grade predictions
 python3 wc26_build_site.py   # regenerate docs/ live pages
 python3 wc26_charts.py        # (occasional) regenerate method-page SVG charts
+python3 -m unittest discover -s tests   # gate: matchday script runs this before publishing
 python3 wc26_build_site.py snapshot  # ...plus freeze docs/archive/<date>/ (once per matchday;
                              # archive/ survives rebuilds, snapshots are immutable history)
 python3 -m http.server 8742 --directory docs   # browse
