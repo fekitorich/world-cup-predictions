@@ -45,11 +45,55 @@ def fetch_all():
         return json.load(r)["response"]
 
 
+def update_scorers(finished):
+    """Tally tournament goalscorers from fixture events (Golden Boot race).
+    Caches per-fixture events so each finished match is fetched once."""
+    import time
+    path = f"{ROOT}/wc26_scorers.json"
+    try:
+        data = json.load(open(path))
+    except FileNotFoundError:
+        data = {"fetched_fixtures": [], "scorers": {}}
+    done = set(data["fetched_fixtures"])
+    new = [f for f in finished if f["fixture"]["id"] not in done]
+    for f in new:
+        fid = f["fixture"]["id"]
+        url = f"https://v3.football.api-sports.io/fixtures/events?fixture={fid}"
+        req = urllib.request.Request(url, headers={"x-apisports-key": KEY})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            events = json.load(r)["response"]
+        for ev in events:
+            if ev.get("type") != "Goal" or ev.get("detail") == "Missed Penalty":
+                continue
+            if ev.get("detail") == "Own Goal":
+                continue   # own goals don't count toward the Golden Boot
+            if "Penalty Shootout" in (ev.get("comments") or ""):
+                continue
+            player = (ev.get("player") or {}).get("name")
+            team = norm((ev.get("team") or {}).get("name", ""))
+            if not player:
+                continue
+            s = data["scorers"].setdefault(player, {"team": team, "goals": 0,
+                                                    "assists_from": []})
+            s["goals"] += 1
+        done.add(fid)
+        time.sleep(0.2)
+    data["fetched_fixtures"] = sorted(done)
+    data["scorers"] = dict(sorted(data["scorers"].items(),
+                                  key=lambda kv: -kv[1]["goals"]))
+    json.dump(data, open(path, "w"), indent=2, ensure_ascii=False)
+    if new:
+        print(f"scorers updated from {len(new)} newly finished matches; "
+              f"race leader: {next(iter(data['scorers']), 'nobody yet')}")
+    return data
+
+
 def main():
     fixtures = fetch_all()
     finished = [f for f in fixtures
                 if f["fixture"]["status"]["short"] in FINISHED]
     print(f"{len(fixtures)} WC fixtures known, {len(finished)} finished")
+    update_scorers(finished)
 
     # ---- refresh group matches file ----
     gm_path = f"{ROOT}/fifa_world_cup_2026_group_matches.json"

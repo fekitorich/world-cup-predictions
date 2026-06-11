@@ -1,0 +1,6183 @@
+{
+  "fetched_at": "2026-06-11 07:21 UTC",
+  "profiles": {
+    "H. Kane": {
+      "team": "England",
+      "api_name": "H. Kane",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Bayern München",
+            "competition": "Bundesliga",
+            "apps": 31,
+            "minutes": 2389,
+            "goals": 26,
+            "assists": 8,
+            "rating": 7.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "DFB Pokal",
+            "apps": 2,
+            "minutes": 72,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.15,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 1120,
+            "goals": 11,
+            "assists": 2,
+            "rating": 7.72,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 93,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "Euro Championship",
+            "apps": 7,
+            "minutes": 606,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.04,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "UEFA Nations League",
+            "apps": 5,
+            "minutes": 347,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.26,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 8,
+            "minutes": 681,
+            "goals": 8,
+            "assists": 0,
+            "rating": 7.88,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Bayern München",
+            "competition": "FIFA Club World Cup",
+            "apps": 4,
+            "minutes": 314,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.53,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.5,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Friendlies Clubs",
+            "apps": 3,
+            "minutes": 45,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 59,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.0,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "DFB Pokal",
+            "apps": 6,
+            "minutes": 537,
+            "goals": 10,
+            "assists": 0,
+            "rating": 8.05,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Bundesliga",
+            "apps": 31,
+            "minutes": 2382,
+            "goals": 36,
+            "assists": 5,
+            "rating": 7.87,
+            "position": "Attacker"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 1039,
+            "goals": 14,
+            "assists": 2,
+            "rating": 8.0,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "England",
+            "competition": "UEFA World Cup Qualifiers",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.1,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "H. Kane",
+        "fullname": "Harry Edward Kane",
+        "age": 32,
+        "birth_date": "1993-07-28",
+        "birth_place": "London, England",
+        "height": "188",
+        "weight": "86",
+        "photo": "https://media.api-sports.io/football/players/184.png"
+      }
+    },
+    "J. David": {
+      "team": "Canada",
+      "api_name": "J. David",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Lille",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1113,
+            "goals": 9,
+            "assists": 4,
+            "rating": 7.23,
+            "position": "Attacker"
+          },
+          {
+            "team": "Lille",
+            "competition": "Ligue 1",
+            "apps": 32,
+            "minutes": 2558,
+            "goals": 16,
+            "assists": 5,
+            "rating": 7.15,
+            "position": "Attacker"
+          },
+          {
+            "team": "Juventus",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1112,
+            "goals": 9,
+            "assists": 4,
+            "rating": 7.23,
+            "position": "Attacker"
+          },
+          {
+            "team": "Canada",
+            "competition": "Copa America",
+            "apps": 6,
+            "minutes": 446,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.93,
+            "position": "Attacker"
+          },
+          {
+            "team": "Canada",
+            "competition": "Friendlies",
+            "apps": 5,
+            "minutes": 388,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.42,
+            "position": "Attacker"
+          },
+          {
+            "team": "Lille",
+            "competition": "Coupe de France",
+            "apps": 2,
+            "minutes": 176,
+            "goals": 0,
+            "assists": 2,
+            "rating": 6.8,
+            "position": "Attacker"
+          },
+          {
+            "team": "Canada",
+            "competition": "CONCACAF Nations League",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.53,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Juventus",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 60,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "Canada",
+            "competition": "CONCACAF Gold Cup",
+            "apps": 2,
+            "minutes": 153,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.4,
+            "position": "Attacker"
+          },
+          {
+            "team": "Canada",
+            "competition": "Friendlies",
+            "apps": 8,
+            "minutes": 502,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.21,
+            "position": "Attacker"
+          },
+          {
+            "team": "Juventus",
+            "competition": "Coppa Italia",
+            "apps": 1,
+            "minutes": 148,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.15,
+            "position": "Attacker"
+          },
+          {
+            "team": "Juventus",
+            "competition": "Serie A",
+            "apps": 35,
+            "minutes": 1801,
+            "goals": 6,
+            "assists": 4,
+            "rating": 6.43,
+            "position": "Attacker"
+          },
+          {
+            "team": "Juventus",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 406,
+            "goals": 2,
+            "assists": 1,
+            "rating": 6.3,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Canada",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 169,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.23,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "J. David",
+        "fullname": "Jonathan Christian David",
+        "age": 25,
+        "birth_date": "2000-01-14",
+        "birth_place": "New York, USA",
+        "height": "178",
+        "weight": "81",
+        "photo": "https://media.api-sports.io/football/players/8489.png"
+      }
+    },
+    "Mikel Oyarzabal": {
+      "team": "Spain",
+      "api_name": "Mikel Oyarzabal",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Sociedad",
+            "competition": "La Liga",
+            "apps": 37,
+            "minutes": 2262,
+            "goals": 9,
+            "assists": 3,
+            "rating": 6.79,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Sociedad",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 332,
+            "goals": 4,
+            "assists": 4,
+            "rating": 8.28,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Sociedad",
+            "competition": "UEFA Europa League",
+            "apps": 12,
+            "minutes": 730,
+            "goals": 5,
+            "assists": 1,
+            "rating": 7.09,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 151,
+            "goals": 4,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "Euro Championship",
+            "apps": 7,
+            "minutes": 196,
+            "goals": 1,
+            "assists": 1,
+            "rating": 6.74,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "UEFA Nations League",
+            "apps": 6,
+            "minutes": 556,
+            "goals": 4,
+            "assists": 2,
+            "rating": 7.34,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 446,
+            "goals": 6,
+            "assists": 4,
+            "rating": 7.88,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Sociedad",
+            "competition": "Copa del Rey",
+            "apps": 6,
+            "minutes": 467,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.08,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Sociedad",
+            "competition": "La Liga",
+            "apps": 34,
+            "minutes": 2714,
+            "goals": 15,
+            "assists": 4,
+            "rating": 7.08,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 63,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.7,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Mikel Oyarzabal",
+        "fullname": "Mikel Oyarzabal Ugarte",
+        "age": 28,
+        "birth_date": "1997-04-21",
+        "birth_place": "Eibar, Spain",
+        "height": "181",
+        "weight": "79",
+        "photo": "https://media.api-sports.io/football/players/47323.png"
+      }
+    },
+    "Kylian Mbappé": {
+      "team": "France",
+      "api_name": "Kylian Mbappé",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 34,
+            "minutes": 2917,
+            "goals": 31,
+            "assists": 3,
+            "rating": 7.72,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.75,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 83,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1134,
+            "goals": 7,
+            "assists": 1,
+            "rating": 7.29,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 62,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 286,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.55,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 235,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 464,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.38,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "UEFA Nations League",
+            "apps": 5,
+            "minutes": 509,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.77,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 4,
+            "minutes": 353,
+            "goals": 5,
+            "assists": 3,
+            "rating": 8.38,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Club World Cup",
+            "apps": 3,
+            "minutes": 135,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.17,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 14,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.0,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 31,
+            "minutes": 2604,
+            "goals": 25,
+            "assists": 5,
+            "rating": 7.53,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 11,
+            "minutes": 912,
+            "goals": 15,
+            "assists": 1,
+            "rating": 8.05,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 219,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.03,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Kylian Mbappé",
+        "fullname": "Kylian Mbappé Lottin",
+        "age": 27,
+        "birth_date": "1998-12-20",
+        "birth_place": "Paris, France",
+        "height": "178",
+        "weight": "75",
+        "photo": "https://media.api-sports.io/football/players/278.png"
+      }
+    },
+    "Lautaro Martínez": {
+      "team": "Argentina",
+      "api_name": "E. Martínez",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Aston Villa",
+            "competition": "Premier League",
+            "apps": 37,
+            "minutes": 3196,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.09,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Aston Villa",
+            "competition": "FA Cup",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.95,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Aston Villa",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 1080,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.42,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Copa America",
+            "apps": 6,
+            "minutes": 570,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.33,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Aston Villa",
+            "competition": "Friendlies Clubs",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.95,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 166,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Aston Villa",
+            "competition": "FA Cup",
+            "apps": 1,
+            "minutes": 46,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Aston Villa",
+            "competition": "UEFA Europa League",
+            "apps": 11,
+            "minutes": 990,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.12,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Aston Villa",
+            "competition": "Premier League",
+            "apps": 32,
+            "minutes": 2835,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.98,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Argentina",
+            "competition": "World Cup - Qualification South America",
+            "apps": 16,
+            "minutes": 1459,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.93,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 51,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "E. Martínez",
+        "fullname": "Damián Emiliano Martínez Romero",
+        "age": 33,
+        "birth_date": "1992-09-02",
+        "birth_place": "Mar del Plata, Argentina",
+        "height": "195",
+        "weight": "88",
+        "photo": "https://media.api-sports.io/football/players/19599.png"
+      }
+    },
+    "E. Haaland": {
+      "team": "Norway",
+      "api_name": "E. Haaland",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Manchester City",
+            "competition": "Premier League",
+            "apps": 32,
+            "minutes": 2741,
+            "goals": 22,
+            "assists": 3,
+            "rating": 7.25,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "FA Cup",
+            "apps": 3,
+            "minutes": 151,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 772,
+            "goals": 8,
+            "assists": 0,
+            "rating": 7.42,
+            "position": "Attacker"
+          },
+          {
+            "team": "Norway",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 317,
+            "goals": 4,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Norway",
+            "competition": "UEFA Nations League",
+            "apps": 6,
+            "minutes": 536,
+            "goals": 7,
+            "assists": 1,
+            "rating": 8.22,
+            "position": "Attacker"
+          },
+          {
+            "team": "Norway",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 8,
+            "minutes": 706,
+            "goals": 16,
+            "assists": 2,
+            "rating": 8.25,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Manchester City",
+            "competition": "FIFA Club World Cup",
+            "apps": 3,
+            "minutes": 165,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.07,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "Friendlies Clubs",
+            "apps": 3,
+            "minutes": 165,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.07,
+            "position": "Attacker"
+          },
+          {
+            "team": "Norway",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "League Cup",
+            "apps": 2,
+            "minutes": 199,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.53,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "FA Cup",
+            "apps": 4,
+            "minutes": 231,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.28,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "Premier League",
+            "apps": 35,
+            "minutes": 2958,
+            "goals": 27,
+            "assists": 8,
+            "rating": 7.31,
+            "position": "Attacker"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 755,
+            "goals": 8,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Norway",
+            "competition": "UEFA World Cup Qualifiers",
+            "apps": 2,
+            "minutes": 168,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Norway",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 135,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "E. Haaland",
+        "fullname": "Erling Braut Haaland",
+        "age": 25,
+        "birth_date": "2000-07-21",
+        "birth_place": "Leeds, England",
+        "height": "195",
+        "weight": "88",
+        "photo": "https://media.api-sports.io/football/players/1100.png"
+      }
+    },
+    "Cristiano Ronaldo": {
+      "team": "Portugal",
+      "api_name": "Cristiano Ronaldo",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Al-Nassr",
+            "competition": "Super Cup",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.07,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Pro League",
+            "apps": 30,
+            "minutes": 2625,
+            "goals": 25,
+            "assists": 3,
+            "rating": 7.53,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "King's Cup",
+            "apps": 16,
+            "minutes": 1434,
+            "goals": 14,
+            "assists": 2,
+            "rating": 7.58,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "AFC Champions League Elite",
+            "apps": 7,
+            "minutes": 571,
+            "goals": 8,
+            "assists": 0,
+            "rating": 7.64,
+            "position": "Attacker"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 2,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 486,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.98,
+            "position": "Attacker"
+          },
+          {
+            "team": "Portugal",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 734,
+            "goals": 8,
+            "assists": 1,
+            "rating": 7.46,
+            "position": "Attacker"
+          },
+          {
+            "team": "Portugal",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 5,
+            "minutes": 375,
+            "goals": 5,
+            "assists": 0,
+            "rating": 7.34,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Al-Nassr",
+            "competition": "King's Cup",
+            "apps": 16,
+            "minutes": 1434,
+            "goals": 14,
+            "assists": 2,
+            "rating": 7.58,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Friendlies Clubs",
+            "apps": 7,
+            "minutes": 571,
+            "goals": 8,
+            "assists": 0,
+            "rating": 7.64,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "AFC Champions League Two",
+            "apps": 3,
+            "minutes": 123,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.45,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Pro League",
+            "apps": 30,
+            "minutes": 2616,
+            "goals": 28,
+            "assists": 2,
+            "rating": 7.16,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Cristiano Ronaldo",
+        "fullname": "Cristiano Ronaldo dos Santos Aveiro",
+        "age": 40,
+        "birth_date": "1985-02-05",
+        "birth_place": "Funchal, Portugal",
+        "height": "187",
+        "weight": "83",
+        "photo": "https://media.api-sports.io/football/players/874.png"
+      }
+    },
+    "R. Jiménez": {
+      "team": "Mexico",
+      "api_name": "R. Jiménez",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Fulham",
+            "competition": "Premier League",
+            "apps": 38,
+            "minutes": 2505,
+            "goals": 12,
+            "assists": 3,
+            "rating": 7.01,
+            "position": "Attacker"
+          },
+          {
+            "team": "Fulham",
+            "competition": "FA Cup",
+            "apps": 4,
+            "minutes": 94,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.97,
+            "position": "Attacker"
+          },
+          {
+            "team": "Fulham",
+            "competition": "League Cup",
+            "apps": 2,
+            "minutes": 105,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Mexico",
+            "competition": "CONCACAF Nations League",
+            "apps": 3,
+            "minutes": 269,
+            "goals": 5,
+            "assists": 1,
+            "rating": 8.77,
+            "position": "Attacker"
+          },
+          {
+            "team": "Mexico",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 82,
+            "goals": 1,
+            "assists": 1,
+            "rating": 8.7,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Mexico",
+            "competition": "CONCACAF Gold Cup",
+            "apps": 3,
+            "minutes": 216,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Mexico",
+            "competition": "Friendlies",
+            "apps": 6,
+            "minutes": 378,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.77,
+            "position": "Attacker"
+          },
+          {
+            "team": "Fulham",
+            "competition": "League Cup",
+            "apps": 4,
+            "minutes": 315,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.73,
+            "position": "Attacker"
+          },
+          {
+            "team": "Fulham",
+            "competition": "FA Cup",
+            "apps": 3,
+            "minutes": 48,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.6,
+            "position": "Attacker"
+          },
+          {
+            "team": "Fulham",
+            "competition": "Premier League",
+            "apps": 36,
+            "minutes": 2216,
+            "goals": 9,
+            "assists": 3,
+            "rating": 6.68,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Mexico",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 187,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "R. Jiménez",
+        "fullname": "Raúl Alonso Jiménez Rodríguez",
+        "age": 34,
+        "birth_date": "1991-05-05",
+        "birth_place": "Tepeji del Río Ocampo, Mexico",
+        "height": "190",
+        "weight": "76",
+        "photo": "https://media.api-sports.io/football/players/2887.png"
+      }
+    },
+    "L. Messi": {
+      "team": "Argentina",
+      "api_name": "L. Messi",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Inter Miami",
+            "competition": "Major League Soccer",
+            "apps": 22,
+            "minutes": 1755,
+            "goals": 21,
+            "assists": 11,
+            "rating": 8.33,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "CONCACAF Champions League",
+            "apps": 3,
+            "minutes": 230,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.77,
+            "position": "Attacker"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Copa America",
+            "apps": 5,
+            "minutes": 426,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.56,
+            "position": "Attacker"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 124,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Inter Miami",
+            "competition": "Leagues Cup",
+            "apps": 2,
+            "minutes": 101,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.25,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "FIFA Club World Cup",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.73,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "CONCACAF Champions League",
+            "apps": 7,
+            "minutes": 556,
+            "goals": 5,
+            "assists": 0,
+            "rating": 7.9,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "Major League Soccer",
+            "apps": 31,
+            "minutes": 2978,
+            "goals": 35,
+            "assists": 23,
+            "rating": 8.6,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "Friendlies Clubs",
+            "apps": 5,
+            "minutes": 73,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 176,
+            "goals": 1,
+            "assists": 3,
+            "rating": 8.7,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Argentina",
+            "competition": "World Cup - Qualification South America",
+            "apps": 12,
+            "minutes": 956,
+            "goals": 8,
+            "assists": 3,
+            "rating": 8.03,
+            "position": "Attacker"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "Major League Soccer",
+            "apps": 14,
+            "minutes": 1250,
+            "goals": 13,
+            "assists": 7,
+            "rating": 8.67,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Inter Miami",
+            "competition": "CONCACAF Champions League",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.65,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Argentina",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 35,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.25,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "L. Messi",
+        "fullname": "Lionel Andrés Messi Cuccittini",
+        "age": 38,
+        "birth_date": "1987-06-24",
+        "birth_place": "Rosario, Argentina",
+        "height": "170",
+        "weight": "67",
+        "photo": "https://media.api-sports.io/football/players/154.png"
+      }
+    },
+    "Brahim Díaz": {
+      "team": "Morocco",
+      "api_name": "Brahim Díaz",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 31,
+            "minutes": 1405,
+            "goals": 4,
+            "assists": 2,
+            "rating": 6.86,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 179,
+            "goals": 0,
+            "assists": 2,
+            "rating": 6.95,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 0,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 11,
+            "minutes": 487,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.01,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 0,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 0,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 0,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 0,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Club World Cup",
+            "apps": 6,
+            "minutes": 103,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.8,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 79,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.9,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations - Qualification",
+            "apps": 4,
+            "minutes": 233,
+            "goals": 7,
+            "assists": 0,
+            "rating": 8.22,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations",
+            "apps": 7,
+            "minutes": 591,
+            "goals": 5,
+            "assists": 0,
+            "rating": 6.94,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 30,
+            "minutes": 1284,
+            "goals": 1,
+            "assists": 6,
+            "rating": 6.68,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 427,
+            "goals": 1,
+            "assists": 1,
+            "rating": 6.79,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 186,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.88,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Brahim Díaz",
+        "fullname": "Brahim Abdelkader Díaz",
+        "age": 26,
+        "birth_date": "1999-08-03",
+        "birth_place": "Málaga, Spain",
+        "height": "171",
+        "weight": "59",
+        "photo": "https://media.api-sports.io/football/players/744.png"
+      }
+    },
+    "M. Olise": {
+      "team": "France",
+      "api_name": "M. Olise",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Bayern München",
+            "competition": "Bundesliga",
+            "apps": 34,
+            "minutes": 2346,
+            "goals": 12,
+            "assists": 15,
+            "rating": 7.92,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "DFB Pokal",
+            "apps": 3,
+            "minutes": 103,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.9,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1033,
+            "goals": 5,
+            "assists": 2,
+            "rating": 7.65,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France U23",
+            "competition": "Olympics Men",
+            "apps": 7,
+            "minutes": 254,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.76,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France",
+            "competition": "UEFA Nations League",
+            "apps": 7,
+            "minutes": 408,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.33,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 5,
+            "minutes": 427,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.42,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Bayern München",
+            "competition": "FIFA Club World Cup",
+            "apps": 4,
+            "minutes": 315,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.28,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 89,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.6,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Friendlies Clubs",
+            "apps": 3,
+            "minutes": 63,
+            "goals": 2,
+            "assists": 0,
+            "rating": 9.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "DFB Pokal",
+            "apps": 6,
+            "minutes": 522,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.4,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Bundesliga",
+            "apps": 32,
+            "minutes": 2317,
+            "goals": 15,
+            "assists": 19,
+            "rating": 7.89,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 1081,
+            "goals": 5,
+            "assists": 6,
+            "rating": 7.52,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 234,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.83,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "M. Olise",
+        "fullname": "Michael Akpovie Olise",
+        "age": 24,
+        "birth_date": "2001-12-12",
+        "birth_place": "London, England",
+        "height": "184",
+        "weight": "76",
+        "photo": "https://media.api-sports.io/football/players/19617.png"
+      }
+    },
+    "F. Wirtz": {
+      "team": "Germany",
+      "api_name": "F. Wirtz",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Bayer Leverkusen",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 766,
+            "goals": 6,
+            "assists": 1,
+            "rating": 7.82,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 5,
+            "minutes": 367,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.46,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayer Leverkusen",
+            "competition": "Bundesliga",
+            "apps": 31,
+            "minutes": 2354,
+            "goals": 10,
+            "assists": 12,
+            "rating": 7.7,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayer Leverkusen",
+            "competition": "DFB Pokal",
+            "apps": 4,
+            "minutes": 253,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 764,
+            "goals": 6,
+            "assists": 1,
+            "rating": 7.82,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Germany",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 237,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.8,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Germany",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 281,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.38,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Germany",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 587,
+            "goals": 4,
+            "assists": 3,
+            "rating": 7.83,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Germany",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 526,
+            "goals": 1,
+            "assists": 2,
+            "rating": 7.97,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 1,
+            "minutes": 84,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayer Leverkusen",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 74,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.0,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "FA Cup",
+            "apps": 4,
+            "minutes": 190,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.33,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 33,
+            "minutes": 2399,
+            "goals": 5,
+            "assists": 3,
+            "rating": 6.81,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 11,
+            "minutes": 840,
+            "goals": 1,
+            "assists": 3,
+            "rating": 7.19,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Germany",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 304,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.95,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "F. Wirtz",
+        "fullname": "Florian Richard Wirtz",
+        "age": 22,
+        "birth_date": "2003-05-03",
+        "birth_place": "Pulheim, Germany",
+        "height": "176",
+        "weight": "70",
+        "photo": "https://media.api-sports.io/football/players/203224.png"
+      }
+    },
+    "B. Embolo": {
+      "team": "Switzerland",
+      "api_name": "B. Embolo",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Monaco",
+            "competition": "Trophée des Champions",
+            "apps": 1,
+            "minutes": 18,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.16,
+            "position": "Attacker"
+          },
+          {
+            "team": "Monaco",
+            "competition": "Ligue 1",
+            "apps": 29,
+            "minutes": 1842,
+            "goals": 6,
+            "assists": 4,
+            "rating": 6.75,
+            "position": "Attacker"
+          },
+          {
+            "team": "Rennes",
+            "competition": "Coupe de France",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Monaco",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 750,
+            "goals": 1,
+            "assists": 3,
+            "rating": 6.98,
+            "position": "Attacker"
+          },
+          {
+            "team": "Monaco",
+            "competition": "Coupe de France",
+            "apps": 2,
+            "minutes": 153,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Switzerland",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 297,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.86,
+            "position": "Attacker"
+          },
+          {
+            "team": "Switzerland",
+            "competition": "UEFA Nations League",
+            "apps": 5,
+            "minutes": 398,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.74,
+            "position": "Attacker"
+          },
+          {
+            "team": "Switzerland",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 487,
+            "goals": 4,
+            "assists": 0,
+            "rating": 7.23,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Monaco",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Switzerland",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 302,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Attacker"
+          },
+          {
+            "team": "Rennes",
+            "competition": "Coupe de France",
+            "apps": 3,
+            "minutes": 170,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.03,
+            "position": "Attacker"
+          },
+          {
+            "team": "Rennes",
+            "competition": "Ligue 1",
+            "apps": 31,
+            "minutes": 1872,
+            "goals": 9,
+            "assists": 3,
+            "rating": 6.71,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Switzerland",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 199,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.27,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "B. Embolo",
+        "fullname": "Breel Donald Embolo",
+        "age": 28,
+        "birth_date": "1997-02-14",
+        "birth_place": "Yaoundé, Cameroon",
+        "height": "187",
+        "weight": "84",
+        "photo": "https://media.api-sports.io/football/players/421.png"
+      }
+    },
+    "V. Gyökeres": {
+      "team": "Sweden",
+      "api_name": "V. Gyökeres",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Sporting CP",
+            "competition": "Primeira Liga",
+            "apps": 33,
+            "minutes": 2804,
+            "goals": 39,
+            "assists": 7,
+            "rating": 7.99,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sporting CP",
+            "competition": "Taça da Liga",
+            "apps": 3,
+            "minutes": 224,
+            "goals": 4,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sporting CP",
+            "competition": "Taça de Portugal",
+            "apps": 7,
+            "minutes": 492,
+            "goals": 5,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sporting CP",
+            "competition": "UEFA Champions League",
+            "apps": 8,
+            "minutes": 606,
+            "goals": 6,
+            "assists": 1,
+            "rating": 7.36,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sweden",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 70,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sweden",
+            "competition": "UEFA Nations League",
+            "apps": 6,
+            "minutes": 528,
+            "goals": 9,
+            "assists": 4,
+            "rating": 8.65,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sweden",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 546,
+            "goals": 4,
+            "assists": 1,
+            "rating": 7.45,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Arsenal",
+            "competition": "Emirates Cup",
+            "apps": 1,
+            "minutes": 65,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Arsenal",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 65,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Sweden",
+            "competition": "Friendlies",
+            "apps": 8,
+            "minutes": 606,
+            "goals": 6,
+            "assists": 1,
+            "rating": 7.36,
+            "position": "Attacker"
+          },
+          {
+            "team": "Arsenal",
+            "competition": "League Cup",
+            "apps": 3,
+            "minutes": 260,
+            "goals": 1,
+            "assists": 1,
+            "rating": 6.63,
+            "position": "Attacker"
+          },
+          {
+            "team": "Arsenal",
+            "competition": "FA Cup",
+            "apps": 2,
+            "minutes": 75,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.75,
+            "position": "Attacker"
+          },
+          {
+            "team": "Arsenal",
+            "competition": "Premier League",
+            "apps": 36,
+            "minutes": 2254,
+            "goals": 14,
+            "assists": 1,
+            "rating": 6.62,
+            "position": "Attacker"
+          },
+          {
+            "team": "Arsenal",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 914,
+            "goals": 5,
+            "assists": 1,
+            "rating": 6.75,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Sweden",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 63,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "V. Gyökeres",
+        "fullname": "Viktor Einar Gyökeres",
+        "age": 27,
+        "birth_date": "1998-06-04",
+        "birth_place": "Stockholm, Sweden",
+        "height": "189",
+        "weight": "90",
+        "photo": "https://media.api-sports.io/football/players/18979.png"
+      }
+    },
+    "L. Díaz": {
+      "team": "Colombia",
+      "api_name": "L. Díaz",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 36,
+            "minutes": 2413,
+            "goals": 13,
+            "assists": 5,
+            "rating": 7.27,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "League Cup",
+            "apps": 4,
+            "minutes": 202,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.8,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "FA Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 634,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "Colombia",
+            "competition": "Copa America",
+            "apps": 6,
+            "minutes": 512,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.92,
+            "position": "Attacker"
+          },
+          {
+            "team": "Colombia",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 305,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Bayern München",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Colombia",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 287,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.38,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "DFB Pokal",
+            "apps": 6,
+            "minutes": 538,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.18,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "Bundesliga",
+            "apps": 32,
+            "minutes": 2450,
+            "goals": 15,
+            "assists": 14,
+            "rating": 7.28,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Bayern München",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 987,
+            "goals": 7,
+            "assists": 3,
+            "rating": 7.52,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Colombia",
+            "competition": "World Cup - Qualification South America",
+            "apps": 17,
+            "minutes": 1505,
+            "goals": 7,
+            "assists": 3,
+            "rating": 7.25,
+            "position": "Attacker"
+          },
+          {
+            "team": "Colombia",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 179,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.18,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "L. Díaz",
+        "fullname": "Luis Fernando Díaz Marulanda",
+        "age": 28,
+        "birth_date": "1997-01-13",
+        "birth_place": "Barrancas, Colombia",
+        "height": "178",
+        "weight": "65",
+        "photo": "https://media.api-sports.io/football/players/2489.png"
+      }
+    },
+    "S. Mané": {
+      "team": "Senegal",
+      "api_name": "S. Mané",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Al-Nassr",
+            "competition": "Super Cup",
+            "apps": 3,
+            "minutes": 243,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.43,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Pro League",
+            "apps": 32,
+            "minutes": 2825,
+            "goals": 14,
+            "assists": 11,
+            "rating": 7.56,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "King's Cup",
+            "apps": 26,
+            "minutes": 1441,
+            "goals": 7,
+            "assists": 5,
+            "rating": 6.91,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "AFC Champions League Elite",
+            "apps": 11,
+            "minutes": 836,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.29,
+            "position": "Attacker"
+          },
+          {
+            "team": "Senegal",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 112,
+            "goals": 2,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Al-Nassr",
+            "competition": "King's Cup",
+            "apps": 26,
+            "minutes": 1441,
+            "goals": 7,
+            "assists": 5,
+            "rating": 6.91,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Friendlies Clubs",
+            "apps": 11,
+            "minutes": 836,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.29,
+            "position": "Attacker"
+          },
+          {
+            "team": "Senegal",
+            "competition": "Africa Cup of Nations Qualification",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.62,
+            "position": "Attacker"
+          },
+          {
+            "team": "Senegal",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 75,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.6,
+            "position": "Attacker"
+          },
+          {
+            "team": "Senegal",
+            "competition": "Africa Cup of Nations",
+            "apps": 7,
+            "minutes": 646,
+            "goals": 2,
+            "assists": 3,
+            "rating": 7.31,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "AFC Champions League Two",
+            "apps": 7,
+            "minutes": 242,
+            "goals": 1,
+            "assists": 3,
+            "rating": 7.04,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al-Nassr",
+            "competition": "Pro League",
+            "apps": 25,
+            "minutes": 2138,
+            "goals": 10,
+            "assists": 6,
+            "rating": 7.28,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Senegal",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 60,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.9,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "S. Mané",
+        "fullname": "Sadio Mané",
+        "age": 33,
+        "birth_date": "1992-04-10",
+        "birth_place": "Sedhiou, Senegal",
+        "height": "175",
+        "weight": "69",
+        "photo": "https://media.api-sports.io/football/players/304.png"
+      }
+    },
+    "Raphinha": {
+      "team": "Brazil",
+      "api_name": "Raphinha",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 37,
+            "minutes": 2844,
+            "goals": 18,
+            "assists": 9,
+            "rating": 7.8,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 3,
+            "minutes": 248,
+            "goals": 1,
+            "assists": 2,
+            "rating": 7.63,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 169,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.95,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1225,
+            "goals": 13,
+            "assists": 8,
+            "rating": 8.25,
+            "position": "Attacker"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Copa America",
+            "apps": 4,
+            "minutes": 260,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.17,
+            "position": "Attacker"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 189,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.7,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Barcelona",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 148,
+            "goals": 4,
+            "assists": 1,
+            "rating": 9.85,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 2,
+            "minutes": 120,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.1,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 22,
+            "minutes": 1388,
+            "goals": 13,
+            "assists": 3,
+            "rating": 7.55,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 7,
+            "minutes": 544,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.31,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Brazil",
+            "competition": "World Cup - Qualification South America",
+            "apps": 13,
+            "minutes": 1079,
+            "goals": 5,
+            "assists": 2,
+            "rating": 7.42,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 161,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.6,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Raphinha",
+        "fullname": "Raphael Dias Belloli",
+        "age": 29,
+        "birth_date": "1996-12-14",
+        "birth_place": "Porto Alegre, Brazil",
+        "height": "176",
+        "weight": "72",
+        "photo": "https://media.api-sports.io/football/players/1496.png"
+      }
+    },
+    "Vinícius Júnior": {
+      "team": "Brazil",
+      "api_name": "Vinícius Júnior",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 30,
+            "minutes": 2257,
+            "goals": 11,
+            "assists": 8,
+            "rating": 7.37,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 341,
+            "goals": 1,
+            "assists": 2,
+            "rating": 7.33,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 164,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.1,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 88,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 1105,
+            "goals": 8,
+            "assists": 2,
+            "rating": 7.56,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Copa America",
+            "apps": 3,
+            "minutes": 251,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.27,
+            "position": "Attacker"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 266,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.97,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Club World Cup",
+            "apps": 6,
+            "minutes": 456,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.33,
+            "position": "Attacker"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 320,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.28,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 163,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 1,
+            "minutes": 97,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 36,
+            "minutes": 2825,
+            "goals": 16,
+            "assists": 5,
+            "rating": 7.51,
+            "position": "Attacker"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1170,
+            "goals": 5,
+            "assists": 5,
+            "rating": 7.32,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Brazil",
+            "competition": "World Cup - Qualification South America",
+            "apps": 11,
+            "minutes": 910,
+            "goals": 2,
+            "assists": 1,
+            "rating": 6.93,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 180,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.27,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Vinícius Júnior",
+        "fullname": "Vinícius José Paixão de Oliveira Júnior",
+        "age": 25,
+        "birth_date": "2000-07-12",
+        "birth_place": "São Gonçalo, Brazil",
+        "height": "176",
+        "weight": "73",
+        "photo": "https://media.api-sports.io/football/players/762.png"
+      }
+    },
+    "K. De Bruyne": {
+      "team": "Belgium",
+      "api_name": "K. De Bruyne",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Manchester City",
+            "competition": "Premier League",
+            "apps": 33,
+            "minutes": 1715,
+            "goals": 4,
+            "assists": 7,
+            "rating": 7.32,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "FA Cup",
+            "apps": 5,
+            "minutes": 198,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.37,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "UEFA Champions League",
+            "apps": 7,
+            "minutes": 399,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.86,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Belgium",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 119,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Belgium",
+            "competition": "Euro Championship",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.78,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Belgium",
+            "competition": "UEFA Nations League",
+            "apps": 4,
+            "minutes": 340,
+            "goals": 2,
+            "assists": 2,
+            "rating": 8.1,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Belgium",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 470,
+            "goals": 6,
+            "assists": 1,
+            "rating": 8.27,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Napoli",
+            "competition": "Serie A",
+            "apps": 18,
+            "minutes": 1169,
+            "goals": 5,
+            "assists": 2,
+            "rating": 7.04,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Napoli",
+            "competition": "UEFA Champions League",
+            "apps": 3,
+            "minutes": 191,
+            "goals": 0,
+            "assists": 2,
+            "rating": 7.07,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Belgium",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 289,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.33,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "K. De Bruyne",
+        "fullname": "Kevin De Bruyne",
+        "age": 34,
+        "birth_date": "1991-06-28",
+        "birth_place": "Drongen, Belgium",
+        "height": "181",
+        "weight": "68",
+        "photo": "https://media.api-sports.io/football/players/629.png"
+      }
+    },
+    "Son Heung-Min": {
+      "team": "South Korea",
+      "api_name": "Son Heung-Min",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Tottenham",
+            "competition": "Premier League",
+            "apps": 30,
+            "minutes": 2116,
+            "goals": 7,
+            "assists": 9,
+            "rating": 7.26,
+            "position": "Attacker"
+          },
+          {
+            "team": "Tottenham",
+            "competition": "League Cup",
+            "apps": 4,
+            "minutes": 280,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.75,
+            "position": "Attacker"
+          },
+          {
+            "team": "Tottenham",
+            "competition": "FA Cup",
+            "apps": 2,
+            "minutes": 120,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Tottenham",
+            "competition": "UEFA Europa League",
+            "apps": 10,
+            "minutes": 673,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.22,
+            "position": "Attacker"
+          },
+          {
+            "team": "South Korea",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 44,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Los Angeles FC",
+            "competition": "Major League Soccer",
+            "apps": 11,
+            "minutes": 1103,
+            "goals": 12,
+            "assists": 3,
+            "rating": 8.18,
+            "position": "Attacker"
+          },
+          {
+            "team": "South Korea",
+            "competition": "Friendlies",
+            "apps": 6,
+            "minutes": 361,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.1,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "South Korea",
+            "competition": "World Cup - Qualification Asia",
+            "apps": 13,
+            "minutes": 891,
+            "goals": 7,
+            "assists": 4,
+            "rating": 7.81,
+            "position": "Attacker"
+          },
+          {
+            "team": "Los Angeles FC",
+            "competition": "Major League Soccer",
+            "apps": 13,
+            "minutes": 1045,
+            "goals": 0,
+            "assists": 8,
+            "rating": 7.15,
+            "position": "Attacker"
+          },
+          {
+            "team": "Los Angeles FC",
+            "competition": "CONCACAF Champions League",
+            "apps": 8,
+            "minutes": 646,
+            "goals": 2,
+            "assists": 6,
+            "rating": 7.04,
+            "position": "Attacker"
+          },
+          {
+            "team": "South Korea",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 203,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.08,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Son Heung-Min",
+        "fullname": "Heung-Min Son",
+        "age": 33,
+        "birth_date": "1992-07-08",
+        "birth_place": "Chuncheon, Korea Republic",
+        "height": "183",
+        "weight": "78",
+        "photo": "https://media.api-sports.io/football/players/186.png"
+      }
+    },
+    "Bruno Fernandes": {
+      "team": "Portugal",
+      "api_name": "Bruno Fernandes",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Manchester United",
+            "competition": "Premier League",
+            "apps": 37,
+            "minutes": 3024,
+            "goals": 8,
+            "assists": 10,
+            "rating": 7.61,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "FA Cup",
+            "apps": 3,
+            "minutes": 330,
+            "goals": 2,
+            "assists": 1,
+            "rating": 8.1,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "League Cup",
+            "apps": 3,
+            "minutes": 208,
+            "goals": 2,
+            "assists": 2,
+            "rating": 8.4,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "UEFA Europa League",
+            "apps": 14,
+            "minutes": 1281,
+            "goals": 7,
+            "assists": 4,
+            "rating": 8.05,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 294,
+            "goals": 3,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Euro Championship",
+            "apps": 4,
+            "minutes": 374,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.45,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 874,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.7,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 5,
+            "minutes": 394,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.94,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Manchester United",
+            "competition": "Premier League Summer Series",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.9,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "Friendlies Clubs",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.9,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "League Cup",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 0,
+            "assists": 0,
+            "rating": 8.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "FA Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester United",
+            "competition": "Premier League",
+            "apps": 35,
+            "minutes": 3066,
+            "goals": 9,
+            "assists": 21,
+            "rating": 7.63,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 214,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.5,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Bruno Fernandes",
+        "fullname": "Bruno Miguel Borges Fernandes",
+        "age": 31,
+        "birth_date": "1994-09-08",
+        "birth_place": "Maia, Portugal",
+        "height": "179",
+        "weight": "66",
+        "photo": "https://media.api-sports.io/football/players/1485.png"
+      }
+    },
+    "S. Rahimi": {
+      "team": "Morocco",
+      "api_name": "S. Rahimi",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Al Ain",
+            "competition": "Pro League",
+            "apps": 18,
+            "minutes": 1539,
+            "goals": 8,
+            "assists": 2,
+            "rating": 7.44,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al Ain",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 11,
+            "minutes": 973,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.46,
+            "position": "Attacker"
+          },
+          {
+            "team": "Morocco U23",
+            "competition": "Olympics Men",
+            "apps": 11,
+            "minutes": 973,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.46,
+            "position": "Attacker"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 100,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al Ain",
+            "competition": "League Cup",
+            "apps": 11,
+            "minutes": 973,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.46,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al Ain",
+            "competition": "AFC Champions League Elite",
+            "apps": 7,
+            "minutes": 623,
+            "goals": 5,
+            "assists": 1,
+            "rating": 7.54,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Al Ain",
+            "competition": "FIFA Club World Cup",
+            "apps": 3,
+            "minutes": 223,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.85,
+            "position": "Attacker"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations Qualification",
+            "apps": 5,
+            "minutes": 308,
+            "goals": 3,
+            "assists": 2,
+            "rating": 7.56,
+            "position": "Attacker"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 136,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Attacker"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations",
+            "apps": 3,
+            "minutes": 591,
+            "goals": 5,
+            "assists": 0,
+            "rating": 6.94,
+            "position": "Attacker"
+          },
+          {
+            "team": "Al Ain",
+            "competition": "Pro League",
+            "apps": 15,
+            "minutes": 885,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.98,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 175,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.68,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "S. Rahimi",
+        "fullname": "Soufiane Rahimi",
+        "age": 29,
+        "birth_date": "1996-06-02",
+        "birth_place": "Casablanca, Morocco",
+        "height": "183",
+        "weight": "79",
+        "photo": "https://media.api-sports.io/football/players/36579.png"
+      }
+    },
+    "C. Gakpo": {
+      "team": "Netherlands",
+      "api_name": "C. Gakpo",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 5,
+            "minutes": 420,
+            "goals": 1,
+            "assists": 2,
+            "rating": 7.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 35,
+            "minutes": 1945,
+            "goals": 10,
+            "assists": 4,
+            "rating": 7.22,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "League Cup",
+            "apps": 6,
+            "minutes": 389,
+            "goals": 5,
+            "assists": 1,
+            "rating": 7.73,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 367,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.25,
+            "position": "Attacker"
+          },
+          {
+            "team": "Netherlands",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 172,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.9,
+            "position": "Attacker"
+          },
+          {
+            "team": "Netherlands",
+            "competition": "Euro Championship",
+            "apps": 6,
+            "minutes": 525,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.73,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Netherlands",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 570,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.21,
+            "position": "Attacker"
+          },
+          {
+            "team": "Netherlands",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 8,
+            "minutes": 653,
+            "goals": 4,
+            "assists": 4,
+            "rating": 8.06,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 1,
+            "minutes": 96,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 58,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.2,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "FA Cup",
+            "apps": 4,
+            "minutes": 287,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 36,
+            "minutes": 2765,
+            "goals": 7,
+            "assists": 5,
+            "rating": 6.89,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 11,
+            "minutes": 470,
+            "goals": 2,
+            "assists": 1,
+            "rating": 6.91,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Netherlands",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 298,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.85,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "C. Gakpo",
+        "fullname": "Cody Mathès Gakpo",
+        "age": 26,
+        "birth_date": "1999-05-07",
+        "birth_place": "Eindhoven, Netherlands",
+        "height": "193",
+        "weight": "76",
+        "photo": "https://media.api-sports.io/football/players/247.png"
+      }
+    },
+    "M. Taremi": {
+      "team": "Iran",
+      "api_name": "M. Taremi",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Inter",
+            "competition": "Serie A",
+            "apps": 26,
+            "minutes": 816,
+            "goals": 1,
+            "assists": 2,
+            "rating": 6.7,
+            "position": "Forward"
+          },
+          {
+            "team": "Inter",
+            "competition": "Coppa Italia",
+            "apps": 3,
+            "minutes": 233,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.43,
+            "position": "Forward"
+          },
+          {
+            "team": "Inter",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 0,
+            "goals": 1,
+            "assists": 1,
+            "rating": null,
+            "position": "Forward"
+          },
+          {
+            "team": "Inter",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 714,
+            "goals": 1,
+            "assists": 3,
+            "rating": 7.08,
+            "position": "Forward"
+          },
+          {
+            "team": "Iran",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 0,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Forward"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Inter",
+            "competition": "FIFA Club World Cup",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.3,
+            "position": "Forward"
+          },
+          {
+            "team": "Olympiakos Piraeus",
+            "competition": "Cup",
+            "apps": 4,
+            "minutes": 0,
+            "goals": 3,
+            "assists": 0,
+            "rating": null,
+            "position": "Forward"
+          },
+          {
+            "team": "Iran",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Forward"
+          },
+          {
+            "team": "Iran",
+            "competition": "CAFA Nations Cup",
+            "apps": 4,
+            "minutes": 0,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Forward"
+          },
+          {
+            "team": "Olympiakos Piraeus",
+            "competition": "Super League 1",
+            "apps": 24,
+            "minutes": 1261,
+            "goals": 10,
+            "assists": 2,
+            "rating": 7.07,
+            "position": "Attacker"
+          },
+          {
+            "team": "Olympiakos Piraeus",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 485,
+            "goals": 2,
+            "assists": 2,
+            "rating": 6.76,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Iran",
+            "competition": "World Cup - Qualification Asia",
+            "apps": 15,
+            "minutes": 803,
+            "goals": 5,
+            "assists": 4,
+            "rating": 7.76,
+            "position": "Forward"
+          },
+          {
+            "team": "Olympiakos Piraeus",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 0,
+            "goals": 1,
+            "assists": 0,
+            "rating": null,
+            "position": "Forward"
+          }
+        ]
+      },
+      "bio": {
+        "name": "M. Taremi",
+        "fullname": "Mehdi Taremi",
+        "age": 33,
+        "birth_date": "1992-07-18",
+        "birth_place": "Bushehr, Iran",
+        "height": "185",
+        "weight": "82",
+        "photo": "https://media.api-sports.io/football/players/42315.png"
+      }
+    },
+    "A. Ueda": {
+      "team": "Japan",
+      "api_name": "A. Ueda",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Feyenoord",
+            "competition": "Eredivisie",
+            "apps": 21,
+            "minutes": 1211,
+            "goals": 7,
+            "assists": 1,
+            "rating": 6.83,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "KNVB Beker",
+            "apps": 40,
+            "minutes": 3210,
+            "goals": 22,
+            "assists": 2,
+            "rating": 7.05,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "UEFA Champions League",
+            "apps": 8,
+            "minutes": 388,
+            "goals": 2,
+            "assists": 0,
+            "rating": 6.54,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Feyenoord",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Japan",
+            "competition": "Friendlies",
+            "apps": 5,
+            "minutes": 270,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.26,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "KNVB Beker",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "UEFA Europa League",
+            "apps": 6,
+            "minutes": 435,
+            "goals": 1,
+            "assists": 0,
+            "rating": 6.58,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "Eredivisie",
+            "apps": 31,
+            "minutes": 2533,
+            "goals": 25,
+            "assists": 1,
+            "rating": 7.17,
+            "position": "Attacker"
+          },
+          {
+            "team": "Feyenoord",
+            "competition": "UEFA Champions League",
+            "apps": 2,
+            "minutes": 167,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.85,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Japan",
+            "competition": "World Cup - Qualification Asia",
+            "apps": 9,
+            "minutes": 692,
+            "goals": 8,
+            "assists": 2,
+            "rating": 7.49,
+            "position": "Attacker"
+          },
+          {
+            "team": "Japan",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 138,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.37,
+            "position": "Attacker"
+          }
+        ]
+      },
+      "bio": {
+        "name": "A. Ueda",
+        "fullname": "Ayase Ueda",
+        "age": 27,
+        "birth_date": "1998-08-28",
+        "birth_place": "Mito, Japan",
+        "height": "182",
+        "weight": "76",
+        "photo": "https://media.api-sports.io/football/players/72155.png"
+      }
+    },
+    "Lamine Yamal": {
+      "team": "Spain",
+      "api_name": "Lamine Yamal",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 34,
+            "minutes": 2771,
+            "goals": 9,
+            "assists": 13,
+            "rating": 7.79,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 3,
+            "minutes": 287,
+            "goals": 2,
+            "assists": 3,
+            "rating": 8.43,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 122,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.0,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 1101,
+            "goals": 5,
+            "assists": 3,
+            "rating": 7.68,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "Euro Championship",
+            "apps": 7,
+            "minutes": 506,
+            "goals": 1,
+            "assists": 4,
+            "rating": 7.26,
+            "position": "Attacker"
+          },
+          {
+            "team": "Spain",
+            "competition": "UEFA Nations League",
+            "apps": 5,
+            "minutes": 611,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.84,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Spain",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 2,
+            "minutes": 152,
+            "goals": 0,
+            "assists": 3,
+            "rating": 8.7,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Barcelona",
+            "competition": "Friendlies Clubs",
+            "apps": 2,
+            "minutes": 122,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.0,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 107,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.6,
+            "position": "Attacker"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 5,
+            "minutes": 457,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.88,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 28,
+            "minutes": 2268,
+            "goals": 16,
+            "assists": 11,
+            "rating": 7.95,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 874,
+            "goals": 6,
+            "assists": 4,
+            "rating": 8.14,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 108,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Lamine Yamal",
+        "fullname": "Lamine Yamal Nasraoui Ebana",
+        "age": 18,
+        "birth_date": "2007-07-13",
+        "birth_place": "Mataró, Spain",
+        "height": "179",
+        "weight": "72",
+        "photo": "https://media.api-sports.io/football/players/386828.png"
+      }
+    },
+    "Pedri": {
+      "team": "Spain",
+      "api_name": "Pedri",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 36,
+            "minutes": 2808,
+            "goals": 4,
+            "assists": 5,
+            "rating": 7.62,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 279,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.58,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 14,
+            "minutes": 1117,
+            "goals": 0,
+            "assists": 2,
+            "rating": 7.38,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 123,
+            "goals": 2,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Spain",
+            "competition": "Euro Championship",
+            "apps": 4,
+            "minutes": 190,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.08,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Spain",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 459,
+            "goals": 1,
+            "assists": 2,
+            "rating": 7.06,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Spain",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 4,
+            "minutes": 301,
+            "goals": 2,
+            "assists": 0,
+            "rating": 8.5,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Barcelona",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 162,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "Copa del Rey",
+            "apps": 3,
+            "minutes": 134,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.47,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "La Liga",
+            "apps": 29,
+            "minutes": 2107,
+            "goals": 2,
+            "assists": 9,
+            "rating": 7.54,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Barcelona",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 695,
+            "goals": 0,
+            "assists": 2,
+            "rating": 7.19,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Pedri",
+        "fullname": "Pedro González López",
+        "age": 23,
+        "birth_date": "2002-11-25",
+        "birth_place": "Tegueste, Spain",
+        "height": "174",
+        "weight": "68",
+        "photo": "https://media.api-sports.io/football/players/133609.png"
+      }
+    },
+    "Vitinha": {
+      "team": "Portugal",
+      "api_name": "Vitinha",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Ligue 1",
+            "apps": 31,
+            "minutes": 2035,
+            "goals": 5,
+            "assists": 1,
+            "rating": 7.52,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Coupe de France",
+            "apps": 4,
+            "minutes": 228,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Trophée des Champions",
+            "apps": 4,
+            "minutes": 228,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Champions League",
+            "apps": 17,
+            "minutes": 1448,
+            "goals": 2,
+            "assists": 2,
+            "rating": 7.56,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 264,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Euro Championship",
+            "apps": 4,
+            "minutes": 361,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.43,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "UEFA Nations League",
+            "apps": 7,
+            "minutes": 658,
+            "goals": 0,
+            "assists": 3,
+            "rating": 7.5,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Portugal",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 485,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.68,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "FIFA Club World Cup",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.6,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 120,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.5,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Trophée des Champions",
+            "apps": 1,
+            "minutes": 97,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.7,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Coupe de France",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 8.0,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Ligue 1",
+            "apps": 29,
+            "minutes": 2121,
+            "goals": 1,
+            "assists": 7,
+            "rating": 7.58,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Champions League",
+            "apps": 17,
+            "minutes": 1544,
+            "goals": 6,
+            "assists": 1,
+            "rating": 7.58,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 88,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.35,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Vitinha",
+        "fullname": "Vítor Machado Ferreira",
+        "age": 25,
+        "birth_date": "2000-02-13",
+        "birth_place": "Santo Tirso, Portugal",
+        "height": "172",
+        "weight": "64",
+        "photo": "https://media.api-sports.io/football/players/128384.png"
+      }
+    },
+    "Ousmane Dembélé": {
+      "team": "France",
+      "api_name": "O. Dembélé",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Ligue 1",
+            "apps": 30,
+            "minutes": 1736,
+            "goals": 21,
+            "assists": 7,
+            "rating": 7.72,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Coupe de France",
+            "apps": 4,
+            "minutes": 208,
+            "goals": 3,
+            "assists": 1,
+            "rating": 8.47,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Trophée des Champions",
+            "apps": 4,
+            "minutes": 208,
+            "goals": 3,
+            "assists": 1,
+            "rating": 8.47,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Champions League",
+            "apps": 15,
+            "minutes": 1162,
+            "goals": 8,
+            "assists": 6,
+            "rating": 7.65,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 157,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 364,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.64,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France",
+            "competition": "UEFA Nations League",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 2,
+            "assists": 0,
+            "rating": 7.44,
+            "position": "Attacker"
+          },
+          {
+            "team": "France",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 1,
+            "minutes": 36,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.2,
+            "position": "Attacker"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Super Cup",
+            "apps": 4,
+            "minutes": 208,
+            "goals": 3,
+            "assists": 1,
+            "rating": 8.47,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "FIFA Club World Cup",
+            "apps": 4,
+            "minutes": 197,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.38,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 42,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.0,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Trophée des Champions",
+            "apps": 1,
+            "minutes": 97,
+            "goals": 1,
+            "assists": 0,
+            "rating": 8.3,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Coupe de France",
+            "apps": 2,
+            "minutes": 87,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.75,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "Ligue 1",
+            "apps": 22,
+            "minutes": 1062,
+            "goals": 10,
+            "assists": 7,
+            "rating": 7.41,
+            "position": "Attacker"
+          },
+          {
+            "team": "Paris Saint Germain",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 827,
+            "goals": 8,
+            "assists": 2,
+            "rating": 7.16,
+            "position": "Attacker"
+          }
+        ],
+        "2026": [
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 120,
+            "goals": 0,
+            "assists": 1,
+            "rating": 6.95,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "O. Dembélé",
+        "fullname": "Masour Ousmane Dembélé",
+        "age": 28,
+        "birth_date": "1997-05-15",
+        "birth_place": "Vernon, France",
+        "height": "178",
+        "weight": "67",
+        "photo": "https://media.api-sports.io/football/players/153.png"
+      }
+    },
+    "Rayan Cherki": {
+      "team": "France",
+      "api_name": "R. Cherki",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Lyon",
+            "competition": "Ligue 1",
+            "apps": 30,
+            "minutes": 2054,
+            "goals": 8,
+            "assists": 11,
+            "rating": 7.63,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Lyon",
+            "competition": "Coupe de France",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 1,
+            "rating": 8.9,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Lyon",
+            "competition": "UEFA Europa League",
+            "apps": 12,
+            "minutes": 919,
+            "goals": 4,
+            "assists": 8,
+            "rating": 8.02,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France U23",
+            "competition": "Olympics Men",
+            "apps": 3,
+            "minutes": 77,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France",
+            "competition": "UEFA Nations League",
+            "apps": 1,
+            "minutes": 102,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.95,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 2,
+            "minutes": 96,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.35,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Manchester City",
+            "competition": "FIFA Club World Cup",
+            "apps": 3,
+            "minutes": 105,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.17,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "Friendlies Clubs",
+            "apps": 3,
+            "minutes": 105,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.17,
+            "position": "Midfielder"
+          },
+          {
+            "team": "France U21",
+            "competition": "UEFA U21 Championship - Qualification",
+            "apps": 4,
+            "minutes": 313,
+            "goals": 4,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "League Cup",
+            "apps": 4,
+            "minutes": 276,
+            "goals": 3,
+            "assists": 1,
+            "rating": 7.78,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "FA Cup",
+            "apps": 6,
+            "minutes": 397,
+            "goals": 0,
+            "assists": 2,
+            "rating": 7.1,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "Premier League",
+            "apps": 33,
+            "minutes": 1806,
+            "goals": 4,
+            "assists": 12,
+            "rating": 7.2,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Manchester City",
+            "competition": "UEFA Champions League",
+            "apps": 8,
+            "minutes": 399,
+            "goals": 3,
+            "assists": 0,
+            "rating": 7.48,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 184,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.27,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "R. Cherki",
+        "fullname": "Mathis Rayan Cherki",
+        "age": 22,
+        "birth_date": "2003-08-17",
+        "birth_place": "Lyon, France",
+        "height": "180",
+        "weight": "71",
+        "photo": "https://media.api-sports.io/football/players/156477.png"
+      }
+    },
+    "Jude Bellingham": {
+      "team": "England",
+      "api_name": "J. Bellingham",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 31,
+            "minutes": 2493,
+            "goals": 9,
+            "assists": 8,
+            "rating": 7.48,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 4,
+            "minutes": 269,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 6,
+            "minutes": 447,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 13,
+            "minutes": 1136,
+            "goals": 3,
+            "assists": 3,
+            "rating": 7.45,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 89,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Midfielder"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 157,
+            "goals": 1,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "England",
+            "competition": "Euro Championship",
+            "apps": 7,
+            "minutes": 671,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.44,
+            "position": "Midfielder"
+          },
+          {
+            "team": "England",
+            "competition": "UEFA Nations League",
+            "apps": 4,
+            "minutes": 357,
+            "goals": 1,
+            "assists": 2,
+            "rating": 8.33,
+            "position": "Attacker"
+          },
+          {
+            "team": "England",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 5,
+            "minutes": 355,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.54,
+            "position": "Midfielder"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Club World Cup",
+            "apps": 6,
+            "minutes": 447,
+            "goals": 1,
+            "assists": 1,
+            "rating": 7.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 19,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.6,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.85,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 1,
+            "minutes": 13,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.3,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 28,
+            "minutes": 1917,
+            "goals": 6,
+            "assists": 4,
+            "rating": 7.28,
+            "position": "Midfielder"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 9,
+            "minutes": 607,
+            "goals": 2,
+            "assists": 1,
+            "rating": 7.2,
+            "position": "Midfielder"
+          }
+        ],
+        "2026": [
+          {
+            "team": "England",
+            "competition": "UEFA World Cup Qualifiers",
+            "apps": 2,
+            "minutes": 157,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.6,
+            "position": "Midfielder"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 45,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Midfielder"
+          }
+        ]
+      },
+      "bio": {
+        "name": "J. Bellingham",
+        "fullname": "Jude Victor William Bellingham",
+        "age": 22,
+        "birth_date": "2003-06-29",
+        "birth_place": "Stourbridge, England",
+        "height": "186",
+        "weight": "75",
+        "photo": "https://media.api-sports.io/football/players/129718.png"
+      }
+    },
+    "Unai Simón": {
+      "team": "Spain",
+      "api_name": "Unai Simón",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Athletic Club",
+            "competition": "La Liga",
+            "apps": 25,
+            "minutes": 1890,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.09,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "UEFA Europa League",
+            "apps": 10,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Spain",
+            "competition": "Euro Championship",
+            "apps": 6,
+            "minutes": 570,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.22,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Spain",
+            "competition": "UEFA Nations League",
+            "apps": 2,
+            "minutes": 426,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Spain",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.07,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Athletic Club",
+            "competition": "Emirates Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.3,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.3,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 4.6,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "La Liga",
+            "apps": 37,
+            "minutes": 3330,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.88,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Athletic Club",
+            "competition": "UEFA Champions League",
+            "apps": 8,
+            "minutes": 720,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Spain",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.3,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Unai Simón",
+        "fullname": "Unai Simón Mendibil",
+        "age": 28,
+        "birth_date": "1997-06-11",
+        "birth_place": "Vitoria-Gasteiz, Spain",
+        "height": "190",
+        "weight": "88",
+        "photo": "https://media.api-sports.io/football/players/47270.png"
+      }
+    },
+    "J. Pickford": {
+      "team": "England",
+      "api_name": "J. Pickford",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Everton",
+            "competition": "Premier League",
+            "apps": 38,
+            "minutes": 3420,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.26,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Everton",
+            "competition": "League Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Everton",
+            "competition": "FA Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.95,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "Euro Championship",
+            "apps": 7,
+            "minutes": 690,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.06,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "UEFA Nations League",
+            "apps": 5,
+            "minutes": 457,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.96,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 7,
+            "minutes": 630,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.84,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Everton",
+            "competition": "Premier League Summer Series",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Everton",
+            "competition": "Friendlies Clubs",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Everton",
+            "competition": "FA Cup",
+            "apps": 1,
+            "minutes": 120,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.5,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Everton",
+            "competition": "Premier League",
+            "apps": 38,
+            "minutes": 3432,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.02,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "England",
+            "competition": "UEFA World Cup Qualifiers",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "England",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 135,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.75,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "J. Pickford",
+        "fullname": "Jordan Lee Pickford",
+        "age": 31,
+        "birth_date": "1994-03-07",
+        "birth_place": "Washington, England",
+        "height": "185",
+        "weight": "82",
+        "photo": "https://media.api-sports.io/football/players/2932.png"
+      }
+    },
+    "Y. Bounou": {
+      "team": "Morocco",
+      "api_name": "Y. Bounou",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "King's Cup",
+            "apps": 31,
+            "minutes": 2790,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.82,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "Pro League",
+            "apps": 31,
+            "minutes": 2790,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.82,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "AFC Champions League Elite",
+            "apps": 11,
+            "minutes": 900,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.42,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "King's Cup",
+            "apps": 31,
+            "minutes": 2790,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.82,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "FIFA Club World Cup",
+            "apps": 5,
+            "minutes": 480,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.78,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations Qualification",
+            "apps": 4,
+            "minutes": 302,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 4,
+            "minutes": 371,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.85,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Morocco",
+            "competition": "Africa Cup of Nations",
+            "apps": 7,
+            "minutes": 690,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.17,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "AFC Champions League Elite",
+            "apps": 5,
+            "minutes": 485,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.74,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Al-Hilal Saudi FC",
+            "competition": "Pro League",
+            "apps": 26,
+            "minutes": 2346,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.93,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Morocco",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 271,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.33,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Y. Bounou",
+        "fullname": "Yassine Bounou",
+        "age": 34,
+        "birth_date": "1991-04-05",
+        "birth_place": "Montréal, Canada",
+        "height": "195",
+        "weight": "78",
+        "photo": "https://media.api-sports.io/football/players/2701.png"
+      }
+    },
+    "M. Maignan": {
+      "team": "France",
+      "api_name": "M. Maignan",
+      "seasons": {
+        "2024": [
+          {
+            "team": "AC Milan",
+            "competition": "Serie A",
+            "apps": 37,
+            "minutes": 3295,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.4,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "UEFA Champions League",
+            "apps": 10,
+            "minutes": 861,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.22,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "Coppa Italia",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "France",
+            "competition": "Euro Championship",
+            "apps": 6,
+            "minutes": 570,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.33,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "France",
+            "competition": "UEFA Nations League",
+            "apps": 9,
+            "minutes": 936,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.34,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "France",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.62,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "AC Milan",
+            "competition": "Friendlies Clubs",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.4,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.0,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "Coppa Italia",
+            "apps": 3,
+            "minutes": 275,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.03,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "AC Milan",
+            "competition": "Serie A",
+            "apps": 37,
+            "minutes": 3303,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.23,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "France",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.83,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "M. Maignan",
+        "fullname": "Mike Peterson Maignan",
+        "age": 30,
+        "birth_date": "1995-07-03",
+        "birth_place": "Cayenne, Guyana",
+        "height": "191",
+        "weight": "89",
+        "photo": "https://media.api-sports.io/football/players/22221.png"
+      }
+    },
+    "Alisson Becker": {
+      "team": "Brazil",
+      "api_name": "Alisson Becker",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 5,
+            "minutes": 450,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.74,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 28,
+            "minutes": 2509,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.11,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "League Cup",
+            "apps": 2,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 6,
+            "minutes": 570,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.62,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Copa America",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.17,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.0,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Liverpool",
+            "competition": "Community Shield",
+            "apps": 1,
+            "minutes": 96,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.2,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Friendlies Clubs",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "FA Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.25,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "Premier League",
+            "apps": 26,
+            "minutes": 2351,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.78,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Liverpool",
+            "competition": "UEFA Champions League",
+            "apps": 6,
+            "minutes": 506,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.18,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Brazil",
+            "competition": "World Cup - Qualification South America",
+            "apps": 9,
+            "minutes": 803,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.18,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Brazil",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Alisson Becker",
+        "fullname": "Alisson Ramsés Becker",
+        "age": 33,
+        "birth_date": "1992-10-02",
+        "birth_place": "Novo Hamburgo, Brazil",
+        "height": "193",
+        "weight": "91",
+        "photo": "https://media.api-sports.io/football/players/280.png"
+      }
+    },
+    "Diogo Costa": {
+      "team": "Portugal",
+      "api_name": "Diogo Costa",
+      "seasons": {
+        "2024": [
+          {
+            "team": "FC Porto",
+            "competition": "Primeira Liga",
+            "apps": 32,
+            "minutes": 2880,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.98,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "FC Porto",
+            "competition": "UEFA Europa League",
+            "apps": 10,
+            "minutes": 900,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.89,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Portugal",
+            "competition": "Euro Championship",
+            "apps": 5,
+            "minutes": 510,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.34,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Portugal",
+            "competition": "UEFA Nations League",
+            "apps": 8,
+            "minutes": 875,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.23,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Portugal",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.6,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "FC Porto",
+            "competition": "Friendlies Clubs",
+            "apps": 32,
+            "minutes": 2880,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.98,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "FC Porto",
+            "competition": "UEFA Europa League",
+            "apps": 12,
+            "minutes": 1080,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "FC Porto",
+            "competition": "Taça de Portugal",
+            "apps": 4,
+            "minutes": 293,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.33,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "FC Porto",
+            "competition": "Primeira Liga",
+            "apps": 33,
+            "minutes": 2907,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.07,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "Diogo Costa",
+        "fullname": "Diogo Meireles da Costa",
+        "age": 26,
+        "birth_date": "1999-09-19",
+        "birth_place": "Santo Tirso, Portugal",
+        "height": "186",
+        "weight": "82",
+        "photo": "https://media.api-sports.io/football/players/369.png"
+      }
+    },
+    "T. Courtois": {
+      "team": "Belgium",
+      "api_name": "T. Courtois",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 32,
+            "minutes": 2700,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.11,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Copa del Rey",
+            "apps": 1,
+            "minutes": 120,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Super Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 12,
+            "minutes": 1110,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.43,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Intercontinental Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Belgium",
+            "competition": "UEFA Nations League",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.9,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Belgium",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.93,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Real Madrid",
+            "competition": "FIFA Club World Cup",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.47,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "Super Cup",
+            "apps": 1,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.1,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "La Liga",
+            "apps": 32,
+            "minutes": 2880,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.93,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Real Madrid",
+            "competition": "UEFA Champions League",
+            "apps": 11,
+            "minutes": 945,
+            "goals": 0,
+            "assists": 2,
+            "rating": 7.29,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Belgium",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 184,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.05,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "T. Courtois",
+        "fullname": "Thibaut Nicolas Marc Courtois",
+        "age": 33,
+        "birth_date": "1992-05-11",
+        "birth_place": "Bree, Belgium",
+        "height": "200",
+        "weight": "96",
+        "photo": "https://media.api-sports.io/football/players/730.png"
+      }
+    },
+    "T. Hayakawa": {
+      "team": "Japan",
+      "api_name": "T. Hayakawa",
+      "seasons": {
+        "2024": [
+          {
+            "team": "Kashima",
+            "competition": "J1 League",
+            "apps": 38,
+            "minutes": 3420,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.06,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Kashima",
+            "competition": "J-League Cup",
+            "apps": 2,
+            "minutes": 210,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Kashima",
+            "competition": "Emperor Cup",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "Japan",
+            "competition": "EAFF E-1 Football Championship",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.23,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Kashima",
+            "competition": "J-League Cup",
+            "apps": 1,
+            "minutes": 90,
+            "goals": 0,
+            "assists": 0,
+            "rating": null,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Japan",
+            "competition": "EAFF E-1 Football Championship",
+            "apps": 32,
+            "minutes": 2880,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.64,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Kashima",
+            "competition": "J1 League",
+            "apps": 38,
+            "minutes": 3420,
+            "goals": 0,
+            "assists": 1,
+            "rating": 7.15,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Japan",
+            "competition": "Friendlies",
+            "apps": 2,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.95,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Kashima",
+            "competition": "J1 League",
+            "apps": 17,
+            "minutes": 1536,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.38,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Japan",
+            "competition": "Friendlies",
+            "apps": 1,
+            "minutes": 8,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.7,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "T. Hayakawa",
+        "fullname": "Tomoki Hayakawa",
+        "age": 26,
+        "birth_date": "1999-03-03",
+        "birth_place": "Japan",
+        "height": "187",
+        "weight": "81",
+        "photo": "https://media.api-sports.io/football/players/304782.png"
+      }
+    },
+    "O. Baumann": {
+      "team": "Germany",
+      "api_name": "O. Baumann",
+      "seasons": {
+        "2024": [
+          {
+            "team": "1899 Hoffenheim",
+            "competition": "Bundesliga",
+            "apps": 28,
+            "minutes": 2520,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.01,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "1899 Hoffenheim",
+            "competition": "DFB Pokal",
+            "apps": 3,
+            "minutes": 180,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.5,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "1899 Hoffenheim",
+            "competition": "UEFA Europa League",
+            "apps": 7,
+            "minutes": 630,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.61,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Germany",
+            "competition": "UEFA Nations League",
+            "apps": 4,
+            "minutes": 360,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.0,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "Germany",
+            "competition": "World Cup - Qualification Europe",
+            "apps": 6,
+            "minutes": 540,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.92,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2025": [
+          {
+            "team": "1899 Hoffenheim",
+            "competition": "DFB Pokal",
+            "apps": 2,
+            "minutes": 210,
+            "goals": 0,
+            "assists": 0,
+            "rating": 7.35,
+            "position": "Goalkeeper"
+          },
+          {
+            "team": "1899 Hoffenheim",
+            "competition": "Bundesliga",
+            "apps": 34,
+            "minutes": 3060,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.81,
+            "position": "Goalkeeper"
+          }
+        ],
+        "2026": [
+          {
+            "team": "Germany",
+            "competition": "Friendlies",
+            "apps": 3,
+            "minutes": 270,
+            "goals": 0,
+            "assists": 0,
+            "rating": 6.27,
+            "position": "Goalkeeper"
+          }
+        ]
+      },
+      "bio": {
+        "name": "O. Baumann",
+        "fullname": "Oliver Baumann",
+        "age": 35,
+        "birth_date": "1990-06-02",
+        "birth_place": "Breisach, Germany",
+        "height": "187",
+        "weight": "82",
+        "photo": "https://media.api-sports.io/football/players/702.png"
+      }
+    }
+  }
+}
