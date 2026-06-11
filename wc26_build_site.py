@@ -46,8 +46,50 @@ try:
     PLAYERS = json.load(open(ROOT / "wc26_players.json"))["squads"]
 except FileNotFoundError:
     PLAYERS = {}
+try:
+    _prof = json.load(open(ROOT / "wc26_player_profiles.json"))
+    PROFILES, PROFILES_AT = _prof["profiles"], _prof["fetched_at"]
+except FileNotFoundError:
+    PROFILES, PROFILES_AT = {}, None
+try:
+    SCORERS = json.load(open(ROOT / "wc26_scorers.json"))["scorers"]
+except FileNotFoundError:
+    SCORERS = {}
+try:
+    ESPN_IDS = json.load(open(ROOT / "wc26_espn_ids.json"))["ids"]
+except FileNotFoundError:
+    ESPN_IDS = {}
+try:
+    TEAM_IDS = {n: d["team_id"]
+                for n, d in json.load(open(ROOT / "wc26_matches.json")).items()}
+except FileNotFoundError:
+    TEAM_IDS = {}
 from wc26_simulate import params as _params, score_grid as _score_grid
 RHO = _params()["rho"]
+import unicodedata
+
+
+def _nrm(s):
+    return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+
+
+_PROF_BY_LAST = { _nrm(k).split()[-1]: k for k in {} }
+
+
+def profile_for(name):
+    if name in PROFILES:
+        return name
+    last = _nrm(name).split()[-1]
+    hits = [k for k in PROFILES if _nrm(k).split()[-1] == last]
+    return hits[0] if len(hits) == 1 else None
+
+
+def player_link(name, depth=0):
+    key = profile_for(name)
+    if key:
+        return (f'<a href="{"../" * depth}players/{slug(key)}.html">'
+                f'{escape(name)}</a>')
+    return escape(name)
 
 TEAMS = {t["country"]: t for t in teams_data["teams"]}
 MATCHES = matches_data["matches"]
@@ -58,8 +100,37 @@ for m in MATCHES:
     team_group[m["away"]] = m["group"]
 
 
+ISO2 = {
+    "United States": "US", "Canada": "CA", "Mexico": "MX", "Panama": "PA",
+    "Curaçao": "CW", "Haiti": "HT", "Argentina": "AR", "Brazil": "BR",
+    "Colombia": "CO", "Uruguay": "UY", "Ecuador": "EC", "Paraguay": "PY",
+    "Germany": "DE", "France": "FR", "Spain": "ES", "Portugal": "PT",
+    "Netherlands": "NL", "Belgium": "BE", "Austria": "AT", "Switzerland": "CH",
+    "Turkey": "TR", "Norway": "NO", "Sweden": "SE", "Czech Republic": "CZ",
+    "Bosnia and Herzegovina": "BA", "Croatia": "HR", "Morocco": "MA",
+    "Algeria": "DZ", "Ghana": "GH", "Cape Verde": "CV", "Senegal": "SN",
+    "Egypt": "EG", "Ivory Coast": "CI", "South Africa": "ZA", "DR Congo": "CD",
+    "Tunisia": "TN", "Japan": "JP", "South Korea": "KR", "Iran": "IR",
+    "Australia": "AU", "Saudi Arabia": "SA", "Uzbekistan": "UZ", "Jordan": "JO",
+    "Qatar": "QA", "Iraq": "IQ", "New Zealand": "NZ",
+}
+
+
+def flag(name):
+    if name == "England":
+        return "\U0001F3F4\U000E0067\U000E0062\U000E0065\U000E006E\U000E0067\U000E007F"
+    if name == "Scotland":
+        return "\U0001F3F4\U000E0067\U000E0062\U000E0073\U000E0063\U000E0074\U000E007F"
+    code = ISO2.get(name)
+    if not code:
+        return ""
+    return "".join(chr(0x1F1E6 + ord(c) - 65) for c in code)
+
+
 def slug(name):
-    return re.sub(r"[^a-z0-9]+", "-", name.lower().replace("ç", "c")).strip("-")
+    import unicodedata
+    name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
 def match_slug(m):
@@ -191,7 +262,8 @@ def build_index():
                 host = ' <sup class="host">host</sup>' if t.get("host") else ""
                 cls = "q1" if pos <= 2 else "q3" if pos == 3 else ""
                 rows.append(
-                    f'<tr class="{cls}"><td>{team_link(name)}{host}</td>'
+                    f'<tr class="{cls}"><td class="flagcell">{flag(name)}</td>'
+                    f'<td>{team_link(name)}{host}</td>'
                     f'<td class="num">{r["p"]}</td>'
                     f'<td class="num">{r["gf"] - r["ga"]:+d}</td>'
                     f'<td class="num"><b>{r["pts"]}</b></td>'
@@ -199,7 +271,7 @@ def build_index():
             cards.append(f"""<section class="group" id="group-{g.lower()}">
 <h2><span>Group</span> {g}</h2>
 <table>
-<thead><tr><th scope="col">Team</th><th scope="col" class="num" title="matches played">P</th><th scope="col" class="num" title="goal difference">GD</th><th scope="col" class="num" title="points - top two advance, the eight best thirds join them">Pts</th><th scope="col" title="last 5 internationals, most recent first">Form</th></tr></thead>
+<thead><tr><th scope="col" aria-label="flag"></th><th scope="col">Team</th><th scope="col" class="num" title="matches played">P</th><th scope="col" class="num" title="goal difference">GD</th><th scope="col" class="num" title="points - top two advance, the eight best thirds join them">Pts</th><th scope="col" title="last 5 internationals, most recent first">Form</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -209,14 +281,15 @@ def build_index():
             t = TEAMS[name]
             host = ' <sup class="host">host</sup>' if t.get("host") else ""
             rows.append(
-                f"<tr><td>{team_link(name)}{host}</td>"
+                f'<tr><td class="flagcell">{flag(name)}</td>'
+                f"<td>{team_link(name)}{host}</td>"
                 f'<td class="num">{t["fifa_ranking"]}</td>'
                 f"<td>{form_chips(t)}</td></tr>"
             )
         cards.append(f"""<section class="group" id="group-{g.lower()}">
 <h2><span>Group</span> {g}</h2>
 <table>
-<thead><tr><th scope="col">Team</th><th scope="col" class="num" title="official FIFA ranking, 1 Apr 2026 - shown for orientation; the model does not use it">FIFA</th><th scope="col" title="last 5 internationals, most recent first - W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
+<thead><tr><th scope="col" aria-label="flag"></th><th scope="col">Team</th><th scope="col" class="num" title="official FIFA ranking, 1 Apr 2026 - shown for orientation; the model does not use it">FIFA</th><th scope="col" title="last 5 internationals, most recent first - W win, D draw (pens count as draws), L loss">Form</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>
 </section>""")
@@ -371,7 +444,7 @@ def key_players(name):
     gks = [p for p in squad if p["position"] == "Goalkeeper"]
     gk = max(gks, key=lambda p: p["apps"]) if gks else None
     rows = "".join(
-        f'<tr><td>{escape(p["name"])}</td><td>{p["position"]}</td>'
+        f'<tr><td>{player_link(p["name"], 1)}</td><td>{p["position"]}</td>'
         f'<td class="num">{p["age"]}</td><td class="num">{p["goals"]}</td>'
         f'<td class="num">{p["goals"]/total*100:.0f}%</td>'
         f'<td class="num">{p["apps"]}</td></tr>'
@@ -406,7 +479,12 @@ def build_team_pages():
                 f'<td class="venue">{escape(m["venue"])}, {escape(m["city"])}</td></tr>'
             )
         host = '<span class="chip">Host nation</span>' if t.get("host") else ""
+        crest = (f'<img class="headshot crest" '
+                 f'src="https://media.api-sports.io/football/teams/{TEAM_IDS[name]}.png" '
+                 f'alt="{escape(name)} crest" loading="lazy">'
+                 if name in TEAM_IDS else "")
         body = f"""<div class="teamhead">
+{crest}
 <h1>{escape(name)}</h1>
 <p class="meta">
 <a class="chip" href="../index.html#group-{g.lower()}">Group {g}</a>
@@ -638,9 +716,29 @@ def build_match_pages():
         h, a = TEAMS[m["home"]], TEAMS[m["away"]]
         date_label, time_ = fmt_date(m["date_utc"])
         score = f'<div class="bigscore">{m["score"]}</div>' if m["score"] else ""
-        body = f"""<div class="card">
+        pride = (m["home"], m["away"]) == ("Egypt", "Iran")
+        pride_html = ("""<div class="pridebar" role="presentation"></div>
+<p class="meta center pridenote">Seattle's host committee designated this fixture its
+<b>Pride match</b> 🏳️‍🌈 - chosen before the draw, and now contested by both federations.
+The rainbow above is the venue's, the probabilities below are ours: the model prices
+football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-iran-complain-world-cup-pride-match-seattle">Background</a>.</p>"""
+                      if pride else "")
+        wrap_open = '<div class="pridepage">' if pride else ""
+        wrap_close = '<div class="pridebar" role="presentation"></div></div>' if pride else ""
+        pm_slug = PRICES.get(str(m["match_id"]), {}).get("slug")
+        links = []
+        if pm_slug:
+            links.append(f'<a href="https://polymarket.com/event/{pm_slug}" '
+                         f'target="_blank" rel="noopener">Polymarket ↗</a>')
+        eid = ESPN_IDS.get(str(m["match_id"]))
+        if eid:
+            links.append(f'<a href="https://www.espn.com/soccer/match/_/gameId/{eid}" '
+                         f'target="_blank" rel="noopener">ESPN live ↗</a>')
+        ext = '<p class="meta center extlinks">' + " · ".join(links) + "</p>"
+        body = f"""{pride_html}{wrap_open}<div class="card">
 <p class="meta center">Group {m['group']} · Matchday {m['matchday']} · {date_label}, {time_} UTC<br>
 {escape(m['venue'])}, {escape(m['city'])}</p>
+{ext}
 <div class="versus">
 <h1>{team_link(m['home'], 1)}</h1>
 <span class="v">v</span>
@@ -653,7 +751,7 @@ def build_match_pages():
 <div class="twocol">
 <section><h2>{escape(m['home'])} - last ten</h2>{last10_table(h)}</section>
 <section><h2>{escape(m['away'])} - last ten</h2>{last10_table(a)}</section>
-</div>"""
+</div>{wrap_close}"""
         crumb = (f'<a href="../matches.html">Matches</a> / Matchday {m["matchday"]} / '
                  f'{escape(m["home"])} v {escape(m["away"])}')
         (OUT / "matches" / f"{match_slug(m)}.html").write_text(
@@ -858,7 +956,7 @@ def build_awards():
         return f'<td class="num edge {cls}">{e * 100:+.1f}¢</td>'
 
     boot_rows = "".join(
-        f'<tr><td>{escape(b["player"])}</td><td>{team_link(b["team"])}</td>'
+        f'<tr><td>{player_link(b["player"])}</td><td>{team_link(b["team"])}</td>'
         f'<td class="num">{b["intl_goals_24_26"]}</td>'
         f'<td class="num">{b["exp_goals"]:.1f}</td>'
         f'<td class="num fair">{b["p_model"] * 100:.1f}¢</td>'
@@ -871,14 +969,14 @@ def build_awards():
         f'<td class="num">{fmt_cents(n["market"])}</td>{edge_cell(n["edge"])}</tr>'
         for n in AWARDS["top_scorer_nation"][:12])
     glove_rows = "".join(
-        f'<tr><td class="num">{i + 1}</td><td>{escape(g["player"])}</td>'
+        f'<tr><td class="num">{i + 1}</td><td>{player_link(g["player"])}</td>'
         f'<td>{team_link(g["team"])}</td>'
         f'<td class="num">{g["p_final"] * 100:.1f}%</td>'
         f'<td class="num">{g["conceded_pg"]:.2f}</td>'
         f'<td class="num">{fmt_cents(g.get("market"))}</td></tr>'
         for i, g in enumerate(AWARDS["golden_glove"][:12]))
     ball_rows = "".join(
-        f'<tr><td>{escape(b["player"])}</td>'
+        f'<tr><td>{player_link(b["player"])}</td>'
         f'<td>{team_link(b["team"]) if b["team"] else "-"}</td>'
         f'<td class="num">{fmt_cents(b["market"])}</td>'
         f'<td class="num">{b["team_champion_p"] * 100:.1f}%'
@@ -906,6 +1004,8 @@ or a verdict.</p>
 <th class="num" title="expected tournament goals: his share applied to his team's goals across 100k simulated tournaments - deep runs included">xG (tourn.)</th><th class="num" title="probability of winning the Golden Boot, as a fair price">Model</th><th class="num" title="live Polymarket YES price">Polymarket</th><th class="num" title="model minus market - positive means underpriced">Edge</th></tr></thead>
 <tbody>{boot_rows}</tbody></table>
 
+{boot_race_table()}
+
 <h2>Top scoring nation - modelled</h2>
 <table class="ko">
 <thead><tr><th>Team</th><th class="num">Exp. goals</th><th class="num">Model</th>
@@ -929,6 +1029,98 @@ with each candidate's team title odds for context.</p>
 <tbody>{ball_rows}</tbody></table>
 <p class="modelnote">{escape(AWARDS["method"])} Prices as of {AWARDS["prices_at"]}.</p>"""
     (OUT / "awards.html").write_text(page("Awards", body))
+
+
+# ---------- player dossier pages ----------
+def build_player_pages():
+    if not PROFILES:
+        return
+    boot = {b["player"]: b for b in (AWARDS or {}).get("golden_boot", [])}
+    (OUT / "players").mkdir(exist_ok=True)
+    for name, prof in PROFILES.items():
+        bio = prof.get("bio", {})
+        team = prof["team"]
+        photo = (f'<img class="headshot" src="{bio["photo"]}" '
+                 f'alt="{escape(name)}" loading="lazy">' if bio.get("photo") else "")
+        facts = "".join(
+            f'<div><dt>{k}</dt><dd>{escape(str(v))}</dd></div>'
+            for k, v in (("Age", bio.get("age")), ("Born", bio.get("birth_date")),
+                         ("Birthplace", bio.get("birth_place")),
+                         ("Height", bio.get("height")), ("Weight", bio.get("weight")))
+            if v)
+        outlook = ""
+        b = boot.get(name) or next(
+            (v for k, v in boot.items()
+             if _nrm(k).split()[-1] == _nrm(name).split()[-1]), None)
+        if b:
+            mkt = f"{b['market']*100:.1f}¢" if b.get("market") else "unpriced"
+            outlook = f"""<h2>Golden Boot outlook</h2>
+<dl class="stats">
+<div><dt>Model odds</dt><dd>{b['p_model']*100:.1f}¢</dd></div>
+<div><dt>Polymarket</dt><dd>{mkt}</dd></div>
+<div><dt>Exp. tournament goals</dt><dd>{b['exp_goals']:.1f}</dd></div>
+<div><dt>Intl goals 24-26</dt><dd>{b['intl_goals_24_26']}</dd></div>
+</dl>
+<p class="fineprint">Model odds come from this player's share of {escape(team)}'s goals
+applied across 100,000 simulated tournaments - his team's path to the final is priced in.
+Details on the <a href="../method.html">Method</a> page.</p>"""
+        tg = next((v["goals"] for k, v in SCORERS.items()
+                   if _nrm(k).split()[-1] == _nrm(name).split()[-1]), None)
+        race = (f'<p class="standfirst">World Cup 2026 so far: '
+                f'<b>{tg} goal{"s" if tg != 1 else ""}</b></p>' if tg else "")
+        season_html = ""
+        for season in sorted(prof.get("seasons", {}), reverse=True):
+            rows = "".join(
+                f'<tr><td>{escape(r["team"])}</td><td class="comp">{escape(r["competition"])}</td>'
+                f'<td class="num">{r["apps"]}</td><td class="num">{r["minutes"]}</td>'
+                f'<td class="num">{r["goals"]}</td><td class="num">{r["assists"]}</td>'
+                f'<td class="num">{r["rating"] if r["rating"] else "-"}</td></tr>'
+                for r in prof["seasons"][season])
+            season_html += f"""<h2>{season} season, all competitions</h2>
+<table class="ko">
+<thead><tr><th>Team</th><th>Competition</th><th class="num">Apps</th>
+<th class="num">Min</th><th class="num">Goals</th><th class="num">Assists</th>
+<th class="num" title="average match rating where the league is covered">Rating</th></tr></thead>
+<tbody>{rows}</tbody></table>"""
+        body = f"""<div class="teamhead">
+{photo}
+<h1>{escape(bio.get("fullname") or name)}</h1>
+<p class="meta"><a class="chip" href="../teams/{slug(team)}.html">{escape(team)}</a></p>
+{race}
+</div>
+<dl class="stats">{facts}</dl>
+{outlook}
+{season_html}
+<p class="fineprint">Reference dossier; data from API-Football, profiles fetched
+{PROFILES_AT}. Club and country statistics per competition; rating coverage varies by league.</p>"""
+        crumb = (f'<a href="../awards.html">Awards</a> / '
+                 f'<a href="../teams/{slug(team)}.html">{escape(team)}</a> / {escape(name)}')
+        (OUT / "players" / f"{slug(name)}.html").write_text(
+            page(name, body, depth=1, crumb=crumb))
+
+
+def boot_race_table():
+    if not SCORERS:
+        return ('<p class="fineprint">The live scorer race appears here once the '
+                'tournament\'s first goals are scored.</p>')
+    boot = {_nrm(b["player"]).split()[-1]: b
+            for b in (AWARDS or {}).get("golden_boot", [])}
+    rows = []
+    for name, s in list(SCORERS.items())[:15]:
+        b = boot.get(_nrm(name).split()[-1])
+        odds = f'{b["p_model"]*100:.1f}¢' if b else '<span class="dim">-</span>'
+        mkt = (f'{b["market"]*100:.1f}¢' if b and b.get("market")
+               else '<span class="dim">-</span>')
+        rows.append(f'<tr><td>{player_link(name)}</td>'
+                    f'<td>{escape(s["team"].title())}</td>'
+                    f'<td class="num"><b>{s["goals"]}</b></td>'
+                    f'<td class="num">{odds}</td><td class="num">{mkt}</td></tr>')
+    return f"""<h2>The race, live</h2>
+<table class="ko">
+<thead><tr><th>Player</th><th>Team</th><th class="num">Goals</th>
+<th class="num" title="model Golden Boot odds">Model</th>
+<th class="num">Polymarket</th></tr></thead>
+<tbody>{''.join(rows)}</tbody></table>"""
 
 
 # ---------- methodology page ----------
@@ -1448,6 +1640,7 @@ td.num { color: var(--ink-soft); }
 .group h2 { display: flex; align-items: baseline; gap: .5rem; font-size: 1.6rem; font-weight: 900; border-bottom: 2px solid var(--ink); }
 .group h2 span { font-size: .7rem; font-family: "IBM Plex Mono", monospace; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-soft); }
 .group td:last-child, .group th:last-child { text-align: right; }
+.flagcell { width: 1.6em; font-size: 1.05rem; padding-right: .2rem; }
 .tlink { color: var(--ink); font-weight: 600; }
 .tlink:hover { color: var(--green); }
 sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
@@ -1461,6 +1654,10 @@ sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
 
 /* team page */
 .teamhead { text-align: center; padding: 1rem 0 .5rem; }
+.headshot { width: 110px; height: 110px; border-radius: 50%;
+  border: 2px solid var(--ink); object-fit: cover; margin: 0 auto .4rem; display: block;
+  background: #fff; }
+.headshot.crest { object-fit: contain; padding: 14px; }
 .teamhead h1 { margin-bottom: .6rem; }
 .meta { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; margin: .4rem 0 .9rem; }
 .meta.center { display: block; text-align: center; color: var(--ink-soft); font-size: .8rem; }
@@ -1606,6 +1803,21 @@ a.gchip { color: var(--ink); }
 .todaybox { border: 3px double var(--ink); padding: .2rem 1rem .8rem; margin: 1.2rem 0; }
 .todaybox h2 { border-bottom: 1px solid var(--rule); font-size: 1rem;
   text-transform: uppercase; letter-spacing: .15em; font-family: "IBM Plex Mono", monospace; }
+.pridebar { height: 7px; margin: .4rem 0 1rem; border: 1px solid var(--rule);
+  background: linear-gradient(90deg, #e40303 0 16.6%, #ff8c00 0 33.3%, #ffed00 0 50%,
+  #008026 0 66.6%, #24408e 0 83.3%, #732982 0 100%); }
+.extlinks { font-size: .78rem; }
+.pridenote { max-width: 640px; margin-left: auto; margin-right: auto; }
+.pridepage h1, .pridepage h2 {
+  border-image: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #24408e, #732982) 1;
+}
+.pridepage h2 { border-bottom-width: 2px; border-bottom-style: solid; }
+.pridepage .versus .v {
+  background: linear-gradient(180deg, #e40303, #ff8c00, #ffed00, #008026, #24408e, #732982);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  font-weight: 700;
+}
+.pridepage .group h2, .pridepage .sim h2 { border-image-slice: 1; }
 .verdict { max-width: 640px; margin: .8rem auto; padding: .6rem .9rem; font-size: .85rem;
   border: 2px solid var(--green); }
 .verdict.miss { border-color: var(--red); }
@@ -1677,6 +1889,7 @@ build_match_pages()
 build_futures()
 build_bracket()
 build_awards()
+build_player_pages()
 build_method()
 build_method_fa()
 build_archive_index()

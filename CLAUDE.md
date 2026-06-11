@@ -16,6 +16,8 @@ python3 wc26_simulate.py tune   # (occasional) re-tune hyperparams -> wc26_param
                              #    (locked bracket; --force to re-lock, normally never)
 python3 wc26_polymarket.py   # live Polymarket prices -> wc26_market_prices.json (free, no key)
 python3 wc26_players.py      # squads + player intl goals + award market prices (~300 API calls)
+python3 wc26_player_pages.py # (occasional) candidate dossiers for /players pages (~140 calls)
+python3 wc26_espn_ids.py     # (once) ESPN gameId mapping for live links
 .venv/bin/python3 wc26_awards.py       # Golden Boot model etc -> wc26_awards.json (after tournament.py)
 python3 wc26_update_results.py  # during tournament: pull actual results, grade predictions
 python3 wc26_build_site.py   # regenerate docs/ live pages
