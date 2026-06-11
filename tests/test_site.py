@@ -172,6 +172,14 @@ class TestBuiltSite(unittest.TestCase):
                     broken.append(f"{p.relative_to(self.docs)} -> {link}")
         self.assertFalse(broken[:10], f"{len(broken)} broken links")
 
+    def test_method_timeline_both_languages(self):
+        for name, heading in (("method.html", "How the method evolved"),
+                              ("method-fa.html", "سیر تکامل روش")):
+            html = (self.docs / name).read_text()
+            self.assertIn(heading, html, name)
+            tl = html.split('<ol class="timeline">')[1].split("</ol>")[0]
+            self.assertGreaterEqual(tl.count("<li>"), 8, name)
+
     def test_farsi_page_rtl_and_charts(self):
         fa = (self.docs / "method-fa.html").read_text()
         self.assertIn('dir="rtl"', fa)

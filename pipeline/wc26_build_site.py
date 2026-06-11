@@ -1489,6 +1489,39 @@ p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities c
 the weight is an explicit, testable choice: the scorecard grades model, market and blend
 separately, so the data itself will tell us if 0.35 was wrong.</p>
 
+<h2>How the method evolved</h2>
+<p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
+was validated on held-out matches before it touched the site — and one was rejected for
+failing exactly that test.</p>
+<ol class="timeline">
+<li><b>9 June</b> — Dixon-Coles weighted Poisson chosen over plain Poisson (misprices draws),
+Elo-to-goals hybrids (same accuracy, more moving parts) and machine learning (data-starved at
+international level). Fitted on 8,081 internationals since 2018: held-out log-loss 0.897
+vs a 1.046 baseline.</li>
+<li><b>9 June, evening</b> — hyperparameters tuned by rolling cross-validation. Longer memory
+won (half-life 548 → 1000 days): national teams change slower than club sides. Log-loss
+0.897 → 0.854.</li>
+<li><b>9 June, night</b> — uncertainty made explicit: a 200-model bootstrap ensemble feeding
+100,000 simulated tournaments on the official bracket, plus the market blend
+(log-opinion pool, w=0.35) where Polymarket prices a match. The full bracket
+<b>locked</b>, the public scorecard opened.</li>
+<li><b>10 June</b> — zero-mean anomaly variance in the simulations: per-tournament form
+shocks, knockout attrition, extra-time fatigue. Nobody is helped on average, but favourites
+hand tail mass back to the field (Argentina 19.0% → 16.6%).</li>
+<li><b>10 June</b> — the squad-value prior: Transfermarkt market values nudge fitted ratings
+(β=0.35). Held-out log-loss 0.854 → 0.818 — the single largest upgrade in the project.</li>
+<li><b>11 June</b> — the exact-score calibration audit, our favourite <i>negative</i> result:
+a tempting correction (high-scoring draws looked 28% underpriced in one test window) failed
+validation on three earlier windows and was <b>not</b> shipped. The grid was already
+calibrated; resisting a fix is also a method.</li>
+<li><b>11 June</b> — full market coverage: Polymarket's exact-score, totals, BTTS and spread
+books wired in, so every probability the model produces now sits beside a live price and
+its edge.</li>
+<li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
+public, the model refits on the newest matches, and the day's site is frozen into an
+immutable snapshot.</li>
+</ol>
+
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
 no weather or altitude terms (magnitudes unfittable from our data - treated as caution flags,
@@ -1679,6 +1712,36 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <a href="archive.html">نسخه‌های قبلی</a> منجمد باقی می‌مانند.</p>
 <p>پیش‌بینی‌ای که بتوان آن را بعداً تغییر داد، پیش‌بینی نیست.</p>
 
+<h2>سیر تکامل روش</h2>
+<p class="fineprint">خلاصهٔ دفترچهٔ آزمایشگاه (یادداشت‌های کامل در مخزن کد موجود است). هر تغییر
+پیش از انتشار روی داده‌های دیده‌نشده اعتبارسنجی شد ــ و یکی هم دقیقاً در همین آزمون رد شد.</p>
+<ol class="timeline">
+<li><b>۹ ژوئن</b> ــ انتخاب پواسون وزن‌دار دیکسون-کولز به‌جای پواسون ساده (تساوی‌ها را اشتباه
+قیمت می‌گذارد)، ترکیب‌های Elo (دقت مشابه با پیچیدگی بیشتر) و یادگیری ماشین (در فوتبال ملی
+دادهٔ کافی ندارد). برازش روی ۸٬۰۸۱ بازی ملی از ۲۰۱۸: log-loss برابر ۰٫۸۹۷ در برابر خط
+پایهٔ ۱٫۰۴۶.</li>
+<li><b>۹ ژوئن، عصر</b> ــ تنظیم ابرپارامترها با اعتبارسنجی متقاطع غلتان. حافظهٔ بلندتر برنده شد
+(نیمه‌عمر از ۵۴۸ به ۱۰۰۰ روز): تیم‌های ملی کندتر از باشگاه‌ها تغییر می‌کنند. بهبود log-loss
+از ۰٫۸۹۷ به ۰٫۸۵۴.</li>
+<li><b>۹ ژوئن، شب</b> ــ صریح‌کردن عدم‌قطعیت: آنسامبل بوت‌استرپ ۲۰۰ مدلی برای ۱۰۰٬۰۰۰
+تورنمنت شبیه‌سازی‌شده روی براکت رسمی، به‌علاوهٔ ترکیب با قیمت‌های بازار (وزن ۰٫۳۵) در
+مسابقاتی که پلی‌مارکت قیمت دارد. براکت کامل <b>قفل شد</b> و کارنامهٔ عمومی آغاز شد.</li>
+<li><b>۱۰ ژوئن</b> ــ واریانس ناهنجاری با میانگین صفر در شبیه‌سازی‌ها: شوک فرم هر تورنمنت،
+فرسایش مرحلهٔ حذفی، خستگی وقت اضافه. به‌طور متوسط به هیچ تیمی کمک نمی‌شود، اما بخت‌های اول
+بخشی از احتمال خود را به بقیه پس می‌دهند (آرژانتین از ۱۹٫۰٪ به ۱۶٫۶٪).</li>
+<li><b>۱۰ ژوئن</b> ــ پیشینِ ارزش ترکیب: ارزش بازار بازیکنان (ترانسفرمارکت) امتیازهای
+برازش‌شده را کمی جابه‌جا می‌کند (β=۰٫۳۵). بهبود log-loss از ۰٫۸۵۴ به ۰٫۸۱۸ ــ بزرگ‌ترین
+ارتقای پروژه.</li>
+<li><b>۱۱ ژوئن</b> ــ ممیزی کالیبراسیون نتیجهٔ دقیق؛ نتیجهٔ منفیِ محبوب ما: یک اصلاح
+وسوسه‌انگیز (تساوی‌های پرگل در یک پنجرهٔ آزمون ۲۸٪ ارزان‌قیمت به نظر می‌رسیدند) در
+اعتبارسنجی روی سه پنجرهٔ قدیمی‌تر رد شد و <b>عرضه نشد</b>. شبکهٔ نمرات از قبل کالیبره بود؛
+مقاومت در برابر «اصلاح» هم بخشی از روش است.</li>
+<li><b>۱۱ ژوئن</b> ــ پوشش کامل بازار: دفترهای نتیجهٔ دقیق، مجموع گل، گلزنی هر دو تیم و
+هندیکپ پلی‌مارکت متصل شدند تا هر احتمالی که مدل می‌سازد کنار قیمت زنده و اختلافش بنشیند.</li>
+<li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
+می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
+</ol>
+
 <h2>نقاط کور شناخته‌شده</h2>
 <p class="fineprint">ترکیب بازیکنان، مصدومیت‌ها و محرومیت‌ها مستقیماً در مدل حضور ندارند؛
 این اطلاعات از طریق بازار وارد می‌شوند. آب‌وهوا و ارتفاع زمین ضریب مستقلی ندارند، چون با
@@ -1771,6 +1834,20 @@ h1 { font-size: 2.6rem; font-weight: 900; letter-spacing: -.02em; margin: 1.2rem
 h2 { font-size: 1.25rem; font-weight: 600; border-bottom: 2px solid var(--ink); padding-bottom: .25rem; margin: 2rem 0 .8rem; }
 a { color: var(--green); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* method-page evolution timeline */
+ol.timeline { list-style: none; margin: 1.2rem 0; padding: 0; }
+ol.timeline li {
+  position: relative; padding-inline-start: 22px; margin: 0;
+  padding-bottom: .9rem; border-inline-start: 2px solid var(--rule);
+}
+ol.timeline li:last-child { border-inline-start-color: transparent; }
+ol.timeline li::before {
+  content: ""; position: absolute; inset-inline-start: -6px; top: .42em;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--green); border: 2px solid var(--paper);
+}
+ol.timeline b { font-family: "Fraunces", serif; }
 
 /* masthead */
 .masthead {

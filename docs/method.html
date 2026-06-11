@@ -21,7 +21,7 @@ gtag('config', 'G-EG56KHB1SX');
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606112106">
+<link rel="stylesheet" href="style.css?v=202606112111">
 <script>
 (function() {
   var t = localStorage.getItem("theme");
@@ -223,6 +223,39 @@ renormalise - is the standard way to merge them: p ∝ p<sub>model</sub>^0.65 ·
 p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities compound, and
 the weight is an explicit, testable choice: the scorecard grades model, market and blend
 separately, so the data itself will tell us if 0.35 was wrong.</p>
+
+<h2>How the method evolved</h2>
+<p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
+was validated on held-out matches before it touched the site — and one was rejected for
+failing exactly that test.</p>
+<ol class="timeline">
+<li><b>9 June</b> — Dixon-Coles weighted Poisson chosen over plain Poisson (misprices draws),
+Elo-to-goals hybrids (same accuracy, more moving parts) and machine learning (data-starved at
+international level). Fitted on 8,081 internationals since 2018: held-out log-loss 0.897
+vs a 1.046 baseline.</li>
+<li><b>9 June, evening</b> — hyperparameters tuned by rolling cross-validation. Longer memory
+won (half-life 548 → 1000 days): national teams change slower than club sides. Log-loss
+0.897 → 0.854.</li>
+<li><b>9 June, night</b> — uncertainty made explicit: a 200-model bootstrap ensemble feeding
+100,000 simulated tournaments on the official bracket, plus the market blend
+(log-opinion pool, w=0.35) where Polymarket prices a match. The full bracket
+<b>locked</b>, the public scorecard opened.</li>
+<li><b>10 June</b> — zero-mean anomaly variance in the simulations: per-tournament form
+shocks, knockout attrition, extra-time fatigue. Nobody is helped on average, but favourites
+hand tail mass back to the field (Argentina 19.0% → 16.6%).</li>
+<li><b>10 June</b> — the squad-value prior: Transfermarkt market values nudge fitted ratings
+(β=0.35). Held-out log-loss 0.854 → 0.818 — the single largest upgrade in the project.</li>
+<li><b>11 June</b> — the exact-score calibration audit, our favourite <i>negative</i> result:
+a tempting correction (high-scoring draws looked 28% underpriced in one test window) failed
+validation on three earlier windows and was <b>not</b> shipped. The grid was already
+calibrated; resisting a fix is also a method.</li>
+<li><b>11 June</b> — full market coverage: Polymarket's exact-score, totals, BTTS and spread
+books wired in, so every probability the model produces now sits beside a live price and
+its edge.</li>
+<li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
+public, the model refits on the newest matches, and the day's site is frozen into an
+immutable snapshot.</li>
+</ol>
 
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
