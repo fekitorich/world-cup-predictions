@@ -48,10 +48,12 @@ class TestHelpers(unittest.TestCase):
         self.assertEqual(b.actual_result("0-0"), "draw")
         self.assertEqual(b.actual_result("0-3"), "away")
 
-    def test_is_live(self):
-        self.assertFalse(b.is_live({"score": None, "status": "Not Started"}))
-        self.assertFalse(b.is_live({"score": "1-0", "status": "Match Finished"}))
-        self.assertTrue(b.is_live({"score": None, "status": "First Half"}))
+    def test_no_live_chip_rendered(self):
+        """Static pages can't know liveness; the LIVE badge was removed
+        as misleading (matches between rebuilds showed it for hours)."""
+        for name in ("index.html", "matches.html"):
+            self.assertNotIn("livechip", (Path(b.OUT) / name).read_text(),
+                             name)
 
     def test_slug_accents(self):
         self.assertEqual(b.slug("Kylian Mbappé"), "kylian-mbappe")

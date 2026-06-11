@@ -340,8 +340,6 @@ def build_index():
                     == actual_result(m["score"])
                 verdict = (f'<b class="score">{m["score"]}</b> '
                            + ('<i class="f W">✓</i>' if hit else '<i class="f L">✗</i>'))
-            elif is_live(m):
-                verdict = LIVE_CHIP
             else:
                 verdict = f'{time_} UTC'
             rows.append(
@@ -386,8 +384,6 @@ def build_matches_list():
             _, time_ = fmt_date(m["date_utc"])
             if m.get("score"):
                 res = f'<b class="score">{m["score"]}</b>'
-            elif is_live(m):
-                res = LIVE_CHIP
             else:
                 res = '<span class="dim">-</span>'
             rows.append(f"""<tr>
@@ -574,17 +570,6 @@ def actual_result(score):
     return "home" if h > a else "away" if a > h else "draw"
 
 
-NOT_LIVE = {None, "", "Not Started", "Match Finished", "Match Postponed",
-            "Match Cancelled", "Time to be defined", "Match Abandoned"}
-
-
-def is_live(m):
-    return not m.get("score") and m.get("status") not in NOT_LIVE
-
-
-LIVE_CHIP = '<b class="livechip">LIVE</b>'
-
-
 def group_standings(g):
     """Real standings for a group once any of its matches have finished.
     Returns ordered rows or None if nothing played yet."""
@@ -768,7 +753,7 @@ football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-ir
         eid = ESPN_IDS.get(str(m["match_id"]))
         if eid:
             links.append(f'<a href="https://www.espn.com/soccer/match/_/gameId/{eid}" '
-                         f'target="_blank" rel="noopener">ESPN live ↗</a>')
+                         f'target="_blank" rel="noopener">ESPN ↗</a>')
         ext = '<p class="meta center extlinks">' + " · ".join(links) + "</p>"
         body = f"""{pride_html}{wrap_open}<div class="card">
 <p class="meta center">{(escape(m["round"]) if m.get("round") else f"Group {m['group']} · Matchday {m['matchday']}")} · {date_label}, {time_} UTC<br>
@@ -2024,15 +2009,9 @@ figure img, figure svg { width: 100%; max-width: 660px; height: auto; display: b
 figcaption { font-size: .72rem; color: var(--ink-soft); margin: .35rem auto 0;
   max-width: 600px; text-align: center; }
 
-/* standings shading, live chip, micro-bars, sticky heads, a11y, print */
+/* standings shading, micro-bars, sticky heads, a11y, print */
 tr.q1 td { background: color-mix(in srgb, var(--green) 9%, transparent); }
 tr.q3 td { background: color-mix(in srgb, var(--amber) 10%, transparent); }
-.livechip {
-  color: var(--paper); background: var(--red); font-size: .68rem;
-  padding: .1em .5em; border-radius: 2px; letter-spacing: .08em;
-  animation: livepulse 1.6s ease-in-out infinite;
-}
-@keyframes livepulse { 50% { opacity: .55; } }
 .futures td.bar { background: linear-gradient(90deg,
   color-mix(in srgb, var(--green) 16%, transparent) var(--p), transparent var(--p)); }
 @media (min-width: 701px) {
