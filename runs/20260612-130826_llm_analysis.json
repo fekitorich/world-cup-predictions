@@ -452,9 +452,9 @@
     "generated": "2026-06-12 09:59 UTC"
    },
    "review": {
-    "text": "Mexico opened their World Cup at the Estadio Azteca with a controlled 2-0 win over South Africa, the kind of result the numbers had been pointing at all along. It was a clean continuation of the home side's recent form, and the scoreline landed exactly on the model's single most likely outcome: 2-0 sat top of the projected scores at 15.4 percent, just ahead of 1-0. A 2.06 expected-goals figure for Mexico against 0.56 for South Africa described this game well in advance, and the shutout chimed with a below-even both-teams-to-score read of 38 percent.\n\nThis was a good night for both the model and the market, with little to separate them. The model priced Mexico at 72.2 percent to win; Polymarket had them at 69.5 cents — close agreement that South Africa, ranked 60th to Mexico's 15th, would struggle to find a foothold. The locked bracket pick of 1-0 Mexico nailed the result if not the exact margin, and a first-to-score read of 72.5 percent for the hosts captured how the game was always likely to flow. A straightforward call, and a correct one.",
+    "text": "Mexico opened their World Cup at a heaving Estadio Azteca exactly as the script demanded, beating South Africa 2-0 to bank three points without much alarm. The scoreline was, quite literally, the model's single most likely outcome: 2-0 topped the projection at 15.4 percent, narrowly ahead of 1-0 at 14.5, and the home xG of 2.06 against just 0.56 captured the gulf cleanly. South Africa, ranked 60th to Mexico's 15th and carrying barely a quarter of the hosts' squad value, never found the response their pre-tournament draws suggested they might.\n\nThis is a clean win for both the numbers and the price. The model gave Mexico 72.2 percent and the clean sheet implied by a 38.1 percent both-teams-to-score figure landing on the unders side — under 2.5 sat at 51.2 percent, and the game obliged. Polymarket went further still, posting Mexico at a full 100 cents with the draw and away both at zero, and was vindicated outright. Our locked bracket pick of 1-0 nailed the home result if not the margin. A straightforward read, straightforwardly correct.",
     "model": "claude-opus-4-8",
-    "generated": "2026-06-12 12:02 UTC"
+    "generated": "2026-06-12 09:59 UTC"
    }
   },
   "1538999": {
@@ -464,9 +464,9 @@
     "generated": "2026-06-12 09:59 UTC"
    },
    "review": {
-    "text": "South Korea opened their Group A campaign with a 2-1 win over the Czech Republic in Guadalajara, turning a tight contest into the kind of narrow home victory the numbers leaned toward without ever promising. The Czechs, the more valuable squad on paper at €188m to Korea's €139m and unbeaten in their previous nine before kickoff, got on the scoresheet but couldn't take a point from the Estadio Akron.\n\nGrade this one a clean hit for the model. It made South Korea favorites at 47.4% to win, with the draw at 27.7% and the Czechs trailing on 24.9%, and the result landed squarely on the right side. The exact 2-1 scoreline was the fifth-likeliest line at 9.1%, and with an xG read of 1.46 to 0.98 the model expected Korea to edge the goal count without a blowout — which is exactly what happened. BTTS came in too, just ahead of the model's near-coin-flip 48.6%. Our locked bracket pick, a 1-1 that called the home result correctly, also graded as a hit. A solid, unflashy night for the projections.",
+    "text": "South Korea got the win their billing demanded, edging the Czech Republic 2-1 in Guadalajara to open Group A. The match delivered three goals, clearing the over 2.5 line the model had as a near coin-flip at 44.1%, and both teams scored — the 48.6% BTTS outcome landing on the right side. The 2-1 scoreline itself sat fifth on the model's list of likeliest results at 9.1%, a tidy match for the run of play given an expected goals split of 1.46 to 0.98 in Korea's favour.\n\nThis was a good day for both forecasts, with a caveat on conviction. The model made Korea favourites at 47.4% against the Czechs' 24.9%, and the home win duly arrived. Polymarket went further, pricing Korea at a full 100 cents and the Czechs at zero — vindicated by the result, but a reminder that the market left no room for the 25-or-so percent of outcomes that didn't happen. The locked bracket pick called 1-1 yet correctly tagged the home result, so it grades as a hit. Honest scoreboard: right team, right total, right both-teams-scored.",
     "model": "claude-opus-4-8",
-    "generated": "2026-06-12 12:02 UTC"
+    "generated": "2026-06-12 09:59 UTC"
    }
   },
   "1539000": {
@@ -960,5 +960,5 @@
    }
   }
  },
- "updated": "2026-06-12 12:02 UTC"
+ "updated": "2026-06-12 11:08 UTC"
 }

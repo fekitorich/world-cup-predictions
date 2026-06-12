@@ -186,6 +186,13 @@ def build_preview_prompt(m, sim, mkt, src):
 
 def build_review_prompt(m, sim, mkt, src, pred):
     d = _match_dossier(m, sim, mkt, src)
+    # the live snapshot may hold post-settlement prices (1.0/0/0) — only the
+    # pre-match prices preserved in the locked predictions file are honest
+    # inputs for grading the market's view
+    if pred.get("p_market"):
+        d["polymarket"] = {"prematch_moneyline_HDA": pred["p_market"]}
+    else:
+        d.pop("polymarket", None)
     d["result"] = {"final_score": m.get("score"),
                    "locked_bracket_pick": {k: pred.get(k) for k in
                                            ("pred_score", "pred_result",
