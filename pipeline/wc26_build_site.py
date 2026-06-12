@@ -1106,15 +1106,17 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
         else:
             actual = '<td class="num dim">-</td><td class="dim">-</td>'
         conf = p["p"][p["pred_result"]] * 100
+        pick = {"H": p["home"], "D": "Draw", "A": p["away"]}[p["pred_result"]]
         rows.append(
             f'<tr><td class="num">{p["date_utc"][:10]}</td>'
             f'<td><b class="gchip">{p["group"]}</b></td>'
             f'<td>{escape(p["home"])} <em>v</em> {escape(p["away"])}</td>'
-            f'<td class="num score">{p["pred_score"]}</td>'
-            f'<td class="num">{conf:.0f}%</td>{actual}</tr>')
+            f'<td><b>{escape(pick)}</b></td>'
+            f'<td class="num">{conf:.0f}%</td>'
+            f'<td class="num score dim">{p["pred_score"]}</td>{actual}</tr>')
     track_html = f"""<table>
 <thead><tr><th class="num">Date</th><th title="group A-L">Grp</th><th>Fixture</th>
-<th class="num" title="most likely exact score under the model">Pred</th><th class="num" title="probability of the predicted 1X2 result (market-blended)">Conf.</th><th class="num" title="filled in by wc26_update_results.py as games finish">Actual</th><th></th></tr></thead>
+<th title="the model's 1X2 call — THE prediction that gets graded">Result pick</th><th class="num" title="probability of the result pick (market-blended)">Conf.</th><th class="num" title="single most likely exact scoreline — typically a 10-15% shot among ~170 possible scores. A low draw is often the modal score even when one side is clearly favoured to WIN; this column is colour, not the call">Modal score</th><th class="num" title="filled in by wc26_update_results.py as games finish">Actual</th><th></th></tr></thead>
 <tbody>{''.join(rows)}</tbody></table>"""
 
     body = f"""<h1>The predicted tournament</h1>
@@ -1122,6 +1124,12 @@ or the blend prices matches best (market graded on {acc['market_priced_matches']
 graded against reality as results land. Picks are modal outcomes from the mean model;
 the official FIFA bracket decides who meets whom.</p>
 <div class="champ">Predicted champion: <b>{team_link(PRED['champion'])}</b></div>
+<p class="fineprint">Two pick columns, two different questions - don't conflate them. <b>Result
+pick</b> is the call: who wins (or a draw), with the model's probability beside it. <b>Modal
+score</b> is the single most likely exact scoreline, typically a 10-15% shot - and because goals
+are rare, a low draw like 1-1 is often the modal score even when one team is clearly favoured to
+win. Betting the modal score as if it were the result call is a misread (South Korea v Czechia,
+matchday 1: modal score 1-1, result pick South Korea at 47% - Korea won 2-1).</p>
 <p class="fineprint">A locked bracket never updates - when reality diverges, the picks stay frozen,
 because a prediction you can revise isn't a prediction. The Conf column is the model's own
 probability for its pick: a 50% pick is a coin flip it was forced to call, so judge the model by
