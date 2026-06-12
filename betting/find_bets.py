@@ -28,7 +28,7 @@ ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
 sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from wc26_polymarket import (ALIASES, names_for, parse_score_question,
-                             classify_more_market)  # noqa: E402
+                             classify_more_market, FUTURES_SLUGS)  # noqa: E402
 
 CFG = json.load(open(f"{HERE}/config.json"))
 if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
@@ -350,16 +350,6 @@ def corners_candidates():
                     })
         time.sleep(0.12)
     return out
-
-
-FUTURES_SLUGS = {   # stage key in wc26_tournament.json -> Polymarket event
-    "champion": "world-cup-winner",
-    "final": "world-cup-nation-to-reach-final",
-    "sf": "world-cup-nation-to-reach-semifinals",
-    "qf": "world-cup-nation-to-reach-quarterfinals",
-    "r16": "world-cup-nation-to-reach-round-of-16",
-    "r32": "world-cup-team-to-advance-to-knockout-stages",
-}
 
 
 def futures_candidates():

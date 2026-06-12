@@ -30,8 +30,13 @@ except FileNotFoundError:
 try:
     _mkt = json.load(open(DATA / "wc26_market_prices.json"))
     PRICES, PRICES_AT = _mkt["prices"], _mkt["fetched_at"]
+    FUT_PRICES = _mkt.get("futures", {})
 except FileNotFoundError:
-    PRICES, PRICES_AT = {}, None
+    PRICES, PRICES_AT, FUT_PRICES = {}, None, {}
+try:
+    CORNERS = json.load(open(DATA / "wc26_corners.json"))["matches"]
+except FileNotFoundError:
+    CORNERS = {}
 try:
     TOURNEY = json.load(open(DATA / "wc26_tournament.json"))["teams"]
 except FileNotFoundError:
@@ -717,6 +722,15 @@ def sim_section(m):
             (f"{m['away']} score first", fs["away"], mfs.get("away")),
             ("Neither (0-0)", fs["neither"], mfs.get("neither")),
         ]
+    cn = CORNERS.get(str(m["match_id"]), {})
+    mcn = rec.get("corners", {})
+    if cn:
+        rows += [("__head", "Corners (base-rate model)", None)] + [
+            row for line in ("9.5", "10.5") for row in (
+                (f"Over {line} corners", cn[f"over_{line}"],
+                 mcn.get(f"over_{line}")),
+                (f"Under {line} corners", 1 - cn[f"over_{line}"],
+                 flip(mcn.get(f"over_{line}"))))]
     market_rows = []
     for k, v, price in rows:
         if k == "__head":
@@ -820,6 +834,7 @@ football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-ir
 def build_futures():
     if not TOURNEY:
         return
+    champ_mkt = FUT_PRICES.get("champion", {})
     rows = []
     for name, p in TOURNEY.items():
         if name not in TEAMS:
@@ -828,6 +843,14 @@ def build_futures():
             f'<td class="num bar{" hot" if p[k] >= 0.5 else ""}" '
             f'style="--p:{p[k] * 100:.1f}%">{p[k] * 100:.1f}%</td>'
             for k in ("win_group", "r32", "qf", "sf", "final", "champion"))
+        cm = champ_mkt.get(name)
+        if cm is not None:
+            edge = (p["champion"] - cm) * 100
+            cls = "pos" if edge >= 2 else "neg" if edge <= -2 else ""
+            cells += (f'<td class="num">{cm * 100:.1f}¢</td>'
+                      f'<td class="num edge {cls}">{edge:+.1f}¢</td>')
+        else:
+            cells += '<td class="num dim">-</td><td class="num dim">-</td>'
         g = team_group.get(name, "?")
         rows.append(f'<tr><td>{team_link(name)}</td>'
                     f'<td><a class="gchip" href="index.html#group-{g.lower()}">{g}</a></td>{cells}</tr>')
@@ -846,7 +869,7 @@ fatigue penalty after 120-minute matches. None of it favours anyone on average; 
 favours outsiders, because chaos always does.</p>
 <table class="futures">
 <thead><tr><th>Team</th><th title="group A-L">Grp</th><th class="num" title="finish top of the group">Win group</th><th class="num" title="advance to the round of 32 - top two per group plus the eight best third-placed teams">Reach R32</th>
-<th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament - column sums to 100% across all teams">Champion</th></tr></thead>
+<th class="num" title="reach the quarter-finals">QF</th><th class="num" title="reach the semi-finals">SF</th><th class="num" title="reach the final">Final</th><th class="num" title="win the tournament - column sums to 100% across all teams">Champion</th><th class="num" title="live Polymarket price for Champion">Mkt</th><th class="num" title="model minus market on Champion - positive means the market sells it cheaper than the ensemble values it">Edge</th></tr></thead>
 <tbody>{''.join(rows)}</tbody>
 </table>"""
     (OUT / "futures.html").write_text(page("Futures", body))

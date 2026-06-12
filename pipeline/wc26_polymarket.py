@@ -271,6 +271,46 @@ def fetch_exact_scores(base_slug, home, away):
     return slug, cells
 
 
+FUTURES_SLUGS = {   # stage key in wc26_tournament.json -> Polymarket event
+    "champion": "world-cup-winner",
+    "final": "world-cup-nation-to-reach-final",
+    "sf": "world-cup-nation-to-reach-semifinals",
+    "qf": "world-cup-nation-to-reach-quarterfinals",
+    "r16": "world-cup-nation-to-reach-round-of-16",
+    "r32": "world-cup-team-to-advance-to-knockout-stages",
+}
+
+
+def fetch_futures(team_names):
+    """Yes-price per team per stage from the futures events (incl. the 12
+    group-winner books). Returns {stage: {team: price}}."""
+    def team_for(title):
+        tl = (title or "").lower()
+        for team in team_names:
+            if title == team or tl in names_for(team):
+                return team
+        return None
+    slugs = list(FUTURES_SLUGS.items()) +         [("win_group", f"world-cup-group-{g}-winner") for g in "abcdefghijkl"]
+    out = {}
+    for stage, slug in slugs:
+        try:
+            evs = get("/events", slug=slug)
+        except Exception as e:
+            print(f"  futures fetch failed {slug}: {e}", flush=True)
+            continue
+        for mk in (evs[0].get("markets", []) if evs else []):
+            team = team_for(mk.get("groupItemTitle") or "")
+            if not team:
+                continue
+            try:
+                out.setdefault(stage, {})[team] = \
+                    float(json.loads(mk["outcomePrices"])[0])
+            except (KeyError, ValueError, IndexError):
+                continue
+        time.sleep(0.15)
+    return out
+
+
 def parse_event(ev, home, away):
     """Extract home/draw/away Yes-prices from an event's binary markets."""
     out = {}
@@ -359,8 +399,11 @@ def main():
         else:
             misses.append(f"{m['home']} v {m['away']} {m['date_utc'][:10]}")
         time.sleep(0.15)
+    teams = sorted({m["home"] for m in fixtures} | {m["away"] for m in fixtures})
+    futures = fetch_futures(teams)
     json.dump({"fetched_at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
-               "source": "Polymarket Gamma API", "prices": out},
+               "source": "Polymarket Gamma API", "prices": out,
+               "futures": futures},
               open(f"{DATA}/wc26_market_prices.json", "w"), indent=2)
     from wc26_simulate import save_versioned
     save_versioned(f"{DATA}/wc26_market_prices.json")
