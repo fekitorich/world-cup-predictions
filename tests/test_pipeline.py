@@ -59,6 +59,15 @@ class TestLayout(unittest.TestCase):
             self.assertTrue(os.path.exists(os.path.join(_ROOT, rel)),
                             f"matchday.sh calls missing {rel}")
 
+    def test_matchday_script_network_hardened(self):
+        """launchd fires before Wi-Fi is up after sleep; the run must wait
+        for the network and retry pull/push (2026-06-12 04:30 DNS death)."""
+        src = open(os.path.join(_ROOT, "wc26_matchday.sh")).read()
+        self.assertIn("retry()", src)
+        self.assertRegex(src, r"retry \d+ \d+ curl")       # network wait
+        self.assertRegex(src, r"retry \d+ \d+ git pull")
+        self.assertRegex(src, r"retry \d+ \d+ git push")
+
     def test_no_stale_root_references(self):
         """No script may open a data file at the repo root anymore."""
         pat = re.compile(r"""ROOT[}/].{0,3}(?:wc26_\w+\.(?:json|npz|csv)
