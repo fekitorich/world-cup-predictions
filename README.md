@@ -106,4 +106,6 @@ python3 pipeline/wc26_build_site.py snapshot   # rebuild site + freeze a dated s
 git add -A && git commit && git push           # deploy
 ```
 
-*Not betting advice; the model knows nothing about injuries or lineups.*
+*Not betting advice. The model's probabilities ignore injuries and lineups
+by design — an opt-in, reduce-only news check guards the betting side, but
+no published number reflects it.*
