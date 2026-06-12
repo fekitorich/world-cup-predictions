@@ -22,6 +22,10 @@ pre-tournament bracket graded publicly as results land.
   Golden Ball & Glove
 - **Bracket** — every match predicted through the final, locked 2026-06-09,
   with a public scorecard grading model vs market vs blend on real results
+- **AI analyst sections** — every match (preview + post-result review), team
+  and player page closes with short AI-written analysis (claude-opus-4-8),
+  generated from a frozen source dossier plus the model's own numbers —
+  clearly labeled, commentary not calculation
 - **Method** — how all of it is computed, validation numbers, known blind spots
 - **Versions** — immutable daily snapshots of the whole site, so past
   predictions never disappear
@@ -68,8 +72,11 @@ wc26_matchday.sh   nightly automation entry point (launchd)
 
 `betting/` turns model-vs-market edges into capped, fractional-Kelly
 Polymarket orders (dry-run by default, hard per-bet and total caps, a
-persistent ledger against double-betting). All personal data — keys, caps,
-ledger — stays in gitignored local files. See [betting/README.md](betting/README.md).
+persistent ledger against double-betting, execution-time slippage refusal).
+Every scanned candidate — staked or not — feeds a paper-trading log that
+`betting/paper.py` grades for closing-line value and resolved PnL: the
+edge-finder's own out-of-sample scoreboard. All personal data — keys, caps,
+ledgers — stays in gitignored local files. See [betting/README.md](betting/README.md).
 
 ## Reproduce
 

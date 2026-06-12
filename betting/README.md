@@ -22,6 +22,10 @@ Turns the model's edges into capped, Kelly-sized Polymarket orders.
 - combined exposure per fixture (and per team for futures) capped at
   `max_per_match_usdc`: five correlated bets on one match are one big bet
 - dry run is the default; `--live` is an explicit opt-in
+- execution-time price check: an order is refused if the live ask exceeds
+  the planned price by more than `max_slippage_cents`
+- `python3 betting/paper.py` — paper-trading scoreboard (CLV + resolved
+  PnL per category for every candidate ever scanned, no money involved)
 - only positive-edge buys (either side of a binary); Golden Ball/Glove never bet (no calibrated model)
 - every non-moneyline category (exact score, totals, team totals, BTTS, spread,
   halves, first-to-score, futures, corners) ships **off** in the committed config —

@@ -1713,6 +1713,18 @@ the shipped model is a pure base rate (about 9.2 corners per match). Where the c
 are genuinely traded it agrees with them almost exactly; its only job is to flag the
 untraded lines that drift far from reality.</p>
 
+<h2>The AI analyst</h2>
+<p>The short analysis sections that close each match, team and player page are written by a
+language model (the byline at the bottom of each one says which, and when). Two rules keep
+them honest. First, a <b>grounding contract</b>: the model sees only a frozen source dossier —
+encyclopedia summaries fetched once, plus our own form data and squad lists — and the
+probabilities this site computes. Same inputs, reproducible outputs, no outside facts. Second,
+a <b>separation of concerns</b>: the text is colour, not calculation. Nothing the analyst
+writes feeds the goal model, the simulations, or the bet scanner — the numbers would be
+identical if the words didn't exist. Post-match reviews grade the model and the market against
+the pre-match prices preserved for the public scorecard, so the AI can't flatter anyone
+with hindsight.</p>
+
 <h2>How the method evolved</h2>
 <p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
 was validated on held-out matches before it touched the site — and two were rejected for
@@ -1746,6 +1758,12 @@ first-to-score derived from the existing grid; half markets via a fitted first-h
 share (0.447 on 2,360 goals); futures priced against the ensemble. Corners brought the
 second rejected idea: goal threat failed to predict corner counts out of sample, so their
 model is a deliberate base rate.</li>
+<li><b>12 June, later</b> — an external code review found two real bugs (a contaminated
+validation harness for the squad-value prior — the clean rerun reproduced the published
+numbers exactly — and unseeded randomness in the tournament engine, now deterministic) and
+prompted two defenses: execution-time price protection on bets, and a paper-trading log that
+grades every flagged edge for closing-line value. Predictions unchanged; trust in them,
+better earned.</li>
 <li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
 public, the model refits on the newest matches, and the day's site is frozen into an
 immutable snapshot.</li>
@@ -1960,6 +1978,18 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 می‌شود، مدل تقریباً دقیقاً با آن هم‌نظر است؛ تنها کارش نشان‌کردن خطوط معامله‌نشده‌ای است
 که از واقعیت دور افتاده‌اند.</p>
 
+<h2>تحلیلگر هوش مصنوعی</h2>
+<p>بخش‌های کوتاه تحلیلی که در انتهای هر صفحهٔ مسابقه، تیم و بازیکن می‌آیند، نوشتهٔ یک مدل
+زبانی هستند (امضای پایین هر بخش می‌گوید کدام مدل و چه زمانی). دو قانون آن‌ها را صادق نگه
+می‌دارد. اول، <b>قرارداد استناد</b>: مدل فقط یک پروندهٔ منجمد از منابع را می‌بیند ــ
+خلاصه‌های دانش‌نامه‌ای که یک بار دریافت شده‌اند، به‌علاوهٔ داده‌های فرم و فهرست بازیکنان
+خودمان ــ و احتمال‌هایی که همین سایت محاسبه می‌کند. ورودی یکسان، خروجی تکرارپذیر، بدون
+واقعیت بیرونی. دوم، <b>تفکیک وظایف</b>: این متن رنگ است، نه محاسبه. هیچ‌چیز از نوشتهٔ
+تحلیلگر به مدل گل، شبیه‌سازی‌ها یا اسکنر شرط‌بندی راه ندارد ــ اگر این کلمات نبودند، اعداد
+همین بودند. مرور پس از مسابقه هم مدل و بازار را با قیمت‌های پیش از بازی می‌سنجد که برای
+کارنامهٔ عمومی نگه داشته شده‌اند؛ پس هوش مصنوعی نمی‌تواند با عقل پس از واقعه از کسی
+تعریف کند.</p>
+
 <h2>سیر تکامل روش</h2>
 <p class="fineprint">خلاصهٔ دفترچهٔ آزمایشگاه (یادداشت‌های کامل در مخزن کد موجود است). هر تغییر
 پیش از انتشار روی داده‌های دیده‌نشده اعتبارسنجی شد ــ و دو مورد هم دقیقاً در همین آزمون رد شدند.</p>
@@ -1991,6 +2021,11 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 گل)؛ بازارهای آیندهٔ تورنمنت در برابر آنسامبل قیمت‌گذاری شدند. کرنرها دومین ایدهٔ
 ردشده را آوردند: قدرت گلزنی نتوانست تعداد کرنر را خارج از نمونه پیش‌بینی کند، پس مدلشان
 آگاهانه یک نرخ پایه است.</li>
+<li><b>۱۲ ژوئن، بعدتر</b> ــ یک بازبینی بیرونی کد دو باگ واقعی یافت (آلودگی در ابزار
+اعتبارسنجی پیشینِ ارزش ترکیب ــ اجرای پاکیزه دقیقاً همان اعداد منتشرشده را بازتولید کرد ــ
+و تصادفی‌بودن بدون بذر در موتور تورنمنت که حالا قطعی است) و دو دفاع به همراه آورد:
+محافظت قیمت در لحظهٔ اجرا برای شرط‌ها و دفتر شرط‌بندی کاغذی که هر فرصت یافت‌شده را با
+ارزش خط پایانی می‌سنجد. پیش‌بینی‌ها تغییری نکردند؛ اعتماد به آن‌ها بهتر کسب شد.</li>
 <li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
 می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
 </ol>

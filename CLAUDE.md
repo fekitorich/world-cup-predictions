@@ -87,8 +87,13 @@ python3 -m http.server 8742 --directory docs  # browse
   `betting/.env` (wallet key + API creds), `betting/config.local.json`
   (real caps), `betting/state/` (plans + ledger). The committed
   `betting/config.json` holds only generic placeholder caps.
-- The ledger enforces the total cap across runs and prevents double-betting;
-  never edit it by hand.
+- The ledger enforces the total cap across runs and prevents double-betting
+  (token- AND market-level: holding one side blocks the other side);
+  never edit it by hand. place_bets refuses fills above plan price +
+  `max_slippage_cents` (live CLOB ask check) and records the executed ask.
+- Every find_bets scan logs all candidates to betting/state/paper.json
+  (gitignored); `python3 betting/paper.py` grades CLV + resolved PnL per
+  category — check it after a few matchdays before trusting any edge.
 
 ## Conventions
 
