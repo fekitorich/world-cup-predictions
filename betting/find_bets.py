@@ -30,9 +30,19 @@ sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 from wc26_polymarket import (ALIASES, names_for, parse_score_question,
                              classify_more_market, FUTURES_SLUGS)  # noqa: E402
 
+def merge_local(cfg, local):
+    """Overlay config.local.json on the committed config. `include` is
+    deep-merged: a local file that flips two categories on must not
+    silently wipe the gates it doesn't mention."""
+    include = {**cfg.get("include", {}), **(local.pop("include", None) or {})}
+    cfg = {**cfg, **local}
+    cfg["include"] = include
+    return cfg
+
+
 CFG = json.load(open(f"{HERE}/config.json"))
 if os.path.exists(f"{HERE}/config.local.json"):   # gitignored personal caps
-    CFG.update(json.load(open(f"{HERE}/config.local.json")))
+    CFG = merge_local(CFG, json.load(open(f"{HERE}/config.local.json")))
 AWARD_SLUGS = {
     "golden_boot": "world-cup-golden-boot-winner",
     "top_scorer_nation": "world-cup-top-scorer-nation",
@@ -534,7 +544,26 @@ def main():
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     record_paper(cands)
-    cands, total = build_plan(cands, CFG)
+    # size against what is LEFT of the bankroll, not the headline cap —
+    # the ledger already holds real positions and place_bets will refuse
+    # anything past the cap anyway; planning to the full cap just makes
+    # a plan that mostly can't execute
+    try:
+        ledger = json.load(open(f"{HERE}/state/ledger.json"))
+        spent = sum(b["stake_usdc"] for b in ledger["placed"])
+    except FileNotFoundError:
+        spent = 0.0
+    remaining = max(CFG["max_total_stake_usdc"] - spent, 0.0)
+    if spent:
+        print(f"\nledger holds ${spent:.2f} of the "
+              f"${CFG['max_total_stake_usdc']} cap — "
+              f"sizing plan to the ${remaining:.2f} that remains")
+    if remaining < CFG.get("min_stake_usdc", 1):
+        print("CAP EXHAUSTED — no room for even a minimum stake; raise "
+              "max_total_stake_usdc in config.local.json to bet more")
+        cands = []
+    cands, total = build_plan(cands, {**CFG,
+                                      "max_total_stake_usdc": remaining})
 
     plan = {
         "created": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),

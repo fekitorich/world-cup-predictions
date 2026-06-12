@@ -3,14 +3,29 @@
 Turns the model's edges into capped, Kelly-sized Polymarket orders.
 **This stakes real money when run with `--live`. Read this file first.**
 
-## Flow
+## One command
 
 ```
-1. edit betting/config.json          # YOUR caps: total + per-bet + min edges
-2. python3 betting/find_bets.py      # plan from RAW model vs live prices (no keys)
-3. review betting/state/plan.json    # every bet, stake, edge — read it
-4. .venv/bin/python3 betting/place_bets.py          # dry run, prints orders
-5. .venv/bin/python3 betting/place_bets.py --live   # real money
+.venv/bin/python3 betting/run.py            # refresh -> scan -> plan -> DRY RUN
+.venv/bin/python3 betting/run.py --live     # same, then places REAL orders
+```
+
+`run.py` chains the whole flow (Polymarket snapshot refresh, scan of every
+category enabled in config, plan build, execution) and refuses to start on
+stale inputs: model outputs older than `max_sims_age_hours`, an exhausted
+total cap, a missing key, or — for `--live` — a missing `config.local.json`
+(real money never runs on the committed placeholder caps). `--limit N`,
+`--skip-refresh`, `--allow-stale` are passed through / available.
+
+## Step-by-step flow (what run.py does)
+
+```
+1. edit betting/config.local.json    # YOUR caps + category gates (gitignored)
+2. python3 pipeline/wc26_polymarket.py   # refresh snapshot (late-listed books)
+3. python3 betting/find_bets.py      # plan from RAW model vs live prices (no keys)
+4. review betting/state/plan.json    # every bet, stake, edge — read it
+5. .venv/bin/python3 betting/place_bets.py          # dry run, prints orders
+6. .venv/bin/python3 betting/place_bets.py --live   # real money
 ```
 
 ## Safety rails (enforced in place_bets.py, not just the plan)
@@ -22,8 +37,17 @@ Turns the model's edges into capped, Kelly-sized Polymarket orders.
 - combined exposure per fixture (and per team for futures) capped at
   `max_per_match_usdc`: five correlated bets on one match are one big bet
 - dry run is the default; `--live` is an explicit opt-in
-- execution-time price check: an order is refused if the live ask exceeds
-  the planned price by more than `max_slippage_cents`
+- a plan older than `max_plan_age_min` is refused outright — prices and
+  kickoffs have moved; rebuild it (override: `--ignore-plan-age`)
+- kickoff is re-checked at execution time: a started match is never bet,
+  even from a plan built before kickoff
+- the plan is sized against the bankroll that *remains* (cap minus ledger),
+  and both sides of one market can't appear in the same batch
+- execution-time price check, both directions: refused if the live ask rose
+  past `max_slippage_cents` (edge gone) **or** fell past
+  `max_price_drop_cents` (a collapse means the market knows something the
+  pre-match plan doesn't — re-scan, don't "buy the dip")
+- wallet USDC balance is checked before the first live order
 - `python3 betting/paper.py` — paper-trading scoreboard (CLV + resolved
   PnL per category for every candidate ever scanned, no money involved)
 - only positive-edge buys (either side of a binary); Golden Ball/Glove never bet (no calibrated model)

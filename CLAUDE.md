@@ -11,7 +11,10 @@ simulation model.
 - `docs/` — generated site, GitHub Pages root, never edit by hand
   (report.html = accuracy report, regraded nightly; archive/ = immutable snapshots)
 - `betting/` — Polymarket executor (own README)
-- `tests/` — gate suite; `runs/` — time-coded archives of every result write
+- `tests/` — gate suite in four layers (unit/integration/e2e/smoke, see
+  tests/README.md; coverage via `.venv/bin/python3 -m coverage run -m
+  unittest discover -s tests`); `runs/` — time-coded archives of every
+  result write
 - `wc26_matchday.sh` — launchd entry point (06:30/23:30); stays at repo root,
   the plist points at it by absolute path
 
@@ -72,10 +75,13 @@ python3 -m http.server 8742 --directory docs  # browse
 
 ## Betting module (`betting/`)
 
-- `find_bets.py` (plan from RAW-model edges vs live prices, Kelly-sized) →
-  review `betting/state/plan.json` → `place_bets.py` (dry-run default,
-  `--live` to execute, `--limit N` for partial batches). Uses the
-  py-clob-client-v2 SDK (Polymarket migrated exchanges 2026-04-28).
+- `run.py` — one-command entry point: refresh Polymarket snapshot →
+  `find_bets.py` (plan from RAW-model edges vs live prices, Kelly-sized,
+  sized to the bankroll REMAINING after the ledger) → `place_bets.py`
+  (dry-run default, `--live` to execute, `--limit N`). Preflight refuses
+  stale model outputs (`max_sims_age_hours`), an exhausted cap, and live
+  mode without config.local.json. Uses the py-clob-client-v2 SDK
+  (Polymarket migrated exchanges 2026-04-28).
 - Categories are gated in config `include`; everything except `moneyline`
   and the two awards ships OFF in the committed config (a test enforces it:
   exact_score, totals, team_totals, btts, spread, halftime, second_half,
@@ -88,9 +94,13 @@ python3 -m http.server 8742 --directory docs  # browse
   (real caps), `betting/state/` (plans + ledger). The committed
   `betting/config.json` holds only generic placeholder caps.
 - The ledger enforces the total cap across runs and prevents double-betting
-  (token- AND market-level: holding one side blocks the other side);
-  never edit it by hand. place_bets refuses fills above plan price +
-  `max_slippage_cents` (live CLOB ask check) and records the executed ask.
+  (token- AND market-level, across runs AND within one batch); never edit
+  it by hand. place_bets also refuses plans older than `max_plan_age_min`,
+  re-checks kickoff per bet at execution, checks the live CLOB ask both
+  ways (`max_slippage_cents` up / `max_price_drop_cents` down — a collapsed
+  price is information, not a bargain), and verifies the wallet USDC
+  balance before the first live order. config.local.json is deep-merged:
+  its `include` overlays the committed gates instead of replacing them.
 - Every find_bets scan logs all candidates to betting/state/paper.json
   (gitignored); `python3 betting/paper.py` grades CLV + resolved PnL per
   category — check it after a few matchdays before trusting any edge.

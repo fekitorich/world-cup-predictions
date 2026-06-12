@@ -62,7 +62,9 @@ pipeline/          model + site scripts (run from repo root)
 data/              all inputs and canonical model outputs (JSON/CSV/NPZ)
 docs/              generated site (GitHub Pages root) + immutable archive/
 betting/           Polymarket executor — see betting/README.md
-tests/             offline gate suite (75 tests; CI + matchday gate)
+tests/             offline suite in four layers — unit / integration / e2e /
+                   smoke (180 tests, branch coverage via coverage.py;
+                   see tests/README.md); CI + matchday gate
 runs/              time-coded archive of every result write
 charts/            method-page SVG sources
 wc26_matchday.sh   nightly automation entry point (launchd)
@@ -71,8 +73,13 @@ wc26_matchday.sh   nightly automation entry point (launchd)
 ## Betting executor
 
 `betting/` turns model-vs-market edges into capped, fractional-Kelly
-Polymarket orders (dry-run by default, hard per-bet and total caps, a
-persistent ledger against double-betting, execution-time slippage refusal).
+Polymarket orders — one command end to end (`betting/run.py`: snapshot
+refresh → scan every enabled category → plan → execute; dry-run by default,
+`--live` to spend). Rails are enforced at execution, not just planning:
+hard per-bet/total/per-fixture caps, a persistent ledger against
+double-betting, plan-age and kickoff re-checks, two-sided live-price
+refusal (slippage up, suspicious collapse down), wallet balance preflight,
+and stale-model refusal.
 Every scanned candidate — staked or not — feeds a paper-trading log that
 `betting/paper.py` grades for closing-line value and resolved PnL: the
 edge-finder's own out-of-sample scoreboard. All personal data — keys, caps,
