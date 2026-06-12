@@ -136,7 +136,7 @@ def load_matches(cutoff, half_life, friendly_w, margin_cap=99):
     return out
 
 
-def fit(matches, shrink, iters=80):
+def fit(matches, shrink, iters=80, value_beta=VALUE_BETA):
     teams = sorted({m["home"] for m in matches} | {m["away"] for m in matches})
     att = {t: 0.0 for t in teams}
     dfn = {t: 0.0 for t in teams}
@@ -181,7 +181,7 @@ def fit(matches, shrink, iters=80):
             att[t] -= ma
             dfn[t] -= md
         mu += ma + md
-    apply_value_prior(att, dfn)
+    apply_value_prior(att, dfn, value_beta)
     return {"att": att, "dfn": dfn, "mu": mu, "hadv": hadv}
 
 

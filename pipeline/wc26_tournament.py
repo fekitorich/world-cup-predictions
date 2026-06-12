@@ -242,10 +242,10 @@ def sim_tournament(b):
     gf = {}
     goals = {}
     # per-tournament form shock: injuries, chemistry, camp chaos (zero-mean)
-    shock = np.random.normal(0.0, FORM_SD, len(ALL_TEAMS))
+    shock = rng.normal(0.0, FORM_SD, len(ALL_TEAMS))
     tilt = np.exp(shock[FIX_HI] - shock[FIX_AI])
-    hg_s = np.random.poisson(L1G[b] * tilt)
-    ag_s = np.random.poisson(L2G[b] / tilt)
+    hg_s = rng.poisson(L1G[b] * tilt)
+    ag_s = rng.poisson(L2G[b] / tilt)
     for f, (home, away, grp) in enumerate(FIX_INFO):
         i, j = int(hg_s[f]), int(ag_s[f])
         for t, sf_, sa in ((home, i, j), (away, j, i)):
@@ -283,8 +283,8 @@ def sim_tournament(b):
         ia, ib = T_IDX[a], T_IDX[bb]
         l1 *= math.exp(shock[ia] - shock[ib] - handicap.get(a, 0.0))
         l2 *= math.exp(shock[ib] - shock[ia] - handicap.get(bb, 0.0))
-        i = np.random.poisson(l1)
-        j = np.random.poisson(l2)
+        i = rng.poisson(l1)
+        j = rng.poisson(l2)
         goals[a] = goals.get(a, 0) + int(i)
         goals[bb] = goals.get(bb, 0) + int(j)
         went_distance = i == j

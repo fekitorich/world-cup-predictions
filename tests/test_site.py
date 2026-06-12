@@ -114,16 +114,26 @@ class TestCompleteness(unittest.TestCase):
 
 
 class TestBuiltSite(unittest.TestCase):
-    """Integration: build and audit the artifact."""
+    """Integration: build and audit the artifact — into a TEMP dir, so the
+    test suite never rewrites the production docs/ tree."""
 
     @classmethod
     def setUpClass(cls):
+        import tempfile
+        cls._tmp = tempfile.TemporaryDirectory()
+        cls._out_saved = b.OUT
+        b.OUT = Path(cls._tmp.name)
         b.build_all(snapshot=False)
         cls.docs = Path(b.OUT)
         cls.pages = list(cls.docs.glob("*.html")) \
             + list((cls.docs / "teams").glob("*.html")) \
             + list((cls.docs / "matches").glob("*.html")) \
             + list((cls.docs / "players").glob("*.html"))
+
+    @classmethod
+    def tearDownClass(cls):
+        b.OUT = cls._out_saved
+        cls._tmp.cleanup()
 
     def test_report_page_graded_mode(self):
         """Inject synthetic results and verify every report section renders."""

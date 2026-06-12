@@ -42,7 +42,12 @@ first-to-score is the Poisson race argument. Corners get their own
 negative-binomial base rate — the xG slope failed leave-one-tournament-out
 validation and was deliberately not shipped.
 Group-match probabilities blend the model with Polymarket prices
-(log-opinion pool, w=0.35); raw model is kept separate for edge-finding. Full write-up:
+(log-opinion pool, w=0.35); raw model is kept separate for edge-finding.
+A caution we apply to ourselves: every validation number above is historical
+(and the squad-value prior grades past matches with today's values — a mild,
+documented look-ahead). The tournament itself is the only out-of-sample test
+that counts, and the Report page grades it in public, match by match.
+Full write-up:
 [the Method page](https://wcformbook.com/method.html)
 and [wc26_model_notes.md](wc26_model_notes.md).
 

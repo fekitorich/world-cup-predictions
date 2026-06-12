@@ -19,9 +19,9 @@ P = params()
 sv = json.load(open(f"{DATA}/wc26_squad_values.json"))
 VALUES, DEFAULT = sv["values"], sv["default_for_missing"]
 
-print("fitting base model on data to", SPLIT, "...")
+print("fitting base model on data to", SPLIT, "(value prior OFF)...")
 model = fit(load_matches(SPLIT, P["half_life"], P["friendly_w"],
-                         P["margin_cap"]), P["shrink"])
+                         P["margin_cap"]), P["shrink"], value_beta=0.0)
 teams = list(model["att"])
 
 logs = {t: math.log(VALUES.get(t, DEFAULT)) for t in teams}

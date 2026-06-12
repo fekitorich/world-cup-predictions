@@ -48,6 +48,18 @@ def load_ledger():
     return {"placed": []}
 
 
+def live_ask(token_id):
+    """Best ask from the public CLOB book — no auth needed."""
+    import urllib.request
+    url = f"https://clob.polymarket.com/price?token_id={token_id}&side=buy"
+    try:
+        with urllib.request.urlopen(url, timeout=10) as r:
+            return float(json.load(r)["price"])
+    except Exception as e:
+        print(f"  live price check failed: {e}")
+        return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--live", action="store_true",
@@ -132,8 +144,20 @@ def main():
         else:
             raise
 
+    max_slip = CFG.get("max_slippage_cents", 2) / 100
     for b in todo:
         print(f"placing ${b['stake_usdc']:.2f} on {b['bet']} ...", flush=True)
+        # execution-time price protection: the plan's price is stale; a FOK
+        # market order fills at the book, so refuse if it moved against us
+        ask = live_ask(b["token_id"])
+        if ask is None:
+            print("  SKIP: cannot verify live price")
+            continue
+        if ask > b["market_p"] + max_slip:
+            print(f"  SKIP: price moved {b['market_p']:.3f} -> {ask:.3f} "
+                  f"(over the {max_slip*100:.0f}c slippage cap)")
+            continue
+        b["price_at_exec"] = ask
         try:
             # WC match markets are neg-risk (multi-outcome) markets
             order = client.create_market_order(
@@ -153,6 +177,7 @@ def main():
                 "question": b.get("question", ""),
                 "match_id": b.get("match_id", ""),
                 "stake_usdc": b["stake_usdc"], "price_seen": b["market_p"],
+                "price_at_exec": b.get("price_at_exec"),
                 "model_p": b["model_p"], "category": b["category"],
             })
             json.dump(ledger, open(LEDGER_PATH, "w"), indent=2)

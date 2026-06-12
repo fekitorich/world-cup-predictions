@@ -487,6 +487,28 @@ def build_plan(cands, cfg):
     return cands, round(planned, 2)
 
 
+def record_paper(cands):
+    """Paper-trading log: every candidate from every scan, regardless of
+    what gets staked. betting/paper.py grades these later for CLV (did the
+    price move toward our view before close?) and result PnL — the honest
+    out-of-sample test of the edge-finding, with no money at risk."""
+    path = f"{HERE}/state/paper.json"
+    try:
+        paper = json.load(open(path))
+    except FileNotFoundError:
+        paper = {"runs": []}
+    paper["runs"].append({
+        "at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
+        "candidates": [{k: c.get(k) for k in
+                        ("category", "bet", "question", "token_id",
+                         "match_id", "model_p", "market_p", "edge")}
+                       for c in cands]})
+    os.makedirs(f"{HERE}/state", exist_ok=True)
+    json.dump(paper, open(path, "w"), indent=1, ensure_ascii=False)
+    print(f"paper log: +{len(cands)} candidates "
+          f"({sum(len(r['candidates']) for r in paper['runs'])} total)")
+
+
 def main():
     cands = []
     if CFG["include"].get("moneyline"):
@@ -511,6 +533,7 @@ def main():
         cands += corners_candidates()
     print("scanning award markets...", flush=True)
     cands += award_candidates()
+    record_paper(cands)
     cands, total = build_plan(cands, CFG)
 
     plan = {
