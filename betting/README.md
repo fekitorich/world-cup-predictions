@@ -106,8 +106,11 @@ already set. (`.venv/bin/pip install py-clob-client-v2` once.)
 
 - Plan prices are Gamma mid-prices; market orders fill against the book, so
   expect a little slippage on thin markets. Edges under ~5¢ may not survive it.
-- The model knows nothing about injuries/lineups. The Boot model's shares are
-  opposition-unadjusted (it loves CONCACAF strikers). Bet sizes assume the
-  model is right *on average* — quarter-Kelly exists because it isn't always.
+- The model still knows nothing about injuries/lineups — the news gate
+  compensates at bet time (and only by blocking/shrinking), it never
+  teaches the model anything. Skip `--news-check` and you're betting the
+  naive numbers. The Boot model's shares are opposition-unadjusted (it
+  loves CONCACAF strikers). Bet sizes assume the model is right *on
+  average* — quarter-Kelly exists because it isn't always.
 - Polymarket prices are probabilities; a "win" pays $1/share. Sized stakes are
   in USDC spent, not shares.
