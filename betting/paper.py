@@ -41,21 +41,18 @@ def gamma_markets(tokens):
     return out
 
 
-def main():
-    try:
-        paper = json.load(open(PAPER))
-    except FileNotFoundError:
-        print("no paper log yet — run betting/find_bets.py first")
-        return
-    first = {}   # token -> first-seen candidate
-    for run in paper["runs"]:
+def first_seen(runs):
+    """token -> first sighting of each candidate (the paper entry price)."""
+    first = {}
+    for run in runs:
         for c in run["candidates"]:
             if c["token_id"] not in first:
                 first[c["token_id"]] = {**c, "at": run["at"]}
-    print(f"{len(first)} unique paper positions across "
-          f"{len(paper['runs'])} scans")
-    markets = gamma_markets(list(first))
+    return first
 
+
+def aggregate(first, markets):
+    """Per-category CLV + resolved flat-$1 PnL (pure: no network)."""
     cats = {}
     for tok, c in first.items():
         hit = markets.get(tok)
@@ -77,6 +74,20 @@ def main():
             st["resolved"] += 1
             st["wins"] += won
             st["pnl"] += (1 / c["market_p"] - 1) if won else -1.0
+    return cats
+
+
+def main():
+    try:
+        paper = json.load(open(PAPER))
+    except FileNotFoundError:
+        print("no paper log yet — run betting/find_bets.py first")
+        return
+    first = first_seen(paper["runs"])
+    print(f"{len(first)} unique paper positions across "
+          f"{len(paper['runs'])} scans")
+    markets = gamma_markets(list(first))
+    cats = aggregate(first, markets)
 
     print(f"\n{'category':<16}{'n':>4}{'avg entry':>11}{'avg CLV':>9}"
           f"{'resolved':>9}{'wins':>6}{'PnL/$1':>9}")
