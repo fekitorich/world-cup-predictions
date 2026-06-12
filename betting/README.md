@@ -17,7 +17,10 @@ Turns the model's edges into capped, Kelly-sized Polymarket orders.
 
 - total across all runs ≤ `max_total_stake_usdc` (persistent ledger in `state/`)
 - every stake ≤ `max_per_bet_usdc`
-- a market already in the ledger is never bought twice
+- a market already in the ledger is never bought twice — token-level AND
+  market-level (holding one side blocks ever buying the other side)
+- combined exposure per fixture (and per team for futures) capped at
+  `max_per_match_usdc`: five correlated bets on one match are one big bet
 - dry run is the default; `--live` is an explicit opt-in
 - only positive-edge buys (either side of a binary); Golden Ball/Glove never bet (no calibrated model)
 - every non-moneyline category (exact score, totals, team totals, BTTS, spread,

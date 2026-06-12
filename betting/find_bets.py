@@ -117,7 +117,7 @@ def match_candidates():
             if q - price >= CFG["min_edge_match"]:
                 label = {"home": sim["home"], "away": sim["away"], "draw": "Draw"}[side]
                 out.append({
-                    "category": "moneyline",
+                    "category": "moneyline", "match_id": mid,
                     "bet": f"{sim['home']} v {sim['away']}: {label} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
@@ -158,7 +158,7 @@ def exact_score_candidates():
             q = sim["exact_scores"].get(cell, 0.0)
             if q - price >= CFG["min_edge_score"]:
                 out.append({
-                    "category": "exact_score",
+                    "category": "exact_score", "match_id": mid,
                     "bet": f"{sim['home']} v {sim['away']}: {cell} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
@@ -216,7 +216,7 @@ def more_markets_candidates():
                     continue
                 if q - prices[idx] >= CFG["min_edge_match"]:
                     out.append({
-                        "category": cat,
+                        "category": cat, "match_id": mid,
                         "bet": f"{sim['home']} v {sim['away']}: "
                                f"{mk['question'].split(': ')[-1]} "
                                f"— {outcomes[idx]}",
@@ -284,7 +284,7 @@ def sibling_result_candidates():
                         continue
                     if q - prices[idx] >= CFG["min_edge_match"]:
                         out.append({
-                            "category": cat,
+                            "category": cat, "match_id": mid,
                             "bet": f"{sim['home']} v {sim['away']}: "
                                    f"{mk['question'].rstrip('?')} "
                                    f"— {'YES' if idx == 0 else 'NO'}",
@@ -339,7 +339,7 @@ def corners_candidates():
                     continue
                 if q - prices[idx] >= CFG["min_edge_match"]:
                     out.append({
-                        "category": "corners",
+                        "category": "corners", "match_id": mid,
                         "bet": f"Corners O/U {m.group(1)} "
                                f"({'Over' if idx == 0 else 'Under'}) — "
                                f"{mk['question'].split(':')[0]}",
@@ -392,7 +392,7 @@ def futures_candidates():
                     continue
                 if q - prices[idx] >= CFG["min_edge_match"]:
                     out.append({
-                        "category": "futures",
+                        "category": "futures", "match_id": f"future:{team}",
                         "bet": f"{team} {stage} — "
                                f"{'YES' if idx == 0 else 'NO'}",
                         "question": mk.get("question", ""),
@@ -463,6 +463,20 @@ def build_plan(cands, cfg):
                     cfg["max_per_bet_usdc"])
         # floor qualifying bets at min_stake for breadth across categories
         c["stake_usdc"] = round(max(stake, cfg.get("min_stake_usdc", 1)), 2)
+    # per-fixture exposure cap: many markets, one opinion — five
+    # correlated bets on the same match are one big bet in disguise
+    cap = cfg.get("max_per_match_usdc")
+    if cap:
+        spent, kept = {}, []
+        for c in cands:   # edge-descending: best expression of the
+            mid = c.get("match_id") or c["bet"]   # opinion keeps its size
+            room = cap - spent.get(mid, 0.0)
+            if room < cfg.get("min_stake_usdc", 1):
+                continue
+            c["stake_usdc"] = round(min(c["stake_usdc"], room), 2)
+            spent[mid] = spent.get(mid, 0.0) + c["stake_usdc"]
+            kept.append(c)
+        cands = kept
     # scale down if the plan exceeds the total cap
     planned = sum(c["stake_usdc"] for c in cands)
     if planned > bankroll:

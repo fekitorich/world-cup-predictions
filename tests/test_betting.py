@@ -13,9 +13,9 @@ from betting.find_bets import kelly_stake, started, build_plan, CFG
 from wc26_polymarket import parse_score_question
 
 
-def cand(category, edge, model_p=None, market_p=0.30):
+def cand(category, edge, model_p=None, market_p=0.30, match_id="m1"):
     return {"category": category, "bet": f"{category}@{edge}",
-            "question": "?", "token_id": "t",
+            "question": "?", "token_id": "t", "match_id": match_id,
             "model_p": model_p if model_p is not None else market_p + edge,
             "market_p": market_p, "edge": edge}
 
@@ -86,6 +86,30 @@ class TestBuildPlan(unittest.TestCase):
     def test_empty_plan(self):
         plan, total = build_plan([], self.CFG)
         self.assertEqual((plan, total), ([], 0.0))
+
+    def test_per_match_exposure_cap(self):
+        """Correlated bets on one fixture must not stack past the cap;
+        the highest-edge expressions of the opinion keep their size."""
+        cfg = dict(self.CFG, max_bets=40, max_per_match_usdc=12.0)
+        cands = [cand(c, e, market_p=0.10, match_id="fix1") for c, e in
+                 (("moneyline", 0.40), ("spread", 0.35), ("totals", 0.30),
+                  ("team_totals", 0.25), ("halftime", 0.20))] + \
+                [cand("moneyline", 0.15, market_p=0.10, match_id="fix2")]
+        plan, _ = build_plan(cands, cfg)
+        per_match = {}
+        for c in plan:
+            per_match[c["match_id"]] = \
+                per_match.get(c["match_id"], 0) + c["stake_usdc"]
+        self.assertLessEqual(per_match["fix1"], 12.0 + 0.01)
+        self.assertIn("fix2", per_match)   # other fixtures unaffected
+        kept_edges = [c["edge"] for c in plan if c["match_id"] == "fix1"]
+        self.assertEqual(kept_edges, sorted(kept_edges, reverse=True))
+
+    def test_committed_config_has_exposure_caps(self):
+        committed = json.load(open(os.path.join(ROOT, "betting", "config.json")))
+        self.assertGreater(committed["max_per_match_usdc"], 0)
+        self.assertLessEqual(committed["max_per_match_usdc"],
+                             committed["max_total_stake_usdc"])
 
 
 class TestExactScoreScanner(unittest.TestCase):

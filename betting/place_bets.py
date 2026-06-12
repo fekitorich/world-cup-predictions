@@ -60,11 +60,17 @@ def main():
     ledger = load_ledger()
     spent = sum(b["stake_usdc"] for b in ledger["placed"])
     done_tokens = {b["token_id"] for b in ledger["placed"]}
+    # market-level dedup: never touch a market we already hold a side of —
+    # buying the complementary token of an earlier bet locks in a loss
+    done_markets = {b["question"] for b in ledger["placed"] if b.get("question")}
 
     todo = []
     for b in plan["bets"]:
         if b["token_id"] in done_tokens:
             print(f"skip (already placed): {b['bet']}")
+            continue
+        if b.get("question") and b["question"] in done_markets:
+            print(f"skip (market already held, other side?): {b['bet']}")
             continue
         if b["stake_usdc"] < 1:
             continue
@@ -144,6 +150,8 @@ def main():
             ledger["placed"].append({
                 "at": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
                 "bet": b["bet"], "token_id": b["token_id"],
+                "question": b.get("question", ""),
+                "match_id": b.get("match_id", ""),
                 "stake_usdc": b["stake_usdc"], "price_seen": b["market_p"],
                 "model_p": b["model_p"], "category": b["category"],
             })

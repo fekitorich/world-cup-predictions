@@ -22,7 +22,8 @@
     "futures": false,
     "corners": false
   },
-  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them. exact_score/totals/btts/spread ship OFF \u2014 exact-score cells are the model's thinnest claims; totals/btts/spread are better calibrated (mid-grid) but opt in deliberately. halftime/second_half use the fitted half_split=0.447 (2,360 goals, six tournaments); first_to_score uses the Poisson race argument; futures come from the 100k-sim ensemble. corners: intercept-only NegBin base rate (xG slope failed LOTO validation) \u2014 an anchor against lazy thin books only.",
+  "_notes": "Caps are YOURS to set; defaults are conservative placeholders. kelly_fraction 0.25 = quarter-Kelly. Awards need a bigger edge because the Boot model is cruder (opposition-unadjusted shares). Golden Ball/Glove are never bet: no calibrated model exists for them. exact_score/totals/btts/spread ship OFF \u2014 exact-score cells are the model's thinnest claims; totals/btts/spread are better calibrated (mid-grid) but opt in deliberately. halftime/second_half use the fitted half_split=0.447 (2,360 goals, six tournaments); first_to_score uses the Poisson race argument; futures come from the 100k-sim ensemble. corners: intercept-only NegBin base rate (xG slope failed LOTO validation) \u2014 an anchor against lazy thin books only. max_per_match_usdc caps combined exposure per fixture (and per team for futures) across all categories.",
   "max_bets": 40,
-  "min_stake_usdc": 1
+  "min_stake_usdc": 1,
+  "max_per_match_usdc": 8
 }
