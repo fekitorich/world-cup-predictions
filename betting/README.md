@@ -19,7 +19,12 @@ Turns the model's edges into capped, Kelly-sized Polymarket orders.
 - every stake ≤ `max_per_bet_usdc`
 - a market already in the ledger is never bought twice
 - dry run is the default; `--live` is an explicit opt-in
-- only positive-edge YES buys; Golden Ball/Glove never bet (no calibrated model)
+- only positive-edge buys (either side of a binary); Golden Ball/Glove never bet (no calibrated model)
+- every non-moneyline category (exact score, totals, team totals, BTTS, spread,
+  halves, first-to-score, futures, corners) ships **off** in the committed config —
+  a test enforces it; enable per category in your gitignored `config.local.json`
+- started matches are never scanned; illiquid/placeholder books are rejected
+  (`min_liquidity_usdc`, `max_book_spread`)
 
 ## Secrets — never committed
 

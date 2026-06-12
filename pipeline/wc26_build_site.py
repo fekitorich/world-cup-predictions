@@ -1534,9 +1534,27 @@ p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities c
 the weight is an explicit, testable choice: the scorecard grades model, market and blend
 separately, so the data itself will tell us if 0.35 was wrong.</p>
 
+<h2>One model, many markets</h2>
+<p>Most of the markets on the match cards are not separate models — they are different
+questions asked of the <em>same</em> scoreline grid. Team totals are its row and column
+sums. The extra over/under lines are just more cells added up. First-to-score follows from
+a one-line race argument: if both teams generate chances as independent streams, the first
+goal belongs to a team in proportion to its scoring rate. Half-time and second-half results
+treat a half as a shorter match: scale both teams' expected goals by the share of goals
+that arrive before the break — <b>0.447</b>, fitted on 2,360 goals across six recent
+international tournaments (first halves are quieter everywhere, World Cups most of all) —
+and reuse the whole machinery. One fitted parameter unlocked a dozen markets, and the
+live half-time prices landed within a few cents of the model on day one.</p>
+<p>Corners are the exception: goals data says nothing about them, so they get their own
+model — a negative binomial fitted to 250 matches from five recent tournaments. The honest
+finding: a team's <em>goal</em> threat does not predict its corner count out of sample, so
+the shipped model is a pure base rate (about 9.2 corners per match). Where the corner books
+are genuinely traded it agrees with them almost exactly; its only job is to flag the
+untraded lines that drift far from reality.</p>
+
 <h2>How the method evolved</h2>
 <p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
-was validated on held-out matches before it touched the site — and one was rejected for
+was validated on held-out matches before it touched the site — and two were rejected for
 failing exactly that test.</p>
 <ol class="timeline">
 <li><b>9 June</b> — Dixon-Coles weighted Poisson chosen over plain Poisson (misprices draws),
@@ -1562,6 +1580,11 @@ calibrated; resisting a fix is also a method.</li>
 <li><b>11 June</b> — full market coverage: Polymarket's exact-score, totals, BTTS and spread
 books wired in, so every probability the model produces now sits beside a live price and
 its edge.</li>
+<li><b>12 June</b> — one model, many markets: team totals, more goal lines and
+first-to-score derived from the existing grid; half markets via a fitted first-half goal
+share (0.447 on 2,360 goals); futures priced against the ensemble. Corners brought the
+second rejected idea: goal threat failed to predict corner counts out of sample, so their
+model is a deliberate base rate.</li>
 <li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
 public, the model refits on the newest matches, and the day's site is frozen into an
 immutable snapshot.</li>
@@ -1757,9 +1780,26 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <a href="archive.html">نسخه‌های قبلی</a> منجمد باقی می‌مانند.</p>
 <p>پیش‌بینی‌ای که بتوان آن را بعداً تغییر داد، پیش‌بینی نیست.</p>
 
+<h2>یک مدل، بازارهای بسیار</h2>
+<p>بیشتر بازارهای روی کارت هر مسابقه مدل‌های جداگانه نیستند؛ پرسش‌های متفاوتی هستند از
+<em>همان</em> شبکهٔ احتمال نتایج. مجموع گل هر تیم، جمع سطرها و ستون‌های همان شبکه است.
+خطوط بالا/پایین بیشتر فقط جمع سلول‌های بیشترند. «اولین گل» از یک استدلال یک‌خطی مسابقه‌ای
+به دست می‌آید: اگر دو تیم به‌طور مستقل موقعیت بسازند، گل اول به نسبت نرخ گلزنی به یکی از
+دو تیم می‌رسد. نتیجهٔ نیمهٔ اول و دوم هم هر نیمه را یک مسابقهٔ کوتاه‌تر در نظر می‌گیرد:
+گل انتظاری هر دو تیم در سهم گل‌های پیش از استراحت ضرب می‌شود ــ <b>۰٫۴۴۷</b>، برازش‌شده
+روی ۲٬۳۶۰ گل از شش تورنمنت ملی اخیر (نیمهٔ اول همه‌جا کم‌گل‌تر است، در جام‌های جهانی
+بیش از همه) ــ و همان ماشین قبلی دوباره به کار می‌افتد. یک پارامتر، دوازده بازار را باز
+کرد و قیمت‌های زندهٔ نیمهٔ اول از روز اول تا چند سنت با مدل هم‌خوان بودند.</p>
+<p>کرنرها استثنا هستند: داده‌های گل دربارهٔ آن‌ها چیزی نمی‌گویند، پس مدل خودشان را دارند ــ
+یک دوجمله‌ای منفی برازش‌شده روی ۲۵۰ مسابقه از پنج تورنمنت اخیر. یافتهٔ صادقانه: قدرت
+<em>گلزنی</em> یک تیم، تعداد کرنرهایش را خارج از نمونه پیش‌بینی نمی‌کند؛ بنابراین مدل
+عرضه‌شده یک نرخ پایهٔ خالص است (حدود ۹٫۲ کرنر در هر بازی). هرجا دفتر کرنر واقعاً معامله
+می‌شود، مدل تقریباً دقیقاً با آن هم‌نظر است؛ تنها کارش نشان‌کردن خطوط معامله‌نشده‌ای است
+که از واقعیت دور افتاده‌اند.</p>
+
 <h2>سیر تکامل روش</h2>
 <p class="fineprint">خلاصهٔ دفترچهٔ آزمایشگاه (یادداشت‌های کامل در مخزن کد موجود است). هر تغییر
-پیش از انتشار روی داده‌های دیده‌نشده اعتبارسنجی شد ــ و یکی هم دقیقاً در همین آزمون رد شد.</p>
+پیش از انتشار روی داده‌های دیده‌نشده اعتبارسنجی شد ــ و دو مورد هم دقیقاً در همین آزمون رد شدند.</p>
 <ol class="timeline">
 <li><b>۹ ژوئن</b> ــ انتخاب پواسون وزن‌دار دیکسون-کولز به‌جای پواسون ساده (تساوی‌ها را اشتباه
 قیمت می‌گذارد)، ترکیب‌های Elo (دقت مشابه با پیچیدگی بیشتر) و یادگیری ماشین (در فوتبال ملی
@@ -1783,6 +1823,11 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 مقاومت در برابر «اصلاح» هم بخشی از روش است.</li>
 <li><b>۱۱ ژوئن</b> ــ پوشش کامل بازار: دفترهای نتیجهٔ دقیق، مجموع گل، گلزنی هر دو تیم و
 هندیکپ پلی‌مارکت متصل شدند تا هر احتمالی که مدل می‌سازد کنار قیمت زنده و اختلافش بنشیند.</li>
+<li><b>۱۲ ژوئن</b> ــ یک مدل، بازارهای بسیار: مجموع گل تیمی، خطوط گل بیشتر و «اولین گل»
+از همان شبکهٔ موجود؛ بازارهای نیمه با سهم برازش‌شدهٔ گل‌های نیمهٔ اول (۰٫۴۴۷ روی ۲٬۳۶۰
+گل)؛ بازارهای آیندهٔ تورنمنت در برابر آنسامبل قیمت‌گذاری شدند. کرنرها دومین ایدهٔ
+ردشده را آوردند: قدرت گلزنی نتوانست تعداد کرنر را خارج از نمونه پیش‌بینی کند، پس مدلشان
+آگاهانه یک نرخ پایه است.</li>
 <li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
 می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
 </ol>

@@ -21,7 +21,7 @@ gtag('config', 'G-EG56KHB1SX');
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606120806">
+<link rel="stylesheet" href="style.css?v=202606120813">
 <script>
 (function() {
   var t = localStorage.getItem("theme");
@@ -224,9 +224,27 @@ p<sub>market</sub>^0.35. Unlike simple averaging it respects how probabilities c
 the weight is an explicit, testable choice: the scorecard grades model, market and blend
 separately, so the data itself will tell us if 0.35 was wrong.</p>
 
+<h2>One model, many markets</h2>
+<p>Most of the markets on the match cards are not separate models — they are different
+questions asked of the <em>same</em> scoreline grid. Team totals are its row and column
+sums. The extra over/under lines are just more cells added up. First-to-score follows from
+a one-line race argument: if both teams generate chances as independent streams, the first
+goal belongs to a team in proportion to its scoring rate. Half-time and second-half results
+treat a half as a shorter match: scale both teams' expected goals by the share of goals
+that arrive before the break — <b>0.447</b>, fitted on 2,360 goals across six recent
+international tournaments (first halves are quieter everywhere, World Cups most of all) —
+and reuse the whole machinery. One fitted parameter unlocked a dozen markets, and the
+live half-time prices landed within a few cents of the model on day one.</p>
+<p>Corners are the exception: goals data says nothing about them, so they get their own
+model — a negative binomial fitted to 250 matches from five recent tournaments. The honest
+finding: a team's <em>goal</em> threat does not predict its corner count out of sample, so
+the shipped model is a pure base rate (about 9.2 corners per match). Where the corner books
+are genuinely traded it agrees with them almost exactly; its only job is to flag the
+untraded lines that drift far from reality.</p>
+
 <h2>How the method evolved</h2>
 <p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
-was validated on held-out matches before it touched the site — and one was rejected for
+was validated on held-out matches before it touched the site — and two were rejected for
 failing exactly that test.</p>
 <ol class="timeline">
 <li><b>9 June</b> — Dixon-Coles weighted Poisson chosen over plain Poisson (misprices draws),
@@ -252,6 +270,11 @@ calibrated; resisting a fix is also a method.</li>
 <li><b>11 June</b> — full market coverage: Polymarket's exact-score, totals, BTTS and spread
 books wired in, so every probability the model produces now sits beside a live price and
 its edge.</li>
+<li><b>12 June</b> — one model, many markets: team totals, more goal lines and
+first-to-score derived from the existing grid; half markets via a fitted first-half goal
+share (0.447 on 2,360 goals); futures priced against the ensemble. Corners brought the
+second rejected idea: goal threat failed to predict corner counts out of sample, so their
+model is a deliberate base rate.</li>
 <li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
 public, the model refits on the newest matches, and the day's site is frozen into an
 immutable snapshot.</li>
