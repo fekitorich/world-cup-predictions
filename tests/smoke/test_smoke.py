@@ -39,7 +39,7 @@ class TestEntryPoints(unittest.TestCase):
         never touch betting/ executors or wc26_llm.py generate."""
         sh = open(os.path.join(ROOT, "wc26_matchday.sh")).read()
         for forbidden in ("place_bets", "find_bets", "betting/run.py",
-                          "wc26_llm.py generate"):
+                          "news_check", "wc26_llm.py generate"):
             self.assertNotIn(forbidden, sh)
 
     def test_betting_entry_points_exist(self):

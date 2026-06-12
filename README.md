@@ -79,7 +79,9 @@ refresh → scan every enabled category → plan → execute; dry-run by default
 hard per-bet/total/per-fixture caps, a persistent ledger against
 double-betting, plan-age and kickoff re-checks, two-sided live-price
 refusal (slippage up, suspicious collapse down), wallet balance preflight,
-and stale-model refusal.
+and stale-model refusal. An opt-in LLM news gate covers the model's one
+blind spot — injuries, lineups, weather — and is reduce-only by
+construction: it can veto or shrink a planned bet, never add or raise one.
 Every scanned candidate — staked or not — feeds a paper-trading log that
 `betting/paper.py` grades for closing-line value and resolved PnL: the
 edge-finder's own out-of-sample scoreboard. All personal data — keys, caps,

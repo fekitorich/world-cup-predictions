@@ -213,6 +213,14 @@ class TestBuiltSite(unittest.TestCase):
             tl = html.split('<ol class="timeline">')[1].split("</ol>")[0]
             self.assertGreaterEqual(tl.count("<li>"), 8, name)
 
+    def test_method_news_gate_disclosure_both_languages(self):
+        """The site's honesty claim must track reality: the AI analyst
+        section discloses the reduce-only betting news gate."""
+        for name, phrase in (("method.html", "reduce-only by construction"),
+                             ("method-fa.html", "فقط کاهنده است")):
+            html = (self.docs / name).read_text()
+            self.assertIn(phrase, html, name)
+
     def test_farsi_page_rtl_and_charts(self):
         fa = (self.docs / "method-fa.html").read_text()
         self.assertIn('dir="rtl"', fa)
