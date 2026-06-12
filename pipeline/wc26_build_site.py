@@ -960,17 +960,20 @@ def evolution_section(lang="en"):
     s = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H_}" '
          f'style="max-width:660px;width:100%">'
          f'<rect width="{W}" height="{H_}" fill="var(--paper, #f6f1e6)"/>')
-    # milestone markers
-    for i, (stamp, _) in enumerate(series):
-        label = EVO_MILESTONES.get(stamp)
-        if not label:
-            continue
-        s += (f'<line x1="{x(i):.1f}" y1="{T - 14}" x2="{x(i):.1f}" '
+    # milestone markers — numbered circles; names live in the table below
+    # (text labels clipped outside the viewbox at the chart edges)
+    stamps_ = [st for st, _ in series]
+    marks = sorted((stamps_.index(st), label)
+                   for st, label in EVO_MILESTONES.items() if st in stamps_)
+    for no, (i, label) in enumerate(marks, 1):
+        s += (f'<line x1="{x(i):.1f}" y1="{T - 6}" x2="{x(i):.1f}" '
               f'y2="{T + ph}" stroke="var(--ink-soft, #6b6353)" '
               f'stroke-dasharray="3,3"/>')
-        s += (f'<text x="{x(i) + 3:.1f}" y="{T - 17}" font-size="9" '
-              f'fill="var(--ink-soft, #6b6353)" {font} '
-              f'transform="rotate(-14 {x(i) + 3:.1f} {T - 17})">{label}</text>')
+        s += (f'<circle cx="{x(i):.1f}" cy="{T - 14}" r="8" '
+              f'fill="var(--ink, #211d16)"/>')
+        s += (f'<text x="{x(i):.1f}" y="{T - 10.5}" font-size="9.5" '
+              f'fill="var(--paper, #f6f1e6)" text-anchor="middle" '
+              f'{font}>{no}</text>')
     used_ys = []
     for ti, t in enumerate(teams):
         vals = [s_.get(t, 0) for _, s_ in series]
@@ -994,21 +997,19 @@ def evolution_section(lang="en"):
           f'{series[0][0][:8]} → {series[-1][0][:8]} · {n} runs</text></svg>')
 
     # biggest movers per milestone (vs the run immediately before)
-    stamps = [st for st, _ in series]
+    baseline = "baseline" if lang == "en" else "نقطهٔ شروع"
     mover_rows = []
-    for stamp, label in EVO_MILESTONES.items():
-        if stamp not in stamps:
-            continue
-        i = stamps.index(stamp)
+    for no, (i, label) in enumerate(marks, 1):
         if i == 0:
-            continue
-        prev, cur = series[i - 1][1], series[i][1]
-        deltas = sorted(((t, (cur.get(t, 0) - prev.get(t, 0)) * 100)
-                         for t in cur), key=lambda kv: -abs(kv[1]))[:3]
-        moved = ", ".join(f"{escape(t)} {d:+.1f}pp" for t, d in deltas
-                          if abs(d) >= 0.3)
-        mover_rows.append(f"<tr><td>{escape(label)}</td>"
-                          f"<td>{moved or '—'}</td></tr>")
+            moved = baseline
+        else:
+            prev, cur = series[i - 1][1], series[i][1]
+            deltas = sorted(((t, (cur.get(t, 0) - prev.get(t, 0)) * 100)
+                             for t in cur), key=lambda kv: -abs(kv[1]))[:3]
+            moved = ", ".join(f"{escape(t)} {d:+.1f}pp" for t, d in deltas
+                              if abs(d) >= 0.3) or "—"
+        mover_rows.append(f'<tr><td class="num">{no}</td>'
+                          f"<td>{escape(label)}</td><td>{moved}</td></tr>")
     if lang == "fa":
         head = "هر تکرار، چقدر پیش‌بینی را جابه‌جا کرد"
         intro = ("نمودار زیر شانس قهرمانی را در تمام اجراهای آرشیوشده نشان می‌دهد؛ "
@@ -1016,7 +1017,7 @@ def evolution_section(lang="en"):
                  "جابه‌جایی هر مرحله را خلاصه می‌کند. خط‌های صافِ روزهای آخر هم "
                  "خودشان پیام دارند: ممیزی‌های کالیبراسیون و بازارهای جدید "
                  "پیش‌بینی‌ها را تغییر ندادند ــ و قرار هم نبود تغییر دهند.")
-        cols = "<th>روش</th><th>بزرگ‌ترین جابه‌جایی‌ها</th>"
+        cols = "<th>#</th><th>روش</th><th>بزرگ‌ترین جابه‌جایی‌ها</th>"
     else:
         head = "What each iteration did to the numbers"
         intro = ("The chart shows championship odds across every archived "
@@ -1025,7 +1026,7 @@ def evolution_section(lang="en"):
                  "stretch at the end carries its own message: the calibration "
                  "audits and the new market surfaces changed no predictions — "
                  "by design, since both were pricing the same grid.")
-        cols = "<th>Method</th><th>Biggest moves</th>"
+        cols = "<th>#</th><th>Method</th><th>Biggest moves</th>"
     return f"""<h2>{head}</h2>
 <p class="fineprint">{intro}</p>
 <figure>{s}</figure>
@@ -1455,11 +1456,28 @@ automatically by the nightly run; previous editions live in the
 
 # ---------- methodology page ----------
 def inline_svg(name):
-    """Inline a generated chart so it inherits the page theme (CSS vars)."""
+    """Inline a generated chart so it inherits the page theme (CSS vars).
+    The viewBox is re-balanced so content sits centred in the framed
+    figure — the charts carry y-axis labels on the left only, which
+    otherwise leaves all the dead space on one side."""
     try:
-        return (ROOT / "charts" / f"{name}.svg").read_text()
+        svg = (ROOT / "charts" / f"{name}.svg").read_text()
     except FileNotFoundError:
         return f'<img src="img/{name}.svg" alt="{name} chart">'
+    m = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+    if not m:
+        return svg
+    w = float(m.group(1))
+    xs = [float(v) for v in re.findall(r'(?:\bx|x1|cx)="(-?[\d.]+)"', svg)]
+    xs += [float(a) + float(b) for a, b in
+           re.findall(r'<rect x="(-?[\d.]+)" y="-?[\d.]+" width="([\d.]+)"', svg)]
+    if not xs:
+        return svg
+    pad = max(min(xs), w - max(xs))
+    new_w = max(xs) - min(xs) + 2 * pad
+    return svg.replace(
+        m.group(0),
+        f'viewBox="{min(xs) - pad:.0f} 0 {new_w:.0f} {m.group(2)}"', 1)
 
 
 def build_method():

@@ -1,6 +1,7 @@
 {
   "fetched_fixtures": [
-    1489369
+    1489369,
+    1538999
   ],
   "scorers": {
     "J. Quinones": {
@@ -10,6 +11,21 @@
     },
     "R. Jimenez": {
       "team": "Mexico",
+      "goals": 1,
+      "assists_from": []
+    },
+    "L. Krejci": {
+      "team": "Czech Republic",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Hwang In-Beom": {
+      "team": "South Korea",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Oh Hyeon-Gyu": {
+      "team": "South Korea",
       "goals": 1,
       "assists_from": []
     }
