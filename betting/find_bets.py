@@ -131,6 +131,7 @@ def match_candidates():
                     "bet": f"{sim['home']} v {sim['away']}: {label} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
+                    "neg_risk": bool(mk.get("negRisk")),
                     "edge": round(q - price, 4),
                 })
         time.sleep(0.12)
@@ -172,6 +173,7 @@ def exact_score_candidates():
                     "bet": f"{sim['home']} v {sim['away']}: {cell} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
+                    "neg_risk": bool(mk.get("negRisk")),
                     "edge": round(q - price, 4),
                 })
         time.sleep(0.12)
@@ -232,6 +234,7 @@ def more_markets_candidates():
                                f"— {outcomes[idx]}",
                         "question": mk["question"], "token_id": tokens[idx],
                         "model_p": round(q, 4), "market_p": prices[idx],
+                        "neg_risk": bool(mk.get("negRisk")),
                         "edge": round(q - prices[idx], 4),
                     })
         time.sleep(0.12)
@@ -301,6 +304,7 @@ def sibling_result_candidates():
                             "question": mk["question"],
                             "token_id": tokens[idx],
                             "model_p": round(q, 4), "market_p": prices[idx],
+                        "neg_risk": bool(mk.get("negRisk")),
                             "edge": round(q - prices[idx], 4),
                         })
             time.sleep(0.12)
@@ -356,6 +360,7 @@ def corners_candidates():
                         "question": mk["question"],
                         "token_id": tokens[idx],
                         "model_p": round(q, 4), "market_p": prices[idx],
+                        "neg_risk": bool(mk.get("negRisk")),
                         "edge": round(q - prices[idx], 4),
                     })
         time.sleep(0.12)
@@ -408,6 +413,7 @@ def futures_candidates():
                         "question": mk.get("question", ""),
                         "token_id": tokens[idx],
                         "model_p": round(q, 4), "market_p": prices[idx],
+                        "neg_risk": bool(mk.get("negRisk")),
                         "edge": round(q - prices[idx], 4),
                     })
         time.sleep(0.15)
@@ -446,6 +452,7 @@ def award_candidates():
                     "category": cat, "bet": f"{title} (YES)",
                     "question": mk["question"], "token_id": token,
                     "model_p": round(q, 4), "market_p": price,
+                    "neg_risk": bool(mk.get("negRisk")),
                     "edge": round(q - price, 4),
                 })
         time.sleep(0.2)

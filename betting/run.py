@@ -38,9 +38,15 @@ def file_age_hours(path):
     return (time.time() - os.path.getmtime(path)) / 3600
 
 
-def preflight(live, allow_stale):
+def preflight(live, allow_stale, news=False):
     """Return a list of hard failures (empty = good to go)."""
     fails = []
+    if news:
+        from wc26_llm import api_key
+        if not api_key():
+            fails.append("--news-check needs an Anthropic key (env "
+                         "ANTHROPIC_API_KEY or .anthropic_key) — without it "
+                         "the gate would be silently skipped")
     for f in REQUIRED_DATA:
         if not os.path.exists(f"{DATA}/{f}"):
             fails.append(f"missing data/{f} — run the pipeline first")
@@ -90,10 +96,13 @@ def main():
                     help="skip the Polymarket snapshot refresh")
     ap.add_argument("--allow-stale", action="store_true",
                     help="run even if model outputs exceed max_sims_age_hours")
+    ap.add_argument("--news-check", action="store_true",
+                    help="LLM news gate between plan and execution "
+                         "(needs Anthropic key; costs API spend)")
     args = ap.parse_args()
     py = sys.executable
 
-    fails = preflight(args.live, args.allow_stale)
+    fails = preflight(args.live, args.allow_stale, args.news_check)
     if fails:
         print("PREFLIGHT FAILED:")
         for f in fails:
@@ -109,6 +118,11 @@ def main():
         step("refresh Polymarket snapshot",
              [py, "pipeline/wc26_polymarket.py"], fatal=False)
     step("scan markets + build plan", [py, "betting/find_bets.py"])
+
+    if args.news_check:
+        # fatal: if the user asked for the gate, executing without it
+        # would silently bypass an intended safety layer
+        step("LLM news gate", [py, "betting/news_check.py"])
 
     cmd = [py, "betting/place_bets.py"]
     if args.live:

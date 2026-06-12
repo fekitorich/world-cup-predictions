@@ -17,6 +17,36 @@ total cap, a missing key, or — for `--live` — a missing `config.local.json`
 (real money never runs on the committed placeholder caps). `--limit N`,
 `--skip-refresh`, `--allow-stale` are passed through / available.
 
+## The LLM news gate (opt-in: `--news-check`)
+
+The model's one structural blind spot is news: it knows nothing about
+injuries, lineups, rotation or weather. `betting/news_check.py` closes it
+without ever letting a language model set odds. For each fixture/award in
+the plan it builds a dossier (API-Football injuries + confirmed lineups,
+Open-Meteo stadium weather, our model numbers and stakes) and the analyst
+(claude-opus-4-8 + web search) returns one flag per bet:
+
+- **veto** — confirmed info breaks the bet's premise → bet removed
+- **caution** — credible-but-unconfirmed → stake × `news_caution_factor`
+- **clear** — nothing material → untouched
+
+Bets with edge ≥ `news_big_edge_cents` get an explicit *"why does the
+market disagree?"* investigation — a fat edge the news can explain is a
+trap, not an opinion. The contract is reduce-only **in code, not in
+prompts**: the analyst can't add bets, raise stakes, or touch prices, and
+if it fails the plan passes through unchanged with a loud warning.
+`news_check.py holdings` runs the same review over open ledger positions
+and prints hold / review / sell_flag (it never trades). Every run is
+logged to `state/news_checks.json` so the flags themselves can be graded
+later, and rendered to a local page — `betting/state/news_report.html`
+(regenerated after every run; `python3 betting/news_report.py` rebuilds
+it by hand). The page lives inside gitignored `state/` because it shows
+real positions: it is the betting UI, and it is never published. Key absences also produce an *advisory* absence-adjusted moneyline
+(the player's goal share scaled out of the lambdas); it touches the plan
+only if `apply_lineup_adjustments` is flipped on locally — it ships off,
+test-enforced, until the log earns it. Needs the Anthropic key; costs
+API spend, so it runs only when you ask for it.
+
 ## Step-by-step flow (what run.py does)
 
 ```

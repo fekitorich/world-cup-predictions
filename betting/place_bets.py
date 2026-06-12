@@ -128,7 +128,9 @@ def live_ask(token_id):
     import urllib.request
     url = f"https://clob.polymarket.com/price?token_id={token_id}&side=buy"
     try:
-        with urllib.request.urlopen(url, timeout=10) as r:
+        # explicit UA required: the CDN 403s python's default user agent
+        req = urllib.request.Request(url, headers={"User-Agent": "wc26-research"})
+        with urllib.request.urlopen(req, timeout=10) as r:
             return float(json.load(r)["price"])
     except Exception as e:
         print(f"  live price check failed: {e}")
@@ -246,11 +248,14 @@ def main():
             continue
         b["price_at_exec"] = ask
         try:
-            # WC match markets are neg-risk (multi-outcome) markets
+            # multi-outcome books (moneylines, awards, group winners) are
+            # neg-risk; standalone binaries (totals, BTTS, stage-reach)
+            # are NOT — signing with the wrong flavor is rejected by the
+            # exchange ("invalid POLY_PROXY signature")
             order = client.create_market_order(
                 MarketOrderArgsV2(token_id=b["token_id"],
                                   amount=b["stake_usdc"], side="BUY"),
-                PartialCreateOrderOptions(neg_risk=True))
+                PartialCreateOrderOptions(neg_risk=b.get("neg_risk", True)))
             resp = client.post_order(order, OrderType.FOK)
             ok = bool(resp and resp.get("success"))
             print("  ->", resp)

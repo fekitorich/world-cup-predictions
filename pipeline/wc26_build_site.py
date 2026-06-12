@@ -1720,10 +1720,13 @@ them honest. First, a <b>grounding contract</b>: the model sees only a frozen so
 encyclopedia summaries fetched once, plus our own form data and squad lists — and the
 probabilities this site computes. Same inputs, reproducible outputs, no outside facts. Second,
 a <b>separation of concerns</b>: the text is colour, not calculation. Nothing the analyst
-writes feeds the goal model, the simulations, or the bet scanner — the numbers would be
-identical if the words didn't exist. Post-match reviews grade the model and the market against
-the pre-match prices preserved for the public scorecard, so the AI can't flatter anyone
-with hindsight.</p>
+writes feeds the goal model, the simulations, or the published probabilities — the numbers
+would be identical if the words didn't exist. Post-match reviews grade the model and the market
+against the pre-match prices preserved for the public scorecard, so the AI can't flatter anyone
+with hindsight. (One honest footnote: since 13 June a separate news-checking assistant can
+read injury and lineup news before a bet is placed — but it is reduce-only by construction.
+It can block or shrink a planned bet; it can never add one, raise a stake, or touch any number
+on this site.)</p>
 
 <h2>How the method evolved</h2>
 <p class="fineprint">The lab notebook, abridged (full notes ship in the repo). Every change
@@ -1985,10 +1988,13 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 خلاصه‌های دانش‌نامه‌ای که یک بار دریافت شده‌اند، به‌علاوهٔ داده‌های فرم و فهرست بازیکنان
 خودمان ــ و احتمال‌هایی که همین سایت محاسبه می‌کند. ورودی یکسان، خروجی تکرارپذیر، بدون
 واقعیت بیرونی. دوم، <b>تفکیک وظایف</b>: این متن رنگ است، نه محاسبه. هیچ‌چیز از نوشتهٔ
-تحلیلگر به مدل گل، شبیه‌سازی‌ها یا اسکنر شرط‌بندی راه ندارد ــ اگر این کلمات نبودند، اعداد
-همین بودند. مرور پس از مسابقه هم مدل و بازار را با قیمت‌های پیش از بازی می‌سنجد که برای
+تحلیلگر به مدل گل، شبیه‌سازی‌ها یا احتمال‌های منتشرشده راه ندارد ــ اگر این کلمات نبودند،
+اعداد همین بودند. مرور پس از مسابقه هم مدل و بازار را با قیمت‌های پیش از بازی می‌سنجد که برای
 کارنامهٔ عمومی نگه داشته شده‌اند؛ پس هوش مصنوعی نمی‌تواند با عقل پس از واقعه از کسی
-تعریف کند.</p>
+تعریف کند. (یک پانوشت صادقانه: از ۱۳ ژوئن یک دستیار جداگانهٔ بررسی اخبار می‌تواند پیش از
+ثبت شرط، اخبار مصدومیت و ترکیب را بخواند ــ اما ساختارش فقط کاهنده است. می‌تواند شرطی را
+حذف یا کوچک کند؛ هرگز نمی‌تواند شرطی اضافه کند، مبلغی را بالا ببرد، یا به عددی در این
+سایت دست بزند.)</p>
 
 <h2>سیر تکامل روش</h2>
 <p class="fineprint">خلاصهٔ دفترچهٔ آزمایشگاه (یادداشت‌های کامل در مخزن کد موجود است). هر تغییر

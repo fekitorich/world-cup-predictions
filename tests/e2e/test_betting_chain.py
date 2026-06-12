@@ -29,7 +29,8 @@ def mk(question, yes, no=None, liq=5000, spread=0.02, tok="tok",
             "outcomePrices": json.dumps([str(yes), str(no)]),
             "clobTokenIds": json.dumps([f"{tok}-y", f"{tok}-n"]),
             "outcomes": json.dumps(list(outcomes)),
-            "liquidityNum": liq, "spread": spread}
+            "negRisk": "Will " in question,   # mimic: 3-ways neg-risk,
+            "liquidityNum": liq, "spread": spread}   # binaries not
 
 
 def sim(home, away):
@@ -176,6 +177,14 @@ class TestBettingChain(unittest.TestCase):
     def test_illiquid_trap_rejected(self):
         """Model 0.15 vs price 0.01 looks like +14c — but the book is dead."""
         self.assertFalse([c for c in self.cands if "-a-" in c["token_id"]])
+
+    def test_neg_risk_carried_per_market(self):
+        """Order signing needs each book's own negRisk flag — totals are
+        binary, moneylines neg-risk; one global default mis-signs half."""
+        flavors = {c["neg_risk"] for c in self.cands}
+        self.assertEqual(flavors, {True, False})
+        for c in self.cands:
+            self.assertIn("neg_risk", c, c["bet"])
 
     def test_edges_honest(self):
         for c in self.cands:

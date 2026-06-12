@@ -93,6 +93,15 @@ python3 -m http.server 8742 --directory docs  # browse
   `betting/.env` (wallet key + API creds), `betting/config.local.json`
   (real caps), `betting/state/` (plans + ledger). The committed
   `betting/config.json` holds only generic placeholder caps.
+- `news_check.py` — LLM news gate (opt-in: `run.py --news-check`, or
+  standalone; `holdings` mode sell-flags open positions, never trades).
+  Dossiers from API-Football injuries/lineups + Open-Meteo weather + web
+  search; analyst returns clear/caution/veto per bet; code applies them
+  reduce-only (veto removes, caution scales by `news_caution_factor`);
+  edges over `news_big_edge_cents` get a why-does-the-market-disagree
+  check. Analyst failure = plan unchanged (fail-open, loudly).
+  Absence-adjusted moneylines stay advisory: `apply_lineup_adjustments`
+  ships false (test-enforced) until the news_checks.json log proves them.
 - The ledger enforces the total cap across runs and prevents double-betting
   (token- AND market-level, across runs AND within one batch); never edit
   it by hand. place_bets also refuses plans older than `max_plan_age_min`,
@@ -117,8 +126,12 @@ python3 -m http.server 8742 --directory docs  # browse
 - Mostly stdlib Python; `.venv/` holds numpy (wc26_tournament.py) and the
   anthropic SDK (wc26_llm.py) — everything else must stay stdlib.
 - Anthropic API key for the analyst sections: env ANTHROPIC_API_KEY or the
-  gitignored `.anthropic_key` at repo root (chmod 600). LLM output is colour,
-  clearly labeled AI-written on the site; it never feeds the model or betting.
+  gitignored `.anthropic_key` at repo root (chmod 600). Site LLM output is
+  colour, clearly labeled AI-written; it never feeds the model or the
+  published numbers. The betting news gate (betting/news_check.py) is the
+  one sanctioned LLM→betting path and it is reduce-only by construction:
+  it can veto or shrink a planned bet, never add/raise one. User-triggered
+  only (run.py --news-check or standalone) — never in matchday automation.
 - `data/wc26_predictions.json` is LOCKED (pre-tournament bracket picks for accuracy
   grading). Only `wc26_update_results.py` may write to it (fills actuals);
   never regenerate it without the user explicitly asking (--force).
