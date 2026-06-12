@@ -1,0 +1,14 @@
+# Branch coverage over the actual code (pipeline + betting).
+# Run:  .venv/bin/python3 -m coverage run -m unittest discover -s tests
+#       .venv/bin/python3 -m coverage report
+[run]
+branch = True
+source = pipeline, betting
+omit =
+    */.venv/*
+    tests/*
+
+[report]
+show_missing = False
+skip_empty = True
+sort = cover

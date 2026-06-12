@@ -16,8 +16,12 @@ import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
-KEY = os.environ.get("API_FOOTBALL_KEY") or \
-    open(os.path.join(ROOT, ".api_football_key")).read().strip()
+
+
+def api_key():
+    """Lazy: importing this module must work on key-less machines (tests)."""
+    return os.environ.get("API_FOOTBALL_KEY") or \
+        open(os.path.join(ROOT, ".api_football_key")).read().strip()
 
 ALIAS = {
     "USA": "United States", "Korea Republic": "South Korea",
@@ -41,7 +45,7 @@ def norm(name):
 
 def fetch_all():
     url = "https://v3.football.api-sports.io/fixtures?league=1&season=2026"
-    req = urllib.request.Request(url, headers={"x-apisports-key": KEY})
+    req = urllib.request.Request(url, headers={"x-apisports-key": api_key()})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)["response"]
 
@@ -60,7 +64,7 @@ def update_scorers(finished):
     for f in new:
         fid = f["fixture"]["id"]
         url = f"https://v3.football.api-sports.io/fixtures/events?fixture={fid}"
-        req = urllib.request.Request(url, headers={"x-apisports-key": KEY})
+        req = urllib.request.Request(url, headers={"x-apisports-key": api_key()})
         with urllib.request.urlopen(req, timeout=30) as r:
             events = json.load(r)["response"]
         for ev in events:
@@ -87,6 +91,64 @@ def update_scorers(finished):
         print(f"scorers updated from {len(new)} newly finished matches; "
               f"race leader: {next(iter(data['scorers']), 'nobody yet')}")
     return data
+
+
+def grade_group_matches(group_matches, by_id):
+    """Fill actuals into the locked group picks and tally accuracy.
+
+    Mutates each entry (actual_score / actual_result / hit) and returns
+    {graded, res_hit, score_hit, mkt_n, briers, lls}. Pure apart from
+    that mutation: fixtures come in via by_id, nothing is fetched."""
+    import math
+    res_hit = score_hit = graded = mkt_n = 0
+    briers = {"blend": 0.0, "model": 0.0, "market": 0.0}
+    lls = {"blend": 0.0, "model": 0.0, "market": 0.0}
+    for p in group_matches:
+        f = by_id.get(p["match_id"])
+        if not f or f["fixture"]["status"]["short"] not in FINISHED:
+            p.pop("actual_score", None)
+            continue
+        gh, ga = f["goals"]["home"], f["goals"]["away"]
+        actual = "H" if gh > ga else "A" if ga > gh else "D"
+        p["actual_score"] = f"{gh}-{ga}"
+        p["actual_result"] = actual
+        p["hit"] = p["pred_result"] == actual
+        graded += 1
+        res_hit += p["hit"]
+        score_hit += p["pred_score"] == p["actual_score"]
+        sources = {"blend": p["p"], "model": p.get("p_model")}
+        if p.get("p_market"):
+            tot = sum(p["p_market"].values())
+            sources["market"] = {k: v / tot for k, v in p["p_market"].items()}
+            mkt_n += 1
+        for src, probs in sources.items():
+            if not probs:
+                continue
+            briers[src] += sum((probs[k] - (1 if k == actual else 0)) ** 2
+                               for k in ("H", "D", "A"))
+            lls[src] -= math.log(max(probs[actual], 1e-9))
+    return {"graded": graded, "res_hit": res_hit, "score_hit": score_hit,
+            "mkt_n": mkt_n, "briers": briers, "lls": lls}
+
+
+def knockout_actuals(finished):
+    """Who actually reached each stage + the champion, from finished
+    knockout fixtures. Winning the round-of-32 means reaching the R16,
+    etc.; the 3rd-place playoff must never be mistaken for the final."""
+    actual_stages = {k: set() for k in ("r16", "qf", "sf", "final")}
+    champion = None
+    for f in finished:
+        rnd = f["league"]["round"].lower()
+        h, a = norm(f["teams"]["home"]["name"]), norm(f["teams"]["away"]["name"])
+        winner = h if f["teams"]["home"].get("winner") else \
+            a if f["teams"]["away"].get("winner") else None
+        for frag, stage in KO_ROUNDS.items():
+            if frag in rnd and winner:
+                actual_stages[stage].add(winner)
+        if "final" in rnd and "semi" not in rnd and "3rd" not in rnd \
+                and "third" not in rnd and winner:
+            champion = winner
+    return actual_stages, champion
 
 
 def main():
@@ -147,49 +209,12 @@ def main():
         return
     pred = json.load(open(pred_path))
 
-    import math
-    res_hit = score_hit = graded = mkt_n = 0
-    briers = {"blend": 0.0, "model": 0.0, "market": 0.0}
-    lls = {"blend": 0.0, "model": 0.0, "market": 0.0}
-    for p in pred["group_matches"]:
-        f = by_id.get(p["match_id"])
-        if not f or f["fixture"]["status"]["short"] not in FINISHED:
-            p.pop("actual_score", None)
-            continue
-        gh, ga = f["goals"]["home"], f["goals"]["away"]
-        actual = "H" if gh > ga else "A" if ga > gh else "D"
-        p["actual_score"] = f"{gh}-{ga}"
-        p["actual_result"] = actual
-        p["hit"] = p["pred_result"] == actual
-        graded += 1
-        res_hit += p["hit"]
-        score_hit += p["pred_score"] == p["actual_score"]
-        sources = {"blend": p["p"], "model": p.get("p_model")}
-        if p.get("p_market"):
-            tot = sum(p["p_market"].values())
-            sources["market"] = {k: v / tot for k, v in p["p_market"].items()}
-            mkt_n += 1
-        for src, probs in sources.items():
-            if not probs:
-                continue
-            briers[src] += sum((probs[k] - (1 if k == actual else 0)) ** 2
-                               for k in ("H", "D", "A"))
-            lls[src] -= math.log(max(probs[actual], 1e-9))
+    g = grade_group_matches(pred["group_matches"], by_id)
+    graded, res_hit, score_hit, mkt_n = \
+        g["graded"], g["res_hit"], g["score_hit"], g["mkt_n"]
+    briers, lls = g["briers"], g["lls"]
 
-    # knockout: who actually reached each stage + champion
-    actual_stages = {k: set() for k in ("r16", "qf", "sf", "final")}
-    champion = None
-    for f in finished:
-        rnd = f["league"]["round"].lower()
-        h, a = norm(f["teams"]["home"]["name"]), norm(f["teams"]["away"]["name"])
-        winner = h if f["teams"]["home"].get("winner") else \
-            a if f["teams"]["away"].get("winner") else None
-        for frag, stage in KO_ROUNDS.items():
-            if frag in rnd and winner:
-                actual_stages[stage].add(winner)
-        if "final" in rnd and "semi" not in rnd and "3rd" not in rnd \
-                and "third" not in rnd and winner:
-            champion = winner
+    actual_stages, champion = knockout_actuals(finished)
 
     stage_acc = {}
     for stage, actual in actual_stages.items():

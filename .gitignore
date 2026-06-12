@@ -13,3 +13,4 @@ betting/config.local.json
 logs/
 .vscode/
 .anthropic_key
+.coverage

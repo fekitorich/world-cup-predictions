@@ -1,15 +1,15 @@
-"""Betting math and safety invariants (no network, no keys, no orders)."""
-import json
+"""Unit: betting math and safety logic — pure functions only
+(no network, no keys, no orders, no repo state)."""
 import os
 import sys
 import unittest
 
-_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, _ROOT)
 sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-from betting.find_bets import kelly_stake, started, build_plan, CFG
+from betting.find_bets import kelly_stake, started, build_plan, merge_local
+from betting.place_bets import plan_age_minutes, exec_price_ok, select_todo
 from wc26_polymarket import parse_score_question
 
 
@@ -34,16 +34,6 @@ class TestKelly(unittest.TestCase):
     def test_kelly_fraction_is_fractional(self):
         """Full Kelly for q=.5, p=.3 is f*=2/7 of bankroll; ours must be less."""
         self.assertLess(kelly_stake(0.5, 0.3, 100), 100 * (0.5 - 0.3) / 0.7)
-
-
-class TestConfig(unittest.TestCase):
-    def test_caps_sane(self):
-        self.assertGreater(CFG["max_total_stake_usdc"], 0)
-        self.assertGreater(CFG["max_per_bet_usdc"], 0)
-        self.assertLessEqual(CFG["max_per_bet_usdc"],
-                             CFG["max_total_stake_usdc"])
-        self.assertTrue(0 < CFG["kelly_fraction"] <= 1)
-        self.assertTrue(0 < CFG["min_edge_match"] < 0.5)
 
 
 class TestBuildPlan(unittest.TestCase):
@@ -105,13 +95,6 @@ class TestBuildPlan(unittest.TestCase):
         kept_edges = [c["edge"] for c in plan if c["match_id"] == "fix1"]
         self.assertEqual(kept_edges, sorted(kept_edges, reverse=True))
 
-    def test_committed_config_has_exposure_caps(self):
-        committed = json.load(open(os.path.join(ROOT, "betting", "config.json")))
-        self.assertGreater(committed["max_per_match_usdc"], 0)
-        self.assertLessEqual(committed["max_per_match_usdc"],
-                             committed["max_total_stake_usdc"])
-
-
 class TestExactScoreScanner(unittest.TestCase):
     def test_parse_home_first(self):
         self.assertEqual(parse_score_question(
@@ -142,37 +125,104 @@ class TestExactScoreScanner(unittest.TestCase):
         self.assertFalse(started("2", times))
         self.assertFalse(started("3", times))   # unknown id: no guard claim
 
-    def test_new_categories_ship_disabled(self):
-        """Committed config must keep all non-moneyline match categories
-        off; enabling is a local, deliberate opt-in (config.local.json)."""
-        committed = json.load(open(os.path.join(ROOT, "betting", "config.json")))
-        for cat in ("exact_score", "totals", "team_totals", "btts", "spread",
-                    "halftime", "second_half", "first_to_score", "futures",
-                    "corners"):
-            self.assertIs(committed["include"][cat], False, cat)
-        self.assertGreaterEqual(committed["min_edge_score"],
-                                committed["min_edge_match"])
+class TestMergeLocal(unittest.TestCase):
+    def test_include_deep_merged(self):
+        """A local include that flips two gates must not wipe the rest."""
+        base = {"max_total_stake_usdc": 20,
+                "include": {"moneyline": True, "totals": False,
+                            "corners": False}}
+        merged = merge_local(dict(base), {"max_total_stake_usdc": 500,
+                                          "include": {"totals": True}})
+        self.assertEqual(merged["max_total_stake_usdc"], 500)
+        self.assertTrue(merged["include"]["moneyline"])   # survived
+        self.assertTrue(merged["include"]["totals"])      # flipped
+        self.assertFalse(merged["include"]["corners"])    # untouched
+
+    def test_local_without_include(self):
+        base = {"include": {"moneyline": True}}
+        merged = merge_local(dict(base), {"max_bets": 9})
+        self.assertEqual(merged["include"], {"moneyline": True})
+        self.assertEqual(merged["max_bets"], 9)
 
 
-class TestLedgerInvariants(unittest.TestCase):
-    """Run only where the (gitignored) ledger exists - i.e. on this machine."""
-    LEDGER = os.path.join(ROOT, "betting", "state", "ledger.json")
+class TestExecutionGuards(unittest.TestCase):
+    def test_plan_age(self):
+        from datetime import datetime, timezone
+        now = datetime(2026, 6, 12, 12, 0, tzinfo=timezone.utc)
+        self.assertAlmostEqual(
+            plan_age_minutes("2026-06-12 10:30 UTC", now=now), 90.0)
 
-    @unittest.skipUnless(os.path.exists(LEDGER), "no local ledger")
-    def test_ledger_respects_caps(self):
-        led = json.load(open(self.LEDGER))["placed"]
-        total = sum(b["stake_usdc"] for b in led)
-        self.assertLessEqual(total, CFG["max_total_stake_usdc"] + 0.01)
-        for b in led:
-            self.assertLessEqual(b["stake_usdc"],
-                                 25.01,  # historical per-bet cap high-water
-                                 b["bet"])
+    def test_price_within_band_ok(self):
+        ok, _ = exec_price_ok(0.51, 0.50, max_slip=0.02, max_drop=0.10)
+        self.assertTrue(ok)
 
-    @unittest.skipUnless(os.path.exists(LEDGER), "no local ledger")
-    def test_no_duplicate_positions(self):
-        led = json.load(open(self.LEDGER))["placed"]
-        tokens = [b["token_id"] for b in led]
-        self.assertEqual(len(tokens), len(set(tokens)))
+    def test_price_rise_refused(self):
+        """The edge was sized at the plan price; pay more and it's gone."""
+        ok, why = exec_price_ok(0.53, 0.50, max_slip=0.02, max_drop=0.10)
+        self.assertFalse(ok)
+        self.assertIn("slippage", why)
+
+    def test_price_collapse_refused(self):
+        """A big drop is information we don't have, not a discount."""
+        ok, why = exec_price_ok(0.35, 0.50, max_slip=0.02, max_drop=0.10)
+        self.assertFalse(ok)
+        self.assertIn("information", why)
+
+    def test_small_favorable_drop_ok(self):
+        ok, _ = exec_price_ok(0.45, 0.50, max_slip=0.02, max_drop=0.10)
+        self.assertTrue(ok)
+
+
+class TestSelectTodo(unittest.TestCase):
+    CFG = {"max_per_bet_usdc": 10.0, "max_total_stake_usdc": 100.0}
+    TIMES = {"past": "2000-01-01T12:00:00+00:00",
+             "future": "2099-01-01T12:00:00+00:00"}
+
+    @staticmethod
+    def bet(token="t1", q="q1", mid="future", stake=5.0):
+        return {"token_id": token, "question": q, "match_id": mid,
+                "stake_usdc": stake, "bet": f"{token}/{q}"}
+
+    def pick(self, bets, ledger=None, cfg=None):
+        import io
+        from contextlib import redirect_stdout
+        with redirect_stdout(io.StringIO()):
+            return select_todo(bets, ledger or {"placed": []},
+                               cfg or self.CFG, self.TIMES)
+
+    def test_ledger_token_dedup(self):
+        led = {"placed": [{"token_id": "t1", "question": "other",
+                           "stake_usdc": 5.0}]}
+        self.assertEqual(self.pick([self.bet(token="t1")], led), [])
+
+    def test_ledger_market_dedup_blocks_other_side(self):
+        """Holding YES then buying NO of the same market locks in a loss."""
+        led = {"placed": [{"token_id": "yes-tok", "question": "q1",
+                           "stake_usdc": 5.0}]}
+        self.assertEqual(self.pick([self.bet(token="no-tok", q="q1")], led), [])
+
+    def test_in_batch_market_dedup(self):
+        """Both sides of one market inside a single plan: only one places."""
+        todo = self.pick([self.bet(token="yes-tok", q="q1"),
+                          self.bet(token="no-tok", q="q1")])
+        self.assertEqual(len(todo), 1)
+
+    def test_kickoff_rechecked_at_execution(self):
+        """A plan built pre-kickoff must not execute post-kickoff."""
+        todo = self.pick([self.bet(mid="past"),
+                          self.bet(token="t2", q="q2", mid="future")])
+        self.assertEqual([b["token_id"] for b in todo], ["t2"])
+
+    def test_futures_ids_have_no_kickoff(self):
+        todo = self.pick([self.bet(mid="future:Spain")])
+        self.assertEqual(len(todo), 1)
+
+    def test_caps_enforced(self):
+        led = {"placed": [{"token_id": "x", "question": "qx",
+                           "stake_usdc": 95.0}]}
+        bets = [self.bet(stake=11.0),                       # > per-bet cap
+                self.bet(token="t2", q="q2", stake=6.0)]    # > total cap
+        self.assertEqual(self.pick(bets, led), [])
 
 
 if __name__ == "__main__":

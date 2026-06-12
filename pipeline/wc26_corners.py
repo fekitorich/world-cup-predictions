@@ -21,8 +21,6 @@ import urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-KEY = os.environ.get("API_FOOTBALL_KEY") or \
-    open(os.path.join(ROOT, ".api_football_key")).read().strip()
 HIST = f"{DATA}/wc26_corners_history.json"
 MODEL = f"{DATA}/wc26_corners_model.json"
 
@@ -36,9 +34,15 @@ SOURCES = [
 ]
 
 
+def api_key():
+    """Lazy: importing this module must work on key-less machines (tests)."""
+    return os.environ.get("API_FOOTBALL_KEY") or \
+        open(os.path.join(ROOT, ".api_football_key")).read().strip()
+
+
 def api(path):
     url = f"https://v3.football.api-sports.io/{path}"
-    req = urllib.request.Request(url, headers={"x-apisports-key": KEY})
+    req = urllib.request.Request(url, headers={"x-apisports-key": api_key()})
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.load(r)["response"]
 
