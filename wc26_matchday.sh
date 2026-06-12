@@ -38,8 +38,6 @@ python3 pipeline/wc26_simulate.py                # refit on latest results
 python3 pipeline/wc26_corners.py predict         # corner O/U from base-rate NegBin
 .venv/bin/python3 pipeline/wc26_tournament.py    # 100k tournament sims (lock untouched)
 .venv/bin/python3 pipeline/wc26_awards.py        # boot/awards odds
-.venv/bin/python3 pipeline/wc26_llm.py generate || echo "LLM analyses failed - continuing"
-                                                 # analyst sections (skips quietly without key)
 python3 pipeline/wc26_build_site.py snapshot     # rebuild + freeze today's archive copy
 
 if [[ -n "$(git status --porcelain -- . ':!experiments')" ]]; then

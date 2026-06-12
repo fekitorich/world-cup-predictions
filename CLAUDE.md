@@ -38,7 +38,8 @@ python3 pipeline/wc26_player_pages.py # (occasional) candidate dossiers for /pla
 python3 pipeline/wc26_espn_ids.py     # (once) ESPN gameId mapping for live links
 .venv/bin/python3 pipeline/wc26_awards.py   # Golden Boot model etc (after tournament.py)
 .venv/bin/python3 pipeline/wc26_llm.py sources   # (once) freeze LLM source corpus (wiki + internal)
-.venv/bin/python3 pipeline/wc26_llm.py generate  # AI analyst sections (claude-opus-4-8; skips without key)
+.venv/bin/python3 pipeline/wc26_llm.py generate  # AI analyst sections (claude-opus-4-8) — MANUAL ONLY,
+                                      # never in matchday automation (API cost); user runs it
 python3 pipeline/wc26_update_results.py     # during tournament: pull actual results, grade predictions
 python3 pipeline/wc26_build_site.py   # regenerate docs/ live pages
 python3 pipeline/wc26_charts.py       # (occasional) regenerate method-page SVG charts
