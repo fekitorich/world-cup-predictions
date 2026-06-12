@@ -28,8 +28,11 @@ def gamma_markets(tokens):
     out = {}
     for i in range(0, len(tokens), 20):
         chunk = tokens[i:i + 20]
-        url = ("https://gamma-api.polymarket.com/markets?clob_token_ids="
-               + urllib.parse.quote(",".join(chunk)))
+        # repeated params, not comma-joined: Gamma started rejecting
+        # comma lists with 422 "invalid clob token ids" (seen 2026-06-12)
+        url = ("https://gamma-api.polymarket.com/markets?"
+               + "&".join("clob_token_ids=" + urllib.parse.quote(t)
+                          for t in chunk))
         req = urllib.request.Request(url, headers={"User-Agent": "wc26-research"})
         try:
             with urllib.request.urlopen(req, timeout=30) as r:
