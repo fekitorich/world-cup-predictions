@@ -1,0 +1,2933 @@
+{
+ "frozen_at": "2026-06-12 09:22 UTC",
+ "teams": {
+  "United States": {
+   "wiki": "The United States men's national soccer team (USMNT) represents the United States in men's international soccer, which is governed by the United States Soccer Federation. The team has been an affiliate member of FIFA since 1914 and a founding affiliate member of CONCACAF since 1961. Regionally, it is an affiliate member of NAFU in the North American Zone. From 1946 to 1961, it was a member of NAFC, the former governing soccer body in North America and a predecessor confederation of CONCACAF, and also a member of PFC, the former unified confederation of the Americas.",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 16,
+   "host": true,
+   "last_10": [
+    "2026-06-06 L 1-2 vs Germany (H, Friendlies)",
+    "2026-05-31 W 3-2 vs Senegal (H, Friendlies)",
+    "2026-03-31 L 0-2 vs Portugal (H, Friendlies)",
+    "2026-03-28 L 2-5 vs Belgium (H, Friendlies)",
+    "2025-11-19 W 5-1 vs Uruguay (H, Friendlies)",
+    "2025-11-15 W 2-1 vs Paraguay (H, Friendlies)",
+    "2025-10-15 W 2-1 vs Australia (H, Friendlies)",
+    "2025-10-11 D 1-1 vs Ecuador (H, Friendlies)",
+    "2025-09-09 W 2-0 vs Japan (H, Friendlies)",
+    "2025-09-06 L 0-2 vs South Korea (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 385.65,
+   "key_players": [
+    {
+     "name": "C. Brady",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Freese",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Turner",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Dest",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Freeman",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. McKenzie",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Ream",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Richards",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Canada": {
+   "wiki": "Canada national football team may refer to:",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 30,
+   "host": true,
+   "last_10": [
+    "2026-06-05 D 1-1 vs Rep. Of Ireland (H, Friendlies)",
+    "2026-06-02 W 2-0 vs Uzbekistan (H, Friendlies)",
+    "2026-03-31 D 0-0 vs Tunisia (H, Friendlies)",
+    "2026-03-28 D 2-2 vs Iceland (H, Friendlies)",
+    "2026-01-18 W 1-0 vs Guatemala (H, Friendlies)",
+    "2025-11-19 W 2-0 vs Venezuela (H, Friendlies)",
+    "2025-11-14 D 0-0 vs Ecuador (H, Friendlies)",
+    "2025-10-15 D 0-0 vs Colombia (H, Friendlies)",
+    "2025-10-10 L 0-1 vs Australia (H, Friendlies)",
+    "2025-09-09 W 1-0 vs Wales (A, Friendlies)"
+   ],
+   "squad_value_eur_m": 198.65,
+   "key_players": [
+    {
+     "name": "M. Crépeau",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Goodman",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. St. Clair",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Cornelius",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "L. De Fougerolles",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Laryea",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Waterman",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Johnston",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Mexico": {
+   "wiki": "The Mexico national football team represents Mexico in men's international football, which is governed by the Federación Mexicana de Fútbol founded in 1927. It has been an affiliate member of FIFA since 1929 and a founding affiliate member of CONCACAF since 1961. Regionally, it is an affiliate member of NAFU in the North American Zone.\nFrom 1946 to 1961, it was a member of NAFC, the former governing body of football in North America and a predecessor confederation of CONCACAF, and also a member of PFC, the former unified confederation of the Americas.",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 15,
+   "host": true,
+   "last_10": [
+    "2026-06-05 W 5-1 vs Serbia (H, Friendlies)",
+    "2026-05-31 W 1-0 vs Australia (H, Friendlies)",
+    "2026-05-23 W 2-0 vs Ghana (H, Friendlies)",
+    "2026-04-01 D 1-1 vs Belgium (H, Friendlies)",
+    "2026-03-29 D 0-0 vs Portugal (H, Friendlies)",
+    "2026-02-26 W 4-0 vs Iceland (H, Friendlies)",
+    "2026-01-25 W 1-0 vs Bolivia (A, Friendlies)",
+    "2026-01-23 W 1-0 vs Panama (A, Friendlies)",
+    "2025-11-19 L 1-2 vs Paraguay (H, Friendlies)",
+    "2025-11-16 D 0-0 vs Uruguay (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 191.85,
+   "key_players": [
+    {
+     "name": "C. Acevedo",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Ochoa",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Rangel",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Gallardo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Montes",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Reyes",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Sánchez",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Vásquez",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Panama": {
+   "wiki": "The Panama national football team represents Panama in men's international football, which is governed by the Federación Panameña de Fútbol founded in 1937. It has been an affiliate member of FIFA since 1938 and a founding affiliate member of CONCACAF since 1961. Regionally, it is an affiliate member of UNCAF in the Central American Zone. From 1938 to 1961, it was a member of CCCF, the former governing body of football in Central America and Caribbean and a predecessor confederation of CONCACAF, and also a member of PFC, the former unified confederation of the Americas, from 1946 to 1961.",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 33,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 1-1 vs Bosnia & Herzegovina (H, Friendlies)",
+    "2026-06-04 W 4-2 vs Dominican Republic (H, Friendlies)",
+    "2026-05-31 L 2-6 vs Brazil (A, Friendlies)",
+    "2026-03-31 W 2-1 vs South Africa (A, Friendlies)",
+    "2026-03-27 D 1-1 vs South Africa (A, Friendlies)",
+    "2026-01-23 L 0-1 vs Mexico (H, Friendlies)",
+    "2026-01-18 D 1-1 vs Bolivia (A, Friendlies)",
+    "2025-11-19 W 3-0 vs El Salvador (H, World Cup - Qualification CONCACAF)",
+    "2025-11-14 W 3-2 vs Guatemala (A, World Cup - Qualification CONCACAF)",
+    "2025-10-15 D 1-1 vs Suriname (H, World Cup - Qualification CONCACAF)"
+   ],
+   "squad_value_eur_m": 34.55,
+   "key_players": [
+    {
+     "name": "L. Mejía",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Mosquera",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Samudio",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Andrade",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Blackman",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Córdoba",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "É. Davis",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Escobar",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Argentina": {
+   "wiki": "The Argentina national football team, nicknamed la Albiceleste,  represents Argentina in men's international football and is administered by the Argentine Football Association, the governing body of football in Argentina. It has been a member of FIFA since 1912 and was a founding member of CONMEBOL in 1916. It was also a member of PFC, the unified confederation of the Americas, from 1946 to 1961. Argentina is the current FIFA World Cup champion, having won the most recent World Cup in 2022. The team previously won the World Cup in 1978 and 1986, and has appeared in the World Cup final a total of six times.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 3,
+   "host": false,
+   "last_10": [
+    "2026-06-07 W 2-0 vs Honduras (H, Friendlies)",
+    "2026-03-31 W 5-0 vs Zambia (H, Friendlies)",
+    "2026-03-27 W 2-1 vs Mauritania (H, Friendlies)",
+    "2025-11-14 W 2-0 vs Angola (A, Friendlies)",
+    "2025-10-15 W 6-0 vs Puerto Rico (A, Friendlies)",
+    "2025-10-11 W 1-0 vs Venezuela (H, Friendlies)",
+    "2025-09-09 L 0-1 vs Ecuador (A, World Cup - Qualification South America)",
+    "2025-09-04 W 3-0 vs Venezuela (H, World Cup - Qualification South America)",
+    "2025-06-11 D 1-1 vs Colombia (H, World Cup - Qualification South America)",
+    "2025-06-06 W 1-0 vs Chile (A, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 782.5,
+   "key_players": [
+    {
+     "name": "E. Martínez",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Musso",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Rulli",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Balerdi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Lisandro Martínez",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Medina",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Molina",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Montiel",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Brazil": {
+   "wiki": "The Brazil national football team, nicknamed A seleção,  represents Brazil in men's international football and is administered by the Brazilian Football Confederation, the governing body of football in Brazil. It has been a member of FIFA since 1923 and was a founding member of CONMEBOL in 1916. It was also a member of PFC, the unified confederation of the Americas, from 1946 to 1961.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 6,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 2-1 vs Egypt (H, Friendlies)",
+    "2026-05-31 W 6-2 vs Panama (H, Friendlies)",
+    "2026-04-01 W 3-1 vs Croatia (H, Friendlies)",
+    "2026-03-26 L 1-2 vs France (H, Friendlies)",
+    "2025-11-18 D 1-1 vs Tunisia (H, Friendlies)",
+    "2025-11-15 W 2-0 vs Senegal (H, Friendlies)",
+    "2025-10-14 L 2-3 vs Japan (A, Friendlies)",
+    "2025-10-10 W 5-0 vs South Korea (A, Friendlies)",
+    "2025-09-09 L 0-1 vs Bolivia (A, World Cup - Qualification South America)",
+    "2025-09-05 W 3-0 vs Chile (H, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 928.2,
+   "key_players": [
+    {
+     "name": "Alisson Becker",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Ederson",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Weverton",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Alex Sandro",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Bremer",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Gabriel Magalhães",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Ibañez",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Léo Pereira",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Colombia": {
+   "wiki": "The Colombia national football team, nicknamed Los Cafeteros, represents Colombia in men's international football and is managed by the Federación Colombiana de Fútbol, the governing body for football in Colombia. They are a member of CONMEBOL and are ranked 14th in the FIFA World Rankings as of April 2025. The team are nicknamed Los Cafeteros due to the coffee production in the country. The national team has been a symbol of nationalism, pride and passion for many Colombians worldwide. Colombia is known for having a passionate fan base, and the team's dances during goal celebrations have been symbolic.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 13,
+   "host": false,
+   "last_10": [
+    "2026-06-07 W 2-0 vs Jordan (H, Friendlies)",
+    "2026-06-01 W 3-1 vs Costa Rica (H, Friendlies)",
+    "2026-03-29 L 1-3 vs France (H, Friendlies)",
+    "2026-03-26 L 1-2 vs Croatia (H, Friendlies)",
+    "2025-11-19 W 3-0 vs Australia (H, Friendlies)",
+    "2025-11-16 W 2-1 vs New Zealand (H, Friendlies)",
+    "2025-10-15 D 0-0 vs Canada (A, Friendlies)",
+    "2025-10-12 W 4-0 vs Mexico (A, Friendlies)",
+    "2025-09-09 W 6-3 vs Venezuela (A, World Cup - Qualification South America)",
+    "2025-09-04 W 3-0 vs Bolivia (H, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 302.35,
+   "key_players": [
+    {
+     "name": "Á. Montero",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Ospina",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Vargas",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Arias",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "W. Ditta",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Lucumí",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Machado",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Mina",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Uruguay": {
+   "wiki": "The Uruguay national football team, nicknamed La Celeste and Los Charrúas, have represented Uruguay in international men's football since their first international match in 1902 and is administered by the Asociación Uruguaya de Fútbol, the governing body of football in Uruguay, which is a founding member of CONMEBOL since 1916 and a member of FIFA since 1923. It was also a member of PFC, which was the attempt at a unified confederation of the Americas from 1946 to 1961.\nUruguay's home stadium is the Estadio Centenario, and they have been coached by Marcelo Bielsa since 2023.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 17,
+   "host": false,
+   "last_10": [
+    "2026-03-31 D 0-0 vs Algeria (A, Friendlies)",
+    "2026-03-27 D 1-1 vs England (A, Friendlies)",
+    "2025-11-19 L 1-5 vs USA (A, Friendlies)",
+    "2025-11-16 D 0-0 vs Mexico (A, Friendlies)",
+    "2025-10-13 W 2-1 vs Uzbekistan (A, Friendlies)",
+    "2025-10-10 W 1-0 vs Dominican Republic (H, Friendlies)",
+    "2025-09-09 D 0-0 vs Chile (A, World Cup - Qualification South America)",
+    "2025-09-04 W 3-0 vs Peru (H, World Cup - Qualification South America)",
+    "2025-06-10 W 2-0 vs Venezuela (H, World Cup - Qualification South America)",
+    "2025-06-05 L 0-2 vs Paraguay (A, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 359.3,
+   "key_players": [
+    {
+     "name": "S. Mele",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Muslera",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Rochet",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Araújo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Bueno",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Cáceres",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Giménez",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Olivera",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Ecuador": {
+   "wiki": "The Ecuador national football team, nicknamed La Tricolor, represents Ecuador in men's international football and is controlled by the Federación Ecuatoriana de Fútbol. They joined FIFA in 1926 and CONMEBOL a year later.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 23,
+   "host": false,
+   "last_10": [
+    "2026-06-07 W 3-0 vs Guatemala (H, Friendlies)",
+    "2026-05-31 W 2-1 vs Saudi Arabia (H, Friendlies)",
+    "2026-03-31 D 1-1 vs Netherlands (A, Friendlies)",
+    "2026-03-27 D 1-1 vs Morocco (A, Friendlies)",
+    "2025-11-19 W 2-0 vs New Zealand (H, Friendlies)",
+    "2025-11-14 D 0-0 vs Canada (A, Friendlies)",
+    "2025-10-15 D 1-1 vs Mexico (A, Friendlies)",
+    "2025-10-11 D 1-1 vs USA (A, Friendlies)",
+    "2025-09-09 W 1-0 vs Argentina (H, World Cup - Qualification South America)",
+    "2025-09-04 D 0-0 vs Paraguay (A, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 368.7,
+   "key_players": [
+    {
+     "name": "H. Galíndez",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Ramírez",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Valle",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "P. Estupiñán",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "P. Hincapié",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Medina",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Ordoñez",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "W. Pacho",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Paraguay": {
+   "wiki": "The Paraguay national football team, nicknamed La Albirroja, represents Paraguay in men's international football competitions, and are controlled by the Asociación Paraguaya de Fútbol. Paraguay is a member of CONMEBOL. The Albirroja has qualified for ten FIFA World Cup competitions, with their best performance coming in 2010 when they reached the quarter-finals. A regular participant at the Copa América, Paraguay have been crowned champions of the competition on two occasions. Paraguay's highest FIFA World Ranking was 8th in March 2001 and their lowest was 103rd in May 1995. Paraguay was awarded second place with Best Move of the Year in 1996 for their rise in the FIFA World Ranking.",
+   "confederation": "CONMEBOL",
+   "fifa_ranking": 40,
+   "host": false,
+   "last_10": [
+    "2026-06-05 W 4-0 vs Nicaragua (H, Friendlies)",
+    "2026-03-31 L 1-2 vs Morocco (A, Friendlies)",
+    "2026-03-27 W 1-0 vs Greece (A, Friendlies)",
+    "2025-11-19 W 2-1 vs Mexico (A, Friendlies)",
+    "2025-11-15 L 1-2 vs USA (A, Friendlies)",
+    "2025-10-14 L 0-2 vs South Korea (A, Friendlies)",
+    "2025-10-10 D 2-2 vs Japan (A, Friendlies)",
+    "2025-09-09 W 1-0 vs Peru (A, World Cup - Qualification South America)",
+    "2025-09-04 D 0-0 vs Ecuador (H, World Cup - Qualification South America)",
+    "2025-06-11 L 0-1 vs Brazil (A, World Cup - Qualification South America)"
+   ],
+   "squad_value_eur_m": 153.65,
+   "key_players": [
+    {
+     "name": "R. Fernandez",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Gill",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Olveira",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Alderete",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Alonso",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Cáceres",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Balbuena",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Gómez",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Germany": {
+   "wiki": "The Germany national football team represents Germany in men's international football and played its first match in 1908. The team is governed by the German Football Association, founded in 1900. Between 1949 and 1990, separate German national teams were recognised by FIFA due to Allied occupation and division: the DFB's team representing the Federal Republic of Germany, the Saarland team representing the Saar Protectorate (1950–1956) and the East Germany team representing the German Democratic Republic (1952–1990). The latter two were absorbed along with their records; the present team represents the reunified Federal Republic. The official name and code \"Germany FR (FRG)\" was shortened to \"Germany (GER)\" following reunification in 1990.",
+   "confederation": "UEFA",
+   "fifa_ranking": 10,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 2-1 vs USA (A, Friendlies)",
+    "2026-05-31 W 4-0 vs Finland (H, Friendlies)",
+    "2026-03-30 W 2-1 vs Ghana (H, Friendlies)",
+    "2026-03-27 W 4-3 vs Switzerland (A, Friendlies)",
+    "2025-11-17 W 6-0 vs Slovakia (H, World Cup - Qualification Europe)",
+    "2025-11-14 W 2-0 vs Luxembourg (A, World Cup - Qualification Europe)",
+    "2025-10-13 W 1-0 vs Northern Ireland (A, World Cup - Qualification Europe)",
+    "2025-10-10 W 4-0 vs Luxembourg (H, World Cup - Qualification Europe)",
+    "2025-09-07 W 3-1 vs Northern Ireland (H, World Cup - Qualification Europe)",
+    "2025-09-04 L 0-2 vs Slovakia (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 947.0,
+   "key_players": [
+    {
+     "name": "O. Baumann",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Neuer",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Nübel",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "W. Anton",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Brown",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Raum",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Rüdiger",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Schlotterbeck",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "England": {
+   "wiki": "The England national football team have represented England in men's international football since the first international match in 1872. It is controlled by the Football Association (FA), the governing body for football in England, which is affiliated with UEFA and comes under the global jurisdiction of world football's governing body FIFA. England competes in the three major international tournaments contested by European nations: the FIFA World Cup, UEFA European Championship and UEFA Nations League.",
+   "confederation": "UEFA",
+   "fifa_ranking": 4,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 1-0 vs New Zealand (H, Friendlies)",
+    "2026-03-31 L 0-1 vs Japan (H, Friendlies)",
+    "2026-03-27 D 1-1 vs Uruguay (H, Friendlies)",
+    "2025-11-16 W 2-0 vs Albania (A, World Cup - Qualification Europe)",
+    "2025-11-13 W 2-0 vs Serbia (H, World Cup - Qualification Europe)",
+    "2025-10-14 W 5-0 vs Latvia (A, World Cup - Qualification Europe)",
+    "2025-10-09 W 3-0 vs Wales (H, Friendlies)",
+    "2025-09-09 W 5-0 vs Serbia (A, World Cup - Qualification Europe)",
+    "2025-09-06 W 2-0 vs Andorra (H, World Cup - Qualification Europe)",
+    "2025-06-10 L 1-3 vs Senegal (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 1360.0,
+   "key_players": [
+    {
+     "name": "D. Henderson",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Pickford",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Trafford",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Burn",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Guéhi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. James",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Konsa",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Livramento",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "France": {
+   "wiki": "The France national football team represents France in men's international football. It is controlled by the French Football Federation, the governing body for football in France. It is a member of UEFA in Europe and FIFA in global competitions. The team's colours and imagery reference two national symbols: the French blue-white-red tricolour and Gallic rooster. The team is colloquially known as Les Bleus. They play home matches at the Stade de France in Saint-Denis and train at Centre National du Football in Clairefontaine-en-Yvelines.",
+   "confederation": "UEFA",
+   "fifa_ranking": 1,
+   "host": false,
+   "last_10": [
+    "2026-06-08 W 3-1 vs Northern Ireland (H, Friendlies)",
+    "2026-06-04 L 1-2 vs Ivory Coast (H, Friendlies)",
+    "2026-03-29 W 3-1 vs Colombia (A, Friendlies)",
+    "2026-03-26 W 2-1 vs Brazil (A, Friendlies)",
+    "2025-11-16 W 3-1 vs Azerbaijan (A, World Cup - Qualification Europe)",
+    "2025-11-13 W 4-0 vs Ukraine (H, World Cup - Qualification Europe)",
+    "2025-10-13 D 2-2 vs Iceland (A, World Cup - Qualification Europe)",
+    "2025-10-10 W 3-0 vs Azerbaijan (H, World Cup - Qualification Europe)",
+    "2025-09-09 W 2-1 vs Iceland (H, World Cup - Qualification Europe)",
+    "2025-09-05 W 2-0 vs Ukraine (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 1520.0,
+   "key_players": [
+    {
+     "name": "M. Maignan",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Risser",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "B. Samba",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Digne",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Gusto",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Hernández",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Hernández",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Konaté",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Spain": {
+   "wiki": "The Spain national football team has represented Spain in men's international football competition since 1920. It is governed by the Royal Spanish Football Federation, the governing body for football in Spain.",
+   "confederation": "UEFA",
+   "fifa_ranking": 2,
+   "host": false,
+   "last_10": [
+    "2026-06-09 W 3-1 vs Peru (A, Friendlies)",
+    "2026-06-04 D 1-1 vs Iraq (H, Friendlies)",
+    "2026-03-31 D 0-0 vs Egypt (H, Friendlies)",
+    "2026-03-27 W 3-0 vs Serbia (H, Friendlies)",
+    "2025-11-18 D 2-2 vs Türkiye (H, World Cup - Qualification Europe)",
+    "2025-11-15 W 4-0 vs Georgia (A, World Cup - Qualification Europe)",
+    "2025-10-14 W 4-0 vs Bulgaria (H, World Cup - Qualification Europe)",
+    "2025-10-11 W 2-0 vs Georgia (H, World Cup - Qualification Europe)",
+    "2025-09-07 W 6-0 vs Türkiye (A, World Cup - Qualification Europe)",
+    "2025-09-04 W 3-0 vs Bulgaria (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 1220.0,
+   "key_players": [
+    {
+     "name": "Joan García",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "David Raya",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Unai Simón",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Pau Cubarsí Paredes",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Marc Cucurella",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Eric García",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Álex Grimaldo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Aymeric Laporte",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Portugal": {
+   "wiki": "The Portugal national football team has represented Portugal in men's international football competition since 1921. The national team is controlled by the Portuguese Football Federation (FPF), the governing body for football in Portugal. Portugal's home stadium is the Estádio Nacional in Oeiras, located next to its primary training ground and the FPF headquarters, but the team usually plays its home matches in more modern stadiums throughout the country, such as the Estádio da Luz, Estádio José Alvalade and the Estádio do Dragão. The head coach is Roberto Martínez, and the captain is Cristiano Ronaldo, who holds the team records for most caps and most goals.",
+   "confederation": "UEFA",
+   "fifa_ranking": 5,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 2-1 vs Chile (H, Friendlies)",
+    "2026-03-31 W 2-0 vs USA (A, Friendlies)",
+    "2026-03-29 D 0-0 vs Mexico (A, Friendlies)",
+    "2025-11-16 W 9-1 vs Armenia (H, World Cup - Qualification Europe)",
+    "2025-11-13 L 0-2 vs Rep. Of Ireland (A, World Cup - Qualification Europe)",
+    "2025-10-14 D 2-2 vs Hungary (H, World Cup - Qualification Europe)",
+    "2025-10-11 W 1-0 vs Rep. Of Ireland (H, World Cup - Qualification Europe)",
+    "2025-09-09 W 3-2 vs Hungary (A, World Cup - Qualification Europe)",
+    "2025-09-06 W 5-0 vs Armenia (A, World Cup - Qualification Europe)",
+    "2025-06-08 W 2-2 vs Spain (H, UEFA Nations League)"
+   ],
+   "squad_value_eur_m": 1010.0,
+   "key_players": [
+    {
+     "name": "Diogo Costa",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "José Sá",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Rui Silva",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Tomás Araújo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "João Cancelo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Diogo Dalot",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Rúben Dias",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Gonçalo Inácio",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Netherlands": {
+   "wiki": "The Netherlands national football team has represented the Netherlands in international men's football matches since 1905. The men's national team is controlled by the Royal Dutch Football Association (KNVB), the governing body for football in the Netherlands, which is a part of UEFA, under the jurisdiction of FIFA. Most of the Netherlands home matches are played at the Johan Cruyff Arena, De Kuip, Philips Stadion and De Grolsch Veste.",
+   "confederation": "UEFA",
+   "fifa_ranking": 7,
+   "host": false,
+   "last_10": [
+    "2026-06-08 W 2-1 vs Uzbekistan (H, Friendlies)",
+    "2026-06-03 L 0-1 vs Algeria (H, Friendlies)",
+    "2026-03-31 D 1-1 vs Ecuador (H, Friendlies)",
+    "2026-03-27 W 2-1 vs Norway (H, Friendlies)",
+    "2025-11-17 W 4-0 vs Lithuania (H, World Cup - Qualification Europe)",
+    "2025-11-14 D 1-1 vs Poland (A, World Cup - Qualification Europe)",
+    "2025-10-12 W 4-0 vs Finland (H, World Cup - Qualification Europe)",
+    "2025-10-09 W 4-0 vs Malta (A, World Cup - Qualification Europe)",
+    "2025-09-07 W 3-2 vs Lithuania (A, World Cup - Qualification Europe)",
+    "2025-09-04 D 1-1 vs Poland (H, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 754.2,
+   "key_players": [
+    {
+     "name": "M. Flekken",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Roefs",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "B. Verbruggen",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Aké",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Dumfries",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Hato",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Timber",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "V. van Dijk",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Belgium": {
+   "wiki": "The Belgium national football team has represented Belgium in men's international football since their maiden match in 1904. The squad is under the global jurisdiction of FIFA and is governed in Europe by UEFA—both of which were co-founded by the Belgian team's supervising body, the Royal Belgian Football Association. Periods of regular Belgian representation at the highest international level, from 1920 to 1938, from 1980 to 2002 and again from 2014 onwards, have alternated with mostly unsuccessful qualification rounds. Most of Belgium's home matches are played at the King Baudouin Stadium in Brussels.",
+   "confederation": "UEFA",
+   "fifa_ranking": 9,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 5-0 vs Tunisia (H, Friendlies)",
+    "2026-06-02 W 2-0 vs Croatia (A, Friendlies)",
+    "2026-04-01 D 1-1 vs Mexico (A, Friendlies)",
+    "2026-03-28 W 5-2 vs USA (A, Friendlies)",
+    "2025-11-18 W 7-0 vs Liechtenstein (H, World Cup - Qualification Europe)",
+    "2025-11-15 D 1-1 vs Kazakhstan (A, World Cup - Qualification Europe)",
+    "2025-10-13 W 4-2 vs Wales (A, World Cup - Qualification Europe)",
+    "2025-10-10 D 0-0 vs FYR Macedonia (H, World Cup - Qualification Europe)",
+    "2025-09-07 W 6-0 vs Kazakhstan (H, World Cup - Qualification Europe)",
+    "2025-09-04 W 6-0 vs Liechtenstein (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 547.5,
+   "key_players": [
+    {
+     "name": "T. Courtois",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Lammens",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Penders",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Castagne",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. De Cuyper",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "K. De Winter",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Z. Debast",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "B. Mechele",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Austria": {
+   "wiki": "The Austria national football team represents Austria in men's international football competitions, and is controlled by the Austrian Football Association.",
+   "confederation": "UEFA",
+   "fifa_ranking": 24,
+   "host": false,
+   "last_10": [
+    "2026-06-01 W 1-0 vs Tunisia (H, Friendlies)",
+    "2026-03-31 W 1-0 vs South Korea (H, Friendlies)",
+    "2026-03-27 W 5-1 vs Ghana (H, Friendlies)",
+    "2025-11-18 D 1-1 vs Bosnia & Herzegovina (H, World Cup - Qualification Europe)",
+    "2025-11-15 W 2-0 vs Cyprus (A, World Cup - Qualification Europe)",
+    "2025-10-12 L 0-1 vs Romania (A, World Cup - Qualification Europe)",
+    "2025-10-09 W 10-0 vs San Marino (H, World Cup - Qualification Europe)",
+    "2025-09-09 W 2-1 vs Bosnia & Herzegovina (A, World Cup - Qualification Europe)",
+    "2025-09-06 W 1-0 vs Cyprus (H, World Cup - Qualification Europe)",
+    "2025-06-10 W 4-0 vs San Marino (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 242.2,
+   "key_players": [
+    {
+     "name": "P. Pentz",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Schlager",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Wiegele",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Affengruber",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Alaba",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Danso",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Friedl",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "P. Lienhart",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Switzerland": {
+   "wiki": "The Switzerland national football team represents Switzerland in men's international football. The national team is controlled by the Swiss Football Association.",
+   "confederation": "UEFA",
+   "fifa_ranking": 19,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 1-1 vs Australia (H, Friendlies)",
+    "2026-05-31 W 4-1 vs Jordan (H, Friendlies)",
+    "2026-03-31 D 0-0 vs Norway (A, Friendlies)",
+    "2026-03-27 L 3-4 vs Germany (H, Friendlies)",
+    "2025-11-18 D 1-1 vs Kosovo (A, World Cup - Qualification Europe)",
+    "2025-11-15 W 4-1 vs Sweden (H, World Cup - Qualification Europe)",
+    "2025-10-13 D 0-0 vs Slovenia (A, World Cup - Qualification Europe)",
+    "2025-10-10 W 2-0 vs Sweden (A, World Cup - Qualification Europe)",
+    "2025-09-08 W 3-0 vs Slovenia (H, World Cup - Qualification Europe)",
+    "2025-09-05 W 4-0 vs Kosovo (H, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 332.5,
+   "key_players": [
+    {
+     "name": "M. Keller",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Kobel",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Mvogo",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Akanji",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Amenda",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Cömert",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Elvedi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Jaquez",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Turkey": {
+   "wiki": "The Turkey national football team, recognized as Türkiye by FIFA and UEFA, represents Turkey in men's international football matches. The team is controlled by the Turkish Football Federation (TFF), the governing body for football in Turkey, which was founded in 1923 and has been a member of FIFA since 1923 and UEFA since 1962.",
+   "confederation": "UEFA",
+   "fifa_ranking": 22,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 2-1 vs Venezuela (A, Friendlies)",
+    "2026-06-01 W 4-0 vs FYR Macedonia (H, Friendlies)",
+    "2026-03-31 W 1-0 vs Kosovo (A, World Cup - Qualification Europe)",
+    "2026-03-26 W 1-0 vs Romania (H, World Cup - Qualification Europe)",
+    "2025-11-18 D 2-2 vs Spain (A, World Cup - Qualification Europe)",
+    "2025-11-15 W 2-0 vs Bulgaria (H, World Cup - Qualification Europe)",
+    "2025-10-14 W 4-1 vs Georgia (H, World Cup - Qualification Europe)",
+    "2025-10-11 W 6-1 vs Bulgaria (A, World Cup - Qualification Europe)",
+    "2025-09-07 L 0-6 vs Spain (H, World Cup - Qualification Europe)",
+    "2025-09-04 W 3-2 vs Georgia (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 473.7,
+   "key_players": [
+    {
+     "name": "A. Bayindir",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "U. Çakir",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Günok",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Akaydin",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Bardakci",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Z. Çelik",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Demiral",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Elmali",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Croatia": {
+   "wiki": "The Croatia national football team represents Croatia in men's international football matches. It is governed by the Croatian Football Federation (HNS), the governing body for football in Croatia. It is a member of UEFA in Europe and FIFA in global competition. The team's colours reference two national symbols: the Croatian checkerboard and the country's tricolour. They are colloquially known as the Vatreni (Blazers) and the Kockasti.",
+   "confederation": "UEFA",
+   "fifa_ranking": 11,
+   "host": false,
+   "last_10": [
+    "2026-06-07 W 2-1 vs Slovenia (H, Friendlies)",
+    "2026-06-02 L 0-2 vs Belgium (H, Friendlies)",
+    "2026-04-01 L 1-3 vs Brazil (A, Friendlies)",
+    "2026-03-26 W 2-1 vs Colombia (A, Friendlies)",
+    "2025-11-17 W 3-2 vs Montenegro (A, World Cup - Qualification Europe)",
+    "2025-11-14 W 3-1 vs Faroe Islands (H, World Cup - Qualification Europe)",
+    "2025-10-12 W 3-0 vs Gibraltar (H, World Cup - Qualification Europe)",
+    "2025-10-09 D 0-0 vs Czech Republic (A, World Cup - Qualification Europe)",
+    "2025-09-08 W 4-0 vs Montenegro (H, World Cup - Qualification Europe)",
+    "2025-09-05 W 1-0 vs Faroe Islands (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 387.3,
+   "key_players": [
+    {
+     "name": "D. Kotarski",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Livakovic",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Pandur",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Caleta-Car",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Erlic",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Gvardiol",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Pongracic",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Stanisic",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Scotland": {
+   "wiki": "The Scotland national football team represents Scotland in men's international football and is controlled by the Scottish Football Association. They compete in three major professional tournaments: the FIFA World Cup, UEFA Nations League, and the UEFA European Championship. Scotland, as a country of the United Kingdom, are not a member of the International Olympic Committee, and therefore the national team does not compete in the Olympic Games. The majority of Scotland's home matches are played at the national stadium, Hampden Park.",
+   "confederation": "UEFA",
+   "fifa_ranking": 43,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 4-0 vs Bolivia (A, Friendlies)",
+    "2026-05-30 W 4-1 vs Curaçao (H, Friendlies)",
+    "2026-03-31 L 0-1 vs Ivory Coast (H, Friendlies)",
+    "2026-03-28 L 0-1 vs Japan (H, Friendlies)",
+    "2025-11-18 W 4-2 vs Denmark (H, World Cup - Qualification Europe)",
+    "2025-11-15 L 2-3 vs Greece (A, World Cup - Qualification Europe)",
+    "2025-10-12 W 2-1 vs Belarus (H, World Cup - Qualification Europe)",
+    "2025-10-09 W 3-1 vs Greece (H, World Cup - Qualification Europe)",
+    "2025-09-08 W 2-0 vs Belarus (A, World Cup - Qualification Europe)",
+    "2025-09-05 D 0-0 vs Denmark (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 170.25,
+   "key_players": [
+    {
+     "name": "C. Gordon",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Gunn",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Kelly",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Hanley",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Hendry",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Hickey",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Hyam",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. McKenna",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Morocco": {
+   "wiki": "The Morocco national football team represents Morocco in men's international football. It is controlled by the Royal Moroccan Football Federation (FRMF), the governing body for football in Morocco. It has been affiliated with FIFA since 1960, with the Confederation of African Football since 1959, and with the Union of North African Football since 2005. The team, which is known as the Atlas Lions, plays home matches at the Prince Moulay Abdellah Stadium in Rabat, and trains at the Mohammed VI Football Complex in Salé.",
+   "confederation": "CAF",
+   "fifa_ranking": 8,
+   "host": false,
+   "last_10": [
+    "2026-06-07 D 1-1 vs Norway (H, Friendlies)",
+    "2026-06-02 W 4-0 vs Madagascar (H, Friendlies)",
+    "2026-05-26 W 5-0 vs Burundi (H, Friendlies)",
+    "2026-03-31 W 2-1 vs Paraguay (H, Friendlies)",
+    "2026-03-27 D 1-1 vs Ecuador (H, Friendlies)",
+    "2026-01-18 W 3-0 vs Senegal (A, Africa Cup of Nations)",
+    "2026-01-14 W 0-0 vs Nigeria (A, Africa Cup of Nations)",
+    "2026-01-09 W 2-0 vs Cameroon (A, Africa Cup of Nations)",
+    "2026-01-04 W 1-0 vs Tanzania (H, Africa Cup of Nations)",
+    "2025-12-29 W 3-0 vs Zambia (A, Africa Cup of Nations)"
+   ],
+   "squad_value_eur_m": 498.3,
+   "key_players": [
+    {
+     "name": "Y. Bounou",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Mohamedi",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Tagnaouti",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Aguerd",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Diop",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Z. El Ouahdi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Hakimi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Halhal",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Senegal": {
+   "wiki": "The Senegal national football team, nicknamed Les Lions de la Teranga, represents Senegal in men's international association football and is operated by the Senegalese Football Federation.",
+   "confederation": "CAF",
+   "fifa_ranking": 14,
+   "host": false,
+   "last_10": [
+    "2026-05-31 L 2-3 vs USA (A, Friendlies)",
+    "2026-03-31 W 3-1 vs Gambia (H, Friendlies)",
+    "2026-03-28 W 2-0 vs Peru (H, Friendlies)",
+    "2026-01-18 L 0-3 vs Morocco (H, Africa Cup of Nations)",
+    "2026-01-14 W 1-0 vs Egypt (H, Africa Cup of Nations)",
+    "2026-01-09 W 1-0 vs Mali (A, Africa Cup of Nations)",
+    "2026-01-03 W 3-1 vs Sudan (H, Africa Cup of Nations)",
+    "2025-12-30 W 3-0 vs Benin (A, Africa Cup of Nations)",
+    "2025-12-27 D 1-1 vs Congo DR (H, Africa Cup of Nations)",
+    "2025-12-23 W 3-0 vs Botswana (H, Africa Cup of Nations)"
+   ],
+   "squad_value_eur_m": 478.1,
+   "key_players": [
+    {
+     "name": "M. Diaw",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Diouf",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "É. Mendy",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Diouf",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Jakobs",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Koulibaly",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Mendy",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Niakhaté",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Egypt": {
+   "wiki": "The Egypt national football team, nicknamed The Pharaohs, represents Egypt in men's international football, and is governed by the Egyptian Football Association (EFA), the governing body of football in Egypt.",
+   "confederation": "CAF",
+   "fifa_ranking": 29,
+   "host": false,
+   "last_10": [
+    "2026-06-06 L 1-2 vs Brazil (A, Friendlies)",
+    "2026-05-28 W 1-0 vs Russia (H, Friendlies)",
+    "2026-03-31 D 0-0 vs Spain (A, Friendlies)",
+    "2026-03-27 W 4-0 vs Saudi Arabia (A, Friendlies)",
+    "2026-01-17 L 0-0 vs Nigeria (H, Africa Cup of Nations)",
+    "2026-01-14 L 0-1 vs Senegal (A, Africa Cup of Nations)",
+    "2026-01-10 W 3-2 vs Ivory Coast (H, Africa Cup of Nations)",
+    "2026-01-05 W 3-1 vs Benin (H, Africa Cup of Nations)",
+    "2025-12-29 D 0-0 vs Angola (A, Africa Cup of Nations)",
+    "2025-12-26 W 1-0 vs South Africa (H, Africa Cup of Nations)"
+   ],
+   "squad_value_eur_m": 116.48,
+   "key_players": [
+    {
+     "name": "M. Alaa",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Mohamed El Shenawy",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Mostafa Shobeir",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Al Mahdi Soliman",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Hossam Abdelmaguid",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Mohamed Abdelmonem",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Ahmed Fatouh",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Karim Hafez",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Ivory Coast": {
+   "wiki": "The Ivory Coast national football team represents Ivory Coast in men's international football. Nicknamed the Elephants, the team is managed by the Ivorian Football Federation (FIF). The team has won the Africa Cup of Nations three times, in 1992, 2015 and 2023, and has qualified for the FIFA World Cup four times, in 2006, 2010, 2014 and 2026.",
+   "confederation": "CAF",
+   "fifa_ranking": 34,
+   "host": false,
+   "last_10": [
+    "2026-06-08 W 2-0 vs Philadelphia Union II (A, Friendlies)",
+    "2026-06-04 W 2-1 vs France (A, Friendlies)",
+    "2026-03-31 W 1-0 vs Scotland (A, Friendlies)",
+    "2026-03-28 W 4-0 vs South Korea (A, Friendlies)",
+    "2026-01-10 L 2-3 vs Egypt (A, Africa Cup of Nations)",
+    "2026-01-06 W 3-0 vs Burkina Faso (H, Africa Cup of Nations)",
+    "2025-12-31 W 3-2 vs Gabon (A, Africa Cup of Nations)",
+    "2025-12-28 D 1-1 vs Cameroon (H, Africa Cup of Nations)",
+    "2025-12-24 W 1-0 vs Mozambique (H, Africa Cup of Nations)",
+    "2025-11-18 W 2-0 vs Oman (A, Friendlies)"
+   ],
+   "squad_value_eur_m": 522.1,
+   "key_players": [
+    {
+     "name": "Y. Fofana",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Koné",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Lafont",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Agbadou",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Diomande",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Doué",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Konan",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Kossounou",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "South Africa": {
+   "wiki": "The South Africa national soccer team represents South Africa in men's international football and is run by the South African Football Association, the governing body for football in South Africa. Nicknamed Bafana Bafana, the team plays at various stadiums around the country. The team is a member of both FIFA and the Confederation of African Football (CAF), is one of the most well-supported national sides in Africa, and are recognised by their traditional yellow-green kits.",
+   "confederation": "CAF",
+   "fifa_ranking": 60,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 1-1 vs Jamaica (A, Friendlies)",
+    "2026-05-29 D 0-0 vs Nicaragua (H, Friendlies)",
+    "2026-03-31 L 1-2 vs Panama (H, Friendlies)",
+    "2026-03-27 D 1-1 vs Panama (H, Friendlies)",
+    "2026-01-04 L 1-2 vs Cameroon (H, Africa Cup of Nations)",
+    "2025-12-29 W 3-2 vs Zimbabwe (A, Africa Cup of Nations)",
+    "2025-12-26 L 0-1 vs Egypt (A, Africa Cup of Nations)",
+    "2025-12-22 W 2-1 vs Angola (H, Africa Cup of Nations)",
+    "2025-12-16 W 1-0 vs Ghana B (H, Friendlies)",
+    "2025-11-15 W 3-1 vs Zambia (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 49.25,
+   "key_players": [
+    {
+     "name": "S. Chaine",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Goss",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Williams",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "B. Cross",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Kabini",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "O. Makhanya",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Mbokazi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Modiba",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "DR Congo": {
+   "wiki": "The DR Congo national football team, recognised by FIFA as Congo DR and by CAF as DR Congo, represents the Democratic Republic of the Congo in men's international football and it is controlled by the Congolese Association Football Federation. They are nicknamed Les Léopards, meaning The Leopards. The team is a member of FIFA and the Confederation of African Football (CAF).",
+   "confederation": "CAF",
+   "fifa_ranking": 46,
+   "host": false,
+   "last_10": [
+    "2026-06-03 D 0-0 vs Denmark (H, Friendlies)",
+    "2026-03-31 W 1-0 vs Jamaica (H, World Cup - Qualification Intercontinental Play-offs)",
+    "2026-03-25 W 2-0 vs Bermuda (H, Friendlies)",
+    "2026-01-06 L 0-1 vs Algeria (A, Africa Cup of Nations)",
+    "2025-12-30 W 3-0 vs Botswana (A, Africa Cup of Nations)",
+    "2025-12-27 D 1-1 vs Senegal (A, Africa Cup of Nations)",
+    "2025-12-23 W 1-0 vs Benin (H, Africa Cup of Nations)",
+    "2025-12-16 W 2-0 vs Zambia (H, Friendlies)",
+    "2025-11-16 W 1-1 vs Nigeria (A, World Cup - Qualification Africa)",
+    "2025-11-13 W 1-0 vs Cameroon (A, World Cup - Qualification Africa)"
+   ],
+   "squad_value_eur_m": 143.9,
+   "key_players": [
+    {
+     "name": "M. Epolo",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Fayulu",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Mpasi",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Batubinsika",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Kalulu",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Kapuadi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Kayembe",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Masuaku",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Tunisia": {
+   "wiki": "The Tunisia national football team, represents Tunisia in men's international association football competitions, and is controlled by the Tunisian Football Federation (TFF). The team competes under the Confederation of African Football (CAF) on the continental level, and is affiliated with FIFA for global competitions. Additionally, the team is a member of the Union of North African Football (UNAF) and the Union of Arab Football Associations (UAFA). The team is colloquially known as Eagles of Carthage by fans and the media, with the bald eagle serving as its symbol. Their home kit is primarily white and their away kit is red, which is a reference to the national flag of the country. The team has qualified for the FIFA World Cup seven times and the Africa Cup of Nations 22 times, and has appeared in four editions of Summer Olympics and participated once in the FIFA Confederation Cup. Since 2001, Tunisia's home stadium is the Hammadi Agrebi Stadium in Radès, Tunis.",
+   "confederation": "CAF",
+   "fifa_ranking": 44,
+   "host": false,
+   "last_10": [
+    "2026-06-06 L 0-5 vs Belgium (A, Friendlies)",
+    "2026-06-01 L 0-1 vs Austria (A, Friendlies)",
+    "2026-03-31 D 0-0 vs Canada (A, Friendlies)",
+    "2026-03-29 W 1-0 vs Haiti (A, Friendlies)",
+    "2026-01-03 L 1-1 vs Mali (A, Africa Cup of Nations)",
+    "2025-12-30 D 1-1 vs Tanzania (A, Africa Cup of Nations)",
+    "2025-12-27 L 2-3 vs Nigeria (A, Africa Cup of Nations)",
+    "2025-12-23 W 3-1 vs Uganda (H, Africa Cup of Nations)",
+    "2025-12-07 W 3-0 vs Qatar (A, Arab Cup)",
+    "2025-12-04 D 2-2 vs Palestine (A, Arab Cup)"
+   ],
+   "squad_value_eur_m": 69.95,
+   "key_players": [
+    {
+     "name": "S. Ben Hsan",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Abdelmouhib",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Dahmen",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Abdi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Arous",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Ben Hmida",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Bronn",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Chikhaoui",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Japan": {
+   "wiki": "The Japan national football team , also known by the nickname Samurai Blue , represents Japan in men's international football. It is controlled by the Japan Football Association (JFA), the governing body for football in Japan.",
+   "confederation": "AFC",
+   "fifa_ranking": 18,
+   "host": false,
+   "last_10": [
+    "2026-05-31 W 1-0 vs Iceland (H, Friendlies)",
+    "2026-03-31 W 1-0 vs England (A, Friendlies)",
+    "2026-03-28 W 1-0 vs Scotland (A, Friendlies)",
+    "2025-11-18 W 3-0 vs Bolivia (H, Friendlies)",
+    "2025-11-14 W 2-0 vs Ghana (H, Friendlies)",
+    "2025-10-14 W 3-2 vs Brazil (H, Friendlies)",
+    "2025-10-10 D 2-2 vs Paraguay (H, Friendlies)",
+    "2025-09-09 L 0-2 vs USA (A, Friendlies)",
+    "2025-09-07 D 0-0 vs Mexico (A, Friendlies)",
+    "2025-07-15 W 1-0 vs South Korea (A, EAFF E-1 Football Championship)"
+   ],
+   "squad_value_eur_m": 270.85,
+   "key_players": [
+    {
+     "name": "T. Hayakawa",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Osako",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Z. Suzuki",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Itakura",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Ito",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Nagatomo",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Seko",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Y. Sugawara",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "South Korea": {
+   "wiki": "The South Korea national football team represents South Korea in men's international football and is governed by the Korea Football Association, a member of FIFA and the Asian Football Confederation (AFC).",
+   "confederation": "AFC",
+   "fifa_ranking": 25,
+   "host": false,
+   "last_10": [
+    "2026-06-04 W 1-0 vs El Salvador (H, Friendlies)",
+    "2026-05-31 W 5-0 vs Trinidad and Tobago (H, Friendlies)",
+    "2026-03-31 L 0-1 vs Austria (A, Friendlies)",
+    "2026-03-28 L 0-4 vs Ivory Coast (H, Friendlies)",
+    "2025-11-18 W 1-0 vs Ghana (H, Friendlies)",
+    "2025-11-14 W 2-0 vs Bolivia (H, Friendlies)",
+    "2025-10-14 W 2-0 vs Paraguay (H, Friendlies)",
+    "2025-10-10 L 0-5 vs Brazil (H, Friendlies)",
+    "2025-09-10 D 2-2 vs Mexico (A, Friendlies)",
+    "2025-09-06 W 2-0 vs USA (A, Friendlies)"
+   ],
+   "squad_value_eur_m": 139.05,
+   "key_players": [
+    {
+     "name": "Jo Hyeon-Woo",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Kim Seung-Gyu",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Song Bum-Keun",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Cho Wi-Je",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Kim Min-Jae",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Kim Moon-Hwan",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Kim Tae-Hyeon",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Lee Han-Beom",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Iran": {
+   "wiki": "The Iran national football team, recognised as IR Iran by FIFA since 2018, represents Iran in men's international senior football and is governed by the Football Federation Islamic Republic of Iran (FFIRI).",
+   "confederation": "AFC",
+   "fifa_ranking": 21,
+   "host": false,
+   "last_10": [
+    "2026-06-04 W 2-0 vs Mali (H, Friendlies)",
+    "2026-05-29 W 3-1 vs Gambia (H, Friendlies)",
+    "2026-03-31 W 5-0 vs Costa Rica (A, Friendlies)",
+    "2026-03-27 L 1-2 vs Nigeria (H, Friendlies)",
+    "2025-11-18 L 0-0 vs Uzbekistan (A, Friendlies)",
+    "2025-11-13 W 0-0 vs Cape Verde Islands (H, Friendlies)",
+    "2025-10-14 W 2-0 vs Tanzania (H, Friendlies)",
+    "2025-10-10 L 1-2 vs Russia (A, Friendlies)",
+    "2025-09-08 L 0-1 vs Uzbekistan (H, CAFA Nations Cup)",
+    "2025-09-04 D 2-2 vs Tajikistan (A, CAFA Nations Cup)"
+   ],
+   "squad_value_eur_m": 32.05,
+   "key_players": [
+    {
+     "name": "A. Beiranvand",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Hosseini",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "P. Niazmand",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Eiri",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Rezaeian",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Hajisafi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Saleh Hardani",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Kanani",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Australia": {
+   "wiki": "Australia national soccer team most commonly refers to:Australia men's national soccer team\nAustralia women's national soccer team",
+   "confederation": "AFC",
+   "fifa_ranking": 27,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 1-1 vs Switzerland (A, Friendlies)",
+    "2026-05-31 L 0-1 vs Mexico (A, Friendlies)",
+    "2026-03-31 W 5-1 vs Curaçao (H, FIFA Series)",
+    "2026-03-27 W 1-0 vs Cameroon (H, FIFA Series)",
+    "2025-11-19 L 0-3 vs Colombia (A, Friendlies)",
+    "2025-11-15 L 0-1 vs Venezuela (A, Friendlies)",
+    "2025-10-15 L 1-2 vs USA (A, Friendlies)",
+    "2025-10-10 W 1-0 vs Canada (A, Friendlies)",
+    "2025-09-09 W 3-1 vs New Zealand (A, Friendlies)",
+    "2025-09-05 W 1-0 vs New Zealand (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 77.45,
+   "key_players": [
+    {
+     "name": "P. Beach",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "P. Izzo",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Ryan",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Behich",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Bos",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Burgess",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Circati",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Geria",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Saudi Arabia": {
+   "wiki": "The Saudi Arabia national football team represents Saudi Arabia in men's international football. They are known as Al-Suqour Al-Arabiyyah and sometimes Al-Suqour Al-Khodhur, a reference to their traditional colors of green and white, and represent both FIFA and the Asian Football Confederation (AFC).",
+   "confederation": "AFC",
+   "fifa_ranking": 61,
+   "host": false,
+   "last_10": [
+    "2026-06-05 W 3-0 vs Puerto Rico (A, Friendlies)",
+    "2026-05-31 L 1-2 vs Ecuador (A, Friendlies)",
+    "2026-03-31 L 1-2 vs Serbia (A, Friendlies)",
+    "2026-03-27 L 0-4 vs Egypt (H, Friendlies)",
+    "2025-12-15 L 0-1 vs Jordan (H, Arab Cup)",
+    "2025-12-11 W 2-1 vs Palestine (A, Arab Cup)",
+    "2025-12-08 L 0-1 vs Morocco (A, Arab Cup)",
+    "2025-12-05 W 3-1 vs Comoros (A, Arab Cup)",
+    "2025-12-02 W 2-1 vs Oman (H, Arab Cup)",
+    "2025-11-18 L 0-2 vs Algeria (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 40.68,
+   "key_players": [
+    {
+     "name": "Nawaf Al Aqidi",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Ahmed Al Kassar",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Mohammed Al Owais",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Saud Abdulhamid",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Mohammed Abu Al Shamat",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "Nawaf Boushal",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Abdulelah Al Amri",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Moteb Al Harbi",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Uzbekistan": {
+   "wiki": "The Uzbekistan national football team represents Uzbekistan in men's international football and is controlled by the Uzbekistan Football Association, the governing body for football in Uzbekistan.",
+   "confederation": "AFC",
+   "fifa_ranking": 50,
+   "host": false,
+   "last_10": [
+    "2026-06-08 L 1-2 vs Netherlands (A, Friendlies)",
+    "2026-06-02 L 0-2 vs Canada (A, Friendlies)",
+    "2026-03-30 W 0-0 vs Venezuela (H, FIFA Series)",
+    "2026-03-27 W 3-1 vs Gabon (H, FIFA Series)",
+    "2026-01-30 W 4-2 vs FC Urartu (H, Friendlies)",
+    "2026-01-26 D 2-2 vs China (H, Friendlies)",
+    "2025-11-18 W 0-0 vs Iran (H, Friendlies)",
+    "2025-11-14 W 2-0 vs Egypt (H, Friendlies)",
+    "2025-10-13 L 1-2 vs Uruguay (H, Friendlies)",
+    "2025-10-09 W 2-0 vs Kuwait (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 85.33,
+   "key_players": [
+    {
+     "name": "B. Ergashev",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Nematov",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "U. Yusupov",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Alijonov",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Ashurmatov",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "U. Eshmurodov",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "B. Karimov",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Khusanov",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Jordan": {
+   "wiki": "The Jordan national football team, nicknamed Al Nashama, represents Jordan in men's international football. It is under the jurisdiction of the Jordan Football Association.",
+   "confederation": "AFC",
+   "fifa_ranking": 63,
+   "host": false,
+   "last_10": [
+    "2026-06-07 L 0-2 vs Colombia (A, Friendlies)",
+    "2026-05-31 L 1-4 vs Switzerland (A, Friendlies)",
+    "2026-03-31 D 2-2 vs Nigeria (H, Friendlies)",
+    "2026-03-27 D 2-2 vs Costa Rica (H, Friendlies)",
+    "2025-12-18 L 2-3 vs Morocco (H, Arab Cup)",
+    "2025-12-15 W 1-0 vs Saudi Arabia (A, Arab Cup)",
+    "2025-12-12 W 1-0 vs Iraq (H, Arab Cup)",
+    "2025-12-09 W 3-0 vs Egypt (A, Arab Cup)",
+    "2025-12-06 W 3-1 vs Kuwait (A, Arab Cup)",
+    "2025-12-03 W 2-1 vs United Arab Emirates (H, Arab Cup)"
+   ],
+   "squad_value_eur_m": 20.3,
+   "key_players": [
+    {
+     "name": "Yazid Abu Layla",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Abdallah Al Fakhouri",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Noureddin Zaid",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Abu Al Dahab",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Abu Hasheesh",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Abualnadi",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Yazan Al Arab",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Saed Al Rosan",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Qatar": {
+   "wiki": "The Qatar national football team, nicknamed \"The Maroons\", represents Qatar in international football, and is controlled by the Qatar Football Association, which is affiliated with the Asian Football Confederation (AFC) and comes under the global jurisdiction of world football’s governing body FIFA. They play their home games at Jassim bin Hamad Stadium. The latter is considered the home stadium.",
+   "confederation": "AFC",
+   "fifa_ranking": 55,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 0-0 vs El Salvador (H, Friendlies)",
+    "2026-05-28 L 0-1 vs Rep. Of Ireland (A, Friendlies)",
+    "2025-12-07 L 0-3 vs Tunisia (H, Arab Cup)",
+    "2025-12-04 D 1-1 vs Syria (A, Arab Cup)",
+    "2025-12-01 L 0-1 vs Palestine (H, Arab Cup)",
+    "2025-11-17 L 1-2 vs Zimbabwe (H, Friendlies)",
+    "2025-10-14 W 2-1 vs United Arab Emirates (H, World Cup - Qualification Asia)",
+    "2025-10-08 D 0-0 vs Oman (A, World Cup - Qualification Asia)",
+    "2025-09-07 L 1-4 vs Russia (H, Friendlies)",
+    "2025-09-03 D 2-2 vs Bahrain (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 19.93,
+   "key_players": [
+    {
+     "name": "Mahmud Abunada",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Meshaal Barsham",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Salah Zakaria",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Homam Ahmed",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Sultan Al Braik",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Al Hussain",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Al Oui",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Jassem Gaber",
+     "position": "Midfielder",
+     "intl_goals": null
+    }
+   ]
+  },
+  "New Zealand": {
+   "wiki": "New Zealand national football team might refer to:New Zealand men's national football team\nNew Zealand women's national football team\nNew Zealand national American football team\nNew Zealand national Australian rules football team\nNew Zealand national beach soccer team",
+   "confederation": "OFC",
+   "fifa_ranking": 85,
+   "host": false,
+   "last_10": [
+    "2026-06-06 L 0-1 vs England (A, Friendlies)",
+    "2026-06-03 L 0-4 vs Haiti (A, Friendlies)",
+    "2026-03-30 W 4-1 vs Chile (H, FIFA Series)",
+    "2026-03-27 L 0-2 vs Finland (H, FIFA Series)",
+    "2025-11-19 L 0-2 vs Ecuador (A, Friendlies)",
+    "2025-11-16 L 1-2 vs Colombia (A, Friendlies)",
+    "2025-10-14 D 1-1 vs Norway (A, Friendlies)",
+    "2025-10-09 L 0-1 vs Poland (A, Friendlies)",
+    "2025-09-09 L 1-3 vs Australia (H, Friendlies)",
+    "2025-09-05 L 0-1 vs Australia (A, Friendlies)"
+   ],
+   "squad_value_eur_m": 34.35,
+   "key_players": [
+    {
+     "name": "M. Crocombe",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Paulsen",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Woud",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Tyler Bindon",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Boxall",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Cacace",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "F. de Vries",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Elliot",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Norway": {
+   "wiki": "The Norway national football team represents Norway in men's international football, and is controlled by the Norwegian Football Federation, the governing body for football in Norway. Norway's home ground is Ullevaal Stadion in Oslo, and their head coach is Ståle Solbakken. Norway has participated in the FIFA World Cup four times, and once in the UEFA European Championship (2000).",
+   "confederation": "UEFA",
+   "fifa_ranking": 31,
+   "host": false,
+   "last_10": [
+    "2026-06-07 D 1-1 vs Morocco (A, Friendlies)",
+    "2026-06-01 W 3-1 vs Sweden (H, Friendlies)",
+    "2026-03-31 D 0-0 vs Switzerland (H, Friendlies)",
+    "2026-03-27 L 1-2 vs Netherlands (A, Friendlies)",
+    "2025-11-16 W 4-1 vs Italy (A, World Cup - Qualification Europe)",
+    "2025-11-13 W 4-1 vs Estonia (H, World Cup - Qualification Europe)",
+    "2025-10-14 D 1-1 vs New Zealand (H, Friendlies)",
+    "2025-10-11 W 5-0 vs Israel (H, World Cup - Qualification Europe)",
+    "2025-09-09 W 11-1 vs Moldova (H, World Cup - Qualification Europe)",
+    "2025-09-04 W 1-0 vs Finland (H, Friendlies)"
+   ],
+   "squad_value_eur_m": 589.9,
+   "key_players": [
+    {
+     "name": "Ø. Nyland",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Selvik",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Tangvik",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Ajer",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "F. Bjørkan",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Falchener",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Langås",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Heggem",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Sweden": {
+   "wiki": "Sweden national football team might refer to:Sweden men's national football team\nSweden women's national football team",
+   "confederation": "UEFA",
+   "fifa_ranking": 38,
+   "host": false,
+   "last_10": [
+    "2026-06-04 D 2-2 vs Greece (H, Friendlies)",
+    "2026-06-01 L 1-3 vs Norway (A, Friendlies)",
+    "2026-03-31 W 3-2 vs Poland (H, World Cup - Qualification Europe)",
+    "2026-03-26 W 3-1 vs Ukraine (A, World Cup - Qualification Europe)",
+    "2025-11-18 D 1-1 vs Slovenia (H, World Cup - Qualification Europe)",
+    "2025-11-15 L 1-4 vs Switzerland (A, World Cup - Qualification Europe)",
+    "2025-10-13 L 0-1 vs Kosovo (H, World Cup - Qualification Europe)",
+    "2025-10-10 L 0-2 vs Switzerland (H, World Cup - Qualification Europe)",
+    "2025-09-08 L 0-2 vs Kosovo (A, World Cup - Qualification Europe)",
+    "2025-09-05 D 2-2 vs Slovenia (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 406.08,
+   "key_players": [
+    {
+     "name": "V. Johansson",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Nordfeldt",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Widell Zetterström",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Ekdal",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Gudmundsson",
+     "position": "Midfielder",
+     "intl_goals": null
+    },
+    {
+     "name": "I. Hien",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Lagerbielke",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "V. Lindelöf",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Czech Republic": {
+   "wiki": "The Czech Republic national football team, recognised by FIFA as Czechia, represents the Czech Republic in men's international football. The team is controlled by the Football Association of the Czech Republic (FAČR). Historically, the team participated in FIFA and UEFA competitions as Bohemia and Czechoslovakia.",
+   "confederation": "UEFA",
+   "fifa_ranking": 41,
+   "host": false,
+   "last_10": [
+    "2026-06-05 W 3-1 vs Guatemala (H, Friendlies)",
+    "2026-05-31 W 2-1 vs Kosovo (H, Friendlies)",
+    "2026-03-31 W 1-1 vs Denmark (H, World Cup - Qualification Europe)",
+    "2026-03-26 W 2-2 vs Rep. Of Ireland (H, World Cup - Qualification Europe)",
+    "2025-11-17 W 6-0 vs Gibraltar (H, World Cup - Qualification Europe)",
+    "2025-11-13 W 1-0 vs San Marino (H, Friendlies)",
+    "2025-10-12 L 1-2 vs Faroe Islands (A, World Cup - Qualification Europe)",
+    "2025-10-09 D 0-0 vs Croatia (H, World Cup - Qualification Europe)",
+    "2025-09-08 D 1-1 vs Saudi Arabia (H, Friendlies)",
+    "2025-09-05 W 2-0 vs Montenegro (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 188.18,
+   "key_players": [
+    {
+     "name": "L. Hornícek",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Kovár",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Stanek",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Chaloupek",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "V. Coufal",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Holes",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Hranác",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Jurásek",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Bosnia and Herzegovina": {
+   "wiki": "The Bosnia and Herzegovina national football team represents Bosnia and Herzegovina in men's international football competitions and is governed by the Football Association of Bosnia and Herzegovina. Until 1992, Bosnian footballers played for Yugoslavia.",
+   "confederation": "UEFA",
+   "fifa_ranking": 65,
+   "host": false,
+   "last_10": [
+    "2026-06-06 D 1-1 vs Panama (A, Friendlies)",
+    "2026-05-29 D 0-0 vs FYR Macedonia (H, Friendlies)",
+    "2026-03-31 W 1-1 vs Italy (H, World Cup - Qualification Europe)",
+    "2026-03-26 W 1-1 vs Wales (A, World Cup - Qualification Europe)",
+    "2025-11-18 D 1-1 vs Austria (A, World Cup - Qualification Europe)",
+    "2025-11-15 W 3-1 vs Romania (H, World Cup - Qualification Europe)",
+    "2025-10-12 W 4-1 vs Malta (A, Friendlies)",
+    "2025-10-09 D 2-2 vs Cyprus (A, World Cup - Qualification Europe)",
+    "2025-09-09 L 1-2 vs Austria (H, World Cup - Qualification Europe)",
+    "2025-09-06 W 6-0 vs San Marino (A, World Cup - Qualification Europe)"
+   ],
+   "squad_value_eur_m": 151.6,
+   "key_players": [
+    {
+     "name": "M. Jurkas",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Vasilj",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Zlomislic",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Celik",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Dedic",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Hadzikadunic",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "N. Katic",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Kolasinac",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Algeria": {
+   "wiki": "The Algeria national football team represents Algeria in men's international football, and is governed by the Algerian Football Federation. The team plays its home matches at Nelson Mandela Stadium in Algiers and Miloud Hadefi Stadium in Oran. Algeria joined FIFA on 1 January 1964, a year and a half after gaining independence.",
+   "confederation": "CAF",
+   "fifa_ranking": 28,
+   "host": false,
+   "last_10": [
+    "2026-06-03 W 1-0 vs Netherlands (A, Friendlies)",
+    "2026-03-31 D 0-0 vs Uruguay (H, Friendlies)",
+    "2026-03-27 W 7-0 vs Guatemala (H, Friendlies)",
+    "2026-01-10 L 0-2 vs Nigeria (H, Africa Cup of Nations)",
+    "2026-01-06 W 1-0 vs Congo DR (H, Africa Cup of Nations)",
+    "2025-12-31 W 3-1 vs Equatorial Guinea (A, Africa Cup of Nations)",
+    "2025-12-28 W 1-0 vs Burkina Faso (H, Africa Cup of Nations)",
+    "2025-12-24 W 3-0 vs Sudan (H, Africa Cup of Nations)",
+    "2025-12-12 L 1-1 vs United Arab Emirates (H, Arab Cup)",
+    "2025-12-09 W 2-0 vs Iraq (H, Arab Cup)"
+   ],
+   "squad_value_eur_m": 256.9,
+   "key_players": [
+    {
+     "name": "O. Benbot",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "M. Mastil",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Zidane",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Abada",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Aït-Nouri",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Z. Belaïd",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Belghali",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Bensebaïni",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Ghana": {
+   "wiki": "The Ghana national football team represents Ghana in men's international association football. It is named the Black Stars after the Black Star of Africa in the flag of Ghana. The team is governed by the Ghana Football Association, the governing body for football in Ghana. Prior to 1957, it played as the Gold Coast.",
+   "confederation": "CAF",
+   "fifa_ranking": 74,
+   "host": false,
+   "last_10": [
+    "2026-06-02 D 1-1 vs Wales (A, Friendlies)",
+    "2026-05-23 L 0-2 vs Mexico (A, Friendlies)",
+    "2026-03-30 L 1-2 vs Germany (A, Friendlies)",
+    "2026-03-27 L 1-5 vs Austria (A, Friendlies)",
+    "2025-11-18 L 0-1 vs South Korea (A, Friendlies)",
+    "2025-11-14 L 0-2 vs Japan (A, Friendlies)",
+    "2025-10-12 W 1-0 vs Comoros (H, World Cup - Qualification Africa)",
+    "2025-10-08 W 5-0 vs Central African Republic (A, World Cup - Qualification Africa)",
+    "2025-09-08 W 1-0 vs Mali (H, World Cup - Qualification Africa)",
+    "2025-09-04 D 1-1 vs Chad (A, World Cup - Qualification Africa)"
+   ],
+   "squad_value_eur_m": 234.6,
+   "key_players": [
+    {
+     "name": "B. Asare",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Anang",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "L. Zigi",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Adjetey",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "D. Luckassen",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "G. Mensah",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Seidu",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Opoku",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Cape Verde": {
+   "wiki": "The Cape Verde national football team represents Cape Verde in men's international football, and is controlled by the Cape Verdean Football Federation. The team is nicknamed Tubarões Azuis. The national team played its first match on 19 April 1978 against Guinea, a match they lost 0–1. Following the federation's affiliation with the Confederation of African Football and FIFA in 1982, the national team entered Africa Cup of Nations qualification for the first time in 1992 and made its first FIFA World Cup qualification appearance in 2003. The team is coached by Pedro Leitão Brito.",
+   "confederation": "CAF",
+   "fifa_ranking": 69,
+   "host": false,
+   "last_10": [
+    "2026-06-06 W 3-0 vs Bermuda (H, Friendlies)",
+    "2026-05-31 W 3-0 vs Serbia (H, Friendlies)",
+    "2026-03-30 W 1-1 vs Finland (H, FIFA Series)",
+    "2026-03-27 L 2-4 vs Chile (A, FIFA Series)",
+    "2025-11-17 L 1-1 vs Egypt (A, Friendlies)",
+    "2025-11-13 L 0-0 vs Iran (A, Friendlies)",
+    "2025-10-13 W 3-0 vs Eswatini (H, World Cup - Qualification Africa)",
+    "2025-10-08 D 3-3 vs Libya (A, World Cup - Qualification Africa)",
+    "2025-09-09 W 1-0 vs Cameroon (H, World Cup - Qualification Africa)",
+    "2025-09-04 W 2-0 vs Mauritius (A, World Cup - Qualification Africa)"
+   ],
+   "squad_value_eur_m": 54.5,
+   "key_players": [
+    {
+     "name": "Márcio Rosa",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Vózinha",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "C. dos Santos",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Diney Borges",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Logan Costa",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Lopes Cabral",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Pico",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Moreira",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Curaçao": {
+   "wiki": "The Curaçao national football team represents Curaçao in men's international football, it is controlled by the Federashon Futbòl Kòrsou.",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 82,
+   "host": false,
+   "last_10": [
+    "2026-06-07 W 4-0 vs Aruba (H, Friendlies)",
+    "2026-05-30 L 1-4 vs Scotland (A, Friendlies)",
+    "2026-03-31 L 1-5 vs Australia (A, FIFA Series)",
+    "2026-03-27 L 0-2 vs China (A, FIFA Series)",
+    "2025-11-19 D 0-0 vs Jamaica (A, World Cup - Qualification CONCACAF)",
+    "2025-11-14 W 7-0 vs Bermuda (A, World Cup - Qualification CONCACAF)",
+    "2025-10-14 D 1-1 vs Trinidad and Tobago (H, World Cup - Qualification CONCACAF)",
+    "2025-10-10 W 2-0 vs Jamaica (H, World Cup - Qualification CONCACAF)",
+    "2025-09-10 W 3-2 vs Bermuda (H, World Cup - Qualification CONCACAF)",
+    "2025-09-06 D 0-0 vs Trinidad and Tobago (A, World Cup - Qualification CONCACAF)"
+   ],
+   "squad_value_eur_m": 25.78,
+   "key_players": [
+    {
+     "name": "T. Bodak",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "T. Doornbusch",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "E. Room",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "R. Bazoer",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Brenet",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "S. Floranus",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Deveron Fonville",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Gaari",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Haiti": {
+   "wiki": "The Haiti national football team represents Haiti in men's international football, which is governed by the Fédération Haïtienne de Football, the governing body for football in Haiti founded in 1904. It has been an affiliate member of FIFA since 1934 and a founding affiliate member of CONCACAF since 1961. Regionally, it is an affiliate member of CFU in the Caribbean Zone. From 1938 to 1961, it was a member of CCCF, the former governing body of football in Central America and Caribbean and a predecessor confederation of CONCACAF, and also a member of PFC, the former unified confederation of the Americas.",
+   "confederation": "CONCACAF",
+   "fifa_ranking": 83,
+   "host": false,
+   "last_10": [
+    "2026-06-06 L 1-2 vs Peru (H, Friendlies)",
+    "2026-06-03 W 4-0 vs New Zealand (H, Friendlies)",
+    "2026-03-31 D 1-1 vs Iceland (H, Friendlies)",
+    "2026-03-29 L 0-1 vs Tunisia (H, Friendlies)",
+    "2025-11-19 W 2-0 vs Nicaragua (H, World Cup - Qualification CONCACAF)",
+    "2025-11-14 W 1-0 vs Costa Rica (H, World Cup - Qualification CONCACAF)",
+    "2025-10-14 L 0-3 vs Honduras (A, World Cup - Qualification CONCACAF)",
+    "2025-10-10 W 3-0 vs Nicaragua (A, World Cup - Qualification CONCACAF)",
+    "2025-09-10 D 3-3 vs Costa Rica (A, World Cup - Qualification CONCACAF)",
+    "2025-09-06 D 0-0 vs Honduras (H, World Cup - Qualification CONCACAF)"
+   ],
+   "squad_value_eur_m": 55.9,
+   "key_players": [
+    {
+     "name": "J. Duverger",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "A. Pierre",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Placide",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "C. Arcus",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "K. Thermoncy",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Ricardo Ade",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "H. Delcroix",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "J. Duverne",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  },
+  "Iraq": {
+   "wiki": "The Iraq national football team, nicknamed the Lions of Mesopotamia, represents Iraq in men's international football and is controlled by the Iraq Football Association (IFA), the governing body for football in Iraq. Iraq's usual home venue is the Basra International Stadium.",
+   "confederation": "AFC",
+   "fifa_ranking": 57,
+   "host": false,
+   "last_10": [
+    "2026-06-04 D 1-1 vs Spain (A, Friendlies)",
+    "2026-05-29 W 1-0 vs Andorra (H, Friendlies)",
+    "2026-04-01 W 2-1 vs Bolivia (H, World Cup - Qualification Intercontinental Play-offs)",
+    "2025-12-12 L 0-1 vs Jordan (A, Arab Cup)",
+    "2025-12-09 L 0-2 vs Algeria (A, Arab Cup)",
+    "2025-12-06 W 2-0 vs Sudan (A, Arab Cup)",
+    "2025-12-03 W 2-1 vs Bahrain (H, Arab Cup)",
+    "2025-11-18 W 2-1 vs United Arab Emirates (H, World Cup - Qualification Asia)",
+    "2025-11-13 D 1-1 vs United Arab Emirates (A, World Cup - Qualification Asia)",
+    "2025-10-14 D 0-0 vs Saudi Arabia (A, World Cup - Qualification Asia)"
+   ],
+   "squad_value_eur_m": 21.2,
+   "key_players": [
+    {
+     "name": "Ahmed Basil",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Jalal Hassan Hachim",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Fahad Talib",
+     "position": "Goalkeeper",
+     "intl_goals": null
+    },
+    {
+     "name": "Hussein Ali",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Merchas Doski",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Frans Putros",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Mustafa Saadoun",
+     "position": "Defender",
+     "intl_goals": null
+    },
+    {
+     "name": "Rebin Solaka",
+     "position": "Defender",
+     "intl_goals": null
+    }
+   ]
+  }
+ }
+}

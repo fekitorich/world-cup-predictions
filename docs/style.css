@@ -38,6 +38,14 @@ ol.timeline li::before {
 }
 ol.timeline b { font-family: "Fraunces", serif; }
 
+/* AI analyst sections */
+section.llm {
+  max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.3rem;
+  background: var(--paper-2); border: 1px solid var(--rule);
+}
+section.llm h2 { margin-top: 0; border-bottom-color: var(--rule); }
+section.llm .llmnote { border-left-color: var(--amber); margin-bottom: 0; }
+
 /* market-table section dividers */
 table.markets tr.subhead td {
   font-family: "Fraunces", serif; font-weight: 600; font-size: .82rem;

@@ -37,6 +37,8 @@ python3 pipeline/wc26_players.py      # squads + player intl goals + award marke
 python3 pipeline/wc26_player_pages.py # (occasional) candidate dossiers for /players pages (~140 calls)
 python3 pipeline/wc26_espn_ids.py     # (once) ESPN gameId mapping for live links
 .venv/bin/python3 pipeline/wc26_awards.py   # Golden Boot model etc (after tournament.py)
+.venv/bin/python3 pipeline/wc26_llm.py sources   # (once) freeze LLM source corpus (wiki + internal)
+.venv/bin/python3 pipeline/wc26_llm.py generate  # AI analyst sections (claude-opus-4-8; skips without key)
 python3 pipeline/wc26_update_results.py     # during tournament: pull actual results, grade predictions
 python3 pipeline/wc26_build_site.py   # regenerate docs/ live pages
 python3 pipeline/wc26_charts.py       # (occasional) regenerate method-page SVG charts
@@ -61,6 +63,9 @@ python3 -m http.server 8742 --directory docs  # browse
   re-fetch near kickoff; late-listed fixtures get picked up on re-run)
 - `wc26_squad_values.json` — Transfermarkt squad values (refresh occasionally;
   pipeline/wc26_value_test.py revalidates beta)
+- `wc26_llm_sources.json` — FROZEN source corpus for LLM analyses (wiki summaries
+  fetched once + internal snapshots); `wc26_llm_analysis.json` — generated analyst
+  sections (teams/players/match previews+reviews), write-once unless --force
 - `wc26_predictions.json` — LOCKED bracket (see Conventions)
 - `wc26_model_notes.md` (repo root) — method R&D, validation numbers, known blind spots
 
@@ -93,8 +98,11 @@ python3 -m http.server 8742 --directory docs  # browse
   gitignored `.api_football_key` file at repo root) for fixtures/results;
   martj42/international_results for model training. Prefer free APIs; ask user for
   keys when needed.
-- Mostly stdlib Python; numpy lives only in `.venv/` and only `wc26_tournament.py`
-  needs it. Everything else must stay stdlib.
+- Mostly stdlib Python; `.venv/` holds numpy (wc26_tournament.py) and the
+  anthropic SDK (wc26_llm.py) — everything else must stay stdlib.
+- Anthropic API key for the analyst sections: env ANTHROPIC_API_KEY or the
+  gitignored `.anthropic_key` at repo root (chmod 600). LLM output is colour,
+  clearly labeled AI-written on the site; it never feeds the model or betting.
 - `data/wc26_predictions.json` is LOCKED (pre-tournament bracket picks for accuracy
   grading). Only `wc26_update_results.py` may write to it (fills actuals);
   never regenerate it without the user explicitly asking (--force).

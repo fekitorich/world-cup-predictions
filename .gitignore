@@ -12,3 +12,4 @@ betting/state/
 betting/config.local.json
 logs/
 .vscode/
+.anthropic_key
