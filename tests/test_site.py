@@ -184,6 +184,17 @@ class TestBuiltSite(unittest.TestCase):
                     broken.append(f"{p.relative_to(self.docs)} -> {link}")
         self.assertFalse(broken[:10], f"{len(broken)} broken links")
 
+    def test_method_evolution_chart_both_languages(self):
+        for name, heading in (("method.html",
+                               "What each iteration did to the numbers"),
+                              ("method-fa.html",
+                               "هر تکرار، چقدر پیش‌بینی را جابه‌جا کرد")):
+            html = (self.docs / name).read_text()
+            self.assertIn(heading, html, name)
+            sec = html.split(heading)[1]
+            self.assertGreaterEqual(sec.count("<polyline"), 3, name)
+            self.assertIn("squad-value prior", sec, name)
+
     def test_method_timeline_both_languages(self):
         for name, heading in (("method.html", "How the method evolved"),
                               ("method-fa.html", "سیر تکامل روش")):

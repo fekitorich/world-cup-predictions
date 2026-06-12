@@ -922,6 +922,117 @@ def trend_chart():
            f'whichever curve is lowest is winning the forecasting contest.</figcaption></figure>'
 
 
+# ---------- method-page evolution chart ----------
+EVO_MILESTONES = {   # run-stamp prefix -> label shown on the chart
+    "20260609-2104": "v1: DC + Monte Carlo",
+    "20260610-0023": "anomaly variance",
+    "20260610-1526": "squad-value prior",
+    "20260611-2333": "nightly auto-runs",
+}
+
+
+def evolution_section(lang="en"):
+    """Champion odds across every archived tournament run, with method
+    milestones marked — how much each iteration actually moved the needle."""
+    import glob
+    files = sorted(glob.glob(str(ROOT / "runs" / "*_tournament.json")))
+    series = []   # (stamp, {team: champion_p})
+    for f in files:
+        try:
+            d = json.load(open(f))["teams"]
+        except (ValueError, KeyError):
+            continue
+        series.append((Path(f).name[:13],
+                       {t: v["champion"] for t, v in d.items()}))
+    if len(series) < 3:
+        return ""
+    teams = sorted({t for _, s in series for t in s},
+                   key=lambda t: -max(s.get(t, 0) for _, s in series))[:7]
+    W, H_, L, R, T, B = 660, 320, 40, 86, 40, 30
+    pw, ph = W - L - R, H_ - T - B
+    hi = max(s.get(t, 0) for _, s in series for t in teams) * 1.12
+    n = len(series)
+    x = lambda i: L + pw * i / (n - 1)
+    y = lambda v: T + ph * (1 - v / hi)
+    font = 'font-family="ui-monospace,Menlo,monospace"'
+    palette = ["#14633f", "#a72a1e", "#856a1d", "#211d16",
+               "#4a6fa5", "#7b4aa5", "#3f8f8a"]
+    s = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H_}" '
+         f'style="max-width:660px;width:100%">'
+         f'<rect width="{W}" height="{H_}" fill="var(--paper, #f6f1e6)"/>')
+    # milestone markers
+    for i, (stamp, _) in enumerate(series):
+        label = EVO_MILESTONES.get(stamp)
+        if not label:
+            continue
+        s += (f'<line x1="{x(i):.1f}" y1="{T - 14}" x2="{x(i):.1f}" '
+              f'y2="{T + ph}" stroke="var(--ink-soft, #6b6353)" '
+              f'stroke-dasharray="3,3"/>')
+        s += (f'<text x="{x(i) + 3:.1f}" y="{T - 17}" font-size="9" '
+              f'fill="var(--ink-soft, #6b6353)" {font} '
+              f'transform="rotate(-14 {x(i) + 3:.1f} {T - 17})">{label}</text>')
+    used_ys = []
+    for ti, t in enumerate(teams):
+        vals = [s_.get(t, 0) for _, s_ in series]
+        pts = " ".join(f"{x(i):.1f},{y(v):.1f}" for i, v in enumerate(vals))
+        col = palette[ti % len(palette)]
+        s += (f'<polyline points="{pts}" fill="none" stroke="{col}" '
+              f'stroke-width="2"/>')
+        ly = y(vals[-1]) + 3
+        while any(abs(ly - u) < 11 for u in used_ys):   # de-overlap labels
+            ly += 11
+        used_ys.append(ly)
+        s += (f'<text x="{L + pw + 4}" y="{ly:.1f}" font-size="10" '
+              f'fill="{col}" {font}>{escape(t)} '
+              f'{vals[-1] * 100:.0f}%</text>')
+    s += (f'<text x="{L}" y="14" font-size="12" fill="var(--ink, #211d16)" {font}>'
+          + ("championship odds, every archived run" if lang == "en" else
+             "championship odds, every archived run")
+          + '</text>')
+    s += (f'<text x="{L}" y="{H_ - 8}" font-size="10" '
+          f'fill="var(--ink-soft, #6b6353)" {font}>'
+          f'{series[0][0][:8]} → {series[-1][0][:8]} · {n} runs</text></svg>')
+
+    # biggest movers per milestone (vs the run immediately before)
+    stamps = [st for st, _ in series]
+    mover_rows = []
+    for stamp, label in EVO_MILESTONES.items():
+        if stamp not in stamps:
+            continue
+        i = stamps.index(stamp)
+        if i == 0:
+            continue
+        prev, cur = series[i - 1][1], series[i][1]
+        deltas = sorted(((t, (cur.get(t, 0) - prev.get(t, 0)) * 100)
+                         for t in cur), key=lambda kv: -abs(kv[1]))[:3]
+        moved = ", ".join(f"{escape(t)} {d:+.1f}pp" for t, d in deltas
+                          if abs(d) >= 0.3)
+        mover_rows.append(f"<tr><td>{escape(label)}</td>"
+                          f"<td>{moved or '—'}</td></tr>")
+    if lang == "fa":
+        head = "هر تکرار، چقدر پیش‌بینی را جابه‌جا کرد"
+        intro = ("نمودار زیر شانس قهرمانی را در تمام اجراهای آرشیوشده نشان می‌دهد؛ "
+                 "خط‌چین‌ها لحظهٔ ورود هر روش جدید هستند. جدول، بزرگ‌ترین "
+                 "جابه‌جایی هر مرحله را خلاصه می‌کند. خط‌های صافِ روزهای آخر هم "
+                 "خودشان پیام دارند: ممیزی‌های کالیبراسیون و بازارهای جدید "
+                 "پیش‌بینی‌ها را تغییر ندادند ــ و قرار هم نبود تغییر دهند.")
+        cols = "<th>روش</th><th>بزرگ‌ترین جابه‌جایی‌ها</th>"
+    else:
+        head = "What each iteration did to the numbers"
+        intro = ("The chart shows championship odds across every archived "
+                 "simulation run; dashed lines mark the moment each new method "
+                 "landed. The table summarises the biggest moves. The flat "
+                 "stretch at the end carries its own message: the calibration "
+                 "audits and the new market surfaces changed no predictions — "
+                 "by design, since both were pricing the same grid.")
+        cols = "<th>Method</th><th>Biggest moves</th>"
+    return f"""<h2>{head}</h2>
+<p class="fineprint">{intro}</p>
+<figure>{s}</figure>
+<table class="markets evo"><thead><tr>{cols}</tr></thead>
+<tbody>{''.join(mover_rows)}</tbody></table>"""
+
+
 # ---------- bracket / predictions page ----------
 def build_bracket():
     if not PRED:
@@ -1590,6 +1701,8 @@ public, the model refits on the newest matches, and the day's site is frozen int
 immutable snapshot.</li>
 </ol>
 
+{evolution_section("en")}
+
 <h2>Known blind spots</h2>
 <p class="fineprint">No lineups, injuries or suspensions (the market blend carries those);
 no weather or altitude terms (magnitudes unfittable from our data - treated as caution flags,
@@ -1831,6 +1944,8 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 <li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
 می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
 </ol>
+
+{evolution_section("fa")}
 
 <h2>نقاط کور شناخته‌شده</h2>
 <p class="fineprint">ترکیب بازیکنان، مصدومیت‌ها و محرومیت‌ها مستقیماً در مدل حضور ندارند؛
