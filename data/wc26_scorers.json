@@ -1,7 +1,8 @@
 {
   "fetched_fixtures": [
     1489369,
-    1538999
+    1538999,
+    1539000
   ],
   "scorers": {
     "J. Quinones": {
@@ -26,6 +27,16 @@
     },
     "Oh Hyeon-Gyu": {
       "team": "South Korea",
+      "goals": 1,
+      "assists_from": []
+    },
+    "J. Lukic": {
+      "team": "Bosnia and Herzegovina",
+      "goals": 1,
+      "assists_from": []
+    },
+    "C. Larin": {
+      "team": "Canada",
       "goals": 1,
       "assists_from": []
     }
