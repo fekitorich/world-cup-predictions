@@ -524,7 +524,6 @@ def build_team_pages():
 {futures_row(name)}
 {key_players(name)}
 {stat_strip(stats(t))}
-{llm_section(LLM["teams"].get(name), "The analyst's notes")}
 <p class="fineprint">Over 2.5 (three-plus total goals) and BTTS (both teams scored) are counted
 here because they're the totals categories prediction markets actually trade. Caveat on the
 last ten: a few teams padded theirs with friendlies against club or B-team opposition - those
@@ -537,7 +536,8 @@ and how the model scores them.</p>
 <table>
 <thead><tr><th class="num">Kick-off (UTC)</th><th class="num">H/A</th><th>Opponent</th><th>Venue</th></tr></thead>
 <tbody>{''.join(fx_rows)}</tbody>
-</table>"""
+</table>
+{llm_section(LLM["teams"].get(name), "The analyst's notes")}"""
         crumb = f'<a href="../index.html">Groups</a> / Group {g} / {escape(name)}'
         (OUT / "teams" / f"{slug(name)}.html").write_text(
             page(name, body, depth=1, crumb=crumb))
@@ -824,12 +824,12 @@ football only. <a href="https://www.espn.com/soccer/story/_/id/47264840/egypt-ir
 <table class="compare">{compare_rows(h, a)}</table>
 </div>
 {sim_section(m)}
-{llm_section((LLM["matches"].get(str(m["match_id"])) or {}).get("review"), "The analyst's review")}
-{llm_section((LLM["matches"].get(str(m["match_id"])) or {}).get("preview"), "The analyst's preview")}
 <div class="twocol">
 <section><h2>{escape(m['home'])} - last ten</h2>{last10_table(h)}</section>
 <section><h2>{escape(m['away'])} - last ten</h2>{last10_table(a)}</section>
-</div>{wrap_close}"""
+</div>
+{llm_section((LLM["matches"].get(str(m["match_id"])) or {}).get("review"), "The analyst's review")}
+{llm_section((LLM["matches"].get(str(m["match_id"])) or {}).get("preview"), "The analyst's preview")}{wrap_close}"""
         stage = m["round"] if m.get("round") else f'Matchday {m["matchday"]}'
         crumb = (f'<a href="../matches.html">Matches</a> / {escape(stage)} / '
                  f'{escape(m["home"])} v {escape(m["away"])}')
@@ -1291,8 +1291,8 @@ Details on the <a href="../method.html">Method</a> page.</p>"""
 </div>
 <dl class="stats">{facts}</dl>
 {outlook}
-{llm_section(LLM["players"].get(name), "The analyst's notes")}
 {season_html}
+{llm_section(LLM["players"].get(name), "The analyst's notes")}
 <p class="fineprint">Reference dossier; data from API-Football, profiles fetched
 {PROFILES_AT}. Club and country statistics per competition; rating coverage varies by league.</p>"""
         crumb = (f'<a href="../awards.html">Awards</a> / '
