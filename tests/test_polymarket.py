@@ -9,7 +9,9 @@ sys.path.insert(0, _ROOT)
 sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 
 from wc26_polymarket import (FIFA_CODE, names_for, parse_event,
-                             classify_more_market, parse_more_markets)
+                             classify_more_market, parse_more_markets,
+                             parse_half_event, parse_first_to_score,
+                             parse_corners)
 
 
 def mk(question, yes):
@@ -80,10 +82,18 @@ class TestMoreMarkets(unittest.TestCase):
             classify_more_market("United States vs. Paraguay: O/U 2.5",
                                  self.H, self.A), ("totals", "over_2.5"))
 
-    def test_classify_skips_team_and_half_totals(self):
-        for q in ("United States vs. Paraguay: United States O/U 2.5",
-                  "United States vs. Paraguay: 1st Half O/U 0.5",
-                  "United States vs. Paraguay: Paraguay 2nd Half O/U 1.5"):
+    def test_classify_team_totals(self):
+        self.assertEqual(
+            classify_more_market("United States vs. Paraguay: United States O/U 2.5",
+                                 self.H, self.A), ("team_totals", "home_over_2.5"))
+        self.assertEqual(
+            classify_more_market("United States vs. Paraguay: Paraguay O/U 0.5",
+                                 self.H, self.A), ("team_totals", "away_over_0.5"))
+
+    def test_classify_skips_half_markets(self):
+        for q in ("United States vs. Paraguay: 1st Half O/U 0.5",
+                  "United States vs. Paraguay: Paraguay 2nd Half O/U 1.5",
+                  "United States vs. Paraguay: United States 1st Half O/U 1.5"):
             self.assertIsNone(classify_more_market(q, self.H, self.A), q)
 
     def test_classify_btts_full_match_only(self):
@@ -122,6 +132,51 @@ class TestMoreMarkets(unittest.TestCase):
                          {"over_2.5": 0.415, "over_3.5": 0.215})
         self.assertEqual(out["btts"], 0.465)
         self.assertEqual(out["spread"], {"home_-1.5": 0.235})
+
+
+class TestSiblingParsers(unittest.TestCase):
+    H, A = "United States", "Paraguay"
+
+    def ev(self, *qs):
+        return {"markets": [
+            {"question": q, "outcomePrices": json.dumps([str(p), str(1 - p)]),
+             "outcomes": json.dumps(o)} for q, p, o in qs]}
+
+    def test_parse_halftime(self):
+        ev = self.ev(
+            ("United States leading at halftime?", 0.345, ["Yes", "No"]),
+            ("United States vs. Paraguay: Draw at halftime?", 0.465, ["Yes", "No"]),
+            ("Paraguay leading at halftime?", 0.195, ["Yes", "No"]))
+        self.assertEqual(parse_half_event(ev, self.H, self.A),
+                         {"home": 0.345, "draw": 0.465, "away": 0.195})
+
+    def test_parse_second_half_phrasing(self):
+        ev = self.ev(
+            ("United States to win the second half?", 0.40, ["Yes", "No"]),
+            ("Paraguay to win the second half?", 0.38, ["Yes", "No"]),
+            ("United States vs. Paraguay: Second half draw?", 0.51, ["Yes", "No"]))
+        self.assertEqual(parse_half_event(ev, self.H, self.A),
+                         {"home": 0.40, "away": 0.38, "draw": 0.51})
+
+    def test_parse_incomplete_half_book_rejected(self):
+        ev = self.ev(("United States leading at halftime?", 0.345, ["Yes", "No"]))
+        self.assertIsNone(parse_half_event(ev, self.H, self.A))
+
+    def test_parse_first_to_score(self):
+        ev = self.ev(
+            ("Paraguay to score first vs. United States?", 0.345, ["Yes", "No"]),
+            ("United States to score first vs. Paraguay?", 0.565, ["Yes", "No"]),
+            ("United States vs. Paraguay: Neither team to score first?",
+             0.105, ["Yes", "No"]))
+        self.assertEqual(parse_first_to_score(ev, self.H, self.A),
+                         {"away": 0.345, "home": 0.565, "neither": 0.105})
+
+    def test_parse_corners_full_match_only(self):
+        ev = self.ev(
+            ("United States vs. Paraguay: O/U 9.5 Total Corners", 0.43, ["Over", "Under"]),
+            ("United States vs. Paraguay: 2nd Half O/U 4.5 Total Corners", 0.5, ["Over", "Under"]),
+            ("United States vs. Paraguay: United States O/U 4.5 Corners", 0.5, ["Over", "Under"]))
+        self.assertEqual(parse_corners(ev, self.H, self.A), {"over_9.5": 0.43})
 
 
 if __name__ == "__main__":

@@ -22,6 +22,10 @@ python3 pipeline/wc26_fetch.py        # refresh each team's last-10 matches (API
 curl -sL https://raw.githubusercontent.com/martj42/international_results/master/results.csv \
      -o data/international_results.csv     # refresh match history for the model
 python3 pipeline/wc26_simulate.py     # fit model, backtest, write data/wc26_simulations.json
+python3 pipeline/wc26_corners.py predict    # corner O/U from the base-rate NegBin (after simulate)
+python3 pipeline/wc26_half_split.py   # (occasional) refit half_split from API-Football HT scores
+python3 pipeline/wc26_corners.py backfill && python3 pipeline/wc26_corners.py fit
+                                      # (occasional) corners history + LOTO validation
 python3 pipeline/wc26_simulate.py tune      # (occasional) re-tune hyperparams -> data/wc26_params.json
 python3 pipeline/wc26_simulate.py gridtest  # exact-score calibration audit (17-cell log-loss)
 python3 pipeline/wc26_simulate.py tuneboost # (occasional) refit min2_boost on training windows
@@ -46,8 +50,11 @@ python3 -m http.server 8742 --directory docs  # browse
 - `fifa_world_cup_2026.json` — 48 teams: confederation, FIFA ranking, last 10 matches
 - `fifa_world_cup_2026_group_matches.json` — 72 group fixtures (match_id = API-Football fixture id)
 - `wc26_params.json` — tuned model hyperparameters (incl. min2_boost, kept honest at 1.0)
-- `wc26_simulations.json` — per-match probabilities (moneyline/totals/BTTS/spread/top scores
-  + `exact_scores`: the 17-cell book 0-0..3-3 + other, matching Polymarket's shape)
+- `wc26_simulations.json` — per-match probabilities (moneyline/totals 0.5-5.5/BTTS/spread/
+  top scores + `exact_scores` 17-cell book + `team_totals` + `first_to_score` +
+  `halftime`/`second_half` 1X2 via the fitted half_split)
+- `wc26_corners.json` + `wc26_corners_model.json` + `wc26_corners_history.json` —
+  total-corners NegBin (intercept-only: the xG slope failed LOTO validation)
 - `wc26_tournament.json` — per-team futures probabilities (win group → champion)
 - `wc26_market_prices.json` — Polymarket snapshots: moneylines + exact-score books
   + totals/BTTS/spread (from the per-match `-more-markets` sibling event;
@@ -63,9 +70,10 @@ python3 -m http.server 8742 --directory docs  # browse
   review `betting/state/plan.json` → `place_bets.py` (dry-run default,
   `--live` to execute, `--limit N` for partial batches). Uses the
   py-clob-client-v2 SDK (Polymarket migrated exchanges 2026-04-28).
-- Categories are gated in config `include`; `exact_score`, `totals`, `btts`
-  and `spread` ship OFF in the committed config (a test enforces it) —
-  enable only via config.local.json. Started matches are never scanned
+- Categories are gated in config `include`; everything except `moneyline`
+  and the two awards ships OFF in the committed config (a test enforces it:
+  exact_score, totals, team_totals, btts, spread, halftime, second_half,
+  first_to_score, futures, corners) — enable only via config.local.json. Started matches are never scanned
   (pre-match model vs in-play prices), and illiquid/placeholder books are
   rejected (`min_liquidity_usdc` / `max_book_spread` — untraded lines sit
   at ~50/50 and fake a fat edge).

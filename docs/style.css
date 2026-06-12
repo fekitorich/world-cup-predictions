@@ -38,6 +38,13 @@ ol.timeline li::before {
 }
 ol.timeline b { font-family: "Fraunces", serif; }
 
+/* market-table section dividers */
+table.markets tr.subhead td {
+  font-family: "Fraunces", serif; font-weight: 600; font-size: .82rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule); padding-top: .9em;
+}
+
 /* masthead */
 .masthead {
   text-align: center; padding: 26px 16px 14px;

@@ -1,0 +1,1502 @@
+{
+ "855736": {
+  "league": "World Cup 2022",
+  "home": "Qatar",
+  "away": "Ecuador",
+  "corners": 4
+ },
+ "855735": {
+  "league": "World Cup 2022",
+  "home": "England",
+  "away": "Iran",
+  "corners": 8
+ },
+ "855734": {
+  "league": "World Cup 2022",
+  "home": "Senegal",
+  "away": "Netherlands",
+  "corners": 13
+ },
+ "866681": {
+  "league": "World Cup 2022",
+  "home": "USA",
+  "away": "Wales",
+  "corners": 8
+ },
+ "855737": {
+  "league": "World Cup 2022",
+  "home": "Argentina",
+  "away": "Saudi Arabia",
+  "corners": 11
+ },
+ "855738": {
+  "league": "World Cup 2022",
+  "home": "Denmark",
+  "away": "Tunisia",
+  "corners": 20
+ },
+ "855739": {
+  "league": "World Cup 2022",
+  "home": "Mexico",
+  "away": "Poland",
+  "corners": 11
+ },
+ "871850": {
+  "league": "World Cup 2022",
+  "home": "France",
+  "away": "Australia",
+  "corners": 9
+ },
+ "855740": {
+  "league": "World Cup 2022",
+  "home": "Morocco",
+  "away": "Croatia",
+  "corners": 5
+ },
+ "855741": {
+  "league": "World Cup 2022",
+  "home": "Germany",
+  "away": "Japan",
+  "corners": 12
+ },
+ "871851": {
+  "league": "World Cup 2022",
+  "home": "Spain",
+  "away": "Costa Rica",
+  "corners": 5
+ },
+ "855742": {
+  "league": "World Cup 2022",
+  "home": "Belgium",
+  "away": "Canada",
+  "corners": 8
+ },
+ "855743": {
+  "league": "World Cup 2022",
+  "home": "Switzerland",
+  "away": "Cameroon",
+  "corners": 16
+ },
+ "855744": {
+  "league": "World Cup 2022",
+  "home": "Uruguay",
+  "away": "South Korea",
+  "corners": 7
+ },
+ "855745": {
+  "league": "World Cup 2022",
+  "home": "Portugal",
+  "away": "Ghana",
+  "corners": 6
+ },
+ "855746": {
+  "league": "World Cup 2022",
+  "home": "Brazil",
+  "away": "Serbia",
+  "corners": 10
+ },
+ "866682": {
+  "league": "World Cup 2022",
+  "home": "Wales",
+  "away": "Iran",
+  "corners": 9
+ },
+ "855747": {
+  "league": "World Cup 2022",
+  "home": "Qatar",
+  "away": "Senegal",
+  "corners": 12
+ },
+ "855748": {
+  "league": "World Cup 2022",
+  "home": "Netherlands",
+  "away": "Ecuador",
+  "corners": 7
+ },
+ "855749": {
+  "league": "World Cup 2022",
+  "home": "England",
+  "away": "USA",
+  "corners": 10
+ },
+ "871852": {
+  "league": "World Cup 2022",
+  "home": "Tunisia",
+  "away": "Australia",
+  "corners": 7
+ },
+ "855750": {
+  "league": "World Cup 2022",
+  "home": "Poland",
+  "away": "Saudi Arabia",
+  "corners": 9
+ },
+ "855751": {
+  "league": "World Cup 2022",
+  "home": "France",
+  "away": "Denmark",
+  "corners": 10
+ },
+ "855752": {
+  "league": "World Cup 2022",
+  "home": "Argentina",
+  "away": "Mexico",
+  "corners": 6
+ },
+ "871853": {
+  "league": "World Cup 2022",
+  "home": "Japan",
+  "away": "Costa Rica",
+  "corners": 5
+ },
+ "855753": {
+  "league": "World Cup 2022",
+  "home": "Belgium",
+  "away": "Morocco",
+  "corners": 10
+ },
+ "855754": {
+  "league": "World Cup 2022",
+  "home": "Croatia",
+  "away": "Canada",
+  "corners": 7
+ },
+ "855755": {
+  "league": "World Cup 2022",
+  "home": "Spain",
+  "away": "Germany",
+  "corners": 11
+ },
+ "855756": {
+  "league": "World Cup 2022",
+  "home": "Cameroon",
+  "away": "Serbia",
+  "corners": 7
+ },
+ "855757": {
+  "league": "World Cup 2022",
+  "home": "South Korea",
+  "away": "Ghana",
+  "corners": 17
+ },
+ "855758": {
+  "league": "World Cup 2022",
+  "home": "Brazil",
+  "away": "Switzerland",
+  "corners": 11
+ },
+ "855759": {
+  "league": "World Cup 2022",
+  "home": "Portugal",
+  "away": "Uruguay",
+  "corners": 8
+ },
+ "855760": {
+  "league": "World Cup 2022",
+  "home": "Netherlands",
+  "away": "Qatar",
+  "corners": 6
+ },
+ "855761": {
+  "league": "World Cup 2022",
+  "home": "Ecuador",
+  "away": "Senegal",
+  "corners": 9
+ },
+ "855762": {
+  "league": "World Cup 2022",
+  "home": "Iran",
+  "away": "USA",
+  "corners": 6
+ },
+ "866683": {
+  "league": "World Cup 2022",
+  "home": "Wales",
+  "away": "England",
+  "corners": 7
+ },
+ "871854": {
+  "league": "World Cup 2022",
+  "home": "Australia",
+  "away": "Denmark",
+  "corners": 8
+ },
+ "855763": {
+  "league": "World Cup 2022",
+  "home": "Tunisia",
+  "away": "France",
+  "corners": 15
+ },
+ "855765": {
+  "league": "World Cup 2022",
+  "home": "Saudi Arabia",
+  "away": "Mexico",
+  "corners": 9
+ },
+ "855764": {
+  "league": "World Cup 2022",
+  "home": "Poland",
+  "away": "Argentina",
+  "corners": 10
+ },
+ "855766": {
+  "league": "World Cup 2022",
+  "home": "Croatia",
+  "away": "Belgium",
+  "corners": 6
+ },
+ "855767": {
+  "league": "World Cup 2022",
+  "home": "Canada",
+  "away": "Morocco",
+  "corners": 8
+ },
+ "855768": {
+  "league": "World Cup 2022",
+  "home": "Japan",
+  "away": "Spain",
+  "corners": 2
+ },
+ "871855": {
+  "league": "World Cup 2022",
+  "home": "Costa Rica",
+  "away": "Germany",
+  "corners": 15
+ },
+ "855769": {
+  "league": "World Cup 2022",
+  "home": "South Korea",
+  "away": "Portugal",
+  "corners": 9
+ },
+ "855770": {
+  "league": "World Cup 2022",
+  "home": "Ghana",
+  "away": "Uruguay",
+  "corners": 7
+ },
+ "855772": {
+  "league": "World Cup 2022",
+  "home": "Serbia",
+  "away": "Switzerland",
+  "corners": 2
+ },
+ "855771": {
+  "league": "World Cup 2022",
+  "home": "Cameroon",
+  "away": "Brazil",
+  "corners": 14
+ },
+ "976533": {
+  "league": "World Cup 2022",
+  "home": "Netherlands",
+  "away": "USA",
+  "corners": 9
+ },
+ "976642": {
+  "league": "World Cup 2022",
+  "home": "Argentina",
+  "away": "Australia",
+  "corners": 4
+ },
+ "976643": {
+  "league": "World Cup 2022",
+  "home": "France",
+  "away": "Poland",
+  "corners": 8
+ },
+ "976534": {
+  "league": "World Cup 2022",
+  "home": "England",
+  "away": "Senegal",
+  "corners": 6
+ },
+ "977344": {
+  "league": "World Cup 2022",
+  "home": "Japan",
+  "away": "Croatia",
+  "corners": 13
+ },
+ "977705": {
+  "league": "World Cup 2022",
+  "home": "Brazil",
+  "away": "South Korea",
+  "corners": 9
+ },
+ "977345": {
+  "league": "World Cup 2022",
+  "home": "Morocco",
+  "away": "Spain",
+  "corners": 8
+ },
+ "977706": {
+  "league": "World Cup 2022",
+  "home": "Portugal",
+  "away": "Switzerland",
+  "corners": 12
+ },
+ "978072": {
+  "league": "World Cup 2022",
+  "home": "Croatia",
+  "away": "Brazil",
+  "corners": 10
+ },
+ "977794": {
+  "league": "World Cup 2022",
+  "home": "Netherlands",
+  "away": "Argentina",
+  "corners": 10
+ },
+ "978088": {
+  "league": "World Cup 2022",
+  "home": "Morocco",
+  "away": "Portugal",
+  "corners": 12
+ },
+ "978036": {
+  "league": "World Cup 2022",
+  "home": "England",
+  "away": "France",
+  "corners": 7
+ },
+ "978279": {
+  "league": "World Cup 2022",
+  "home": "Argentina",
+  "away": "Croatia",
+  "corners": 6
+ },
+ "978488": {
+  "league": "World Cup 2022",
+  "home": "France",
+  "away": "Morocco",
+  "corners": 5
+ },
+ "979138": {
+  "league": "World Cup 2022",
+  "home": "Croatia",
+  "away": "Morocco",
+  "corners": 9
+ },
+ "979139": {
+  "league": "World Cup 2022",
+  "home": "Argentina",
+  "away": "France",
+  "corners": 11
+ },
+ "1138697": {
+  "league": "AFCON 2023",
+  "home": "Ivory Coast",
+  "away": "Guinea-Bissau",
+  "corners": 8
+ },
+ "1138698": {
+  "league": "AFCON 2023",
+  "home": "Nigeria",
+  "away": "Equatorial Guinea",
+  "corners": 5
+ },
+ "1138699": {
+  "league": "AFCON 2023",
+  "home": "Egypt",
+  "away": "Mozambique",
+  "corners": 9
+ },
+ "1138700": {
+  "league": "AFCON 2023",
+  "home": "Ghana",
+  "away": "Cape Verde Islands",
+  "corners": 7
+ },
+ "1138701": {
+  "league": "AFCON 2023",
+  "home": "Senegal",
+  "away": "Gambia",
+  "corners": 9
+ },
+ "1138702": {
+  "league": "AFCON 2023",
+  "home": "Cameroon",
+  "away": "Guinea",
+  "corners": 5
+ },
+ "1138703": {
+  "league": "AFCON 2023",
+  "home": "Algeria",
+  "away": "Angola",
+  "corners": 16
+ },
+ "1138704": {
+  "league": "AFCON 2023",
+  "home": "Burkina Faso",
+  "away": "Mauritania",
+  "corners": 7
+ },
+ "1138705": {
+  "league": "AFCON 2023",
+  "home": "Tunisia",
+  "away": "Namibia",
+  "corners": 15
+ },
+ "1138706": {
+  "league": "AFCON 2023",
+  "home": "Mali",
+  "away": "South Africa",
+  "corners": 5
+ },
+ "1138707": {
+  "league": "AFCON 2023",
+  "home": "Morocco",
+  "away": "Tanzania",
+  "corners": 7
+ },
+ "1138708": {
+  "league": "AFCON 2023",
+  "home": "Congo DR",
+  "away": "Zambia",
+  "corners": 7
+ },
+ "1138709": {
+  "league": "AFCON 2023",
+  "home": "Equatorial Guinea",
+  "away": "Guinea-Bissau",
+  "corners": 9
+ },
+ "1138710": {
+  "league": "AFCON 2023",
+  "home": "Ivory Coast",
+  "away": "Nigeria",
+  "corners": 11
+ },
+ "1138712": {
+  "league": "AFCON 2023",
+  "home": "Egypt",
+  "away": "Ghana",
+  "corners": 7
+ },
+ "1138714": {
+  "league": "AFCON 2023",
+  "home": "Cape Verde Islands",
+  "away": "Mozambique",
+  "corners": 7
+ },
+ "1138711": {
+  "league": "AFCON 2023",
+  "home": "Senegal",
+  "away": "Cameroon",
+  "corners": 17
+ },
+ "1138713": {
+  "league": "AFCON 2023",
+  "home": "Guinea",
+  "away": "Gambia",
+  "corners": 12
+ },
+ "1138715": {
+  "league": "AFCON 2023",
+  "home": "Algeria",
+  "away": "Burkina Faso",
+  "corners": 5
+ },
+ "1138716": {
+  "league": "AFCON 2023",
+  "home": "Mauritania",
+  "away": "Angola",
+  "corners": 17
+ },
+ "1138717": {
+  "league": "AFCON 2023",
+  "home": "Tunisia",
+  "away": "Mali",
+  "corners": 7
+ },
+ "1138718": {
+  "league": "AFCON 2023",
+  "home": "Morocco",
+  "away": "Congo DR",
+  "corners": 8
+ },
+ "1138719": {
+  "league": "AFCON 2023",
+  "home": "Zambia",
+  "away": "Tanzania",
+  "corners": 8
+ },
+ "1138720": {
+  "league": "AFCON 2023",
+  "home": "South Africa",
+  "away": "Namibia",
+  "corners": 8
+ },
+ "1138722": {
+  "league": "AFCON 2023",
+  "home": "Guinea-Bissau",
+  "away": "Nigeria",
+  "corners": 5
+ },
+ "1138721": {
+  "league": "AFCON 2023",
+  "home": "Equatorial Guinea",
+  "away": "Ivory Coast",
+  "corners": 12
+ },
+ "1138723": {
+  "league": "AFCON 2023",
+  "home": "Mozambique",
+  "away": "Ghana",
+  "corners": 9
+ },
+ "1138724": {
+  "league": "AFCON 2023",
+  "home": "Cape Verde Islands",
+  "away": "Egypt",
+  "corners": 12
+ },
+ "1138726": {
+  "league": "AFCON 2023",
+  "home": "Gambia",
+  "away": "Cameroon",
+  "corners": 12
+ },
+ "1138725": {
+  "league": "AFCON 2023",
+  "home": "Guinea",
+  "away": "Senegal",
+  "corners": 6
+ },
+ "1138728": {
+  "league": "AFCON 2023",
+  "home": "Mauritania",
+  "away": "Algeria",
+  "corners": 11
+ },
+ "1138727": {
+  "league": "AFCON 2023",
+  "home": "Angola",
+  "away": "Burkina Faso",
+  "corners": 8
+ },
+ "1138730": {
+  "league": "AFCON 2023",
+  "home": "Namibia",
+  "away": "Mali",
+  "corners": 12
+ },
+ "1138729": {
+  "league": "AFCON 2023",
+  "home": "South Africa",
+  "away": "Tunisia",
+  "corners": 11
+ },
+ "1138731": {
+  "league": "AFCON 2023",
+  "home": "Tanzania",
+  "away": "Congo DR",
+  "corners": 5
+ },
+ "1138732": {
+  "league": "AFCON 2023",
+  "home": "Zambia",
+  "away": "Morocco",
+  "corners": 10
+ },
+ "1166106": {
+  "league": "AFCON 2023",
+  "home": "Angola",
+  "away": "Namibia",
+  "corners": 9
+ },
+ "1166107": {
+  "league": "AFCON 2023",
+  "home": "Nigeria",
+  "away": "Cameroon",
+  "corners": 4
+ },
+ "1166108": {
+  "league": "AFCON 2023",
+  "home": "Equatorial Guinea",
+  "away": "Guinea",
+  "corners": 4
+ },
+ "1166109": {
+  "league": "AFCON 2023",
+  "home": "Egypt",
+  "away": "Congo DR",
+  "corners": 6
+ },
+ "1166110": {
+  "league": "AFCON 2023",
+  "home": "Cape Verde Islands",
+  "away": "Mauritania",
+  "corners": 12
+ },
+ "1166111": {
+  "league": "AFCON 2023",
+  "home": "Senegal",
+  "away": "Ivory Coast",
+  "corners": 8
+ },
+ "1166112": {
+  "league": "AFCON 2023",
+  "home": "Mali",
+  "away": "Burkina Faso",
+  "corners": 3
+ },
+ "1166113": {
+  "league": "AFCON 2023",
+  "home": "Morocco",
+  "away": "South Africa",
+  "corners": 8
+ },
+ "1169130": {
+  "league": "AFCON 2023",
+  "home": "Nigeria",
+  "away": "Angola",
+  "corners": 11
+ },
+ "1169262": {
+  "league": "AFCON 2023",
+  "home": "Congo DR",
+  "away": "Guinea",
+  "corners": 7
+ },
+ "1169663": {
+  "league": "AFCON 2023",
+  "home": "Mali",
+  "away": "Ivory Coast",
+  "corners": 12
+ },
+ "1169664": {
+  "league": "AFCON 2023",
+  "home": "Cape Verde Islands",
+  "away": "South Africa",
+  "corners": 14
+ },
+ "1171548": {
+  "league": "AFCON 2023",
+  "home": "Nigeria",
+  "away": "South Africa",
+  "corners": 9
+ },
+ "1171549": {
+  "league": "AFCON 2023",
+  "home": "Ivory Coast",
+  "away": "Congo DR",
+  "corners": 12
+ },
+ "1172282": {
+  "league": "AFCON 2023",
+  "home": "South Africa",
+  "away": "Congo DR",
+  "corners": 3
+ },
+ "1172283": {
+  "league": "AFCON 2023",
+  "home": "Nigeria",
+  "away": "Ivory Coast",
+  "corners": 9
+ },
+ "1034492": {
+  "league": "Asian Cup 2023",
+  "home": "Qatar",
+  "away": "Lebanon",
+  "corners": 7
+ },
+ "1034493": {
+  "league": "Asian Cup 2023",
+  "home": "Australia",
+  "away": "India",
+  "corners": 14
+ },
+ "1034494": {
+  "league": "Asian Cup 2023",
+  "home": "China",
+  "away": "Tajikistan",
+  "corners": 8
+ },
+ "1034495": {
+  "league": "Asian Cup 2023",
+  "home": "Uzbekistan",
+  "away": "Syria",
+  "corners": 7
+ },
+ "1034496": {
+  "league": "Asian Cup 2023",
+  "home": "Japan",
+  "away": "Vietnam",
+  "corners": 4
+ },
+ "1034497": {
+  "league": "Asian Cup 2023",
+  "home": "United Arab Emirates",
+  "away": "Hong Kong",
+  "corners": 9
+ },
+ "1034498": {
+  "league": "Asian Cup 2023",
+  "home": "Iran",
+  "away": "Palestine",
+  "corners": 5
+ },
+ "1034499": {
+  "league": "Asian Cup 2023",
+  "home": "South Korea",
+  "away": "Bahrain",
+  "corners": 5
+ },
+ "1034500": {
+  "league": "Asian Cup 2023",
+  "home": "Indonesia",
+  "away": "Iraq",
+  "corners": 8
+ },
+ "1034501": {
+  "league": "Asian Cup 2023",
+  "home": "Malaysia",
+  "away": "Jordan",
+  "corners": 7
+ },
+ "1034502": {
+  "league": "Asian Cup 2023",
+  "home": "Thailand",
+  "away": "Kyrgyzstan",
+  "corners": 5
+ },
+ "1034503": {
+  "league": "Asian Cup 2023",
+  "home": "Saudi Arabia",
+  "away": "Oman",
+  "corners": 6
+ },
+ "1034504": {
+  "league": "Asian Cup 2023",
+  "home": "Lebanon",
+  "away": "China",
+  "corners": 11
+ },
+ "1034505": {
+  "league": "Asian Cup 2023",
+  "home": "Tajikistan",
+  "away": "Qatar",
+  "corners": 10
+ },
+ "1034506": {
+  "league": "Asian Cup 2023",
+  "home": "Syria",
+  "away": "Australia",
+  "corners": 5
+ },
+ "1034507": {
+  "league": "Asian Cup 2023",
+  "home": "India",
+  "away": "Uzbekistan",
+  "corners": 5
+ },
+ "1034508": {
+  "league": "Asian Cup 2023",
+  "home": "Palestine",
+  "away": "United Arab Emirates",
+  "corners": 17
+ },
+ "1034509": {
+  "league": "Asian Cup 2023",
+  "home": "Iraq",
+  "away": "Japan",
+  "corners": 14
+ },
+ "1034510": {
+  "league": "Asian Cup 2023",
+  "home": "Vietnam",
+  "away": "Indonesia",
+  "corners": 10
+ },
+ "1034511": {
+  "league": "Asian Cup 2023",
+  "home": "Hong Kong",
+  "away": "Iran",
+  "corners": 7
+ },
+ "1034512": {
+  "league": "Asian Cup 2023",
+  "home": "Jordan",
+  "away": "South Korea",
+  "corners": 9
+ },
+ "1034513": {
+  "league": "Asian Cup 2023",
+  "home": "Bahrain",
+  "away": "Malaysia",
+  "corners": 8
+ },
+ "1034514": {
+  "league": "Asian Cup 2023",
+  "home": "Oman",
+  "away": "Thailand",
+  "corners": 11
+ },
+ "1034515": {
+  "league": "Asian Cup 2023",
+  "home": "Kyrgyzstan",
+  "away": "Saudi Arabia",
+  "corners": 8
+ },
+ "1034516": {
+  "league": "Asian Cup 2023",
+  "home": "Tajikistan",
+  "away": "Lebanon",
+  "corners": 11
+ },
+ "1034517": {
+  "league": "Asian Cup 2023",
+  "home": "Qatar",
+  "away": "China",
+  "corners": 12
+ },
+ "1034519": {
+  "league": "Asian Cup 2023",
+  "home": "Australia",
+  "away": "Uzbekistan",
+  "corners": 3
+ },
+ "1034518": {
+  "league": "Asian Cup 2023",
+  "home": "Syria",
+  "away": "India",
+  "corners": 12
+ },
+ "1034521": {
+  "league": "Asian Cup 2023",
+  "home": "Iran",
+  "away": "United Arab Emirates",
+  "corners": 7
+ },
+ "1034520": {
+  "league": "Asian Cup 2023",
+  "home": "Hong Kong",
+  "away": "Palestine",
+  "corners": 5
+ },
+ "1034522": {
+  "league": "Asian Cup 2023",
+  "home": "Japan",
+  "away": "Indonesia",
+  "corners": 5
+ },
+ "1034523": {
+  "league": "Asian Cup 2023",
+  "home": "Iraq",
+  "away": "Vietnam",
+  "corners": 6
+ },
+ "1034524": {
+  "league": "Asian Cup 2023",
+  "home": "South Korea",
+  "away": "Malaysia",
+  "corners": 20
+ },
+ "1034525": {
+  "league": "Asian Cup 2023",
+  "home": "Jordan",
+  "away": "Bahrain",
+  "corners": 6
+ },
+ "1034527": {
+  "league": "Asian Cup 2023",
+  "home": "Saudi Arabia",
+  "away": "Thailand",
+  "corners": 16
+ },
+ "1034526": {
+  "league": "Asian Cup 2023",
+  "home": "Kyrgyzstan",
+  "away": "Oman",
+  "corners": 15
+ },
+ "1167786": {
+  "league": "Asian Cup 2023",
+  "home": "Australia",
+  "away": "Indonesia",
+  "corners": 6
+ },
+ "1162603": {
+  "league": "Asian Cup 2023",
+  "home": "Tajikistan",
+  "away": "United Arab Emirates",
+  "corners": 21
+ },
+ "1167787": {
+  "league": "Asian Cup 2023",
+  "home": "Iraq",
+  "away": "Jordan",
+  "corners": 15
+ },
+ "1167788": {
+  "league": "Asian Cup 2023",
+  "home": "Qatar",
+  "away": "Palestine",
+  "corners": 10
+ },
+ "1167789": {
+  "league": "Asian Cup 2023",
+  "home": "Uzbekistan",
+  "away": "Thailand",
+  "corners": 10
+ },
+ "1167790": {
+  "league": "Asian Cup 2023",
+  "home": "Saudi Arabia",
+  "away": "South Korea",
+  "corners": 16
+ },
+ "1167791": {
+  "league": "Asian Cup 2023",
+  "home": "Bahrain",
+  "away": "Japan",
+  "corners": 8
+ },
+ "1162604": {
+  "league": "Asian Cup 2023",
+  "home": "Iran",
+  "away": "Syria",
+  "corners": 9
+ },
+ "1169383": {
+  "league": "Asian Cup 2023",
+  "home": "Tajikistan",
+  "away": "Jordan",
+  "corners": 9
+ },
+ "1169460": {
+  "league": "Asian Cup 2023",
+  "home": "Australia",
+  "away": "South Korea",
+  "corners": 10
+ },
+ "1169668": {
+  "league": "Asian Cup 2023",
+  "home": "Iran",
+  "away": "Japan",
+  "corners": 6
+ },
+ "1169461": {
+  "league": "Asian Cup 2023",
+  "home": "Qatar",
+  "away": "Uzbekistan",
+  "corners": 13
+ },
+ "1170222": {
+  "league": "Asian Cup 2023",
+  "home": "Jordan",
+  "away": "South Korea",
+  "corners": 11
+ },
+ "1170899": {
+  "league": "Asian Cup 2023",
+  "home": "Iran",
+  "away": "Qatar",
+  "corners": 13
+ },
+ "1172165": {
+  "league": "Asian Cup 2023",
+  "home": "Jordan",
+  "away": "Qatar",
+  "corners": 13
+ },
+ "1145509": {
+  "league": "Euro 2024",
+  "home": "Germany",
+  "away": "Scotland",
+  "corners": 5
+ },
+ "1145510": {
+  "league": "Euro 2024",
+  "home": "Hungary",
+  "away": "Switzerland",
+  "corners": 8
+ },
+ "1145511": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "Croatia",
+  "corners": 5
+ },
+ "1145512": {
+  "league": "Euro 2024",
+  "home": "Italy",
+  "away": "Albania",
+  "corners": 8
+ },
+ "1189846": {
+  "league": "Euro 2024",
+  "home": "Poland",
+  "away": "Netherlands",
+  "corners": 9
+ },
+ "1145513": {
+  "league": "Euro 2024",
+  "home": "Slovenia",
+  "away": "Denmark",
+  "corners": 14
+ },
+ "1145514": {
+  "league": "Euro 2024",
+  "home": "Serbia",
+  "away": "England",
+  "corners": 3
+ },
+ "1189847": {
+  "league": "Euro 2024",
+  "home": "Romania",
+  "away": "Ukraine",
+  "corners": 12
+ },
+ "1145516": {
+  "league": "Euro 2024",
+  "home": "Belgium",
+  "away": "Slovakia",
+  "corners": 12
+ },
+ "1145515": {
+  "league": "Euro 2024",
+  "home": "Austria",
+  "away": "France",
+  "corners": 8
+ },
+ "1189848": {
+  "league": "Euro 2024",
+  "home": "T\u00fcrkiye",
+  "away": "Georgia",
+  "corners": 10
+ },
+ "1145517": {
+  "league": "Euro 2024",
+  "home": "Portugal",
+  "away": "Czech Republic",
+  "corners": 13
+ },
+ "1145520": {
+  "league": "Euro 2024",
+  "home": "Croatia",
+  "away": "Albania",
+  "corners": 4
+ },
+ "1145519": {
+  "league": "Euro 2024",
+  "home": "Germany",
+  "away": "Hungary",
+  "corners": 18
+ },
+ "1145518": {
+  "league": "Euro 2024",
+  "home": "Scotland",
+  "away": "Switzerland",
+  "corners": 13
+ },
+ "1145523": {
+  "league": "Euro 2024",
+  "home": "Slovenia",
+  "away": "Serbia",
+  "corners": 13
+ },
+ "1145522": {
+  "league": "Euro 2024",
+  "home": "Denmark",
+  "away": "England",
+  "corners": 6
+ },
+ "1145521": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "Italy",
+  "corners": 7
+ },
+ "1189849": {
+  "league": "Euro 2024",
+  "home": "Slovakia",
+  "away": "Ukraine",
+  "corners": 8
+ },
+ "1189850": {
+  "league": "Euro 2024",
+  "home": "Poland",
+  "away": "Austria",
+  "corners": 7
+ },
+ "1145524": {
+  "league": "Euro 2024",
+  "home": "Netherlands",
+  "away": "France",
+  "corners": 9
+ },
+ "1189851": {
+  "league": "Euro 2024",
+  "home": "Georgia",
+  "away": "Czech Republic",
+  "corners": 16
+ },
+ "1145526": {
+  "league": "Euro 2024",
+  "home": "T\u00fcrkiye",
+  "away": "Portugal",
+  "corners": 10
+ },
+ "1145525": {
+  "league": "Euro 2024",
+  "home": "Belgium",
+  "away": "Romania",
+  "corners": 14
+ },
+ "1145527": {
+  "league": "Euro 2024",
+  "home": "Switzerland",
+  "away": "Germany",
+  "corners": 11
+ },
+ "1145528": {
+  "league": "Euro 2024",
+  "home": "Scotland",
+  "away": "Hungary",
+  "corners": 8
+ },
+ "1145529": {
+  "league": "Euro 2024",
+  "home": "Croatia",
+  "away": "Italy",
+  "corners": 13
+ },
+ "1145530": {
+  "league": "Euro 2024",
+  "home": "Albania",
+  "away": "Spain",
+  "corners": 8
+ },
+ "1189852": {
+  "league": "Euro 2024",
+  "home": "France",
+  "away": "Poland",
+  "corners": 14
+ },
+ "1145533": {
+  "league": "Euro 2024",
+  "home": "Netherlands",
+  "away": "Austria",
+  "corners": 7
+ },
+ "1145531": {
+  "league": "Euro 2024",
+  "home": "England",
+  "away": "Slovenia",
+  "corners": 6
+ },
+ "1145532": {
+  "league": "Euro 2024",
+  "home": "Denmark",
+  "away": "Serbia",
+  "corners": 10
+ },
+ "1189853": {
+  "league": "Euro 2024",
+  "home": "Ukraine",
+  "away": "Belgium",
+  "corners": 10
+ },
+ "1145534": {
+  "league": "Euro 2024",
+  "home": "Slovakia",
+  "away": "Romania",
+  "corners": 6
+ },
+ "1145535": {
+  "league": "Euro 2024",
+  "home": "Czech Republic",
+  "away": "T\u00fcrkiye",
+  "corners": 10
+ },
+ "1189854": {
+  "league": "Euro 2024",
+  "home": "Georgia",
+  "away": "Portugal",
+  "corners": 12
+ },
+ "1212958": {
+  "league": "Euro 2024",
+  "home": "Switzerland",
+  "away": "Italy",
+  "corners": 10
+ },
+ "1214156": {
+  "league": "Euro 2024",
+  "home": "Germany",
+  "away": "Denmark",
+  "corners": 12
+ },
+ "1215074": {
+  "league": "Euro 2024",
+  "home": "England",
+  "away": "Slovakia",
+  "corners": 10
+ },
+ "1215075": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "Georgia",
+  "corners": 16
+ },
+ "1215073": {
+  "league": "Euro 2024",
+  "home": "France",
+  "away": "Belgium",
+  "corners": 7
+ },
+ "1215076": {
+  "league": "Euro 2024",
+  "home": "Portugal",
+  "away": "Slovenia",
+  "corners": 15
+ },
+ "1215077": {
+  "league": "Euro 2024",
+  "home": "Romania",
+  "away": "Netherlands",
+  "corners": 17
+ },
+ "1215078": {
+  "league": "Euro 2024",
+  "home": "Austria",
+  "away": "T\u00fcrkiye",
+  "corners": 14
+ },
+ "1219688": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "Germany",
+  "corners": 6
+ },
+ "1219959": {
+  "league": "Euro 2024",
+  "home": "Portugal",
+  "away": "France",
+  "corners": 15
+ },
+ "1219689": {
+  "league": "Euro 2024",
+  "home": "England",
+  "away": "Switzerland",
+  "corners": 7
+ },
+ "1220308": {
+  "league": "Euro 2024",
+  "home": "Netherlands",
+  "away": "T\u00fcrkiye",
+  "corners": 10
+ },
+ "1225853": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "France",
+  "corners": 10
+ },
+ "1227539": {
+  "league": "Euro 2024",
+  "home": "Netherlands",
+  "away": "England",
+  "corners": 3
+ },
+ "1232551": {
+  "league": "Euro 2024",
+  "home": "Spain",
+  "away": "England",
+  "corners": 12
+ },
+ "1189120": {
+  "league": "Copa America 2024",
+  "home": "Argentina",
+  "away": "Canada",
+  "corners": 11
+ },
+ "1146301": {
+  "league": "Copa America 2024",
+  "home": "Peru",
+  "away": "Chile",
+  "corners": 4
+ },
+ "1146302": {
+  "league": "Copa America 2024",
+  "home": "Ecuador",
+  "away": "Venezuela",
+  "corners": 8
+ },
+ "1146303": {
+  "league": "Copa America 2024",
+  "home": "Mexico",
+  "away": "Jamaica",
+  "corners": 13
+ },
+ "1146304": {
+  "league": "Copa America 2024",
+  "home": "USA",
+  "away": "Bolivia",
+  "corners": 8
+ },
+ "1146305": {
+  "league": "Copa America 2024",
+  "home": "Uruguay",
+  "away": "Panama",
+  "corners": 12
+ },
+ "1146306": {
+  "league": "Copa America 2024",
+  "home": "Colombia",
+  "away": "Paraguay",
+  "corners": 6
+ },
+ "1189121": {
+  "league": "Copa America 2024",
+  "home": "Brazil",
+  "away": "Costa Rica",
+  "corners": 10
+ },
+ "1146307": {
+  "league": "Copa America 2024",
+  "home": "Chile",
+  "away": "Argentina",
+  "corners": 11
+ },
+ "1189122": {
+  "league": "Copa America 2024",
+  "home": "Peru",
+  "away": "Canada",
+  "corners": 3
+ },
+ "1146309": {
+  "league": "Copa America 2024",
+  "home": "Venezuela",
+  "away": "Mexico",
+  "corners": 9
+ },
+ "1146308": {
+  "league": "Copa America 2024",
+  "home": "Ecuador",
+  "away": "Jamaica",
+  "corners": 15
+ },
+ "1146311": {
+  "league": "Copa America 2024",
+  "home": "Uruguay",
+  "away": "Bolivia",
+  "corners": 7
+ },
+ "1146310": {
+  "league": "Copa America 2024",
+  "home": "Panama",
+  "away": "USA",
+  "corners": 3
+ },
+ "1146312": {
+  "league": "Copa America 2024",
+  "home": "Paraguay",
+  "away": "Brazil",
+  "corners": 10
+ },
+ "1189123": {
+  "league": "Copa America 2024",
+  "home": "Colombia",
+  "away": "Costa Rica",
+  "corners": 6
+ },
+ "1146313": {
+  "league": "Copa America 2024",
+  "home": "Argentina",
+  "away": "Peru",
+  "corners": 9
+ },
+ "1189124": {
+  "league": "Copa America 2024",
+  "home": "Canada",
+  "away": "Chile",
+  "corners": 12
+ },
+ "1146315": {
+  "league": "Copa America 2024",
+  "home": "Mexico",
+  "away": "Ecuador",
+  "corners": 7
+ },
+ "1146314": {
+  "league": "Copa America 2024",
+  "home": "Jamaica",
+  "away": "Venezuela",
+  "corners": 15
+ },
+ "1146316": {
+  "league": "Copa America 2024",
+  "home": "Bolivia",
+  "away": "Panama",
+  "corners": 3
+ },
+ "1146317": {
+  "league": "Copa America 2024",
+  "home": "USA",
+  "away": "Uruguay",
+  "corners": 5
+ },
+ "1146318": {
+  "league": "Copa America 2024",
+  "home": "Brazil",
+  "away": "Colombia",
+  "corners": 11
+ },
+ "1189125": {
+  "league": "Copa America 2024",
+  "home": "Costa Rica",
+  "away": "Paraguay",
+  "corners": 7
+ },
+ "1219957": {
+  "league": "Copa America 2024",
+  "home": "Argentina",
+  "away": "Ecuador",
+  "corners": 7
+ },
+ "1219958": {
+  "league": "Copa America 2024",
+  "home": "Venezuela",
+  "away": "Canada",
+  "corners": 10
+ },
+ "1222459": {
+  "league": "Copa America 2024",
+  "home": "Colombia",
+  "away": "Panama",
+  "corners": 6
+ },
+ "1222460": {
+  "league": "Copa America 2024",
+  "home": "Uruguay",
+  "away": "Brazil",
+  "corners": 8
+ },
+ "1227537": {
+  "league": "Copa America 2024",
+  "home": "Argentina",
+  "away": "Canada",
+  "corners": 4
+ },
+ "1227538": {
+  "league": "Copa America 2024",
+  "home": "Uruguay",
+  "away": "Colombia",
+  "corners": 7
+ },
+ "1234029": {
+  "league": "Copa America 2024",
+  "home": "Canada",
+  "away": "Uruguay",
+  "corners": 13
+ },
+ "1234030": {
+  "league": "Copa America 2024",
+  "home": "Argentina",
+  "away": "Colombia",
+  "corners": 11
+ }
+}

@@ -5,10 +5,12 @@
     "shrink": 4.0,
     "rho": -0.05,
     "margin_cap": 99,
-    "min2_boost": 1.0
+    "min2_boost": 1.0,
+    "half_split": 0.447
   },
   "cv_logloss": 0.89127,
   "tuned_on": "4 rolling windows 2022-2026, 4228 matches",
   "tuned_at": "2026-06-11 20:18 UTC",
-  "min2_boost_note": "fit on 3117 matches 2022-2025, exact-score ll 2.87449 -> 2.87449"
+  "min2_boost_note": "fit on 3117 matches 2022-2025, exact-score ll 2.87449 -> 2.87449",
+  "half_split_note": "share of goals before HT, fit on 2360 goals across 6 international tournaments"
 }

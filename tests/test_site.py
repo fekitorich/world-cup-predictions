@@ -92,6 +92,16 @@ class TestCompleteness(unittest.TestCase):
             self.assertGreaterEqual(t["over_1.5"] + 1e-9, t["over_2.5"])
             self.assertGreaterEqual(t["over_2.5"] + 1e-9, t["over_3.5"])
 
+    def test_sims_new_surfaces_valid(self):
+        for mid, s in b.SIMS.items():
+            for key in ("halftime", "second_half", "first_to_score"):
+                self.assertAlmostEqual(sum(s[key].values()), 1.0,
+                                       places=2, msg=f"{mid} {key}")
+            for side in ("home", "away"):
+                t = s["team_totals"][side]
+                self.assertGreaterEqual(t["over_0.5"] + 1e-9, t["over_1.5"])
+                self.assertGreaterEqual(t["over_1.5"] + 1e-9, t["over_2.5"])
+
     def test_sims_exact_scores_valid(self):
         for mid, s in b.SIMS.items():
             es = s["exact_scores"]

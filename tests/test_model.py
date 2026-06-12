@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 
 from wc26_simulate import (params, score_grid, one_x_two, markets, blend,
                            load_matches, grid_cells, cell_of, poisson_row,
+                           team_totals, first_to_score,
                            SPLIT, BLEND_W, MAX_GOALS)
 
 P = params()
@@ -78,6 +79,36 @@ class TestExactScores(unittest.TestCase):
     def test_default_param_present(self):
         self.assertIn("min2_boost", P)
         self.assertGreaterEqual(P["min2_boost"], 1.0)
+
+
+class TestNewSurfaces(unittest.TestCase):
+    GRID = score_grid(1.6, 1.1, P["rho"])
+
+    def test_team_totals_monotonic_and_consistent(self):
+        tt = team_totals(self.GRID)
+        for side in ("home", "away"):
+            self.assertGreaterEqual(tt[side]["over_0.5"], tt[side]["over_1.5"])
+            self.assertGreaterEqual(tt[side]["over_1.5"], tt[side]["over_2.5"])
+        # home over 0.5 == 1 - P(home scores 0) == 1 - first marginal row
+        self.assertAlmostEqual(tt["home"]["over_0.5"],
+                               1 - sum(self.GRID[0]), places=9)
+
+    def test_first_to_score_sums_to_one(self):
+        fs = first_to_score(self.GRID, 1.6, 1.1)
+        self.assertAlmostEqual(sum(fs.values()), 1.0, places=9)
+        self.assertGreater(fs["home"], fs["away"])   # stronger attack first
+        self.assertAlmostEqual(fs["neither"], self.GRID[0][0], places=9)
+
+    def test_half_split_param_sane(self):
+        self.assertTrue(0.35 <= P["half_split"] <= 0.5,
+                        "first halves produce fewer goals than second")
+
+    def test_halves_consistent_with_full(self):
+        """A half is a shorter match: its 1X2 must be flatter (more draws)."""
+        r = P["half_split"]
+        full = one_x_two(self.GRID)
+        half = one_x_two(score_grid(1.6 * r, 1.1 * r, P["rho"]))
+        self.assertGreater(half[1], full[1])   # more draws at halftime
 
 
 class TestPoissonRow(unittest.TestCase):

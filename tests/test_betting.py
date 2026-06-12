@@ -122,7 +122,9 @@ class TestExactScoreScanner(unittest.TestCase):
         """Committed config must keep all non-moneyline match categories
         off; enabling is a local, deliberate opt-in (config.local.json)."""
         committed = json.load(open(os.path.join(ROOT, "betting", "config.json")))
-        for cat in ("exact_score", "totals", "btts", "spread"):
+        for cat in ("exact_score", "totals", "team_totals", "btts", "spread",
+                    "halftime", "second_half", "first_to_score", "futures",
+                    "corners"):
             self.assertIs(committed["include"][cat], False, cat)
         self.assertGreaterEqual(committed["min_edge_score"],
                                 committed["min_edge_match"])

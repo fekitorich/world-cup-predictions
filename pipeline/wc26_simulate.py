@@ -28,7 +28,9 @@ MAX_GOALS = 12
 SINCE = "2018-01-01"
 
 DEFAULTS = {"half_life": 548, "friendly_w": 0.6, "shrink": 8.0, "rho": -0.10,
-            "margin_cap": 99, "min2_boost": 1.0}
+            "margin_cap": 99, "min2_boost": 1.0,
+            "half_split": 0.45}   # share of goals scored before halftime;
+                                  # fit honestly with pipeline/wc26_half_split.py
 BLEND_W = 0.35   # weight on market prices in the blended probabilities
 
 # Squad-value prior (Transfermarkt): ratings nudged by beta * z(log value).
@@ -227,7 +229,7 @@ def markets(grid):
     R = range(MAX_GOALS + 1)
     pH, pD, pA = one_x_two(grid)
     totals = {f"over_{line}": sum(grid[i][j] for i in R for j in R if i + j > line)
-              for line in (1.5, 2.5, 3.5)}
+              for line in (0.5, 1.5, 2.5, 3.5, 4.5, 5.5)}
     btts = sum(grid[i][j] for i in R for j in R if i > 0 and j > 0)
     spread = {
         "home_-1.5": sum(grid[i][j] for i in R for j in R if i - j >= 2),
@@ -236,6 +238,25 @@ def markets(grid):
     scores = sorted(((f"{i}-{j}", grid[i][j]) for i in R for j in R),
                     key=lambda x: -x[1])[:5]
     return pH, pD, pA, totals, btts, spread, scores
+
+
+def team_totals(grid):
+    """Per-team O/U from the grid marginals."""
+    R = range(MAX_GOALS + 1)
+    home_m = [sum(row) for row in grid]
+    away_m = [sum(grid[i][j] for i in R) for j in R]
+    return {side: {f"over_{line}": sum(p for k, p in enumerate(marg) if k > line)
+                   for line in (0.5, 1.5, 2.5)}
+            for side, marg in (("home", home_m), ("away", away_m))}
+
+
+def first_to_score(grid, l1, l2):
+    """Race argument: two independent Poisson processes, the first goal is
+    home's with probability l1/(l1+l2); 'neither' is the 0-0 cell."""
+    none = grid[0][0]
+    share = l1 / (l1 + l2)
+    return {"home": (1 - none) * share, "away": (1 - none) * (1 - share),
+            "neither": none}
 
 
 def test_set(start=SPLIT, end=None):
@@ -476,6 +497,11 @@ def main():
             l1, l2 = l1a, l2a
         grid = score_grid(l1, l2, p["rho"], p["min2_boost"])
         pH, pD, pA, totals, btts, spread, scores = markets(grid)
+        r_half = p["half_split"]
+        half1 = one_x_two(score_grid(l1 * r_half, l2 * r_half,
+                                     p["rho"], p["min2_boost"]))
+        half2 = one_x_two(score_grid(l1 * (1 - r_half), l2 * (1 - r_half),
+                                     p["rho"], p["min2_boost"]))
         mkt = MKT.get(str(m["match_id"]), {}).get("moneyline")
         blended = blend({"home": pH, "draw": pD, "away": pA}, mkt) if mkt else None
         sims[str(m["match_id"])] = {
@@ -491,6 +517,14 @@ def main():
             "spread": {k: round(v, 4) for k, v in spread.items()},
             "top_scores": [{"score": s, "p": round(p_, 4)} for s, p_ in scores],
             "exact_scores": {c: round(v, 4) for c, v in grid_cells(grid).items()},
+            "team_totals": {s: {k: round(v, 4) for k, v in d.items()}
+                            for s, d in team_totals(grid).items()},
+            "first_to_score": {k: round(v, 4) for k, v in
+                               first_to_score(grid, l1, l2).items()},
+            "halftime": {k: round(v, 4) for k, v in
+                         zip(("home", "draw", "away"), half1)},
+            "second_half": {k: round(v, 4) for k, v in
+                            zip(("home", "draw", "away"), half2)},
         }
     out = {
         "method": f"Dixon-Coles weighted Poisson, params {p}; blend w={BLEND_W} "

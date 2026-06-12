@@ -666,13 +666,23 @@ def sim_section(m):
     mt = rec.get("totals", {})         # Polymarket "-more-markets" book
     mb = rec.get("btts")
     ms = rec.get("spread", {})
+    mtt = rec.get("team_totals", {})
+    mht = rec.get("halftime", {})
+    m2h = rec.get("second_half", {})
+    mfs = rec.get("first_to_score", {})
+    tt = sim.get("team_totals", {})
+    ht = sim.get("halftime", {})
+    h2 = sim.get("second_half", {})
+    fs = sim.get("first_to_score", {})
 
     def flip(p):   # market price of the No/Under side of a binary
         return None if p is None else 1 - p
     rows = [
+        ("__head", "Result", None),
         (f"{m['home']} to win", ml["home"], mkt.get("home")),
         ("Draw", ml["draw"], mkt.get("draw")),
         (f"{m['away']} to win", ml["away"], mkt.get("away")),
+        ("__head", "Goals", None),
         ("Over 1.5 goals", t["over_1.5"], mt.get("over_1.5")),
         ("Under 1.5 goals", 1 - t["over_1.5"], flip(mt.get("over_1.5"))),
         ("Over 2.5 goals", t["over_2.5"], mt.get("over_2.5")),
@@ -684,8 +694,35 @@ def sim_section(m):
         (f"{m['home']} −1.5 (win by 2+)", sim["spread"]["home_-1.5"], ms.get("home_-1.5")),
         (f"{m['away']} −1.5 (win by 2+)", sim["spread"]["away_-1.5"], ms.get("away_-1.5")),
     ]
+    if tt:
+        rows += [("__head", "Team goals", None)] + [
+            (f"{m[side]} over {line} goals",
+             tt[side]["over_" + line], mtt.get(f"{side}_over_{line}"))
+            for side in ("home", "away")
+            for line in ("0.5", "1.5", "2.5")]
+    if ht and h2:
+        rows += [
+            ("__head", "Halves", None),
+            (f"{m['home']} leading at halftime", ht["home"], mht.get("home")),
+            ("Draw at halftime", ht["draw"], mht.get("draw")),
+            (f"{m['away']} leading at halftime", ht["away"], mht.get("away")),
+            (f"{m['home']} win the 2nd half", h2["home"], m2h.get("home")),
+            ("2nd half drawn", h2["draw"], m2h.get("draw")),
+            (f"{m['away']} win the 2nd half", h2["away"], m2h.get("away")),
+        ]
+    if fs:
+        rows += [
+            ("__head", "First to score", None),
+            (f"{m['home']} score first", fs["home"], mfs.get("home")),
+            (f"{m['away']} score first", fs["away"], mfs.get("away")),
+            ("Neither (0-0)", fs["neither"], mfs.get("neither")),
+        ]
     market_rows = []
     for k, v, price in rows:
+        if k == "__head":
+            market_rows.append(
+                f'<tr class="subhead"><td colspan="5">{escape(v)}</td></tr>')
+            continue
         if price is not None:
             edge = (v - price) * 100
             cls = "pos" if edge >= 3 else "neg" if edge <= -3 else ""
@@ -1833,6 +1870,13 @@ ol.timeline li::before {
   background: var(--green); border: 2px solid var(--paper);
 }
 ol.timeline b { font-family: "Fraunces", serif; }
+
+/* market-table section dividers */
+table.markets tr.subhead td {
+  font-family: "Fraunces", serif; font-weight: 600; font-size: .82rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule); padding-top: .9em;
+}
 
 /* masthead */
 .masthead {

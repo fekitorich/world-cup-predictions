@@ -154,3 +154,31 @@ a bettable surface, not just bracket decoration. Audit before betting it:
   thinnest-evidence claims and mostly re-express the 1X2 opinion; the
   moneyline is usually the better instrument for the same view. Started
   matches are never scanned (pre-match model vs in-play prices).
+
+## Market expansion pass (2026-06-12, pre-matchday-2)
+
+Six new model surfaces, each priced from machinery that already existed or
+from one validated parameter — plus a second clean negative.
+- **Team totals & extra O/U lines (0.5/4.5/5.5)**: grid marginals and sums —
+  zero new assumptions, emitted per match.
+- **First to score**: Poisson race argument, P(home first)=λ1/(λ1+λ2)·(1−P(0-0)).
+  Spot check vs market (USA-PAR): model 59/31/10 vs prices 56/34/10.
+- **Half markets**: `half_split=0.447` — share of goals before HT, fit on
+  2,360 goals across six tournaments (per-tournament 0.37-0.46, WC22 lowest
+  at 0.399; `pipeline/wc26_half_split.py` refits). A half is a shorter DC
+  match: scale λs, reuse the grid. Spot check (USA-PAR HT): model 39/45/17
+  vs prices 34/46/19.
+- **Futures scanning**: group winners + reach-R32/R16/QF/SF/final/champion
+  books vs the 100k-sim ensemble (no new model; the scanner just never
+  looked). Both sides of every binary are scanned.
+- **Corners (negative result #2)**: 250-fixture backfill (WC22, AFCON23,
+  Asian23, Euro24, Copa24; `wc26_corners.py`). NegBin total-corners with an
+  xG slope **lost** leave-one-tournament-out to intercept-only (NLL 2.7050
+  vs 2.6888) — attacking quality does not transfer to corner counts across
+  tournaments. Shipped intercept-only (μ=9.18, k≈21): a base-rate anchor
+  against lazy thin books, nothing more.
+- **Skipped deliberately**: per-match scorer/shots/assists props — Polymarket
+  lists shots-on-target only, books carry ~$4 liquidity, and our shares are
+  opposition-unadjusted. No model beats no market.
+All new categories ship OFF in betting config; both-sides scanning with the
+liquidity/spread filter and pre-kickoff guard apply everywhere.

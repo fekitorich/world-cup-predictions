@@ -16,6 +16,7 @@ Review the plan before running place_bets.py.
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.parse
@@ -194,9 +195,14 @@ def more_markets_candidates():
             if not cls or not include.get(cls[0]) or not tradeable(mk):
                 continue
             cat, key = cls
-            model_yes = (sim["totals"].get(key) if cat == "totals" else
-                         sim["btts"] if cat == "btts" else
-                         sim["spread"].get(key))
+            if cat == "team_totals":
+                side, line = key.split("_over_")
+                model_yes = sim.get("team_totals", {}).get(side, {}) \
+                    .get(f"over_{line}")
+            else:
+                model_yes = (sim["totals"].get(key) if cat == "totals" else
+                             sim["btts"] if cat == "btts" else
+                             sim["spread"].get(key))
             if model_yes is None:   # market line the model doesn't price
                 continue
             try:
@@ -219,6 +225,192 @@ def more_markets_candidates():
                         "edge": round(q - prices[idx], 4),
                     })
         time.sleep(0.12)
+    return out
+
+
+SIBLING_RESULT_CATS = ("halftime", "second_half", "first_to_score")
+
+
+def sibling_result_candidates():
+    """3-way books fetched per fixture: halftime result, second-half
+    result, first to score. Both sides of each binary are checked."""
+    sims = json.load(open(f"{DATA}/wc26_simulations.json"))["simulations"]
+    snap = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
+    times = kickoff_times()
+    include = CFG["include"]
+    cats = [c for c in SIBLING_RESULT_CATS if include.get(c)]
+    out = []
+    for mid, rec in snap.items():
+        sim = sims.get(mid)
+        if not sim or started(mid, times):
+            continue
+        for cat in cats:
+            slug = rec.get(f"{cat}_slug")
+            if not slug or cat not in sim:
+                continue
+            try:
+                evs = gamma("/events", slug=slug)
+            except Exception as e:
+                print(f"  fetch failed {slug}: {e}")
+                continue
+            if not evs:
+                continue
+            for mk in evs[0]["markets"]:
+                if not tradeable(mk):
+                    continue
+                ql = mk.get("question", "").lower()
+                if cat == "first_to_score":
+                    side = ("neither" if "neither" in ql else
+                            "home" if any(n in ql.split("to score first")[0]
+                                          for n in names_for(sim["home"])) else
+                            "away" if any(n in ql.split("to score first")[0]
+                                          for n in names_for(sim["away"])) else None)
+                else:
+                    side = ("draw" if "draw" in ql else
+                            "home" if any(n in ql for n in names_for(sim["home"])) else
+                            "away" if any(n in ql for n in names_for(sim["away"])) else None)
+                if not side:
+                    continue
+                model_yes = sim[cat].get(side)
+                if model_yes is None:
+                    continue
+                try:
+                    prices = [float(p) for p in json.loads(mk["outcomePrices"])]
+                    tokens = json.loads(mk["clobTokenIds"])
+                except (KeyError, ValueError, IndexError):
+                    continue
+                for idx, q in ((0, model_yes), (1, 1 - model_yes)):
+                    if idx >= min(len(prices), len(tokens)):
+                        continue
+                    if q - prices[idx] >= CFG["min_edge_match"]:
+                        out.append({
+                            "category": cat,
+                            "bet": f"{sim['home']} v {sim['away']}: "
+                                   f"{mk['question'].rstrip('?')} "
+                                   f"— {'YES' if idx == 0 else 'NO'}",
+                            "question": mk["question"],
+                            "token_id": tokens[idx],
+                            "model_p": round(q, 4), "market_p": prices[idx],
+                            "edge": round(q - prices[idx], 4),
+                        })
+            time.sleep(0.12)
+    return out
+
+
+def corners_candidates():
+    """Total-corner O/U vs the intercept-only NegBin base rate (245-match
+    fit; the xG slope failed validation and is not used). Value exists
+    only where a thin book strays far from the base rate — the liquidity
+    filter does the real work here."""
+    try:
+        corners = json.load(open(f"{DATA}/wc26_corners.json"))["matches"]
+    except FileNotFoundError:
+        return []
+    snap = json.load(open(f"{DATA}/wc26_market_prices.json"))["prices"]
+    times = kickoff_times()
+    out = []
+    for mid, rec in snap.items():
+        slug = rec.get("corners_slug")
+        model = corners.get(mid)
+        if not slug or not model or started(mid, times):
+            continue
+        try:
+            evs = gamma("/events", slug=slug)
+        except Exception as e:
+            print(f"  fetch failed {slug}: {e}")
+            continue
+        if not evs:
+            continue
+        for mk in evs[0]["markets"]:
+            m = re.search(r":\s*O/U (\d+\.5) Total Corners\??$",
+                          mk.get("question", ""))
+            if not m or not tradeable(mk):
+                continue
+            q_yes = model.get(f"over_{m.group(1)}")
+            if q_yes is None:
+                continue
+            try:
+                prices = [float(p) for p in json.loads(mk["outcomePrices"])]
+                tokens = json.loads(mk["clobTokenIds"])
+            except (KeyError, ValueError, IndexError):
+                continue
+            for idx, q in ((0, q_yes), (1, 1 - q_yes)):
+                if idx >= min(len(prices), len(tokens)):
+                    continue
+                if q - prices[idx] >= CFG["min_edge_match"]:
+                    out.append({
+                        "category": "corners",
+                        "bet": f"Corners O/U {m.group(1)} "
+                               f"({'Over' if idx == 0 else 'Under'}) — "
+                               f"{mk['question'].split(':')[0]}",
+                        "question": mk["question"],
+                        "token_id": tokens[idx],
+                        "model_p": round(q, 4), "market_p": prices[idx],
+                        "edge": round(q - prices[idx], 4),
+                    })
+        time.sleep(0.12)
+    return out
+
+
+FUTURES_SLUGS = {   # stage key in wc26_tournament.json -> Polymarket event
+    "champion": "world-cup-winner",
+    "final": "world-cup-nation-to-reach-final",
+    "sf": "world-cup-nation-to-reach-semifinals",
+    "qf": "world-cup-nation-to-reach-quarterfinals",
+    "r16": "world-cup-nation-to-reach-round-of-16",
+    "r32": "world-cup-team-to-advance-to-knockout-stages",
+}
+
+
+def futures_candidates():
+    """Stage-reach + group-winner futures vs the tournament ensemble."""
+    tourn = json.load(open(f"{DATA}/wc26_tournament.json"))["teams"]
+
+    def team_for(title):
+        if title in tourn:
+            return title
+        tl = (title or "").lower()
+        for team in tourn:
+            if tl in names_for(team) or norm(title) == norm(team):
+                return team
+        return None
+
+    slugs = [(stage, slug) for stage, slug in FUTURES_SLUGS.items()]
+    slugs += [("win_group", f"world-cup-group-{g}-winner")
+              for g in "abcdefghijkl"]
+    out = []
+    for stage, slug in slugs:
+        try:
+            evs = gamma("/events", slug=slug)
+        except Exception as e:
+            print(f"  fetch failed {slug}: {e}")
+            continue
+        for mk in (evs[0]["markets"] if evs else []):
+            team = team_for(mk.get("groupItemTitle") or "")
+            if not team or not tradeable(mk):
+                continue
+            q_yes = tourn[team].get(stage)
+            if q_yes is None:
+                continue
+            try:
+                prices = [float(p) for p in json.loads(mk["outcomePrices"])]
+                tokens = json.loads(mk["clobTokenIds"])
+            except (KeyError, ValueError, IndexError):
+                continue
+            for idx, q in ((0, q_yes), (1, 1 - q_yes)):
+                if idx >= min(len(prices), len(tokens)):
+                    continue
+                if q - prices[idx] >= CFG["min_edge_match"]:
+                    out.append({
+                        "category": "futures",
+                        "bet": f"{team} {stage} — "
+                               f"{'YES' if idx == 0 else 'NO'}",
+                        "question": mk.get("question", ""),
+                        "token_id": tokens[idx],
+                        "model_p": round(q, 4), "market_p": prices[idx],
+                        "edge": round(q - prices[idx], 4),
+                    })
+        time.sleep(0.15)
     return out
 
 
@@ -268,9 +460,9 @@ def build_plan(cands, cfg):
     Returns (sized candidates, total stake)."""
     cands = sorted(cands, key=lambda c: -c["edge"])
     max_bets = cfg.get("max_bets", 12)
-    per_match = ("moneyline", "exact_score", "totals", "btts", "spread")
-    awards = [c for c in cands if c["category"] not in per_match]
-    mlines = [c for c in cands if c["category"] in per_match]
+    award_cats = ("golden_boot", "top_scorer_nation")
+    awards = [c for c in cands if c["category"] in award_cats]
+    mlines = [c for c in cands if c["category"] not in award_cats]
     cands = awards + mlines[:max(max_bets - len(awards), 0)]
     cands.sort(key=lambda c: -c["edge"])
 
@@ -299,9 +491,20 @@ def main():
     if CFG["include"].get("exact_score"):
         print("scanning exact-score books...", flush=True)
         cands += exact_score_candidates()
-    if any(CFG["include"].get(c) for c in ("totals", "btts", "spread")):
+    if any(CFG["include"].get(c)
+           for c in ("totals", "team_totals", "btts", "spread")):
         print("scanning totals/BTTS/spread books...", flush=True)
         cands += more_markets_candidates()
+    if any(CFG["include"].get(c) for c in SIBLING_RESULT_CATS):
+        print("scanning halftime/second-half/first-to-score books...",
+              flush=True)
+        cands += sibling_result_candidates()
+    if CFG["include"].get("futures"):
+        print("scanning futures books...", flush=True)
+        cands += futures_candidates()
+    if CFG["include"].get("corners"):
+        print("scanning corner books...", flush=True)
+        cands += corners_candidates()
     print("scanning award markets...", flush=True)
     cands += award_candidates()
     cands, total = build_plan(cands, CFG)

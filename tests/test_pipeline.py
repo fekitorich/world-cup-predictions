@@ -84,6 +84,17 @@ class TestLayout(unittest.TestCase):
             finally:
                 os.remove(dst)
 
+    def test_corners_model_validated_shape(self):
+        """The corners file must carry its own validation verdict; the
+        xG slope may only be used if it won leave-one-tournament-out."""
+        m = json.load(open(os.path.join(_ROOT, "data",
+                                        "wc26_corners_model.json")))
+        self.assertIn("slope_validated", m)
+        if not m["slope_validated"]:
+            self.assertEqual(m["b"], 0.0)
+        self.assertTrue(7.5 < m["mean_mu"] < 11.5)   # sane corner base rate
+        self.assertGreaterEqual(m["n_fit"], 200)
+
     def test_locked_predictions_untouched_shape(self):
         """The locked bracket file must keep its grading-critical keys."""
         pred = json.load(open(os.path.join(_ROOT, "data",

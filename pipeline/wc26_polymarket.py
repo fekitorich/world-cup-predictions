@@ -88,14 +88,25 @@ SPREAD_RE = re.compile(r"^Spread: (.+?) \((-\d+\.5)\)\??$")   # team/half lines
                                                    # have words between : and O/U
 
 
+TEAM_OU_RE = re.compile(r":\s*(.+?) O/U (\d+\.5)\??$")
+
+
 def classify_more_market(q, home, away):
     """'United States vs. Paraguay: O/U 2.5' -> ('totals', 'over_2.5');
     '...: Both Teams to Score' -> ('btts', None);
     'Spread: United States (-1.5)' -> ('spread', 'home_-1.5');
-    team totals and half markets -> None (no model for them)."""
+    '...: Paraguay O/U 1.5' -> ('team_totals', 'away_over_1.5');
+    half markets -> None (no model for them)."""
     m = OU_RE.search(q)
     if m:
         return "totals", f"over_{m.group(1)}"
+    m = TEAM_OU_RE.search(q)
+    if m and "half" not in m.group(1).lower():
+        name = m.group(1).lower()
+        side = ("home" if any(n in name for n in names_for(home)) else
+                "away" if any(n in name for n in names_for(away)) else None)
+        if side:
+            return "team_totals", f"{side}_over_{m.group(2)}"
     if q.rstrip("?").endswith("Both Teams to Score"):
         return "btts", None
     m = SPREAD_RE.match(q)
@@ -109,8 +120,8 @@ def classify_more_market(q, home, away):
 
 
 def parse_more_markets(ev, home, away):
-    """Full-match totals, BTTS and spreads from the -more-markets event."""
-    totals, spread, btts = {}, {}, None
+    """Full-match totals, team totals, BTTS and spreads from -more-markets."""
+    totals, tteam, spread, btts = {}, {}, {}, None
     for mk in ev.get("markets", []):
         cls = classify_more_market(mk.get("question", ""), home, away)
         if not cls:
@@ -123,6 +134,8 @@ def parse_more_markets(ev, home, away):
         cat, key = cls
         if cat == "totals" and first == "Over":
             totals[key] = yes
+        elif cat == "team_totals" and first == "Over":
+            tteam[key] = yes
         elif cat == "btts" and first == "Yes":
             btts = yes
         elif cat == "spread":
@@ -130,11 +143,94 @@ def parse_more_markets(ev, home, away):
     out = {}
     if totals:
         out["totals"] = totals
+    if tteam:
+        out["team_totals"] = tteam
     if btts is not None:
         out["btts"] = btts
     if spread:
         out["spread"] = spread
     return out
+
+
+def parse_half_event(ev, home, away):
+    """3-way half books: 'X leading at halftime?' / ': Draw at halftime?'
+    or 'X to win the second half?' / ': Second half draw?'."""
+    out = {}
+    for mk in ev.get("markets", []):
+        ql = mk.get("question", "").lower()
+        try:
+            yes = float(json.loads(mk["outcomePrices"])[0])
+        except (KeyError, ValueError, IndexError):
+            continue
+        if "draw" in ql:
+            out["draw"] = yes
+        elif any(n in ql for n in names_for(home)):
+            out["home"] = yes
+        elif any(n in ql for n in names_for(away)):
+            out["away"] = yes
+    return out if len(out) == 3 else None
+
+
+def parse_first_to_score(ev, home, away):
+    """'United States to score first vs. Paraguay?' / 'Neither team to
+    score first?' -> home/away/neither Yes-prices."""
+    out = {}
+    for mk in ev.get("markets", []):
+        ql = mk.get("question", "").lower()
+        try:
+            yes = float(json.loads(mk["outcomePrices"])[0])
+        except (KeyError, ValueError, IndexError):
+            continue
+        if "neither" in ql:
+            out["neither"] = yes
+        elif "score first" in ql:
+            left = ql.split("to score first")[0]
+            if any(n in left for n in names_for(home)):
+                out["home"] = yes
+            elif any(n in left for n in names_for(away)):
+                out["away"] = yes
+    return out if len(out) == 3 else None
+
+
+CORNERS_RE = re.compile(r":\s*O/U (\d+\.5) Total Corners\??$")
+
+
+def parse_corners(ev, home, away):
+    """Full-match total-corner lines; team and half lines are skipped."""
+    out = {}
+    for mk in ev.get("markets", []):
+        m = CORNERS_RE.search(mk.get("question", ""))
+        if not m:
+            continue
+        try:
+            yes = float(json.loads(mk["outcomePrices"])[0])
+            first = json.loads(mk.get("outcomes") or '["Over"]')[0]
+        except (KeyError, ValueError, IndexError):
+            continue
+        if first == "Over":
+            out[f"over_{m.group(1)}"] = yes
+    return out or None
+
+
+SIBLINGS = [   # suffix, snapshot key, parser — fetched per fixture
+    ("halftime-result", "halftime", parse_half_event),
+    ("second-half-result", "second_half", parse_half_event),
+    ("first-to-score", "first_to_score", parse_first_to_score),
+    ("total-corners", "corners", parse_corners),
+]
+
+
+def fetch_sibling(base_slug, suffix, parser, home, away):
+    slug = f"{base_slug}-{suffix}"
+    try:
+        evs = get("/events", slug=slug)
+    except Exception as e:
+        print(f"  sibling fetch failed {slug}: {e}", flush=True)
+        return None, None
+    if not evs:
+        return None, None
+    parsed = parser(evs[0], home, away)
+    return (slug, parsed) if parsed else (None, None)
 
 
 def fetch_more_markets(base_slug, home, away):
@@ -252,7 +348,13 @@ def main():
             mm_slug, mm = fetch_more_markets(r["slug"], m["home"], m["away"])
             if mm:
                 r["more_markets_slug"] = mm_slug
-                r.update(mm)   # totals / btts / spread
+                r.update(mm)   # totals / team_totals / btts / spread
+            for suffix, key, parser in SIBLINGS:
+                s_slug, parsed = fetch_sibling(r["slug"], suffix, parser,
+                                               m["home"], m["away"])
+                if parsed:
+                    r[f"{key}_slug"] = s_slug
+                    r[key] = parsed
             out[str(m["match_id"])] = r
         else:
             misses.append(f"{m['home']} v {m['away']} {m['date_utc'][:10]}")
