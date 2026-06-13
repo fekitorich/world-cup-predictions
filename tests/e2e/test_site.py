@@ -213,19 +213,26 @@ class TestBuiltSite(unittest.TestCase):
             tl = html.split('<ol class="timeline">')[1].split("</ol>")[0]
             self.assertGreaterEqual(tl.count("<li>"), 8, name)
 
-    def test_second_opinion_on_match_pages_and_method(self):
-        """Elo companion: shown as display-only colour, with the failed
-        blend disclosed on the method page in both languages."""
+    def test_second_opinion_flag_only_on_match_pages(self):
+        """Option 2: match pages carry the disagreement FLAG, never the
+        Elo per-team percentages (no number to average in). The Elo
+        figures and the failed-blend finding live on the method page."""
         import glob as g
         pages = g.glob(str(self.docs / "matches" / "*.html"))
         with_op = [p for p in pages if "Second opinion" in open(p).read()]
         self.assertGreaterEqual(len(with_op), 30)
+        # the flag links to the method page rather than restating Elo odds
+        for p in with_op:
+            self.assertIn("method.html#second-opinion", open(p).read())
+        # the actual Elo numbers belong on the method page, not match pages
         for name, phrase, blend in (("method.html", "A second opinion",
                                      "0.831"),
                                     ("method-fa.html", "نظر دوم", "۰٫۸۳۱")):
             html = (self.docs / name).read_text()
             self.assertIn(phrase, html, name)
             self.assertIn(blend, html, name)   # the rejected blend number
+        self.assertIn("current elo ratings",
+                      (self.docs / "method.html").read_text().lower())
 
     def test_method_news_gate_disclosure_both_languages(self):
         """The site's honesty claim must track reality: the AI analyst

@@ -21,7 +21,7 @@ gtag('config', 'G-EG56KHB1SX');
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202606130459">
+<link rel="stylesheet" href="style.css?v=202606130645">
 <script>
 (function() {
   var t = localStorage.getItem("theme");
@@ -242,17 +242,21 @@ the shipped model is a pure base rate (about 9.2 corners per match). Where the c
 are genuinely traded it agrees with them almost exactly; its only job is to flag the
 untraded lines that drift far from reality.</p>
 
-<h2>A second opinion</h2>
-<p>Every match page also shows an <b>Elo companion model</b>: margin-aware Elo ratings fitted
-on the same match history, mapped to goal rates by a Poisson regression and run through the
-same score grid. It exists because the main model's 200-member ensemble varies the data but
-shares one theory — a structurally different model is the only check on the theory itself.
-Both models take the identical exam (train before June 2025, graded on 1,071 later matches):
+<h2 id="second-opinion">A second opinion</h2>
+<p>Behind every match sits an <b>Elo companion model</b>: margin-aware Elo ratings fitted on
+the same match history, mapped to goal rates by a Poisson regression and run through the same
+score grid. It exists because the main model's 200-member ensemble varies the data but shares
+one theory — a structurally different model is the only check on the theory itself. Both
+models took the identical exam (train before June 2025, graded on 1,071 later matches):
 Dixon-Coles 0.819 log-loss, Elo 0.858, and the 50/50 blend 0.831 — worse than Dixon-Coles
-alone, so the blend was <b>rejected</b> and the Elo numbers never feed anything you see here.
+alone, so the blend was <b>rejected</b> and the Elo numbers feed nothing you see on the site.
 What survives is the disagreement: the two models differ by about 8 points on a typical
-fixture, and where the gap is unusually wide that fixture is flagged — two theories reading
-the same history differently is a warning, not an average.</p>
+fixture, so each match page carries a one-line flag when the gap is unusually wide — a warning
+to trust (and bet) that fixture less. The Elo model's own probabilities deliberately do
+<em>not</em> appear on the match pages: it is the weaker model on the same exam, and showing
+its numbers beside the real ones would only tempt a reader to split the difference with a
+model we have shown makes the prediction worse. The current Elo ratings, top of the field, so
+you can see what it thinks: Spain 2091 · Argentina 2057 · Morocco 2006 · Brazil 2002 · France 1996 · Japan 1984 · Colombia 1970 · England 1940 · Algeria 1926 · Ecuador 1920 · Portugal 1918 · Belgium 1904.</p>
 
 <h2>The AI analyst</h2>
 <p>The short analysis sections that close each match, team and player page are written by a

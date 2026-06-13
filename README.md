@@ -45,6 +45,13 @@ first-half goal share (0.447, fit on 2,360 goals across six tournaments),
 first-to-score is the Poisson race argument. Corners get their own
 negative-binomial base rate — the xG slope failed leave-one-tournament-out
 validation and was deliberately not shipped.
+A structurally independent **Elo→goals companion** takes the same exam as a
+second opinion: it scored 0.858 to Dixon-Coles' 0.819 and the 50/50 blend
+0.831 — *worse* than DC alone, so the blend was rejected and Elo feeds no
+published number. What ships is the disagreement: match pages carry a one-line
+flag (not a second set of odds) where the two models split widely, and the bet
+scanner shrinks stakes there. The Elo figures and this finding live on the
+method page.
 Group-match probabilities blend the model with Polymarket prices
 (log-opinion pool, w=0.35); raw model is kept separate for edge-finding.
 A caution we apply to ourselves: every validation number above is historical

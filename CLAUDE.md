@@ -64,11 +64,13 @@ python3 -m http.server 8742 --directory docs  # browse
 - `wc26_corners.json` + `wc26_corners_model.json` + `wc26_corners_history.json` —
   total-corners NegBin (intercept-only: the xG slope failed LOTO validation)
 - `wc26_tournament.json` — per-team futures probabilities (win group → champion)
-- `wc26_elo.json` — Elo second-opinion model (display-only): per-match
-  moneyline + ratings + `disagreement` vs DC. The 50/50 blend FAILED
-  same-set validation (0.831 vs DC 0.819) so Elo never feeds published
-  numbers; find_bets uses wide disagreement (>= elo_caution_pp) only to
-  scale stakes down (reduce-only)
+- `wc26_elo.json` — Elo second-opinion model: per-match moneyline +
+  ratings + `disagreement` vs DC. The 50/50 blend FAILED same-set
+  validation (0.831 vs DC 0.819) so Elo never feeds published numbers.
+  Site shows only the disagreement FLAG on match pages (no Elo
+  percentages — nothing to average in); the Elo figures + finding live on
+  the method page. find_bets uses wide disagreement (>= elo_caution_pp)
+  only to scale stakes down (reduce-only).
 - `wc26_market_prices.json` — Polymarket snapshots: moneylines + exact-score books
   + totals/BTTS/spread (from the per-match `-more-markets` sibling event;
   re-fetch near kickoff; late-listed fixtures get picked up on re-run)
