@@ -15,8 +15,11 @@ simulation model.
   tests/README.md; coverage via `.venv/bin/python3 -m coverage run -m
   unittest discover -s tests`); `runs/` — time-coded archives of every
   result write
-- `wc26_matchday.sh` — launchd entry point (06:30/23:30); stays at repo root,
-  the plist points at it by absolute path
+- Nightly build runs in the cloud: `.github/workflows/matchday.yml`
+  (scheduled GitHub Action, 3x/day UTC) reproduces the pipeline and pushes
+  docs+data to main. Needs repo secret `API_FOOTBALL_KEY`; never bets,
+  never runs the LLM. `wc26_matchday.sh` is the legacy local launchd
+  entry point (same steps) — kept as a manual/offline fallback
 
 ## Pipeline (order matters)
 

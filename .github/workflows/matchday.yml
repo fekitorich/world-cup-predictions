@@ -1,0 +1,67 @@
+name: matchday
+
+# Nightly site build + deploy, in the cloud — replaces the local launchd
+# job (which depended on a Mac being awake and online; a home-network drop
+# on 2026-06-13 froze the site). Mirrors wc26_matchday.sh: results -> grade
+# -> prices -> refit -> sims -> awards -> site + snapshot -> commit
+# docs+data -> push. It NEVER bets and NEVER runs the LLM analyst (both stay
+# manual/local), so the only secret it needs is API_FOOTBALL_KEY. The
+# personal betting files are gitignored and simply do not exist on the
+# runner — CI physically cannot touch funds or leak a position.
+
+on:
+  schedule:
+    # 3x daily UTC during the tournament — bump/trim these lines freely,
+    # it is free on a public repo. (The old launchd job ran twice daily.)
+    - cron: "0 5 * * *"
+    - cron: "0 13 * * *"
+    - cron: "0 21 * * *"
+  workflow_dispatch: {}   # manual "Run workflow" button / `gh workflow run matchday`
+
+permissions:
+  contents: write          # push the rebuilt docs + data to main
+
+concurrency:
+  group: matchday
+  cancel-in-progress: false   # never interrupt a run mid-publish
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    env:
+      API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install numpy (tournament ensemble only — rest is stdlib)
+        run: pip install --quiet numpy
+
+      - name: test gate — red tests mean no publish
+        run: python3 -m unittest discover -s tests -q
+
+      - name: refresh results, prices, model, site
+        run: |
+          python3 pipeline/wc26_update_results.py   # results, grading, scorers, KO fixtures
+          python3 pipeline/wc26_polymarket.py       # fresh market prices (+ late/KO markets)
+          python3 pipeline/wc26_espn_ids.py         # live-link ids
+          python3 pipeline/wc26_simulate.py         # refit on the latest results
+          python3 pipeline/wc26_corners.py predict  # corner O/U base rate
+          python3 pipeline/wc26_elo.py              # Elo second opinion
+          python3 pipeline/wc26_tournament.py       # 100k tournament sims (lock untouched)
+          python3 pipeline/wc26_awards.py           # boot/awards odds
+          python3 pipeline/wc26_build_site.py snapshot   # rebuild + freeze today's archive
+
+      - name: commit and push if anything changed
+        run: |
+          git config user.name  "wc26-matchday[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain -- . ':!experiments')" ]; then
+            git add -A -- ':!experiments'
+            git commit -q -m "Matchday update $(date -u +%Y-%m-%d)"
+            git push
+            echo "published matchday update"
+          else
+            echo "no changes to publish"
+          fi
