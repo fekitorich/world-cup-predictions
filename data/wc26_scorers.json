@@ -2,6 +2,7 @@
   "fetched_fixtures": [
     1489369,
     1489370,
+    1489373,
     1538999,
     1539000
   ],
@@ -53,6 +54,11 @@
     },
     "G. Reyna": {
       "team": "United States",
+      "goals": 1,
+      "assists_from": []
+    },
+    "B. Embolo": {
+      "team": "Switzerland",
       "goals": 1,
       "assists_from": []
     }
