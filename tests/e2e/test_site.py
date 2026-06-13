@@ -213,6 +213,20 @@ class TestBuiltSite(unittest.TestCase):
             tl = html.split('<ol class="timeline">')[1].split("</ol>")[0]
             self.assertGreaterEqual(tl.count("<li>"), 8, name)
 
+    def test_second_opinion_on_match_pages_and_method(self):
+        """Elo companion: shown as display-only colour, with the failed
+        blend disclosed on the method page in both languages."""
+        import glob as g
+        pages = g.glob(str(self.docs / "matches" / "*.html"))
+        with_op = [p for p in pages if "Second opinion" in open(p).read()]
+        self.assertGreaterEqual(len(with_op), 30)
+        for name, phrase, blend in (("method.html", "A second opinion",
+                                     "0.831"),
+                                    ("method-fa.html", "نظر دوم", "۰٫۸۳۱")):
+            html = (self.docs / name).read_text()
+            self.assertIn(phrase, html, name)
+            self.assertIn(blend, html, name)   # the rejected blend number
+
     def test_method_news_gate_disclosure_both_languages(self):
         """The site's honesty claim must track reality: the AI analyst
         section discloses the reduce-only betting news gate."""

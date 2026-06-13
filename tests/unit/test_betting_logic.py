@@ -8,7 +8,8 @@ _ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__
 sys.path.insert(0, _ROOT)
 sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 
-from betting.find_bets import kelly_stake, started, build_plan, merge_local
+from betting.find_bets import (kelly_stake, started, build_plan, merge_local,
+                               apply_elo_caution)
 from betting.place_bets import plan_age_minutes, exec_price_ok, select_todo
 from wc26_polymarket import parse_score_question
 
@@ -124,6 +125,41 @@ class TestExactScoreScanner(unittest.TestCase):
         self.assertTrue(started("1", times))
         self.assertFalse(started("2", times))
         self.assertFalse(started("3", times))   # unknown id: no guard claim
+
+class TestEloCaution(unittest.TestCase):
+    CFG = {"use_elo_caution": True, "elo_caution_pp": 15,
+           "elo_caution_factor": 0.5}
+    ELO = {"101": {"disagreement": 0.20}, "102": {"disagreement": 0.05}}
+
+    @staticmethod
+    def bet(mid, stake=4.0):
+        return {"bet": f"b{mid}", "match_id": mid, "stake_usdc": stake}
+
+    def test_wide_disagreement_halves_stake(self):
+        kept, flagged = apply_elo_caution(
+            [self.bet("101"), self.bet("102")], self.ELO, self.CFG)
+        by = {b["match_id"]: b for b in kept}
+        self.assertEqual(by["101"]["stake_usdc"], 2.0)
+        self.assertEqual(by["102"]["stake_usdc"], 4.0)   # within noise
+        self.assertEqual(flagged, ["b101"])
+
+    def test_scaled_below_dollar_drops(self):
+        kept, _ = apply_elo_caution([self.bet("101", 1.5)], self.ELO, self.CFG)
+        self.assertEqual(kept, [])
+
+    def test_reduce_only_and_fail_open(self):
+        bets = [self.bet("101")]
+        kept, flagged = apply_elo_caution(bets, None, self.CFG)   # no file
+        self.assertEqual(kept[0]["stake_usdc"], 4.0)
+        kept, _ = apply_elo_caution(bets, self.ELO,
+                                    {**self.CFG, "use_elo_caution": False})
+        self.assertEqual(kept[0]["stake_usdc"], 4.0)
+
+    def test_futures_ids_untouched(self):
+        kept, flagged = apply_elo_caution(
+            [self.bet("future:Spain")], self.ELO, self.CFG)
+        self.assertEqual((kept[0]["stake_usdc"], flagged), (4.0, []))
+
 
 class TestMergeLocal(unittest.TestCase):
     def test_include_deep_merged(self):

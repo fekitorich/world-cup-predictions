@@ -504,6 +504,30 @@ def build_plan(cands, cfg):
     return cands, round(planned, 2)
 
 
+def apply_elo_caution(bets, elo_matches, cfg):
+    """Second-opinion tripwire (reduce-only): where the Elo companion and
+    the DC model disagree on a fixture's result probabilities by >=
+    elo_caution_pp, structural model uncertainty is doing work — every
+    sized bet on that fixture is scaled by elo_caution_factor. Like the
+    news gate it can only shrink, never add or raise; bets scaled below
+    $1 drop. No elo file or gate off => untouched."""
+    if not elo_matches or not cfg.get("use_elo_caution", True):
+        return bets, []
+    thr = cfg.get("elo_caution_pp", 15) / 100.0
+    factor = cfg.get("elo_caution_factor", 0.5)
+    kept, flagged = [], []
+    for b in bets:
+        m = elo_matches.get(str(b.get("match_id") or ""))
+        if m and m.get("disagreement", 0) >= thr:
+            b = {**b, "stake_usdc": round(b["stake_usdc"] * factor, 2),
+                 "elo_disagreement": m["disagreement"]}
+            flagged.append(b["bet"])
+            if b["stake_usdc"] < 1:
+                continue
+        kept.append(b)
+    return kept, flagged
+
+
 def record_paper(cands):
     """Paper-trading log: every candidate from every scan, regardless of
     what gets staked. betting/paper.py grades these later for CLV (did the
@@ -571,6 +595,17 @@ def main():
         cands = []
     cands, total = build_plan(cands, {**CFG,
                                       "max_total_stake_usdc": remaining})
+    try:
+        elo = json.load(open(f"{DATA}/wc26_elo.json"))["matches"]
+    except FileNotFoundError:
+        elo = None
+    cands, elo_flagged = apply_elo_caution(cands, elo, CFG)
+    if elo_flagged:
+        total = round(sum(c["stake_usdc"] for c in cands), 2)
+        print(f"elo second opinion disagrees on {len(elo_flagged)} bet(s) "
+              f"— stakes scaled by {CFG.get('elo_caution_factor', 0.5)}:")
+        for b in elo_flagged:
+            print(f"  ~ {b}")
 
     plan = {
         "created": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),

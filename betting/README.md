@@ -86,6 +86,11 @@ API spend, so it runs only when you ask for it.
   a test enforces it; enable per category in your gitignored `config.local.json`
 - started matches are never scanned; illiquid/placeholder books are rejected
   (`min_liquidity_usdc`, `max_book_spread`)
+- Elo second-opinion tripwire: where the companion model and DC disagree on
+  a fixture by ≥ `elo_caution_pp` (set at the top-quartile gap; they differ
+  ~8pp routinely), plan stakes scale by `elo_caution_factor` — reduce-only,
+  like every advisory layer here. Elo itself never prices a bet: its blend
+  with DC failed validation and was rejected
 
 ## Secrets — never committed
 

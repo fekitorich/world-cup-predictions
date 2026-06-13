@@ -36,6 +36,7 @@ python3 pipeline/wc26_polymarket.py              # fresh market prices (also new
 python3 pipeline/wc26_espn_ids.py                # live-link ids (picks up KO fixtures)
 python3 pipeline/wc26_simulate.py                # refit on latest results
 python3 pipeline/wc26_corners.py predict         # corner O/U from base-rate NegBin
+python3 pipeline/wc26_elo.py                     # Elo second opinion (display-only)
 .venv/bin/python3 pipeline/wc26_tournament.py    # 100k tournament sims (lock untouched)
 .venv/bin/python3 pipeline/wc26_awards.py        # boot/awards odds
 python3 pipeline/wc26_build_site.py snapshot     # rebuild + freeze today's archive copy

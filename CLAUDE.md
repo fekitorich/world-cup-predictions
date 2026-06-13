@@ -26,6 +26,8 @@ curl -sL https://raw.githubusercontent.com/martj42/international_results/master/
      -o data/international_results.csv     # refresh match history for the model
 python3 pipeline/wc26_simulate.py     # fit model, backtest, write data/wc26_simulations.json
 python3 pipeline/wc26_corners.py predict    # corner O/U from the base-rate NegBin (after simulate)
+python3 pipeline/wc26_elo.py          # Elo second opinion -> wc26_elo.json (after simulate;
+                                      # display-only + betting tripwire; `tune`/`compare` subcommands)
 python3 pipeline/wc26_half_split.py   # (occasional) refit half_split from API-Football HT scores
 python3 pipeline/wc26_corners.py backfill && python3 pipeline/wc26_corners.py fit
                                       # (occasional) corners history + LOTO validation
@@ -62,6 +64,11 @@ python3 -m http.server 8742 --directory docs  # browse
 - `wc26_corners.json` + `wc26_corners_model.json` + `wc26_corners_history.json` —
   total-corners NegBin (intercept-only: the xG slope failed LOTO validation)
 - `wc26_tournament.json` — per-team futures probabilities (win group → champion)
+- `wc26_elo.json` — Elo second-opinion model (display-only): per-match
+  moneyline + ratings + `disagreement` vs DC. The 50/50 blend FAILED
+  same-set validation (0.831 vs DC 0.819) so Elo never feeds published
+  numbers; find_bets uses wide disagreement (>= elo_caution_pp) only to
+  scale stakes down (reduce-only)
 - `wc26_market_prices.json` — Polymarket snapshots: moneylines + exact-score books
   + totals/BTTS/spread (from the per-match `-more-markets` sibling event;
   re-fetch near kickoff; late-listed fixtures get picked up on re-run)

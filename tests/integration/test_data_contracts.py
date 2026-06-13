@@ -87,6 +87,25 @@ class TestCornersContract(unittest.TestCase):
             self.assertTrue(all(0 < p < 1 for p in probs), mid)
 
 
+class TestEloContract(unittest.TestCase):
+    ELO = os.path.join(DATA, "wc26_elo.json")
+
+    @unittest.skipUnless(os.path.exists(os.path.join(DATA, "wc26_elo.json")),
+                         "elo file not generated")
+    def test_second_opinion_coherent_and_display_only(self):
+        elo = load("wc26_elo.json")
+        fids = {str(m["match_id"]) for m in
+                load("fifa_world_cup_2026_group_matches.json")["matches"]}
+        self.assertIn("display-only", elo["method"])
+        self.assertGreater(elo["backtest"]["logloss_1x2"], 0)
+        self.assertTrue(set(elo["matches"]) <= fids)
+        self.assertGreaterEqual(len(elo["matches"]), 60)
+        for mid, m in elo["matches"].items():
+            self.assertAlmostEqual(sum(m["moneyline"].values()), 1.0,
+                                   places=2, msg=mid)
+            self.assertTrue(0 <= m["disagreement"] <= 1, mid)
+
+
 class TestAwardsContract(unittest.TestCase):
     def test_award_entries_have_model_probs(self):
         awards = load("wc26_awards.json")

@@ -1,10 +1,16 @@
 {
   "fetched_fixtures": [
     1489369,
+    1489370,
     1538999,
     1539000
   ],
   "scorers": {
+    "F. Balogun": {
+      "team": "United States",
+      "goals": 2,
+      "assists_from": []
+    },
     "J. Quinones": {
       "team": "Mexico",
       "goals": 1,
@@ -37,6 +43,16 @@
     },
     "C. Larin": {
       "team": "Canada",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Mauricio": {
+      "team": "Paraguay",
+      "goals": 1,
+      "assists_from": []
+    },
+    "G. Reyna": {
+      "team": "United States",
       "goals": 1,
       "assists_from": []
     }

@@ -42,6 +42,11 @@ try:
 except FileNotFoundError:
     LLM = {"teams": {}, "players": {}, "matches": {}}
 try:
+    _elo = json.load(open(DATA / "wc26_elo.json"))
+    ELO, ELO_BT = _elo["matches"], _elo.get("backtest", {})
+except FileNotFoundError:
+    ELO, ELO_BT = {}, {}
+try:
     TOURNEY = json.load(open(DATA / "wc26_tournament.json"))["teams"]
 except FileNotFoundError:
     TOURNEY = {}
@@ -670,6 +675,22 @@ def sim_section(m):
 <span class="seg draw" style="flex:{ml['draw']:.4f}"><b>Draw</b> {pct(ml['draw'])}</span>
 <span class="seg away" style="flex:{ml['away']:.4f}"><b>{escape(m['away'])}</b> {pct(ml['away'])}</span>
 </div>"""
+    elo = ELO.get(str(m["match_id"]))
+    second = ""
+    if elo:
+        e = elo["moneyline"]
+        gap = elo["disagreement"]
+        chip = (f'<b class="elo-disagree">models disagree by {gap*100:.0f}pp</b>'
+                if gap >= 0.15 else
+                f'<span class="dim">models within {gap*100:.0f}pp</span>')
+        second = (
+            f'<p class="meta center secondop">Second opinion — Elo companion '
+            f'({elo["elo"]["home"]} vs {elo["elo"]["away"]}): '
+            f'{escape(m["home"])} {pct(e["home"])} · Draw {pct(e["draw"])} · '
+            f'{escape(m["away"])} {pct(e["away"])} — {chip}. '
+            f'<span class="dim">Display-only: a structurally different model '
+            f'taking the same exam (its blend with the main model failed '
+            f'validation, so it never feeds these numbers).</span></p>')
     t = sim["totals"]
     rec = PRICES.get(str(m["match_id"]), {})
     mkt = rec.get("moneyline", {})
@@ -771,6 +792,7 @@ broadcast graphics. Spread −1.5 = win by two or more clear goals.</p>
 {hf}
 <p class="meta center">Model expected goals: {escape(m['home'])} {sim['xg']['home']} - {sim['xg']['away']} {escape(m['away'])}</p>
 {bar}
+{second}
 <table class="markets">
 <thead><tr><th>Market</th><th class="num" title="model probability of this outcome">Probability</th><th class="num" title="the model probability written as a share price - buy below this and you profit on average if the model is right">Fair</th><th class="num" title="live Polymarket YES price at last snapshot">Polymarket</th><th class="num" title="fair minus market - positive (green) means the market sells it cheaper than the model values it">Edge</th></tr></thead>
 <tbody>{''.join(market_rows)}</tbody>
@@ -1713,6 +1735,18 @@ the shipped model is a pure base rate (about 9.2 corners per match). Where the c
 are genuinely traded it agrees with them almost exactly; its only job is to flag the
 untraded lines that drift far from reality.</p>
 
+<h2>A second opinion</h2>
+<p>Every match page also shows an <b>Elo companion model</b>: margin-aware Elo ratings fitted
+on the same match history, mapped to goal rates by a Poisson regression and run through the
+same score grid. It exists because the main model's 200-member ensemble varies the data but
+shares one theory — a structurally different model is the only check on the theory itself.
+Both models take the identical exam (train before June 2025, graded on 1,071 later matches):
+Dixon-Coles 0.819 log-loss, Elo 0.858, and the 50/50 blend 0.831 — worse than Dixon-Coles
+alone, so the blend was <b>rejected</b> and the Elo numbers never feed anything you see here.
+What survives is the disagreement: the two models differ by about 8 points on a typical
+fixture, and where the gap is unusually wide that fixture is flagged — two theories reading
+the same history differently is a warning, not an average.</p>
+
 <h2>The AI analyst</h2>
 <p>The short analysis sections that close each match, team and player page are written by a
 language model (the byline at the bottom of each one says which, and when). Two rules keep
@@ -1767,6 +1801,12 @@ numbers exactly — and unseeded randomness in the tournament engine, now determ
 prompted two defenses: execution-time price protection on bets, and a paper-trading log that
 grades every flagged edge for closing-line value. Predictions unchanged; trust in them,
 better earned.</li>
+<li><b>13 June</b> — a second opinion: an Elo→goals companion model (margin-aware ratings,
+Poisson goals map, the same score grid) was built and given the identical exam. Verdict on
+the same 1,071 held-out matches: Dixon-Coles 0.819, Elo 0.858, and their 50/50 blend 0.831 —
+<em>worse than DC alone</em>, so the blend was rejected and Elo never feeds the published
+numbers. It ships as a display-only second opinion on every match page; the two models'
+disagreement (they differ by ~8pp on a typical fixture) is used only as a tripwire.</li>
 <li><b>Ongoing</b> — every night the real results come in, the locked bracket is regraded in
 public, the model refits on the newest matches, and the day's site is frozen into an
 immutable snapshot.</li>
@@ -1981,6 +2021,18 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 می‌شود، مدل تقریباً دقیقاً با آن هم‌نظر است؛ تنها کارش نشان‌کردن خطوط معامله‌نشده‌ای است
 که از واقعیت دور افتاده‌اند.</p>
 
+<h2>نظر دوم</h2>
+<p>هر صفحهٔ مسابقه یک <b>مدل همراه الو</b> هم نشان می‌دهد: ریتینگ الو حساس به اختلاف گل،
+برازش‌شده روی همان تاریخچهٔ مسابقات، که با یک رگرسیون پواسون به نرخ گل و سپس به همان شبکهٔ
+نتایج تبدیل می‌شود. دلیل وجودش این است که ۲۰۰ عضو مدل اصلی داده را تغییر می‌دهند اما همه یک
+نظریه دارند ــ تنها محکِ خودِ نظریه، مدلی با ساختار متفاوت است. هر دو مدل امتحان یکسانی
+می‌دهند (آموزش پیش از ژوئن ۲۰۲۵، نمره روی ۱٬۰۷۱ مسابقهٔ بعدی): دیکسون-کولز ۰٫۸۱۹،
+الو ۰٫۸۵۸، و ترکیب ۵۰/۵۰ آن‌ها ۰٫۸۳۱ ــ بدتر از دیکسون-کولز به‌تنهایی؛ پس ترکیب
+<b>رد شد</b> و اعداد الو هرگز وارد هیچ عددی که این‌جا می‌بینید نمی‌شوند. آنچه می‌ماند
+اختلاف‌نظر است: دو مدل روی یک مسابقهٔ معمولی حدود ۸ واحد با هم فاصله دارند، و هرجا فاصله
+به‌طور غیرعادی باز شود همان مسابقه علامت می‌خورد ــ دو نظریه که یک تاریخ را متفاوت
+می‌خوانند هشدار است، نه میانگین.</p>
+
 <h2>تحلیلگر هوش مصنوعی</h2>
 <p>بخش‌های کوتاه تحلیلی که در انتهای هر صفحهٔ مسابقه، تیم و بازیکن می‌آیند، نوشتهٔ یک مدل
 زبانی هستند (امضای پایین هر بخش می‌گوید کدام مدل و چه زمانی). دو قانون آن‌ها را صادق نگه
@@ -2032,6 +2084,11 @@ API عمومی پالی‌مارکت دریافت می‌شوند.</p>
 و تصادفی‌بودن بدون بذر در موتور تورنمنت که حالا قطعی است) و دو دفاع به همراه آورد:
 محافظت قیمت در لحظهٔ اجرا برای شرط‌ها و دفتر شرط‌بندی کاغذی که هر فرصت یافت‌شده را با
 ارزش خط پایانی می‌سنجد. پیش‌بینی‌ها تغییری نکردند؛ اعتماد به آن‌ها بهتر کسب شد.</li>
+<li><b>۱۳ ژوئن</b> ــ نظر دوم: یک مدل همراه الو→گل ساخته شد و همان امتحان را داد. حکم روی
+همان ۱٬۰۷۱ مسابقهٔ کنارگذاشته: دیکسون-کولز ۰٫۸۱۹، الو ۰٫۸۵۸، ترکیب ۵۰/۵۰ آن‌ها ۰٫۸۳۱ ــ
+<em>بدتر از دیکسون-کولز به‌تنهایی</em>؛ پس ترکیب رد شد و الو هرگز به اعداد منتشرشده راه
+ندارد. فقط به‌عنوان نظر دوم نمایشی روی صفحهٔ هر مسابقه می‌نشیند و اختلافش با مدل اصلی تنها
+یک سیم هشدار است.</li>
 <li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
 می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
 </ol>
@@ -2145,6 +2202,9 @@ ol.timeline li::before {
 }
 ol.timeline b { font-family: "Fraunces", serif; }
 
+/* Elo second opinion */
+.secondop{max-width:680px;margin:6px auto}
+.elo-disagree{color:#ffc94d}
 /* AI analyst sections */
 section.llm {
   max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.3rem;
