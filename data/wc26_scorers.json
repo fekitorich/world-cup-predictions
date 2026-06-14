@@ -2,6 +2,7 @@
   "fetched_fixtures": [
     1489369,
     1489370,
+    1489371,
     1489373,
     1538999,
     1539000
@@ -59,6 +60,16 @@
     },
     "B. Embolo": {
       "team": "Switzerland",
+      "goals": 1,
+      "assists_from": []
+    },
+    "I. Saibari": {
+      "team": "Morocco",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Vinicius Junior": {
+      "team": "Brazil",
       "goals": 1,
       "assists_from": []
     }
