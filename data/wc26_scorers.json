@@ -5,6 +5,7 @@
     1489371,
     1489372,
     1489373,
+    1489374,
     1538999,
     1539000,
     1539001
@@ -12,6 +13,11 @@
   "scorers": {
     "F. Balogun": {
       "team": "United States",
+      "goals": 2,
+      "assists_from": []
+    },
+    "K. Havertz": {
+      "team": "Germany",
       "goals": 2,
       "assists_from": []
     },
@@ -87,6 +93,36 @@
     },
     "C. Metcalfe": {
       "team": "Australia",
+      "goals": 1,
+      "assists_from": []
+    },
+    "F. Nmecha": {
+      "team": "Germany",
+      "goals": 1,
+      "assists_from": []
+    },
+    "L. Comenencia": {
+      "team": "Curaçao",
+      "goals": 1,
+      "assists_from": []
+    },
+    "N. Schlotterbeck": {
+      "team": "Germany",
+      "goals": 1,
+      "assists_from": []
+    },
+    "J. Musiala": {
+      "team": "Germany",
+      "goals": 1,
+      "assists_from": []
+    },
+    "N. Brown": {
+      "team": "Germany",
+      "goals": 1,
+      "assists_from": []
+    },
+    "D. Undav": {
+      "team": "Germany",
       "goals": 1,
       "assists_from": []
     }

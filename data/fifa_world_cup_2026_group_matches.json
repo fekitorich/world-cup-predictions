@@ -108,8 +108,8 @@
       "away": "Curaçao",
       "venue": "NRG Stadium",
       "city": "Houston",
-      "status": "Not Started",
-      "score": null
+      "status": "Match Finished",
+      "score": "7-1"
     },
     {
       "match_id": 1489376,
@@ -120,7 +120,7 @@
       "away": "Japan",
       "venue": "AT&T Stadium",
       "city": "Dallas",
-      "status": "Not Started",
+      "status": "Second Half",
       "score": null
     },
     {
