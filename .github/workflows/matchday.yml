@@ -11,10 +11,9 @@ name: matchday
 
 on:
   schedule:
-    # 3x daily UTC during the tournament — bump/trim these lines freely,
-    # it is free on a public repo. (The old launchd job ran twice daily.)
+    # twice daily UTC — morning and evening. Bump/trim these lines freely,
+    # it is free on a public repo.
     - cron: "0 5 * * *"
-    - cron: "0 13 * * *"
     - cron: "0 21 * * *"
   workflow_dispatch: {}   # manual "Run workflow" button / `gh workflow run matchday`
 
