@@ -16,10 +16,13 @@ simulation model.
   unittest discover -s tests`); `runs/` — time-coded archives of every
   result write
 - Nightly build runs in the cloud: `.github/workflows/matchday.yml`
-  (scheduled GitHub Action, 3x/day UTC) reproduces the pipeline and pushes
-  docs+data to main. Needs repo secret `API_FOOTBALL_KEY`; never bets,
-  never runs the LLM. `wc26_matchday.sh` is the legacy local launchd
-  entry point (same steps) — kept as a manual/offline fallback
+  (scheduled GitHub Action, 2x/day UTC 05:00+21:00) reproduces the pipeline
+  and pushes docs+data to main. Repo secrets: `API_FOOTBALL_KEY` (always),
+  `ANTHROPIC_API_KEY` (the once-daily LLM refresh). Never bets. The 05:00
+  run regenerates forward-looking LLM analysis for fixtures within 2 days
+  (`wc26_llm.py generate --refresh-days 2`); past-match reviews stay frozen.
+  `wc26_matchday.sh` is the legacy local launchd entry point (same pipeline,
+  no LLM/betting) — kept as a manual/offline fallback
 
 ## Pipeline (order matters)
 

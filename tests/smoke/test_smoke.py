@@ -34,13 +34,25 @@ class TestEntryPoints(unittest.TestCase):
         sh = open(os.path.join(ROOT, "wc26_matchday.sh")).read()
         self.assertIn("unittest discover", sh)
 
-    def test_matchday_never_bets_or_generates_llm(self):
-        """Money and API spend are user-triggered only — automation must
-        never touch betting/ executors or wc26_llm.py generate."""
+    def test_matchday_script_never_bets_or_generates_llm(self):
+        """The local fallback script stays pure: no betting, and no LLM
+        (it has no CI secret plumbing). LLM in the cloud lives in the
+        workflow, not here."""
         sh = open(os.path.join(ROOT, "wc26_matchday.sh")).read()
         for forbidden in ("place_bets", "find_bets", "betting/run.py",
                           "news_check", "wc26_llm.py generate"):
             self.assertNotIn(forbidden, sh)
+
+    def test_ci_workflow_never_bets(self):
+        """The cloud nightly may refresh LLM analysis (user-sanctioned),
+        but must NEVER touch real money — no betting executors in CI."""
+        wf = os.path.join(ROOT, ".github", "workflows", "matchday.yml")
+        if not os.path.exists(wf):
+            self.skipTest("no matchday workflow")
+        text = open(wf).read()
+        for forbidden in ("place_bets", "find_bets", "betting/run.py",
+                          "news_check", "POLYMARKET"):
+            self.assertNotIn(forbidden, text)
 
     def test_betting_entry_points_exist(self):
         for f in ("run.py", "find_bets.py", "place_bets.py", "paper.py"):

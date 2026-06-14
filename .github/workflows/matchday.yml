@@ -40,7 +40,7 @@ jobs:
       - name: test gate — red tests mean no publish
         run: python3 -m unittest discover -s tests -q
 
-      - name: refresh results, prices, model, site
+      - name: refresh results, prices, model
         run: |
           python3 pipeline/wc26_update_results.py   # results, grading, scorers, KO fixtures
           python3 pipeline/wc26_polymarket.py       # fresh market prices (+ late/KO markets)
@@ -50,7 +50,22 @@ jobs:
           python3 pipeline/wc26_elo.py              # Elo second opinion
           python3 pipeline/wc26_tournament.py       # 100k tournament sims (lock untouched)
           python3 pipeline/wc26_awards.py           # boot/awards odds
-          python3 pipeline/wc26_build_site.py snapshot   # rebuild + freeze today's archive
+
+      # Once a day (the 05:00 run) and on manual dispatch: regenerate the
+      # forward-looking AI analyst sections for fixtures within 2 days so
+      # they track the day's refit model + results. Past-match reviews are
+      # frozen (write-once) and never touched. Skipped on the 21:00 run and
+      # whenever the ANTHROPIC_API_KEY secret is absent (clean no-op).
+      - name: refresh forward-looking LLM analysis (once daily)
+        if: github.event.schedule == '0 5 * * *' || github.event_name == 'workflow_dispatch'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          pip install --quiet anthropic
+          python3 pipeline/wc26_llm.py generate --refresh-days 2
+
+      - name: build the site (renders whatever analysis exists)
+        run: python3 pipeline/wc26_build_site.py snapshot   # rebuild + freeze today's archive
 
       - name: commit and push if anything changed
         run: |

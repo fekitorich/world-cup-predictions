@@ -122,6 +122,36 @@ class TestSiteRendering(unittest.TestCase):
         self.assertNotIn("<script>", html)
 
 
+class TestRefreshWindow(unittest.TestCase):
+    """The daily-refresh scope: unplayed fixtures within N days."""
+    from datetime import datetime, timezone
+    NOW = datetime(2026, 6, 14, 12, 0, tzinfo=timezone.utc)
+    FIX = [
+        {"match_id": 1, "home": "A", "away": "B",
+         "date_utc": "2026-06-14T18:00:00+00:00"},                  # today
+        {"match_id": 2, "home": "C", "away": "D",
+         "date_utc": "2026-06-15T18:00:00+00:00"},                  # tomorrow
+        {"match_id": 3, "home": "E", "away": "F",
+         "date_utc": "2026-06-20T18:00:00+00:00"},                  # >2 days
+        {"match_id": 4, "home": "A", "away": "G",
+         "date_utc": "2026-06-13T18:00:00+00:00", "score": "1-0"},  # played
+    ]
+
+    def test_window_two_days(self):
+        mids, teams = L.upcoming_window(self.FIX, self.NOW, 2)
+        self.assertEqual(mids, {"1", "2"})
+        self.assertEqual(teams, {"A", "B", "C", "D"})
+
+    def test_played_and_far_excluded(self):
+        mids, _ = L.upcoming_window(self.FIX, self.NOW, 2)
+        self.assertNotIn("3", mids)   # too far out
+        self.assertNotIn("4", mids)   # already played (review frozen)
+
+    def test_bad_dates_skipped(self):
+        bad = [{"match_id": 9, "home": "X", "away": "Y", "date_utc": "nope"}]
+        self.assertEqual(L.upcoming_window(bad, self.NOW, 5), (set(), set()))
+
+
 class TestSourcesFrozen(unittest.TestCase):
     @unittest.skipUnless(os.path.exists(L.SOURCES), "sources not frozen yet")
     def test_sources_cover_all_teams(self):

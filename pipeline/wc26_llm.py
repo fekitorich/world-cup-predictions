@@ -4,6 +4,10 @@
                                                     # (wiki summaries fetched ONCE)
   .venv/bin/python3 pipeline/wc26_llm.py generate   # fill missing analyses
       [--only teams|players|matches] [--limit N] [--force]
+      [--refresh-days N]   # also REGENERATE forward-looking analysis for
+                           # fixtures kicking off within N days (the daily
+                           # cloud refresh runs this so previews/team/player
+                           # notes track the latest refit model + results)
 
 Grounding contract: every generation sees ONLY the frozen source dossier
 plus our own model calculations — same inputs, reproducible outputs, no
@@ -11,7 +15,9 @@ invented facts. Output store: data/wc26_llm_analysis.json
   {teams: {name: {...}}, players: {name: {...}},
    matches: {mid: {preview: {...}, review: {...}}}}
 Each entry: {text, generated, model}. Reviews are generated only after a
-result exists; previews/teams/players are write-once unless --force.
+result exists and are NEVER regenerated (a finished match's verdict is
+frozen — even --refresh-days leaves it alone); previews/teams/players are
+write-once unless --force or in the --refresh-days upcoming window.
 
 Key: ANTHROPIC_API_KEY env var or gitignored .anthropic_key at repo root.
 Cost: ~190 short generations with claude-opus-4-8; the frozen system
@@ -24,6 +30,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from datetime import datetime, timedelta, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
@@ -239,7 +246,26 @@ def entry(text):
             "generated": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
 
 
-def generate(only=None, limit=None, force=False):
+def upcoming_window(fixtures, now, days):
+    """(match_ids, team names) for UNPLAYED fixtures kicking off within
+    `days` of now — the daily-refresh scope. Pure: no I/O."""
+    horizon = now + timedelta(days=days)
+    mids, teams = set(), set()
+    for m in fixtures:
+        if m.get("score"):
+            continue
+        try:
+            ko = datetime.fromisoformat(m["date_utc"])
+        except (ValueError, KeyError, TypeError):
+            continue
+        if now <= ko <= horizon:
+            mids.add(str(m["match_id"]))
+            teams.add(m["home"])
+            teams.add(m["away"])
+    return mids, teams
+
+
+def generate(only=None, limit=None, force=False, refresh_days=0):
     if not api_key():
         print("no ANTHROPIC_API_KEY / .anthropic_key — skipping LLM generation")
         return
@@ -258,17 +284,23 @@ def generate(only=None, limit=None, force=False):
     except FileNotFoundError:
         pass
 
+    # daily refresh scope: forward-looking analysis for imminent fixtures
+    refresh_mids, refresh_teams = (
+        upcoming_window(fixtures, datetime.now(timezone.utc), refresh_days)
+        if refresh_days else (set(), set()))
+
     todo = []   # (kind, key, prompt)
     if only in (None, "teams"):
         for name, s in src["teams"].items():
-            if force or name not in store["teams"]:
+            if force or name not in store["teams"] or name in refresh_teams:
                 todo.append(("teams", name,
                              build_team_prompt(name, s, team_calcs(name))))
     if only in (None, "players"):
         profiles = json.load(
             open(f"{DATA}/wc26_player_profiles.json"))["profiles"]
         for name, prof in profiles.items():
-            if force or name not in store["players"]:
+            if force or name not in store["players"] \
+                    or prof.get("team") in refresh_teams:
                 team_src = src["teams"].get(prof.get("team"), {})
                 todo.append(("players", name,
                              build_player_prompt(name, prof, team_src)))
@@ -278,7 +310,7 @@ def generate(only=None, limit=None, force=False):
             sim = sims.get(mid, {})
             mkt = prices.get(mid, {})
             slot = store["matches"].setdefault(mid, {})
-            if force or "preview" not in slot:
+            if force or "preview" not in slot or mid in refresh_mids:
                 todo.append(("preview", mid,
                              build_preview_prompt(m, sim, mkt, src)))
             if m.get("score") and (force or "review" not in slot):
@@ -316,8 +348,12 @@ if __name__ == "__main__":
     ap.add_argument("--only", choices=["teams", "players", "matches"])
     ap.add_argument("--limit", type=int)
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--refresh-days", type=int, default=0,
+                    help="also regenerate forward-looking analysis for "
+                         "fixtures within N days (reviews stay frozen)")
     a = ap.parse_args()
     if a.cmd == "sources":
         build_sources(force=a.force)
     else:
-        generate(only=a.only, limit=a.limit, force=a.force)
+        generate(only=a.only, limit=a.limit, force=a.force,
+                 refresh_days=a.refresh_days)
