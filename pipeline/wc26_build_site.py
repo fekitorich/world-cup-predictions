@@ -1486,6 +1486,8 @@ being settled in public.</p>"""
 <p class="fineprint">A calibrated forecaster's last two columns match. Early-tournament
 samples are small - judge after a full group stage.</p>"""
 
+    goals_html = goals_section(graded)
+
     body = f"""<h1>The report card</h1>
 <p class="standfirst">Locked predictions, graded after every matchday. Re-generated
 automatically by the nightly run; previous editions live in the
@@ -1494,9 +1496,62 @@ automatically by the nightly run; previous editions live in the
 {comp}
 {trend_chart()}
 {md_html}
+{goals_html}
 {calls}
 {cal}"""
     (OUT / "report.html").write_text(page("Report", body))
+
+
+def goals_grade(graded):
+    """Grade total-goals predictions from the locked most-likely scoreline
+    against actual scores. Pure: list of graded picks in, stats dict out."""
+    def total(score):
+        h, a = score.split("-")
+        return int(h) + int(a)
+
+    n = pred_sum = act_sum = err_sum = exact = ou_n = ou_hit = 0
+    for p in graded:
+        if "actual_score" not in p or "pred_score" not in p:
+            continue
+        pt, at = total(p["pred_score"]), total(p["actual_score"])
+        n += 1
+        pred_sum += pt
+        act_sum += at
+        err_sum += abs(pt - at)
+        exact += (pt == at)
+        # over/under 2.5 direction of the modal scoreline vs reality
+        # (a conservative proxy — the modal total skews low; see fineprint)
+        ou_n += 1
+        ou_hit += ((pt > 2.5) == (at > 2.5))
+    if not n:
+        return None
+    return {"n": n, "pred_per": pred_sum / n, "act_per": act_sum / n,
+            "mae": err_sum / n, "exact": exact,
+            "ou_n": ou_n, "ou_hit": ou_hit}
+
+
+def goals_section(graded):
+    g = goals_grade(graded)
+    if not g:
+        return ""
+    st = "".join(
+        f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in (
+            ("Goals/game actual", f"{g['act_per']:.2f}"),
+            ("Goals/game predicted", f"{g['pred_per']:.2f}"),
+            ("Avg total error", f"{g['mae']:.2f}"),
+            ("Exact total", f"{g['exact']}/{g['n']}"),
+            ("O/U 2.5 direction", f"{g['ou_hit']}/{g['ou_n']} "
+             f"({g['ou_hit'] / g['ou_n'] * 100:.0f}%)"),
+        ))
+    return f"""<h2>Goals</h2>
+<dl class="stats">{st}</dl>
+<p class="fineprint">"Predicted" is the total of each match's locked most-likely
+scoreline - a deliberately conservative point estimate, since the single most-likely
+scoreline sits below the average total, so expect this to trail the actual rate.
+It grades whether the model reads a match as high- or low-scoring, not a calibrated
+totals line. The full over/under probabilities are on each match page; their betting
+accuracy (hit rate and closing-line value) is tracked privately in the betting
+paper-trading log.</p>"""
 
 
 # ---------- methodology page ----------

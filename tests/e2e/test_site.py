@@ -16,6 +16,40 @@ sys.path.insert(0, os.path.join(_ROOT, "pipeline"))
 import wc26_build_site as b
 
 
+class TestGoalsGrade(unittest.TestCase):
+    """Report-card Goals section: total-goals grading from locked picks."""
+    PICKS = [
+        {"pred_score": "1-0", "actual_score": "2-0"},  # pred 1, act 2, err 1, U/U
+        {"pred_score": "2-1", "actual_score": "2-1"},  # exact 3, O/O
+        {"pred_score": "1-1", "actual_score": "0-0"},  # pred 2, act 0, err 2, U/U
+        {"pred_score": "2-2", "actual_score": "3-1"},  # pred 4, act 4, exact, O/O
+    ]
+
+    def test_totals_and_error(self):
+        g = b.goals_grade(self.PICKS)
+        self.assertEqual(g["n"], 4)
+        self.assertAlmostEqual(g["act_per"], (2 + 3 + 0 + 4) / 4)
+        self.assertAlmostEqual(g["pred_per"], (1 + 3 + 2 + 4) / 4)
+        self.assertAlmostEqual(g["mae"], (1 + 0 + 2 + 0) / 4)
+        self.assertEqual(g["exact"], 2)        # 2-1 and 2-2/3-1 totals match
+
+    def test_over_under_direction(self):
+        g = b.goals_grade(self.PICKS)
+        # pred>2.5 vs act>2.5: (F,F)hit (T,T)hit (F,F)hit (T,T)hit -> 4/4
+        self.assertEqual((g["ou_hit"], g["ou_n"]), (4, 4))
+
+    def test_empty_is_none(self):
+        self.assertIsNone(b.goals_grade([]))
+        self.assertIsNone(b.goals_grade([{"pred_score": "1-0"}]))  # no actual
+
+    def test_section_renders_and_caveats(self):
+        html = b.goals_section(self.PICKS)
+        self.assertIn("<h2>Goals</h2>", html)
+        self.assertIn("Goals/game actual", html)
+        self.assertIn("most-likely", html)   # the honesty caveat is present
+        self.assertEqual(b.goals_section([]), "")
+
+
 class TestStandings(unittest.TestCase):
     def setUp(self):
         self._saved = [dict(m) for m in b.MATCHES]
