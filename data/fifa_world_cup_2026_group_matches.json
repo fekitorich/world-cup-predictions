@@ -84,8 +84,8 @@
       "away": "Scotland",
       "venue": "Gillette Stadium",
       "city": "Boston",
-      "status": "Not Started",
-      "score": null
+      "status": "Match Finished",
+      "score": "0-1"
     },
     {
       "match_id": 1539001,
@@ -96,8 +96,8 @@
       "away": "Turkey",
       "venue": "BC Place",
       "city": "Vancouver",
-      "status": "Not Started",
-      "score": null
+      "status": "Match Finished",
+      "score": "2-0"
     },
     {
       "match_id": 1489374,

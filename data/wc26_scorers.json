@@ -3,9 +3,11 @@
     1489369,
     1489370,
     1489371,
+    1489372,
     1489373,
     1538999,
-    1539000
+    1539000,
+    1539001
   ],
   "scorers": {
     "F. Balogun": {
@@ -70,6 +72,21 @@
     },
     "Vinicius Junior": {
       "team": "Brazil",
+      "goals": 1,
+      "assists_from": []
+    },
+    "J. McGinn": {
+      "team": "Scotland",
+      "goals": 1,
+      "assists_from": []
+    },
+    "N. Irankunda": {
+      "team": "Australia",
+      "goals": 1,
+      "assists_from": []
+    },
+    "C. Metcalfe": {
+      "team": "Australia",
       "goals": 1,
       "assists_from": []
     }
