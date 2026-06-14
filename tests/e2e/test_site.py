@@ -223,6 +223,20 @@ class TestBuiltSite(unittest.TestCase):
         b.OUT = cls._out_saved
         cls._tmp.cleanup()
 
+    def test_glossary_page(self):
+        """The newcomer glossary builds, is linked in the nav, and defines
+        the core terms across the field."""
+        gloss = self.docs / "glossary.html"
+        self.assertTrue(gloss.exists())
+        html = gloss.read_text()
+        for term in ("Probability", "Dixon", "Expected goals", "Over / Under",
+                     "Edge", "Brier score", "Closing-line value", "Look-ahead"):
+            self.assertIn(term, html, term)
+        self.assertIn("dl class=\"glossary\"", html)
+        # linked from the shared nav (check a deep page)
+        deep = next(p for p in self.pages if p.parent.name == "matches")
+        self.assertIn("glossary.html", deep.read_text())
+
     def test_analytics_is_consent_gated(self):
         """GA must never auto-load: no static gtag.js <script> tag, consent
         defaults to denied, and the consent banner ships on every page."""

@@ -41,6 +41,10 @@ ol.timeline b { font-family: "Fraunces", serif; }
 /* Elo second opinion */
 .secondop{max-width:680px;margin:6px auto}
 .elo-disagree{color:#ffc94d}
+/* plain-language glossary */
+dl.glossary{margin:0 0 1.6rem}
+dl.glossary dt{font-weight:600;margin-top:1rem}
+dl.glossary dd{margin:.15rem 0 0;color:var(--ink-soft);max-width:62ch}
 /* cookie consent (Google Consent Mode v2) */
 #cookie-consent{position:fixed;right:1rem;bottom:1rem;z-index:50;
   max-width:min(340px,calc(100vw - 2rem));background:var(--paper-2);
@@ -79,7 +83,9 @@ table.markets tr.subhead td {
   display: inline-block; line-height: 1; margin: 6px 0 10px; letter-spacing: -.03em;
 }
 .wordmark:hover { text-decoration: none; color: var(--green); }
-.masthead nav { font-size: .85rem; text-transform: uppercase; letter-spacing: .18em; }
+.masthead nav { display: flex; flex-wrap: wrap; justify-content: center;
+  align-items: baseline; row-gap: .25rem;
+  font-size: .85rem; text-transform: uppercase; letter-spacing: .18em; }
 .masthead nav span { color: var(--rule); margin: 0 10px; }
 .crumb { max-width: 1080px; margin: 10px auto 0; padding: 0 24px; font-size: .78rem; color: var(--ink-soft); }
 .standfirst { color: var(--ink-soft); margin-top: 0; }
@@ -152,6 +158,7 @@ sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
 .compare .cr { text-align: left; font-weight: 600; width: 38%; }
 .compare td .form { vertical-align: middle; }
 .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 1rem; }
+.twocol > * { min-width: 0; }   /* let grid items shrink so wide tables scroll, not overflow */
 .twocol .comp { display: none; }
 @media (max-width: 860px) { .twocol { grid-template-columns: 1fr; } }
 
@@ -251,8 +258,12 @@ tr.q3 td { background: color-mix(in srgb, var(--amber) 10%, transparent); }
 @media (min-width: 701px) {
   thead th { position: sticky; top: 0; background: var(--paper); z-index: 5; }
 }
-.skip { position: absolute; left: -999px; top: 6px; }
-.skip:focus { left: 8px; background: var(--ink); color: var(--paper); padding: .4em .8em; z-index: 50; }
+/* skip link: clip-hidden (not left:-999px, which extends the page in RTL) */
+.skip { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip:focus { width: auto; height: auto; margin: 0; overflow: visible; clip: auto;
+  left: 8px; top: 6px; background: var(--ink); color: var(--paper);
+  padding: .4em .8em; z-index: 50; }
 a.gchip { color: var(--ink); }
 @media print {
   .masthead nav, .themebtn, .langsw, footer, .snapnote, .skip { display: none !important; }

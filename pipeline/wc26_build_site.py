@@ -286,7 +286,7 @@ function toggleTheme() {{
   {switcher}
   <div class="kicker">The Form Book - research edition</div>
   <a class="wordmark" href="{pre}index.html">World&nbsp;Cup&nbsp;26</a>
-  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}report.html">Report</a><span>·</span><a href="{pre}method.html">Method</a></nav>
+  <nav><a href="{pre}index.html">Groups</a><span>·</span><a href="{pre}matches.html">Matches</a><span>·</span><a href="{pre}futures.html">Futures</a><span>·</span><a href="{pre}awards.html">Awards</a><span>·</span><a href="{pre}bracket.html">Bracket</a><span>·</span><a href="{pre}report.html">Report</a><span>·</span><a href="{pre}glossary.html">Glossary</a><span>·</span><a href="{pre}method.html">Method</a></nav>
 </header>
 {f'<div class="crumb">{crumb}</div>' if crumb else ''}
 <main id="main">
@@ -2405,6 +2405,10 @@ ol.timeline b { font-family: "Fraunces", serif; }
 /* Elo second opinion */
 .secondop{max-width:680px;margin:6px auto}
 .elo-disagree{color:#ffc94d}
+/* plain-language glossary */
+dl.glossary{margin:0 0 1.6rem}
+dl.glossary dt{font-weight:600;margin-top:1rem}
+dl.glossary dd{margin:.15rem 0 0;color:var(--ink-soft);max-width:62ch}
 /* cookie consent (Google Consent Mode v2) */
 #cookie-consent{position:fixed;right:1rem;bottom:1rem;z-index:50;
   max-width:min(340px,calc(100vw - 2rem));background:var(--paper-2);
@@ -2443,7 +2447,9 @@ table.markets tr.subhead td {
   display: inline-block; line-height: 1; margin: 6px 0 10px; letter-spacing: -.03em;
 }
 .wordmark:hover { text-decoration: none; color: var(--green); }
-.masthead nav { font-size: .85rem; text-transform: uppercase; letter-spacing: .18em; }
+.masthead nav { display: flex; flex-wrap: wrap; justify-content: center;
+  align-items: baseline; row-gap: .25rem;
+  font-size: .85rem; text-transform: uppercase; letter-spacing: .18em; }
 .masthead nav span { color: var(--rule); margin: 0 10px; }
 .crumb { max-width: 1080px; margin: 10px auto 0; padding: 0 24px; font-size: .78rem; color: var(--ink-soft); }
 .standfirst { color: var(--ink-soft); margin-top: 0; }
@@ -2516,6 +2522,7 @@ sup.host { color: var(--red); font-size: .62rem; letter-spacing: .08em; }
 .compare .cr { text-align: left; font-weight: 600; width: 38%; }
 .compare td .form { vertical-align: middle; }
 .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 1rem; }
+.twocol > * { min-width: 0; }   /* let grid items shrink so wide tables scroll, not overflow */
 .twocol .comp { display: none; }
 @media (max-width: 860px) { .twocol { grid-template-columns: 1fr; } }
 
@@ -2615,8 +2622,12 @@ tr.q3 td { background: color-mix(in srgb, var(--amber) 10%, transparent); }
 @media (min-width: 701px) {
   thead th { position: sticky; top: 0; background: var(--paper); z-index: 5; }
 }
-.skip { position: absolute; left: -999px; top: 6px; }
-.skip:focus { left: 8px; background: var(--ink); color: var(--paper); padding: .4em .8em; z-index: 50; }
+/* skip link: clip-hidden (not left:-999px, which extends the page in RTL) */
+.skip { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip:focus { width: auto; height: auto; margin: 0; overflow: visible; clip: auto;
+  left: 8px; top: 6px; background: var(--ink); color: var(--paper);
+  padding: .4em .8em; z-index: 50; }
 a.gchip { color: var(--ink); }
 @media print {
   .masthead nav, .themebtn, .langsw, footer, .snapnote, .skip { display: none !important; }
@@ -2697,6 +2708,209 @@ h3 { font-family: "Fraunces", serif; font-size: 1.02rem; font-weight: 600; margi
 .sim .fineprint { margin-left: auto; margin-right: auto; }
 """
 
+GLOSSARY = [
+    ("Start here — the big picture", [
+        ("What this site is", "A computer model that estimates the chance of "
+         "every World Cup result, written out as probabilities. It then puts "
+         "its numbers next to the betting market's prices and grades itself in "
+         "public after every match. Nothing here is a tip or a certainty — it "
+         "is one informed opinion, shown with its workings and its track "
+         "record so you can judge it."),
+        ("Probability", "How likely something is, from 0% (never) to 100% "
+         "(certain). \"Brazil 62% to win\" means that if this exact match "
+         "were played many times, the model expects Brazil to win about 62 of "
+         "every 100. A 62% favourite still loses fairly often — that is not "
+         "the model being wrong, it is what 62% means."),
+        ("Favourite and underdog", "The favourite is the side more likely to "
+         "win; the underdog is the less likely. Upsets are normal — over a "
+         "whole tournament, a good chunk of underdogs win."),
+    ]),
+    ("Reading the odds", [
+        ("Odds", "Another way of writing a probability, usually as a payout. "
+         "\"3.0 (decimal) odds\" means a winning $1 bet returns $3 (your $1 "
+         "back plus $2 profit) — which implies about a 33% chance."),
+        ("Implied probability", "The probability hidden inside a price. A "
+         "price of 50¢ on a yes/no market implies a 50% chance. We turn every "
+         "market price into an implied probability so the model and the market "
+         "can be compared on the same scale."),
+        ("Fair price", "The model's probability written as a price in cents — "
+         "a 56% chance is a 56¢ fair price. Buy below it and you profit on "
+         "average <em>if the model is right</em>; pay above it and you are "
+         "overpaying by the model's lights."),
+    ]),
+    ("The markets — what can be predicted", [
+        ("1X2 / moneyline", "The basic question: home win, draw, or away win "
+         "(the \"1\", \"X\" and \"2\"). \"Moneyline\" is the same thing in "
+         "betting language — just who wins, draw included."),
+        ("Over / Under (totals)", "A bet on the <em>number of goals</em> in a "
+         "match rather than who wins. \"Over 2.5\" wins if there are 3 or more "
+         "goals; \"Under 2.5\" wins with 2 or fewer. The half-goal avoids a "
+         "tie."),
+        ("The line", "The number a total or handicap is set at — 2.5 goals, "
+         "9.5 corners. The half stops the bet from landing exactly on the "
+         "number."),
+        ("Both teams to score (BTTS)", "Yes if each side scores at least one "
+         "goal, No otherwise — independent of who wins."),
+        ("Exact score / correct score", "Predicting the precise final score "
+         "(2–1, 0–0). Hard to hit — even the single likeliest score usually "
+         "sits well under a 1-in-6 chance — so the payouts are large."),
+        ("Spread / handicap", "Giving the favourite a goal start to make a "
+         "lopsided match a coin-flip. \"England −1.5\" wins only if England "
+         "win by 2 or more clear goals."),
+        ("First to score", "Which team scores the opening goal — or neither, "
+         "if it finishes 0–0."),
+        ("Halves", "The same result/goal questions applied to just the first "
+         "or second half of a match."),
+        ("Corners", "Bets on the number of corner kicks, usually an over/under "
+         "total. Driven more by playing style than by who is winning."),
+        ("Futures", "Bets settled later in the tournament rather than on one "
+         "match: to win the World Cup, to reach the final, to win the group. "
+         "Long shots pay big and tie up your stake for weeks."),
+    ]),
+    ("How the model makes the numbers", [
+        ("Statistical model", "A set of equations fitted to past results that "
+         "outputs a probability. It has no opinions, no nerves and no eye for "
+         "the game — only the maths of what has happened before."),
+        ("Poisson", "The standard maths for counting goals: it turns a team's "
+         "average scoring rate into the chance of 0, 1, 2, 3… goals. Plain "
+         "Poisson slightly misprices draws, which is why we use a refinement."),
+        ("Dixon–Coles", "The refinement: weighted Poisson that corrects the "
+         "low-scoring scorelines plain Poisson gets wrong and leans on recent "
+         "matches more than old ones. The engine behind this whole site."),
+        ("Attack and defence ratings", "Each team gets two numbers — how many "
+         "goals it tends to score, and to concede. A match's goal estimate "
+         "comes from one side's attack against the other's defence."),
+        ("Expected goals (xG)", "Here, the number of goals the model expects a "
+         "team to score in a match, from those ratings. Note: this is "
+         "<em>not</em> the shot-by-shot xG on TV broadcasts — same name, "
+         "different thing."),
+        ("Home advantage", "The measured edge a team gets playing at home (or, "
+         "at a World Cup, as a host). Removed at neutral venues."),
+        ("Recency weighting", "Newer matches count for more than old ones, "
+         "because squads and form change. A result from last month says more "
+         "than one from three years ago."),
+        ("Shrinkage / regression to the mean", "Pulling extreme estimates back "
+         "toward average, so a team that happens to win 6–0 once is not "
+         "treated as six-goal-good forever. Guards against reading too much "
+         "into small samples."),
+        ("Score grid", "A table of the probability of every scoreline (0–0, "
+         "1–0, 2–1…). Every market on the site — winner, totals, both-teams, "
+         "exact score — is read off this one grid."),
+        ("Monte Carlo simulation", "Playing the whole tournament out at random "
+         "tens of thousands of times, then counting how often each team wins. "
+         "How the futures (champion, reach-the-final) are estimated."),
+        ("Ensemble", "Running many slightly different versions of the model "
+         "and averaging them, so the answer carries its own uncertainty "
+         "instead of pretending to one exact number."),
+        ("Elo", "A simpler rating system (famous from chess) that updates after "
+         "every match. We run it as a structurally different <em>second "
+         "opinion</em>; where it and the main model disagree sharply, that is "
+         "a flag to trust the match less."),
+        ("The blend", "Mixing the model's probability with the market's price "
+         "to get a combined view, on the logic that the market sees things the "
+         "model can't (injuries, lineups). The site keeps the raw model "
+         "separate so each can be graded on its own."),
+    ]),
+    ("The market side", [
+        ("Prediction market", "A marketplace where people buy and sell shares "
+         "in an outcome; the price floats to reflect the crowd's collective "
+         "estimate of its probability. Polymarket is the one used here."),
+        ("Liquidity", "How much money is actively trading a market. Thin "
+         "(illiquid) markets have unreliable prices — a single small bet can "
+         "move them — so the site ignores them."),
+        ("Overround / vig", "The bookmaker's built-in margin: add up the "
+         "implied probabilities of all outcomes and they total more than "
+         "100%. That extra is the house edge, which you have to beat to "
+         "profit."),
+        ("Closing line", "The final price just before a match starts, after "
+         "all the smart money is in. It is the market's best guess, and a "
+         "hard benchmark to beat."),
+    ]),
+    ("Edge, value and staking", [
+        ("Edge", "The gap between the model's probability and the market's "
+         "price. Model 60%, market 52¢ → an 8-cent edge, the model's claim "
+         "that the market is too cheap. The whole point — and the thing most "
+         "often an illusion."),
+        ("Value", "A bet where your estimated probability beats the price. "
+         "Value betting means backing edges, win or lose on the day, and "
+         "trusting the maths over many bets."),
+        ("Kelly criterion", "A formula for how much to stake given your edge "
+         "and bankroll — bet more on bigger edges, less on thin ones. We use a "
+         "<em>fraction</em> of it, because the edge is never as certain as it "
+         "looks."),
+        ("Bankroll", "The total pot set aside for betting. Stakes are sized as "
+         "a slice of it so no single bet can do real damage."),
+        ("Closing-line value (CLV)", "Did the price move toward your bet after "
+         "you made it? Consistently positive CLV is the early sign you are "
+         "finding real edge — long before wins and losses prove anything."),
+        ("Paper trading", "Recording bets without staking money, to test "
+         "whether an edge is real before risking anything on it."),
+    ]),
+    ("Grading the forecasts", [
+        ("Hit rate / accuracy", "How often the predicted result actually "
+         "happened. Useful but crude — it ignores how <em>confident</em> the "
+         "call was."),
+        ("Brier score", "A sharper grade: the squared error of a probability "
+         "against what happened. Lower is better; a forecaster who just "
+         "guesses 'anything could happen' scores middling, and confident "
+         "wrong calls are punished hard."),
+        ("Log-loss", "Like the Brier score but harsher still on confident "
+         "mistakes — saying 95% and being wrong costs a lot. The main yardstick "
+         "for comparing the model, the market and the blend."),
+        ("Calibration", "Whether the probabilities mean what they say: of all "
+         "the things called 70%, do about 70% happen? A calibrated forecaster's "
+         "claims match reality over the long run."),
+        ("Baseline", "The score to beat — what you'd get by guessing with no "
+         "skill (e.g. always the base rates). A model is only worth anything "
+         "if it beats the baseline."),
+        ("Backtest / out-of-sample", "Testing the model on matches it was "
+         "<em>not</em> trained on, to see if it really predicts rather than "
+         "just memorises. The honest test."),
+        ("Look-ahead", "The cardinal sin: letting the model peek at "
+         "information it wouldn't have had at the time (like results that came "
+         "later). It flatters the numbers and makes a backtest a lie; avoiding "
+         "it is most of the work."),
+        ("Locked predictions", "Picks frozen before the tournament and graded "
+         "in public as results come in, so the scorecard can't be quietly "
+         "rewritten after the fact."),
+    ]),
+    ("Honest limits", [
+        ("Variance / luck", "Football is high-variance: the better side loses "
+         "all the time over 90 minutes. A model can be right about the odds and "
+         "still look wrong on the day — judge it over many matches, not one."),
+        ("Sample size", "How much data a number rests on. Early-tournament "
+         "grades are built on a handful of matches and will swing around; wait "
+         "for a full group stage before trusting any of them."),
+        ("What the model can't see", "It knows results, not injuries, "
+         "suspensions, lineups, weather or motivation. That is its biggest "
+         "blind spot, and why its confident disagreements with the market "
+         "deserve suspicion, not blind backing."),
+    ]),
+]
+
+
+def build_glossary():
+    toc = " · ".join(
+        f'<a href="#{slug(title)}">{escape(title)}</a>'
+        for title, _ in GLOSSARY)
+    sections = ""
+    for title, terms in GLOSSARY:
+        items = "".join(f"<dt>{escape(t)}</dt><dd>{d}</dd>" for t, d in terms)
+        sections += (f'<h2 id="{slug(title)}">{escape(title)}</h2>'
+                     f'<dl class="glossary">{items}</dl>')
+    body = f"""<h1>Plain-language glossary</h1>
+<p class="standfirst">New to predictions, probabilities or betting markets? This
+page explains every term on the site — and the field around it — in plain
+English, no maths assumed. Skim it, or jump to a section.</p>
+<p class="fineprint">{toc}</p>
+{sections}
+<p class="fineprint">Missing a term, or one that still reads like jargon? The
+whole site is open on
+<a href="https://github.com/amirdaraee/world-cup-predictions">GitHub</a> — and
+remember, none of this is betting advice.</p>"""
+    (OUT / "glossary.html").write_text(page("Glossary", body))
+
+
 def build_all(snapshot=False):
     if OUT.exists():
         # keep the archive across rebuilds; regenerate everything else
@@ -2721,6 +2935,7 @@ def build_all(snapshot=False):
     build_awards()
     build_player_pages()
     build_report()
+    build_glossary()
     build_method()
     build_method_fa()
     build_archive_index()
