@@ -223,6 +223,19 @@ class TestBuiltSite(unittest.TestCase):
         b.OUT = cls._out_saved
         cls._tmp.cleanup()
 
+    def test_analytics_is_consent_gated(self):
+        """GA must never auto-load: no static gtag.js <script> tag, consent
+        defaults to denied, and the consent banner ships on every page."""
+        html = (self.docs / "index.html").read_text()
+        self.assertNotIn(
+            '<script async src="https://www.googletagmanager.com/gtag/js',
+            html, "GA is auto-loading without consent")
+        self.assertIn("analytics_storage: 'denied'", html)
+        self.assertIn('id="cookie-consent"', html)
+        # the banner is in the shared page template -> on a deep page too
+        deep = next(p for p in self.pages if p.parent.name == "matches")
+        self.assertIn('id="cookie-consent"', deep.read_text())
+
     def test_report_page_graded_mode(self):
         """Inject synthetic results and verify every report section renders."""
         import copy

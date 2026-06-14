@@ -237,12 +237,30 @@ def page(title, body, depth=0, crumb="", lang="en", rtl=False, alt_lang=None):
 <meta name="twitter:image" content="https://{DOMAIN}/img/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23211d16'/%3E%3Cpath d='M8 4l3 2.2-1.1 3.6H6.1L5 6.2z' fill='%23f6f1e6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EG56KHB1SX"></script>
 <script>
+// Google Consent Mode v2 — analytics stays OFF until the visitor opts in.
+// gtag.js is not even loaded until consent is granted (this run or a prior
+// visit), so no GA cookie or request fires beforehand.
 window.dataLayer = window.dataLayer || [];
 function gtag(){{dataLayer.push(arguments);}}
-gtag('js', new Date());
-gtag('config', 'G-EG56KHB1SX');
+gtag('consent', 'default', {{
+  ad_storage: 'denied', ad_user_data: 'denied',
+  ad_personalization: 'denied', analytics_storage: 'denied'
+}});
+function wcfbLoadGA() {{
+  gtag('consent', 'update', {{ analytics_storage: 'granted' }});
+  if (window.wcfbGALoaded) return;
+  window.wcfbGALoaded = true;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-EG56KHB1SX';
+  document.head.appendChild(s);
+  gtag('js', new Date());
+  gtag('config', 'G-EG56KHB1SX');
+}}
+try {{
+  if (localStorage.getItem('wcfb_consent') === 'granted') wcfbLoadGA();
+}} catch (e) {{}}
 </script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -280,8 +298,35 @@ function toggleTheme() {{
   <p>Data: API-Football · FIFA rankings 2026 · <a href="{pre}method.html">how this works</a> ·
   <a href="{pre}archive.html">previous versions</a> ·
   <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·
-  personal research, verify before staking.</p>
+  personal research, verify before staking. ·
+  <a href="#" onclick="wcfbCookies();return false;">cookie choices</a></p>
 </footer>
+<div id="cookie-consent" role="dialog" aria-label="Cookie consent" hidden>
+  <p>We use cookies to analyse traffic and understand how the site is
+  used. You can accept or decline — your choice is remembered.</p>
+  <div class="cc-btns">
+    <button id="cc-reject" class="cc-no">Decline</button>
+    <button id="cc-accept" class="cc-yes">Accept</button>
+  </div>
+</div>
+<script>
+(function() {{
+  var box = document.getElementById('cookie-consent');
+  if (!box) return;
+  function stored() {{ try {{ return localStorage.getItem('wcfb_consent'); }}
+                       catch (e) {{ return null; }} }}
+  function decide(v) {{
+    try {{ localStorage.setItem('wcfb_consent', v); }} catch (e) {{}}
+    box.hidden = true;
+    if (v === 'granted' && window.wcfbLoadGA) wcfbLoadGA();
+  }}
+  if (!stored()) box.hidden = false;   // first visit: ask
+  document.getElementById('cc-accept').onclick = function() {{ decide('granted'); }};
+  document.getElementById('cc-reject').onclick = function() {{ decide('denied'); }};
+  // let anyone reopen the choice from the footer (easy to withdraw consent)
+  window.wcfbCookies = function() {{ box.hidden = false; }};
+}})();
+</script>
 </body>
 </html>"""
 
@@ -2360,6 +2405,18 @@ ol.timeline b { font-family: "Fraunces", serif; }
 /* Elo second opinion */
 .secondop{max-width:680px;margin:6px auto}
 .elo-disagree{color:#ffc94d}
+/* cookie consent (Google Consent Mode v2) */
+#cookie-consent{position:fixed;right:1rem;bottom:1rem;z-index:50;
+  max-width:min(340px,calc(100vw - 2rem));background:var(--paper-2);
+  border:1px solid var(--rule);border-radius:10px;padding:.85rem 1.1rem;
+  box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:.88rem}
+#cookie-consent p{margin:0 0 .6rem}
+#cookie-consent .cc-btns{display:flex;gap:.5rem;justify-content:flex-end}
+#cookie-consent button{font:inherit;cursor:pointer;border-radius:7px;
+  padding:.35rem .9rem;border:1px solid var(--rule)}
+#cookie-consent .cc-no{background:transparent;color:var(--ink-soft)}
+#cookie-consent .cc-yes{background:var(--ink);color:var(--paper);
+  border-color:var(--ink)}
 /* AI analyst sections */
 section.llm {
   max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.3rem;

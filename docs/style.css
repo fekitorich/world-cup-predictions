@@ -41,6 +41,18 @@ ol.timeline b { font-family: "Fraunces", serif; }
 /* Elo second opinion */
 .secondop{max-width:680px;margin:6px auto}
 .elo-disagree{color:#ffc94d}
+/* cookie consent (Google Consent Mode v2) */
+#cookie-consent{position:fixed;right:1rem;bottom:1rem;z-index:50;
+  max-width:min(340px,calc(100vw - 2rem));background:var(--paper-2);
+  border:1px solid var(--rule);border-radius:10px;padding:.85rem 1.1rem;
+  box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:.88rem}
+#cookie-consent p{margin:0 0 .6rem}
+#cookie-consent .cc-btns{display:flex;gap:.5rem;justify-content:flex-end}
+#cookie-consent button{font:inherit;cursor:pointer;border-radius:7px;
+  padding:.35rem .9rem;border:1px solid var(--rule)}
+#cookie-consent .cc-no{background:transparent;color:var(--ink-soft)}
+#cookie-consent .cc-yes{background:var(--ink);color:var(--paper);
+  border-color:var(--ink)}
 /* AI analyst sections */
 section.llm {
   max-width: 640px; margin: 2rem auto 0; padding: 1rem 1.3rem;
