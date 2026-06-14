@@ -50,6 +50,60 @@ class TestGoalsGrade(unittest.TestCase):
         self.assertEqual(b.goals_section([]), "")
 
 
+class TestTotalsGrade(unittest.TestCase):
+    """Calibrated O/U 2.5 grading of the forward-locked totals."""
+    LOCKED = {
+        "1": {"line": 2.5, "over_model": 0.55, "over_market": 0.60,
+              "over_blend": 0.57},   # actual over -> all 'over' calls right
+        "2": {"line": 2.5, "over_model": 0.40, "over_market": 0.45,
+              "over_blend": 0.42},   # actual under -> all 'under' calls right
+        "3": {"line": 2.5, "over_model": 0.70, "over_market": None,
+              "over_blend": 0.70},   # market missing -> only model/blend
+    }
+    ACTUAL = {"1": 4, "2": 1, "3": 0}   # totals: over, under, under
+
+    def test_hits_and_sources(self):
+        g = b.totals_grade(self.LOCKED, self.ACTUAL)
+        self.assertEqual(g["n"], 3)
+        self.assertEqual(g["over_model"]["of"], 3)
+        self.assertEqual(g["over_market"]["of"], 2)   # one had no market
+        # model calls: .55>.5 over(act over ✓), .40<.5 under(act under ✓),
+        #              .70>.5 over(act under ✗) -> 2/3
+        self.assertEqual(g["over_model"]["hit"], 2)
+
+    def test_brier_is_squared_error(self):
+        g = b.totals_grade({"1": self.LOCKED["1"]}, {"1": 4})  # over=1
+        self.assertAlmostEqual(g["over_model"]["brier"], (0.55 - 1) ** 2)
+
+    def test_none_until_a_locked_match_finishes(self):
+        self.assertIsNone(b.totals_grade(self.LOCKED, {}))   # no actuals
+        self.assertIsNone(b.totals_grade({}, self.ACTUAL))
+
+    def test_unscored_locked_skipped(self):
+        g = b.totals_grade(self.LOCKED, {"1": 4})   # only match 1 has a total
+        self.assertEqual(g["n"], 1)
+
+    def test_section_renders_when_a_locked_match_finishes(self):
+        saved = b.TOTALS_LOCKED
+        try:
+            b.TOTALS_LOCKED = {"locked_from": "2026-06-14",
+                               "matches": {"1": self.LOCKED["1"]}}
+            html = b.totals_section([{"match_id": 1, "actual_score": "3-1"}])
+            self.assertIn("Totals (Over/Under 2.5)", html)
+            self.assertIn("Model", html)
+            self.assertIn("pre-kickoff from 2026-06-14", html)
+        finally:
+            b.TOTALS_LOCKED = saved
+
+    def test_section_absent_with_no_locked_finishers(self):
+        saved = b.TOTALS_LOCKED
+        try:
+            b.TOTALS_LOCKED = {"matches": {"1": self.LOCKED["1"]}}
+            self.assertEqual(b.totals_section([]), "")   # nothing graded yet
+        finally:
+            b.TOTALS_LOCKED = saved
+
+
 class TestStandings(unittest.TestCase):
     def setUp(self):
         self._saved = [dict(m) for m in b.MATCHES]

@@ -48,6 +48,10 @@ try:
 except FileNotFoundError:
     ELO, ELO_BT, ELO_RATINGS = {}, {}, {}
 try:
+    TOTALS_LOCKED = json.load(open(DATA / "wc26_totals_locked.json"))
+except FileNotFoundError:
+    TOTALS_LOCKED = {"matches": {}}
+try:
     TOURNEY = json.load(open(DATA / "wc26_tournament.json"))["teams"]
 except FileNotFoundError:
     TOURNEY = {}
@@ -1486,7 +1490,7 @@ being settled in public.</p>"""
 <p class="fineprint">A calibrated forecaster's last two columns match. Early-tournament
 samples are small - judge after a full group stage.</p>"""
 
-    goals_html = goals_section(graded)
+    goals_html = goals_section(graded) + totals_section(graded)
 
     body = f"""<h1>The report card</h1>
 <p class="standfirst">Locked predictions, graded after every matchday. Re-generated
@@ -1528,6 +1532,82 @@ def goals_grade(graded):
     return {"n": n, "pred_per": pred_sum / n, "act_per": act_sum / n,
             "mae": err_sum / n, "exact": exact,
             "ou_n": ou_n, "ou_hit": ou_hit}
+
+
+def totals_grade(locked, actual_total_by_mid):
+    """Grade forward-locked over/under vs actual totals. `locked` is the
+    wc26_totals_locked 'matches' dict; `actual_total_by_mid` maps mid ->
+    actual goal total. Returns per-source (model/market/blend) Brier,
+    log-loss and hit count, or None if nothing has been graded yet."""
+    import math
+    srcs = ("over_model", "over_market", "over_blend")
+    agg = {s: {"n": 0, "brier": 0.0, "ll": 0.0, "hit": 0} for s in srcs}
+    n = 0
+    for mid, rec in locked.items():
+        at = actual_total_by_mid.get(mid)
+        if at is None:
+            continue
+        over = 1 if at > rec.get("line", 2.5) else 0
+        graded = False
+        for s in srcs:
+            p = rec.get(s)
+            if p is None:
+                continue
+            st = agg[s]
+            st["n"] += 1
+            st["brier"] += (p - over) ** 2
+            st["ll"] -= math.log(max(p if over else 1 - p, 1e-9))
+            st["hit"] += int((p > 0.5) == bool(over))
+            graded = True
+        n += graded
+    if not n:
+        return None
+    out = {"n": n}
+    for s in srcs:
+        st = agg[s]
+        if st["n"]:
+            out[s] = {"brier": round(st["brier"] / st["n"], 4),
+                      "logloss": round(st["ll"] / st["n"], 4),
+                      "hit": st["hit"], "of": st["n"]}
+    return out
+
+
+def totals_section(graded):
+    """Calibrated O/U 2.5 scorecard from the forward-locked totals — model
+    vs market vs blend, graded on matches locked pre-kickoff (so no
+    look-ahead). Absent until the first locked match finishes."""
+    locked = TOTALS_LOCKED.get("matches", {})
+    if not locked:
+        return ""
+    actual = {}
+    for p in graded:
+        try:
+            h, a = p["actual_score"].split("-")
+            actual[str(p["match_id"])] = int(h) + int(a)
+        except (KeyError, ValueError):
+            continue
+    g = totals_grade(locked, actual)
+    if not g:
+        return ""
+    label = {"over_model": "Model", "over_market": "Market",
+             "over_blend": "Blend"}
+    rows = "".join(
+        f'<tr><td>{label[s]}</td>'
+        f'<td class="num">{g[s]["hit"]}/{g[s]["of"]}</td>'
+        f'<td class="num">{g[s]["brier"]}</td>'
+        f'<td class="num">{g[s]["logloss"]}</td></tr>'
+        for s in ("over_model", "over_market", "over_blend") if s in g)
+    return f"""<h2>Totals (Over/Under 2.5)</h2>
+<table class="ko"><thead><tr><th>Source</th>
+<th class="num" title="times the Over/Under call was right">Direction</th>
+<th class="num" title="mean squared error on P(over) - guessing 0.5 scores 0.25">Brier</th>
+<th class="num" title="penalises confident errors">Log-loss</th></tr></thead>
+<tbody>{rows}</tbody></table>
+<p class="fineprint">A <em>calibrated</em> totals grade, unlike the modal-scoreline
+read above: the model's actual Over 2.5 probability scored against reality. These
+lines were locked <b>pre-kickoff from {escape(TOTALS_LOCKED.get("locked_from", "?"))}</b>
+(the pre-tournament bracket didn't store totals), so they grade only matches that
+kicked off after that — no look-ahead. Lower Brier/log-loss is better.</p>"""
 
 
 def goals_section(graded):

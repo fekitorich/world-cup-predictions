@@ -1,0 +1,535 @@
+{
+ "locked_from": "2026-06-14 00:49 UTC",
+ "line": 2.5,
+ "note": "model over/under locked pre-kickoff for unplayed group matches; graded going forward",
+ "matches": {
+  "1489372": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-14T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5223,
+   "over_market": 0.575,
+   "over_blend": 0.5409
+  },
+  "1539001": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-14T04:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4288,
+   "over_market": 0.465,
+   "over_blend": 0.4414
+  },
+  "1489374": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-14T17:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.7693,
+   "over_market": 0.825,
+   "over_blend": 0.7901
+  },
+  "1489376": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-14T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4492,
+   "over_market": 0.495,
+   "over_blend": 0.4652
+  },
+  "1489375": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-14T23:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.1959,
+   "over_market": 0.315,
+   "over_blend": 0.2333
+  },
+  "1539002": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-15T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3743,
+   "over_market": 0.435,
+   "over_blend": 0.3952
+  },
+  "1489380": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-15T16:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.6573,
+   "over_market": 0.695,
+   "over_blend": 0.6708
+  },
+  "1489377": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-15T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.378,
+   "over_market": 0.485,
+   "over_blend": 0.4147
+  },
+  "1489379": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-15T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.324,
+   "over_market": 0.465,
+   "over_blend": 0.3712
+  },
+  "1489378": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-16T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4487,
+   "over_market": 0.385,
+   "over_blend": 0.4261
+  },
+  "1489383": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-16T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3982,
+   "over_market": 0.495,
+   "over_blend": 0.4316
+  },
+  "1539016": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-16T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4706,
+   "over_market": 0.615,
+   "over_blend": 0.5218
+  },
+  "1489381": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-17T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4178,
+   "over_market": 0.485,
+   "over_blend": 0.4411
+  },
+  "1489382": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-17T04:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5135,
+   "over_market": 0.565,
+   "over_blend": 0.5316
+  },
+  "1539003": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-17T17:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3745,
+   "over_market": 0.555,
+   "over_blend": 0.4363
+  },
+  "1489384": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-17T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.396,
+   "over_market": 0.445,
+   "over_blend": 0.413
+  },
+  "1489385": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-17T23:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4271,
+   "over_market": 0.415,
+   "over_blend": 0.4229
+  },
+  "1489386": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-18T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3595,
+   "over_market": 0.495,
+   "over_blend": 0.4055
+  },
+  "1539004": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-18T16:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3692,
+   "over_market": 0.465,
+   "over_blend": 0.402
+  },
+  "1539005": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-18T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5028,
+   "over_market": 0.435,
+   "over_blend": 0.479
+  },
+  "1489387": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-18T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.7295,
+   "over_market": 0.54,
+   "over_blend": 0.6684
+  },
+  "1489388": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-19T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4565,
+   "over_market": 0.395,
+   "over_blend": 0.4347
+  },
+  "1489391": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-19T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4717,
+   "over_market": 0.505,
+   "over_blend": 0.4833
+  },
+  "1489390": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-19T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3692,
+   "over_market": 0.435,
+   "over_blend": 0.3918
+  },
+  "1489389": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-20T00:30:00+00:00",
+   "line": 2.5,
+   "over_model": 0.752,
+   "over_market": 0.725,
+   "over_blend": 0.7428
+  },
+  "1539006": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-20T03:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3709,
+   "over_market": 0.425,
+   "over_blend": 0.3895
+  },
+  "1539007": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-20T17:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5897,
+   "over_market": 0.505,
+   "over_blend": 0.5604
+  },
+  "1489393": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-20T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4276,
+   "over_market": 0.535,
+   "over_blend": 0.4649
+  },
+  "1489392": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-21T00:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4417,
+   "over_market": 0.57,
+   "over_blend": 0.4866
+  },
+  "1489394": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-21T04:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3678,
+   "over_market": 0.42,
+   "over_blend": 0.3858
+  },
+  "1489397": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-21T16:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.6269,
+   "over_market": 0.645,
+   "over_blend": 0.6333
+  },
+  "1489395": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-21T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4883,
+   "over_market": 0.51,
+   "over_blend": 0.4959
+  },
+  "1489398": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-21T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3482,
+   "over_market": 0.49,
+   "over_blend": 0.3962
+  },
+  "1489396": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-22T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3474,
+   "over_market": 0.42,
+   "over_blend": 0.3722
+  },
+  "1489399": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-22T17:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4272,
+   "over_market": 0.475,
+   "over_blend": 0.4438
+  },
+  "1539017": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-22T21:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5553,
+   "over_market": 0.645,
+   "over_blend": 0.5874
+  },
+  "1489401": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-23T00:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4147,
+   "over_market": 0.475,
+   "over_blend": 0.4356
+  },
+  "1489400": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-23T03:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5942,
+   "over_market": 0.495,
+   "over_blend": 0.5599
+  },
+  "1489404": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-23T17:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4253,
+   "over_market": 0.59,
+   "over_blend": 0.4829
+  },
+  "1489402": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-23T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4893,
+   "over_market": 0.56,
+   "over_blend": 0.5141
+  },
+  "1489403": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-23T23:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5401,
+   "over_market": 0.46,
+   "over_blend": 0.5121
+  },
+  "1539008": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-24T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3113,
+   "over_market": 0.42,
+   "over_blend": 0.3477
+  },
+  "1489408": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-24T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4951,
+   "over_market": 0.455,
+   "over_blend": 0.481
+  },
+  "1539009": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-24T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4347,
+   "over_market": 0.475,
+   "over_blend": 0.4487
+  },
+  "1489405": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-24T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5252,
+   "over_market": 0.585,
+   "over_blend": 0.5463
+  },
+  "1489406": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-24T22:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5854,
+   "over_market": 0.535,
+   "over_blend": 0.5679
+  },
+  "1539010": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5096,
+   "over_market": 0.44,
+   "over_blend": 0.4851
+  },
+  "1489407": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T01:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3938,
+   "over_market": 0.465,
+   "over_blend": 0.4184
+  },
+  "1489410": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3283,
+   "over_market": 0.495,
+   "over_blend": 0.3841
+  },
+  "1489409": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T20:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5015,
+   "over_market": 0.575,
+   "over_blend": 0.5274
+  },
+  "1539011": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T23:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5168,
+   "over_market": 0.46,
+   "over_blend": 0.4969
+  },
+  "1489412": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-25T23:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4327,
+   "over_market": 0.51,
+   "over_blend": 0.4596
+  },
+  "1539012": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-26T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.6137,
+   "over_market": 0.53,
+   "over_blend": 0.5849
+  },
+  "1489411": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-26T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.2639,
+   "over_market": 0.415,
+   "over_blend": 0.3128
+  },
+  "1539074": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-26T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3934,
+   "over_market": 0.495,
+   "over_blend": 0.4284
+  },
+  "1489416": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-26T19:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.494,
+   "over_market": 0.49,
+   "over_blend": 0.4926
+  },
+  "1489417": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T00:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.3437,
+   "over_market": 0.49,
+   "over_blend": 0.3931
+  },
+  "1489413": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T00:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.2792,
+   "over_market": 0.45,
+   "over_blend": 0.3348
+  },
+  "1489414": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T03:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.312,
+   "over_market": 0.355,
+   "over_blend": 0.3267
+  },
+  "1489415": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T03:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.5733,
+   "over_market": 0.56,
+   "over_blend": 0.5687
+  },
+  "1489420": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T21:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4161,
+   "over_market": 0.465,
+   "over_blend": 0.4331
+  },
+  "1489422": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T21:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.6424,
+   "over_market": 0.595,
+   "over_blend": 0.6261
+  },
+  "1489419": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T23:30:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4334,
+   "over_market": 0.45,
+   "over_blend": 0.4392
+  },
+  "1539013": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-27T23:30:00+00:00",
+   "line": 2.5,
+   "over_model": 0.1923,
+   "over_market": 0.405,
+   "over_blend": 0.2559
+  },
+  "1489418": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-28T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.4184,
+   "over_market": 0.445,
+   "over_blend": 0.4277
+  },
+  "1489421": {
+   "locked_at": "2026-06-14 00:49 UTC",
+   "kickoff": "2026-06-28T02:00:00+00:00",
+   "line": 2.5,
+   "over_model": 0.7116,
+   "over_market": 0.605,
+   "over_blend": 0.6762
+  }
+ }
+}

@@ -47,6 +47,7 @@ jobs:
           python3 pipeline/wc26_espn_ids.py         # live-link ids
           python3 pipeline/wc26_simulate.py         # refit on the latest results
           python3 pipeline/wc26_corners.py predict  # corner O/U base rate
+          python3 pipeline/wc26_totals_lock.py      # forward-lock O/U pre-kickoff
           python3 pipeline/wc26_elo.py              # Elo second opinion
           python3 pipeline/wc26_tournament.py       # 100k tournament sims (lock untouched)
           python3 pipeline/wc26_awards.py           # boot/awards odds

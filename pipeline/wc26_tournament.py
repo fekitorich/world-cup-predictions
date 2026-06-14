@@ -381,6 +381,23 @@ def predict_bracket():
             p_use = p_model
         i, j = np.unravel_index(int(g.argmax()), g.shape)
         res = max(p_use, key=p_use.get)
+        # store the over/under book at lock time too, so a future clean
+        # pre-tournament lock can grade calibrated totals the way 1X2 is
+        # graded (the grid is already here — it's nearly free)
+        tot = float(g.sum())
+        ou_model, ou, ou_market = {}, {}, {}
+        mtot = MKT.get(str(m["match_id"]), {}).get("totals") or {}
+        for L in (1.5, 2.5, 3.5):
+            om = sum(float(g[a][b]) for a in range(g.shape[0])
+                     for b in range(g.shape[1]) if a + b > L) / tot
+            ou_model[f"over_{L}"] = round(om, 4)
+            mk = mtot.get(f"over_{L}")
+            live = mk is not None and 0.02 < mk < 0.98
+            if live:
+                ou_market[f"over_{L}"] = round(mk, 4)
+            ou[f"over_{L}"] = round(
+                blend({"O": om, "U": 1 - om},
+                      {"O": mk, "U": 1 - mk})["O"] if live else om, 4)
         group_preds.append({
             "match_id": m["match_id"], "group": m["group"],
             "date_utc": m["date_utc"], "home": m["home"], "away": m["away"],
@@ -389,6 +406,8 @@ def predict_bracket():
             "p_model": {k: round(v, 4) for k, v in p_model.items()},
             "p_market": ({"H": mkt["home"], "D": mkt["draw"], "A": mkt["away"]}
                          if mkt else None),
+            "totals_model": ou_model, "totals": ou,
+            "totals_market": ou_market or None,
         })
         pH, pD, pA = p_use["H"], p_use["D"], p_use["A"]
         for t, ex, c in ((m["home"], 3 * pH + pD, l1 - l2),
