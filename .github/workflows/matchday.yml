@@ -58,6 +58,8 @@ jobs:
       # frozen (write-once) and never touched. Skipped on the 21:00 run and
       # whenever the ANTHROPIC_API_KEY secret is absent (clean no-op).
       - name: refresh forward-looking LLM analysis (once daily)
+        # best-effort colour: never let an API blip block the site publish
+        continue-on-error: true
         if: github.event.schedule == '0 5 * * *' || github.event_name == 'workflow_dispatch'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

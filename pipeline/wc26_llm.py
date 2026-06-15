@@ -213,19 +213,35 @@ def build_review_prompt(m, sim, mkt, src, pred):
 
 
 # ---------------- generation ----------------
-def generate_one(cl, prompt):
-    resp = cl.messages.create(
-        model=MODEL,
-        max_tokens=2000,
-        thinking={"type": "adaptive"},
-        system=[{"type": "text", "text": SYSTEM,
-                 "cache_control": {"type": "ephemeral"}}],
-        messages=[{"role": "user", "content": prompt}],
-    )
-    if resp.stop_reason == "refusal":
-        print("  refused — skipped", flush=True)
-        return None
-    return next((b.text for b in resp.content if b.type == "text"), None)
+def generate_one(cl, prompt, attempts=4):
+    """One analysis, with backoff on transient API errors (429/529/5xx).
+    The API being briefly overloaded must not abort a whole refresh run."""
+    import anthropic
+    for i in range(attempts):
+        try:
+            resp = cl.messages.create(
+                model=MODEL,
+                max_tokens=2000,
+                thinking={"type": "adaptive"},
+                system=[{"type": "text", "text": SYSTEM,
+                         "cache_control": {"type": "ephemeral"}}],
+                messages=[{"role": "user", "content": prompt}],
+            )
+        except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
+            status = getattr(e, "status_code", None)
+            transient = isinstance(e, anthropic.APIConnectionError) or \
+                status in (429, 500, 502, 503, 529)
+            if not transient or i == attempts - 1:
+                raise
+            wait = 3 * (2 ** i)   # 3s, 6s, 12s
+            print(f"  transient API error ({status or type(e).__name__}); "
+                  f"retry {i + 1}/{attempts - 1} in {wait}s", flush=True)
+            time.sleep(wait)
+            continue
+        if resp.stop_reason == "refusal":
+            print("  refused — skipped", flush=True)
+            return None
+        return next((b.text for b in resp.content if b.type == "text"), None)
 
 
 def load_store():
@@ -320,9 +336,15 @@ def generate(only=None, limit=None, force=False, refresh_days=0):
     if limit:
         todo = todo[:limit]
     print(f"{len(todo)} analyses to generate with {MODEL}")
-    done = 0
+    done = failed = 0
     for kind, key, prompt in todo:
-        text = generate_one(cl, prompt)
+        try:
+            text = generate_one(cl, prompt)
+        except Exception as e:   # one stubborn item must not abort the run
+            failed += 1
+            print(f"  SKIP {kind}: {key} — {type(e).__name__}: {e}",
+                  flush=True)
+            continue
         if not text:
             continue
         if kind == "teams":
@@ -339,7 +361,9 @@ def generate(only=None, limit=None, force=False, refresh_days=0):
     if done:
         from wc26_simulate import save_versioned
         save_versioned(STORE)
-    print(f"generated {done} analyses -> {STORE}")
+    print(f"generated {done} analyses"
+          + (f", {failed} skipped after retries" if failed else "")
+          + f" -> {STORE}")
 
 
 if __name__ == "__main__":

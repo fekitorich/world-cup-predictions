@@ -76,6 +76,67 @@ class TestPromptBuilders(unittest.TestCase):
         self.assertIn("club form", p)
 
 
+import importlib.util as _ilu
+
+
+@unittest.skipUnless(_ilu.find_spec("anthropic"), "anthropic SDK not installed")
+class TestTransientRetry(unittest.TestCase):
+    """A 529/overload must be retried, not fatal — the bug that failed the
+    2026-06-15 matchday run. (Runs under the venv; skipped on system python.)"""
+    class _Resp:
+        stop_reason = "end_turn"
+        class _B:
+            type = "text"; text = "ok"
+        content = [_B()]
+
+    def _client(self, fails, exc):
+        calls = {"n": 0}
+        outer = self
+
+        class _Msgs:
+            def create(self, **kw):
+                calls["n"] += 1
+                if calls["n"] <= fails:
+                    raise exc
+                return outer._Resp()
+
+        class _Cl:
+            messages = _Msgs()
+        return _Cl(), calls
+
+    def test_retries_then_succeeds(self):
+        import anthropic
+        err = anthropic.APIStatusError(
+            "Overloaded", response=_FakeResp(529), body=None)
+        cl, calls = self._client(fails=2, exc=err)
+        # near-zero backoff for the test
+        import time as _t
+        saved = _t.sleep
+        _t.sleep = lambda s: None
+        try:
+            out = L.generate_one(cl, "p", attempts=4)
+        finally:
+            _t.sleep = saved
+        self.assertEqual(out, "ok")
+        self.assertEqual(calls["n"], 3)   # 2 failures + 1 success
+
+    def test_non_transient_raises_immediately(self):
+        import anthropic
+        err = anthropic.APIStatusError(
+            "bad request", response=_FakeResp(400), body=None)
+        cl, calls = self._client(fails=99, exc=err)
+        with self.assertRaises(anthropic.APIStatusError):
+            L.generate_one(cl, "p", attempts=4)
+        self.assertEqual(calls["n"], 1)   # 400 is not retried
+
+
+class _FakeResp:
+    def __init__(self, status):
+        self.status_code = status
+        self.headers = {}
+        self.request = None
+
+
 class TestKeyPlumbing(unittest.TestCase):
     def test_no_key_returns_none(self):
         saved = os.environ.pop("ANTHROPIC_API_KEY", None)
