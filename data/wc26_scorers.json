@@ -6,9 +6,12 @@
     1489372,
     1489373,
     1489374,
+    1489375,
+    1489376,
     1538999,
     1539000,
-    1539001
+    1539001,
+    1539002
   ],
   "scorers": {
     "F. Balogun": {
@@ -18,6 +21,11 @@
     },
     "K. Havertz": {
       "team": "Germany",
+      "goals": 2,
+      "assists_from": []
+    },
+    "Y. Ayari": {
+      "team": "Sweden",
       "goals": 2,
       "assists_from": []
     },
@@ -123,6 +131,51 @@
     },
     "D. Undav": {
       "team": "Germany",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Virgil van Dijk": {
+      "team": "Netherlands",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Keito Nakamura": {
+      "team": "Japan",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Crysencio Summerville": {
+      "team": "Netherlands",
+      "goals": 1,
+      "assists_from": []
+    },
+    "Daichi Kamada": {
+      "team": "Japan",
+      "goals": 1,
+      "assists_from": []
+    },
+    "A. Diallo": {
+      "team": "Ivory Coast",
+      "goals": 1,
+      "assists_from": []
+    },
+    "A. Isak": {
+      "team": "Sweden",
+      "goals": 1,
+      "assists_from": []
+    },
+    "O. Rekik": {
+      "team": "Tunisia",
+      "goals": 1,
+      "assists_from": []
+    },
+    "V. Gyokeres": {
+      "team": "Sweden",
+      "goals": 1,
+      "assists_from": []
+    },
+    "M. Svanberg": {
+      "team": "Sweden",
       "goals": 1,
       "assists_from": []
     }
