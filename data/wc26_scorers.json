@@ -8,6 +8,8 @@
     1489374,
     1489375,
     1489376,
+    1489377,
+    1489380,
     1538999,
     1539000,
     1539001,
@@ -176,6 +178,11 @@
     },
     "M. Svanberg": {
       "team": "Sweden",
+      "goals": 1,
+      "assists_from": []
+    },
+    "E. Ashour": {
+      "team": "Egypt",
       "goals": 1,
       "assists_from": []
     }

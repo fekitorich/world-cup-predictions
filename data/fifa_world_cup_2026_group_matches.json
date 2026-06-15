@@ -156,8 +156,8 @@
       "away": "Cape Verde",
       "venue": "Mercedes-Benz Stadium",
       "city": "Atlanta",
-      "status": "Not Started",
-      "score": null
+      "status": "Match Finished",
+      "score": "0-0"
     },
     {
       "match_id": 1489377,
@@ -168,8 +168,8 @@
       "away": "Egypt",
       "venue": "Lumen Field",
       "city": "Seattle",
-      "status": "Not Started",
-      "score": null
+      "status": "Match Finished",
+      "score": "1-1"
     },
     {
       "match_id": 1489379,
