@@ -27,6 +27,8 @@ concurrency:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
     steps:
