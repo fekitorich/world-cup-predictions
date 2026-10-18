@@ -1,7 +1,7 @@
 {
   "method": "Dixon-Coles weighted Poisson, params {'half_life': 1000, 'friendly_w': 0.8, 'shrink': 4.0, 'rho': -0.05, 'margin_cap': 99, 'min2_boost': 1.0, 'half_split': 0.447}; blend w=0.35 on Polymarket where priced",
   "backtest_logloss": 0.8185,
-  "generated": "2026-10-17 22:54 UTC",
+  "generated": "2026-10-18 09:18 UTC",
   "simulations": {
     "1489369": {
       "home": "Mexico",
