@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>روش‌شناسی · WC26 Form Book</title>
+<meta property="og:title" content="روش‌شناسی · WC26 Form Book">
+<meta property="og:description" content="World Cup 2026 probabilities from an open statistical model: match fair prices vs the betting market, tournament odds, and a locked bracket graded in public.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://wcformbook.com/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wcformbook.com/img/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23211d16'/%3E%3Cpath d='M8 4l3 2.2-1.1 3.6H6.1L5 6.2z' fill='%23f6f1e6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script>
+// Google Consent Mode v2 — analytics stays OFF until the visitor opts in.
+// gtag.js is not even loaded until consent is granted (this run or a prior
+// visit), so no GA cookie or request fires beforehand.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_storage: 'denied', ad_user_data: 'denied',
+  ad_personalization: 'denied', analytics_storage: 'denied'
+});
+function wcfbLoadGA() {
+  gtag('consent', 'update', { analytics_storage: 'granted' });
+  if (window.wcfbGALoaded) return;
+  window.wcfbGALoaded = true;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-EG56KHB1SX';
+  document.head.appendChild(s);
+  gtag('js', new Date());
+  gtag('config', 'G-EG56KHB1SX');
+}
+try {
+  if (localStorage.getItem('wcfb_consent') === 'granted') wcfbLoadGA();
+} catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css?v=202611041245">
+<script>
+(function() {
+  var t = localStorage.getItem("theme");
+  if (t) document.documentElement.dataset.theme = t;
+})();
+function toggleTheme() {
+  var el = document.documentElement;
+  var dark = el.dataset.theme === "dark" ||
+    (!el.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  el.dataset.theme = dark ? "light" : "dark";
+  localStorage.setItem("theme", el.dataset.theme);
+}
+</script>
+</head>
+<body>
+<div class="snapnote">Snapshot of 2026-11-04-2 - predictions as they stood then. <a href="../../index.html">Back to the latest →</a></div>
+<header class="masthead">
+  <a class="skip" href="#main">skip to content</a>
+  <button class="themebtn" onclick="toggleTheme()" title="light / dark" aria-label="toggle light or dark theme">◐</button>
+  <div class="langsw"><a href="method.html">English</a></div>
+  <div class="kicker">The Form Book - research edition</div>
+  <a class="wordmark" href="index.html">World&nbsp;Cup&nbsp;26</a>
+  <nav><a href="index.html">Groups</a><span>·</span><a href="matches.html">Matches</a><span>·</span><a href="futures.html">Futures</a><span>·</span><a href="awards.html">Awards</a><span>·</span><a href="bracket.html">Bracket</a><span>·</span><a href="report.html">Report</a><span>·</span><a href="glossary.html">Glossary</a><span>·</span><a href="method.html">Method</a></nav>
+</header>
+
+<main id="main">
+<h1>اعداد چگونه ساخته می‌شوند</h1>
+<p class="standfirst">همهٔ آنچه در این سایت می‌بینید با کدِ باز و داده‌های عمومی ساخته شده است؛
+نه نتیجه‌ای که دستی انتخاب شده باشد و نه حاصل حدس و گمان. کد کامل پروژه روی
+<a href="https://github.com/amirdaraee/world-cup-predictions">گیت‌هاب</a> در دسترس است.
+این صفحه فقط توضیح می‌دهد که این اعداد از کجا می‌آیند و پشت صحنهٔ آن‌ها چه می‌گذرد.</p>
+
+<h2>به زبان خیلی ساده (بدون ریاضی، قول می‌دهیم)</h2>
+<p>تصور کنید سال‌ها همهٔ بازی‌های یک تیم را تماشا کرده‌اید و برای هر گلی که زده، یک سنگریزه
+در شیشه‌اش انداخته‌اید. تیم‌هایی که شیشهٔ سنگین‌تری دارند قوی‌ترند. سنگریزه‌های تازه از
+قدیمی‌ها مهم‌ترند، چون تیم‌ها عوض می‌شوند. قلب ماجرا همین است: <b>ما شیشه‌های سنگریزه را
+وزن می‌کنیم.</b></p>
+<p>یک نگاهی هم به قیمت بازیکنان هر تیم می‌اندازیم - تیمی که پر از ستاره‌های گران است حتی
+اگر سال آرامی داشته، کمی اعتبار اضافه می‌گیرد؛ همان‌طور که برای بسکتبال باز هم بچهٔ
+قدبلند را انتخاب می‌کنید.</p>
+<p>برای هر مسابقه، مدل مثل انداختن دو تاسِ دستکاری‌شده است - یکی برای گل‌های هر تیم. یک بار
+بیندازید، یک نتیجهٔ ممکن می‌گیرید. ما به کامپیوتر می‌گوییم این تاس‌ها را برای <em>کلِ
+جام جهانی</em> بیندازد، تا خود فینال… و بعد کل تورنمنت را دوباره از اول، صدهزار بار.
+اگر آرژانتین در ۱۹هزار تا از آن جام‌های خیالی قهرمان شود، می‌گوییم: ۱۹٪.</p>
+<p>یک ترفند دیگر: هزاران نفر روی همین بازی‌ها پول واقعی شرط می‌بندند و قیمت‌هایشان بهترین
+حدسِ جمعیت است. ما کمی هم به جمعیت گوش می‌دهیم، چون جمعیت خبرها - مصدومیت، ترکیب - را
+زودتر از هر آمارِ گلی می‌شنود.</p>
+<p>و قانون صداقت: همهٔ پیش‌بینی‌ها را <b>قبل از</b> شروع تورنمنت نوشتیم، صفحه را قفل کردیم
+و با رسیدن نتایج واقعی، جلوی چشم همه به خودمان نمره می‌دهیم. نه پاک‌کردنی در کار است نه
+«از اول می‌دانستیم». درصدْ قولی است دربارهٔ این‌که <em>چند وقت یک‌بار</em> باید درست
+بگوییم - وقتی مدل می‌گوید ۷۰٪، یعنی باید از هر ۱۰ بار حدوداً ۳ بار هم اشتباه کند، و آن
+اشتباه‌ها را هم می‌شماریم.</p>
+
+<h2>داده‌ها</h2>
+<p>سه منبع داده داریم. مهم‌ترین آن‌ها مجموعهٔ متن‌باز martj42 است که ۴۹٬۴۵۰ بازی ملی از سال
+۱۸۷۲ را در بر می‌گیرد. مدل روی ۸٬۰۸۱ بازیِ برگزارشده از سال ۲۰۱۸ به بعد آموزش می‌بیند.
+فرم فعلی تیم‌ها و برنامهٔ مسابقات از API-Football می‌آیند و قیمت‌های لحظه‌ای بازار از
+API عمومی پالی‌مارکت دریافت می‌شوند.</p>
+<p>داده‌های آموزشی پیش از استفاده با منابع اصلی تطبیق داده شدند. در این فرایند چهار نتیجهٔ
+اشتباه پیدا شد و اصلاح شد. فایل این اصلاحات نیز در مخزن پروژه موجود است.</p>
+
+<h2>مدل بازی</h2>
+<p>هستهٔ سیستم یک مدل پواسونِ وزن‌دار دیکسون–کولز است؛ همان مدلی که سال‌هاست در صنعت
+شرط‌بندی و پیش‌بینی فوتبال استفاده می‌شود.</p>
+<p>برای هر تیم دو عدد تخمین زده می‌شود: قدرت حمله و قدرت دفاع. این اعداد از روی کیفیت
+حریفان و تعداد گل‌هایی که تیم مقابل آن‌ها زده یا خورده به دست می‌آیند. بازی‌های جدیدتر
+اهمیت بیشتری دارند (نیمه‌عمر ۱۰۰۰ روز)، مسابقات دوستانه وزن کمتری می‌گیرند (×۰٫۸)،
+و تیم‌هایی که دادهٔ کمی دارند بیش از حد از میانگین دور نمی‌شوند.</p>
+<p>همچنین یک اصلاح برای نتایج کم‌گل (ρ=−۰٫۰۵) در نظر گرفته می‌شود، چون فوتبال واقعی بیشتر
+از چیزی که دو پواسون مستقل پیش‌بینی می‌کنند به نتایجی مثل ۰-۰ و ۱-۱ ختم می‌شود. تیم‌های
+میزبان نیز زمانی که در کشور خودشان بازی می‌کنند از مزیت زمین خانگی بهره می‌برند که
+تقریباً معادل ۳۰ درصد افزایش در نرخ گل‌زنی است.</p>
+<p>از روی دو مقدار «گل انتظاری»، مدل شبکهٔ کامل احتمال تمام نتایج ممکن را می‌سازد. تمام
+بازارهای هر مسابقه مستقیماً از همین شبکه محاسبه می‌شوند و در این مرحله هیچ شبیه‌سازی‌ای
+انجام نمی‌شود.</p>
+<p>یک ورودی تازه هم از ۱۰ ژوئن (پیش از شروع بازی‌ها) اضافه شد: «پیشینِ ارزش ترکیب».
+امتیاز برازش‌شدهٔ هر تیم به اندازهٔ β×z(لگاریتم ارزش بازاری ترکیب، از Transfermarkt)
+جابه‌جا می‌شود - یعنی استعدادِ روی کاغذ، نه فقط نتایجِ روی چمن. مقدار β=۰٫۳۵ با
+اعتبارسنجی خارج از نمونه انتخاب شد؛ این پیشین لگ‌لاس را از ۰٫۸۵۴ به ۰٫۸۱۸ بهبود داد -
+بزرگ‌ترین ارتقای این پروژه. اثر اصلی آن در مراحل حذفی است که بازاری برای ترکیب‌شدن
+ندارند: همان آگاهی از بازیکنان که مرحلهٔ گروهی از طریق بازار داشت.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 653 562"><rect width="560" height="562" fill="var(--paper, #f6f1e6)"/><text x="110.0" y="22.0" font-size="14" fill="var(--ink, #211d16)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >the score grid: Mexico v South Africa</text><text x="110.0" y="42.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >model xG 2.06 - 0.56; every market is a sum over these cells</text><rect x="110" y="84" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.486"/><text x="140.5" y="120.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >7.7</text><rect x="174" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.231"/><text x="204.5" y="120.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >3.7</text><rect x="238" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.072"/><text x="268.5" y="120.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >1.1</text><rect x="302" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="366" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="430" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="494" y="84" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="148" width="61" height="61" fill="var(--green, #14633f)" opacity="0.920"/><text x="140.5" y="184.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >14.6</text><rect x="174" y="148" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.557"/><text x="204.5" y="184.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >8.8</text><rect x="238" y="148" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.148"/><text x="268.5" y="184.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2.4</text><rect x="302" y="148" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="366" y="148" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="430" y="148" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="494" y="148" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="212" width="61" height="61" fill="var(--green, #14633f)" opacity="0.920"/><text x="140.5" y="248.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >15.4</text><rect x="174" y="212" width="61" height="61" fill="var(--green, #14633f)" opacity="0.546"/><text x="204.5" y="248.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >8.7</text><rect x="238" y="212" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.153"/><text x="268.5" y="248.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2.4</text><rect x="302" y="212" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="366" y="212" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="430" y="212" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="494" y="212" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="276" width="61" height="61" fill="var(--green, #14633f)" opacity="0.669"/><text x="140.5" y="312.0" font-size="13" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >10.6</text><rect x="174" y="276" width="61" height="61" fill="var(--green, #14633f)" opacity="0.375"/><text x="204.5" y="312.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >5.9</text><rect x="238" y="276" width="61" height="61" fill="var(--green, #14633f)" opacity="0.105"/><text x="268.5" y="312.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >1.7</text><rect x="302" y="276" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.040"/><rect x="366" y="276" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="430" y="276" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="494" y="276" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="340" width="61" height="61" fill="var(--green, #14633f)" opacity="0.345"/><text x="140.5" y="376.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >5.5</text><rect x="174" y="340" width="61" height="61" fill="var(--green, #14633f)" opacity="0.193"/><text x="204.5" y="376.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >3.1</text><rect x="238" y="340" width="61" height="61" fill="var(--green, #14633f)" opacity="0.054"/><text x="268.5" y="376.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0.9</text><rect x="302" y="340" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="366" y="340" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.040"/><rect x="430" y="340" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="494" y="340" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="404" width="61" height="61" fill="var(--green, #14633f)" opacity="0.142"/><text x="140.5" y="440.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2.3</text><rect x="174" y="404" width="61" height="61" fill="var(--green, #14633f)" opacity="0.080"/><text x="204.5" y="440.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >1.3</text><rect x="238" y="404" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="302" y="404" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="366" y="404" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="430" y="404" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.040"/><rect x="494" y="404" width="61" height="61" fill="var(--red, #a72a1e)" opacity="0.040"/><rect x="110" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.049"/><text x="140.5" y="504.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0.8</text><rect x="174" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="238" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="302" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="366" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="430" y="468" width="61" height="61" fill="var(--green, #14633f)" opacity="0.040"/><rect x="494" y="468" width="61" height="61" fill="var(--amber, #9a7b2d)" opacity="0.040"/><text x="140.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0</text><text x="98.0" y="120.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0</text><text x="204.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >1</text><text x="98.0" y="184.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >1</text><text x="268.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2</text><text x="98.0" y="248.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >2</text><text x="332.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >3</text><text x="98.0" y="312.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >3</text><text x="396.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >4</text><text x="98.0" y="376.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >4</text><text x="460.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >5</text><text x="98.0" y="440.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >5</text><text x="524.5" y="74.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >6</text><text x="98.0" y="504.0" font-size="12" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >6</text><text x="98.0" y="52.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >MEX ↓</text><text x="555.0" y="52.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >RSA →</text><text x="110.0" y="548.0" font-size="11" fill="var(--green, #14633f)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >■ Mexico win</text><text x="240.0" y="548.0" font-size="11" fill="var(--amber, #9a7b2d)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >■ draw</text><text x="320.0" y="548.0" font-size="11" fill="var(--red, #a72a1e)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >■ South Africa win</text></svg>
+<figcaption>شبکهٔ واقعی برازش‌شده برای بازی افتتاحیه (احتمال‌ها به درصد). برد مکزیک =
+خانه‌های سبز؛ تساوی = قطر کهربایی؛ برد آفریقای جنوبی = خانه‌های قرمز.</figcaption></figure>
+<p class="fineprint">ابرپارامترها به‌صورت دستی انتخاب نشده‌اند. آن‌ها با اعتبارسنجی متقابل
+روی چهار پنجرهٔ غلتان ۱۲ ماهه و ۴٬۲۲۸ بازی خارج از نمونه انتخاب شده‌اند. لگ‌لاس
+اعتبارسنجی ۰٫۸۹۱۲۷ بود، در حالی که حدسِ همیشگی بر اساس نرخ پایه به ۱٫۰۴۶ می‌رسید
+(عدد کمتر بهتر است). دو ایده نیز در آزمایش‌ها رد شدند: سقف‌گذاری روی بردهای پرگل و
+استفاده از حافظهٔ کوتاه‌تر.</p>
+
+<h2>ترکیب با بازار</h2>
+<p>برای پیش‌بینی مسابقات مرحلهٔ گروهی، احتمال‌های مدل با قیمت‌های لحظه‌ای پالی‌مارکت
+ترکیب می‌شوند (میانگین‌گیری لگاریتمی با وزن ۳۵ درصد برای بازار).</p>
+<p>دلیل این کار ساده است: بازار معمولاً ساعت‌ها زودتر از آن‌که نتایج و داده‌های گل اثرشان
+را نشان دهند، از ترکیب تیم‌ها، مصدومیت‌ها و اخبار باخبر می‌شود. در عین حال نسخهٔ خام مدل
+نیز جداگانه نگه داشته می‌شود تا بتوان اختلاف آن با بازار را بررسی کرد و فرصت‌های
+ارزش‌گذاری را پیدا کرد.</p>
+<p>عملکرد مدل، بازار و نسخهٔ ترکیبی نیز به‌صورت جداگانه و با نتایج واقعی در
+<a href="bracket.html">کارنامه</a> سنجیده می‌شود.</p>
+
+<h2>شبیه‌سازی تورنمنت</h2>
+<p>در هر اجرا، ۱۰۰٬۰۰۰ تورنمنت کامل ــ معادل حدود ۱۰ میلیون مسابقهٔ شبیه‌سازی‌شده ــ روی
+براکت رسمی فیفا اجرا می‌شود. این شبیه‌سازی قالب دور ۳۲ تیمی و تمام محدودیت‌های مربوط به
+جایگذاری تیم‌های سوم را نیز در نظر می‌گیرد.</p>
+<p>هر تورنمنتِ شبیه‌سازی‌شده یکی از ۲۰۰ مدلِ بازنمونه‌گیری‌شده (Bootstrap) را انتخاب
+می‌کند تا عدم‌قطعیت پارامترها نیز در احتمال‌ها منعکس شود. علاوه بر این، چند منبع تصادفی
+با میانگین صفر وارد شبیه‌سازی می‌شوند: تغییر فرم تیم‌ها در طول تورنمنت (مصدومیت،
+هماهنگی و عوامل مشابه ــ σ=۰٫۰۶)، فرسایش مراحل حذفی (۱۰ درصد احتمال آسیب ماندگار در هر
+مسابقهٔ حذفی) و جریمهٔ خستگی پس از بازی‌های ۱۲۰ دقیقه‌ای.</p>
+<p>هیچ‌کدام از این عوامل در میانگین به نفع تیم خاصی نیستند؛ اما در عمل معمولاً کمی به سود
+تیم‌های کوچک‌تر تمام می‌شوند، چون اتفاقات غیرمنتظره معمولاً بخشی از برتری مدعیان را از
+بین می‌برند.</p>
+
+<h2>کمی علم: مفاهیم و اصطلاح‌ها</h2>
+
+<h3>چرا پواسون؟</h3>
+<p>گل یک رخداد نسبتاً کمیاب است: به‌طور متوسط حدود ۲٫۷ گل در هر ۹۰ دقیقه و در هر دقیقه با
+احتمالی کوچک و تقریباً مستقل.</p>
+<p>شمارش چنین رخدادهایی به
+<a href="https://fa.wikipedia.org/wiki/توزیع_پواسون">توزیع پواسون</a> منجر می‌شود. در این
+توزیع، یک عدد یعنی نرخ λ («گل انتظاری») برای تعیین کامل احتمال ۰، ۱، ۲ و تعداد بیشتری گل
+کافی است. در نتیجه کل مسئله به تخمین دو نرخ برای هر مسابقه تقلیل پیدا می‌کند؛ نرخ‌هایی
+که از یک مدل لگ-خطی به دست می‌آیند:</p>
+<p>لگاریتم نرخ = پایه + قدرت حملهٔ تیم + ضعف دفاع حریف (+ مزیت میزبانی)</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 682 340"><rect width="640" height="340" fill="var(--paper, #f6f1e6)"/><line x1="70" y1="290.0" x2="620" y2="290.0" stroke="var(--rule, #cfc4ab)"/><text x="62.0" y="294.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0%</text><line x1="70" y1="221.491881939862" x2="620" y2="221.491881939862" stroke="var(--rule, #cfc4ab)"/><text x="62.0" y="225.5" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >10%</text><line x1="70" y1="152.98376387972397" x2="620" y2="152.98376387972397" stroke="var(--rule, #cfc4ab)"/><text x="62.0" y="157.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >20%</text><line x1="70" y1="84.47564581958596" x2="620" y2="84.47564581958596" stroke="var(--rule, #cfc4ab)"/><text x="62.0" y="88.5" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >30%</text><rect x="76.0" y="63.9" width="56.8" height="226.1" fill="var(--ink, #211d16)" opacity="0.82"/><text x="104.4" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0</text><rect x="144.8" y="76.0" width="56.8" height="214.0" fill="var(--ink, #211d16)" opacity="0.82"/><text x="173.1" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >1</text><rect x="213.5" y="161.8" width="56.8" height="128.2" fill="var(--ink, #211d16)" opacity="0.82"/><text x="241.9" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2</text><rect x="282.2" y="229.7" width="56.8" height="60.3" fill="var(--ink, #211d16)" opacity="0.82"/><text x="310.6" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >3</text><rect x="351.0" y="260.5" width="56.8" height="29.5" fill="var(--ink, #211d16)" opacity="0.82"/><text x="379.4" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >4</text><rect x="419.8" y="276.7" width="56.8" height="13.3" fill="var(--ink, #211d16)" opacity="0.82"/><text x="448.1" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >5</text><rect x="488.5" y="283.1" width="56.8" height="6.9" fill="var(--ink, #211d16)" opacity="0.82"/><text x="516.9" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >6</text><rect x="557.2" y="286.9" width="56.8" height="3.1" fill="var(--ink, #211d16)" opacity="0.82"/><text x="585.6" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >7</text><polyline points="104.4,113.4 173.1,50.6 241.9,127.7 310.6,216.7 379.4,265.1 448.1,283.3 516.9,288.5 585.6,289.7" fill="none" stroke="var(--green, #14633f)" stroke-width="2"/><circle cx="104.4" cy="113.4" r="4" fill="var(--green, #14633f)"/><circle cx="173.1" cy="50.6" r="4" fill="var(--green, #14633f)"/><circle cx="241.9" cy="127.7" r="4" fill="var(--green, #14633f)"/><circle cx="310.6" cy="216.7" r="4" fill="var(--green, #14633f)"/><circle cx="379.4" cy="265.1" r="4" fill="var(--green, #14633f)"/><circle cx="448.1" cy="283.3" r="4" fill="var(--green, #14633f)"/><circle cx="516.9" cy="288.5" r="4" fill="var(--green, #14633f)"/><circle cx="585.6" cy="289.7" r="4" fill="var(--green, #14633f)"/><text x="70.0" y="18.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >goals per team per match, 8,086 internationals (bars) vs Poisson λ=1.36 (dots)</text><text x="620.0" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >goals</text></svg>
+<figcaption>چرا این فرض درست است: توزیع گلِ هر تیم در هر بازی در ۸٬۰۸۱ مسابقهٔ آموزشی
+(ستون‌ها) در برابر منحنی پواسون با همان میانگین (نقطه‌ها).</figcaption></figure>
+
+<h3>تصحیح دیکسون–کولز</h3>
+<p>دو پواسون مستقل در یک بخش مهم از واقعیت دچار خطا می‌شوند. فوتبال واقعی بیشتر از چیزی که
+استقلال آماری پیش‌بینی می‌کند نتایج ۰-۰ و ۱-۱ تولید می‌کند، چون تیم‌ها گاهی بازی را
+کنترل می‌کنند و ریسک را کاهش می‌دهند.</p>
+<p>دیکسون و کولز در سال ۱۹۹۷ دقیقاً همین بخش کم‌گل جدول احتمالات را با یک پارامتر همبستگی
+ρ اصلاح کردند. با وجود گذشت نزدیک به سه دهه، این خانواده از مدل‌ها هنوز یکی از پایه‌های
+اصلی محاسبهٔ ضرایب حرفه‌ای فوتبال است.</p>
+
+<h3>برازش: درست‌نمایی بیشینهٔ وزن‌دار</h3>
+<p><a href="https://fa.wikipedia.org/wiki/برآورد_درست‌نمایی_بیشینه">درست‌نمایی بیشینه</a>
+به این سؤال پاسخ می‌دهد: چه مجموعه‌ای از پارامترها نتایج مشاهده‌شده را کمترین میزان
+غافلگیرکننده می‌کند؟</p>
+<p>هر مسابقه با وزن خاص خود وارد مدل می‌شود: افت زمانی نمایی (هر نتیجه پس از ۱٬۰۰۰ روز نیمی
+از اثر خود را از دست می‌دهد) و ضریب ×۰٫۸ برای مسابقات دوستانه.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 682 340"><rect width="640" height="340" fill="var(--paper, #f6f1e6)"/><line x1="70" y1="290" x2="620" y2="290" stroke="var(--rule, #cfc4ab)" stroke-width="1"/><text x="62.0" y="294.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0.00</text><line x1="70" y1="225.0" x2="620" y2="225.0" stroke="var(--rule, #cfc4ab)" stroke-width="1"/><text x="62.0" y="229.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0.25</text><line x1="70" y1="160.0" x2="620" y2="160.0" stroke="var(--rule, #cfc4ab)" stroke-width="1"/><text x="62.0" y="164.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0.50</text><line x1="70" y1="95.0" x2="620" y2="95.0" stroke="var(--rule, #cfc4ab)" stroke-width="1"/><text x="62.0" y="99.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0.75</text><line x1="70" y1="30" x2="620" y2="30" stroke="var(--rule, #cfc4ab)" stroke-width="1"/><text x="62.0" y="34.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >1.00</text><text x="70.0" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0y</text><text x="203.8" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >2y</text><text x="337.7" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >4y</text><text x="471.5" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >6y</text><text x="605.3" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >8y</text><polyline points="70.0,30.0 74.6,34.5 79.2,38.9 83.8,43.2 88.3,47.4 92.9,51.6 97.5,55.7 102.1,59.7 106.7,63.7 111.2,67.5 115.8,71.4 120.4,75.1 125.0,78.8 129.6,82.4 134.2,86.0 138.8,89.5 143.3,93.0 147.9,96.3 152.5,99.7 157.1,102.9 161.7,106.2 166.2,109.3 170.8,112.4 175.4,115.5 180.0,118.5 184.6,121.4 189.2,124.3 193.8,127.2 198.3,130.0 202.9,132.7 207.5,135.4 212.1,138.1 216.7,140.7 221.2,143.2 225.8,145.8 230.4,148.2 235.0,150.7 239.6,153.1 244.2,155.4 248.8,157.7 253.3,160.0 257.9,162.2 262.5,164.4 267.1,166.6 271.7,168.7 276.2,170.8 280.8,172.8 285.4,174.9 290.0,176.8 294.6,178.8 299.2,180.7 303.8,182.6 308.3,184.4 312.9,186.2 317.5,188.0 322.1,189.8 326.7,191.5 331.2,193.2 335.8,194.8 340.4,196.5 345.0,198.1 349.6,199.7 354.2,201.2 358.8,202.7 363.3,204.2 367.9,205.7 372.5,207.2 377.1,208.6 381.7,210.0 386.2,211.4 390.8,212.7 395.4,214.0 400.0,215.3 404.6,216.6 409.2,217.9 413.8,219.1 418.3,220.3 422.9,221.5 427.5,222.7 432.1,223.9 436.7,225.0 441.2,226.1 445.8,227.2 450.4,228.3 455.0,229.4 459.6,230.4 464.2,231.4 468.8,232.4 473.3,233.4 477.9,234.4 482.5,235.3 487.1,236.3 491.7,237.2 496.2,238.1 500.8,239.0 505.4,239.9 510.0,240.7 514.6,241.6 519.2,242.4 523.8,243.2 528.3,244.0 532.9,244.8 537.5,245.6 542.1,246.4 546.7,247.1 551.2,247.9 555.8,248.6 560.4,249.3 565.0,250.0 569.6,250.7 574.2,251.4 578.8,252.0 583.3,252.7 587.9,253.3 592.5,253.9 597.1,254.6 601.7,255.2 606.2,255.8 610.8,256.4 615.4,256.9 620.0,257.5" fill="none" stroke="var(--green, #14633f)" stroke-width="2.5"/><line x1="253.33333333333334" y1="160.0" x2="253.33333333333334" y2="290" stroke="var(--red, #a72a1e)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="259.3" y="154.0" font-size="12" fill="var(--red, #a72a1e)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >half-life: 1000 days</text><text x="70.0" y="18.0" font-size="13" fill="var(--ink, #211d16)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >weight of a result in the fit, by age</text><text x="620.0" y="308.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >match age</text></svg>
+<figcaption>سهم هر نتیجه در برازش بر حسب قدمت آن - با نیمه‌عمر ۱٬۰۰۰ روزه، نتایج قدیمی
+زمزمه می‌کنند و فرم اخیر بلند حرف می‌زند.</figcaption></figure>
+<p>انقباض (Shrinkage) نیز برای هر تیم چند مسابقهٔ خیالیِ «متوسط» اضافه می‌کند تا تیم‌هایی
+که دادهٔ کمی دارند بیش از حد از میانگین فاصله نگیرند. این همان مصالحهٔ کلاسیک بین اریب و
+واریانس است: یک برآورد کمی اریب معمولاً از یک برآورد پرنوسان بهتر عمل می‌کند.</p>
+
+<h3>اعتبارسنجی صادقانه و قواعد نمره‌دهی</h3>
+<p>مدلی که روی داده‌های آموزشی خودش ارزیابی شود، در واقع دارد خودش را فریب می‌دهد.</p>
+<p>به همین دلیل ارزیابی خارج از نمونه
+(<a href="https://fa.wikipedia.org/wiki/اعتبارسنجی_متقابل">اعتبارسنجی متقابل</a>)
+انجام می‌شود: تا یک تاریخ مشخص مدل برازش می‌شود،
+۱۲ ماه بعد پیش‌بینی می‌کند و این فرایند روی چهار پنجره تکرار می‌شود.</p>
+<p>کیفیت پیش‌بینی‌ها با قواعد نمره‌دهی سَره سنجیده می‌شود؛ یعنی معیارهایی که فقط در صورت
+بیان صادقانهٔ باور واقعی بهینه می‌شوند. لگ‌لاس (منفی لگاریتم احتمالی که به رخداد واقعی
+داده شده) با پیش‌بینی‌های بیش‌ازحد مطمئن بسیار سخت‌گیرانه برخورد می‌کند. نمرهٔ برایر نیز
+میانگین مربع خطای احتمال‌ها را اندازه می‌گیرد.</p>
+<p>درصد «پیش‌بینی درست» یک معیار سَره نیست، چون با انتخاب همیشگی فاوریت می‌توان آن را
+دستکاری کرد. به همین دلیل کارنامهٔ مدل با برایر و لگ‌لاس شروع می‌شود.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 608 560"><rect width="560" height="560" fill="var(--paper, #f6f1e6)"/><text x="80.0" y="22.0" font-size="14" fill="var(--ink, #211d16)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >calibration on 1,071 held-out matches</text><text x="80.0" y="40.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >a forecaster saying 60% should be right 60% of the time</text><line x1="80" y1="496" x2="536" y2="496" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="500.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >0%</text><text x="80.0" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >0%</text><line x1="80" y1="406.8" x2="536" y2="406.8" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="410.8" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >20%</text><text x="171.2" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >20%</text><line x1="80" y1="317.59999999999997" x2="536" y2="317.59999999999997" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="321.6" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >40%</text><text x="262.4" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >40%</text><line x1="80" y1="228.4" x2="536" y2="228.4" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="232.4" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >60%</text><text x="353.6" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >60%</text><line x1="80" y1="139.2" x2="536" y2="139.2" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="143.2" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >80%</text><text x="444.8" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >80%</text><line x1="80" y1="50" x2="536" y2="50" stroke="var(--rule, #cfc4ab)"/><text x="72.0" y="54.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="end" font-family="ui-monospace,Menlo,monospace" >100%</text><text x="536.0" y="514.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" >100%</text><line x1="80" y1="496" x2="536" y2="50" stroke="var(--ink-soft, #6b6353)" stroke-width="1.5" stroke-dasharray="5 4"/><circle cx="100.7" cy="479.5" r="10.4" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="149.0" cy="432.2" r="10.5" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="195.4" cy="377.6" r="12.0" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="234.7" cy="345.0" r="10.0" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="283.9" cy="307.7" r="8.3" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="331.6" cy="243.9" r="7.8" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="375.5" cy="205.7" r="7.7" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="421.7" cy="170.1" r="7.2" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="466.8" cy="97.5" r="7.1" fill="var(--green, #14633f)" opacity="0.75"/><circle cx="516.7" cy="74.8" r="6.9" fill="var(--green, #14633f)" opacity="0.75"/><text x="80.0" y="542.0" font-size="11" fill="var(--ink-soft, #6b6353)" text-anchor="start" font-family="ui-monospace,Menlo,monospace" >x: predicted probability · y: observed frequency · dot size: sample count</text></svg>
+<figcaption>کالیبراسیون روی سالِ خارج از نمونه: هر نقطه یک دستهٔ احتمال است؛ روی قطرِ
+خط‌چین، اطمینانِ ادعاشده با واقعیتِ مشاهده‌شده برابر است.</figcaption></figure>
+
+<h3>مونت‌کارلو و قانون اعداد بزرگ</h3>
+<p>برای یک تورنمنت راه‌حل بسته و فرمولی وجود ندارد. قوانین تساوی گروه‌ها، جایگذاری تیم‌های
+سوم و مسیر براکت بیش از حد پیچیده و درهم‌تنیده‌اند.</p>
+<p><a href="https://fa.wikipedia.org/wiki/روش_مونت-کارلو">روش مونت‌کارلو</a>
+این مشکل را دور می‌زند: کل تورنمنت را ۱۰۰٬۰۰۰ بار شبیه‌سازی کن و نتایج را بشمار.</p>
+<p><a href="https://fa.wikipedia.org/wiki/قانون_اعداد_بزرگ">قانون اعداد بزرگ</a>
+تضمین می‌کند که این شمارش‌ها به احتمال واقعی مدل همگرا شوند. خطای
+استاندارد برآورد شانس قهرمانی در این مقیاس حدود ±۰٫۱۲ واحد درصد است و در عمل نیز تأیید
+شده است: دو اجرای مستقل برای همهٔ مدعیان کمتر از ۰٫۲ واحد درصد اختلاف داشتند.</p>
+
+<h3>بوت‌استرپ: دانستنِ آنچه نمی‌دانیم</h3>
+<p>یک مدلِ برازش‌شده ممکن است این تصور را ایجاد کند که پارامترهایش دقیق و قطعی‌اند. در
+واقع این‌طور نیست؛ این پارامترها فقط برآوردهایی هستند که از داده‌ای محدود به دست
+آمده‌اند.</p>
+<p>بوت‌استرپ دقیقاً برای اندازه‌گیری همین عدم‌قطعیت به کار می‌رود: وزن مسابقات به‌صورت
+تصادفی تغییر می‌کند، مدل دوباره برازش می‌شود و این فرایند ۲۰۰ بار تکرار می‌شود.</p>
+<p>پراکندگی این ۲۰۰ مدل همان عدم‌قطعیت پارامترهاست و هر تورنمنتِ شبیه‌سازی‌شده یکی از
+آن‌ها را انتخاب می‌کند. نتیجه این است که بخشی از اعتمادبه‌نفس بیش‌ازحد مدعیان حذف می‌شود
+و احتمال‌ها واقع‌بینانه‌تر می‌شوند.</p>
+
+<h3>ترکیب پیش‌بینی‌گرها: میانگین لگاریتمی</h3>
+<p>مدل و بازار اطلاعات متفاوتی دارند. یکی تاریخچهٔ گل‌ها را می‌بیند و دیگری ترکیب‌ها،
+مصدومیت‌ها و اخبار را.</p>
+<p>میانگین لگاریتمی احتمال‌ها ــ یعنی ضرب احتمال‌ها با توان‌های وزنی و سپس نرمال‌سازی ــ
+روش استاندارد ترکیب این منابع اطلاعاتی است.</p>
+<p>وزن ۰٫۳۵ برای بازار نیز یک انتخاب شفاف و آزمون‌پذیر است. عملکرد هر سه نسخه ــ مدل،
+بازار و ترکیب ــ جداگانه ثبت می‌شود تا خود داده‌ها نشان دهند این وزن انتخاب مناسبی بوده
+است یا نه.</p>
+
+<h2>پاسخ‌گویی</h2>
+<p>براکت کامل ــ شامل هر ۷۲ مسابقهٔ مرحلهٔ گروهی و تمام مراحل حذفی تا تعیین قهرمان ــ پیش
+از آغاز تورنمنت قفل می‌شود و با ثبت نتایج واقعی به‌صورت عمومی در
+<a href="bracket.html">کارنامه</a> ارزیابی می‌شود.</p>
+<p>هر اجرای محاسبات با مهر زمانی آرشیو می‌شود و نسخه‌های روزانهٔ سایت در بخش
+<a href="archive.html">نسخه‌های قبلی</a> منجمد باقی می‌مانند.</p>
+<p>پیش‌بینی‌ای که بتوان آن را بعداً تغییر داد، پیش‌بینی نیست.</p>
+
+<h2>یک مدل، بازارهای بسیار</h2>
+<p>بیشتر بازارهای روی کارت هر مسابقه مدل‌های جداگانه نیستند؛ پرسش‌های متفاوتی هستند از
+<em>همان</em> شبکهٔ احتمال نتایج. مجموع گل هر تیم، جمع سطرها و ستون‌های همان شبکه است.
+خطوط بالا/پایین بیشتر فقط جمع سلول‌های بیشترند. «اولین گل» از یک استدلال یک‌خطی مسابقه‌ای
+به دست می‌آید: اگر دو تیم به‌طور مستقل موقعیت بسازند، گل اول به نسبت نرخ گلزنی به یکی از
+دو تیم می‌رسد. نتیجهٔ نیمهٔ اول و دوم هم هر نیمه را یک مسابقهٔ کوتاه‌تر در نظر می‌گیرد:
+گل انتظاری هر دو تیم در سهم گل‌های پیش از استراحت ضرب می‌شود ــ <b>۰٫۴۴۷</b>، برازش‌شده
+روی ۲٬۳۶۰ گل از شش تورنمنت ملی اخیر (نیمهٔ اول همه‌جا کم‌گل‌تر است، در جام‌های جهانی
+بیش از همه) ــ و همان ماشین قبلی دوباره به کار می‌افتد. یک پارامتر، دوازده بازار را باز
+کرد و قیمت‌های زندهٔ نیمهٔ اول از روز اول تا چند سنت با مدل هم‌خوان بودند.</p>
+<p>کرنرها استثنا هستند: داده‌های گل دربارهٔ آن‌ها چیزی نمی‌گویند، پس مدل خودشان را دارند ــ
+یک دوجمله‌ای منفی برازش‌شده روی ۲۵۰ مسابقه از پنج تورنمنت اخیر. یافتهٔ صادقانه: قدرت
+<em>گلزنی</em> یک تیم، تعداد کرنرهایش را خارج از نمونه پیش‌بینی نمی‌کند؛ بنابراین مدل
+عرضه‌شده یک نرخ پایهٔ خالص است (حدود ۹٫۲ کرنر در هر بازی). هرجا دفتر کرنر واقعاً معامله
+می‌شود، مدل تقریباً دقیقاً با آن هم‌نظر است؛ تنها کارش نشان‌کردن خطوط معامله‌نشده‌ای است
+که از واقعیت دور افتاده‌اند.</p>
+
+<h2 id="second-opinion">نظر دوم</h2>
+<p>پشت هر مسابقه یک <b>مدل همراه الو</b> ایستاده است: ریتینگ الو حساس به اختلاف گل،
+برازش‌شده روی همان تاریخچهٔ مسابقات، که با یک رگرسیون پواسون به نرخ گل و سپس به همان شبکهٔ
+نتایج تبدیل می‌شود. دلیل وجودش این است که ۲۰۰ عضو مدل اصلی داده را تغییر می‌دهند اما همه یک
+نظریه دارند ــ تنها محکِ خودِ نظریه، مدلی با ساختار متفاوت است. هر دو مدل امتحان یکسانی
+دادند (آموزش پیش از ژوئن ۲۰۲۵، نمره روی ۱٬۰۷۱ مسابقهٔ بعدی): دیکسون-کولز ۰٫۸۱۹،
+الو ۰٫۸۵۸، و ترکیب ۵۰/۵۰ آن‌ها ۰٫۸۳۱ ــ بدتر از دیکسون-کولز به‌تنهایی؛ پس ترکیب
+<b>رد شد</b> و اعداد الو وارد هیچ عددی که در سایت می‌بینید نمی‌شوند. آنچه می‌ماند
+اختلاف‌نظر است: دو مدل روی یک مسابقهٔ معمولی حدود ۸ واحد فاصله دارند، پس صفحهٔ هر مسابقه
+فقط یک خط هشدار دارد وقتی فاصله غیرعادی باز است ــ نشانه‌ای که به آن مسابقه کمتر اعتماد
+(و کمتر شرط) کنید. خودِ احتمال‌های الو عمداً روی صفحهٔ مسابقه‌ها نمی‌آیند: الو مدل ضعیف‌تر
+در همان امتحان است و نمایش اعدادش کنار اعداد واقعی فقط خواننده را وسوسه می‌کند که با مدلی
+که نشان داده‌ایم پیش‌بینی را بدتر می‌کند میانگین بگیرد. ریتینگ‌های کنونی الو، بالای جدول،
+تا ببینید چه فکر می‌کند: Spain 2091 · Argentina 2057 · Morocco 2006 · Brazil 2002 · France 1996 · Japan 1984 · Colombia 1970 · England 1940 · Algeria 1926 · Ecuador 1920 · Portugal 1918 · Belgium 1904.</p>
+
+<h2>تحلیلگر هوش مصنوعی</h2>
+<p>بخش‌های کوتاه تحلیلی که در انتهای هر صفحهٔ مسابقه، تیم و بازیکن می‌آیند، نوشتهٔ یک مدل
+زبانی هستند (امضای پایین هر بخش می‌گوید کدام مدل و چه زمانی). دو قانون آن‌ها را صادق نگه
+می‌دارد. اول، <b>قرارداد استناد</b>: مدل فقط یک پروندهٔ منجمد از منابع را می‌بیند ــ
+خلاصه‌های دانش‌نامه‌ای که یک بار دریافت شده‌اند، به‌علاوهٔ داده‌های فرم و فهرست بازیکنان
+خودمان ــ و احتمال‌هایی که همین سایت محاسبه می‌کند. ورودی یکسان، خروجی تکرارپذیر، بدون
+واقعیت بیرونی. دوم، <b>تفکیک وظایف</b>: این متن رنگ است، نه محاسبه. هیچ‌چیز از نوشتهٔ
+تحلیلگر به مدل گل، شبیه‌سازی‌ها یا احتمال‌های منتشرشده راه ندارد ــ اگر این کلمات نبودند،
+اعداد همین بودند. مرور پس از مسابقه هم مدل و بازار را با قیمت‌های پیش از بازی می‌سنجد که برای
+کارنامهٔ عمومی نگه داشته شده‌اند؛ پس هوش مصنوعی نمی‌تواند با عقل پس از واقعه از کسی
+تعریف کند. (یک پانوشت صادقانه: از ۱۳ ژوئن یک دستیار جداگانهٔ بررسی اخبار می‌تواند پیش از
+ثبت شرط، اخبار مصدومیت و ترکیب را بخواند ــ اما ساختارش فقط کاهنده است. می‌تواند شرطی را
+حذف یا کوچک کند؛ هرگز نمی‌تواند شرطی اضافه کند، مبلغی را بالا ببرد، یا به عددی در این
+سایت دست بزند.)</p>
+
+<h2>سیر تکامل روش</h2>
+<p class="fineprint">خلاصهٔ دفترچهٔ آزمایشگاه (یادداشت‌های کامل در مخزن کد موجود است). هر تغییر
+پیش از انتشار روی داده‌های دیده‌نشده اعتبارسنجی شد ــ و دو مورد هم دقیقاً در همین آزمون رد شدند.</p>
+<ol class="timeline">
+<li><b>۹ ژوئن</b> ــ انتخاب پواسون وزن‌دار دیکسون-کولز به‌جای پواسون ساده (تساوی‌ها را اشتباه
+قیمت می‌گذارد)، ترکیب‌های Elo (دقت مشابه با پیچیدگی بیشتر) و یادگیری ماشین (در فوتبال ملی
+دادهٔ کافی ندارد). برازش روی ۸٬۰۸۱ بازی ملی از ۲۰۱۸: log-loss برابر ۰٫۸۹۷ در برابر خط
+پایهٔ ۱٫۰۴۶.</li>
+<li><b>۹ ژوئن، عصر</b> ــ تنظیم ابرپارامترها با اعتبارسنجی متقاطع غلتان. حافظهٔ بلندتر برنده شد
+(نیمه‌عمر از ۵۴۸ به ۱۰۰۰ روز): تیم‌های ملی کندتر از باشگاه‌ها تغییر می‌کنند. بهبود log-loss
+از ۰٫۸۹۷ به ۰٫۸۵۴.</li>
+<li><b>۹ ژوئن، شب</b> ــ صریح‌کردن عدم‌قطعیت: آنسامبل بوت‌استرپ ۲۰۰ مدلی برای ۱۰۰٬۰۰۰
+تورنمنت شبیه‌سازی‌شده روی براکت رسمی، به‌علاوهٔ ترکیب با قیمت‌های بازار (وزن ۰٫۳۵) در
+مسابقاتی که پلی‌مارکت قیمت دارد. براکت کامل <b>قفل شد</b> و کارنامهٔ عمومی آغاز شد.</li>
+<li><b>۱۰ ژوئن</b> ــ واریانس ناهنجاری با میانگین صفر در شبیه‌سازی‌ها: شوک فرم هر تورنمنت،
+فرسایش مرحلهٔ حذفی، خستگی وقت اضافه. به‌طور متوسط به هیچ تیمی کمک نمی‌شود، اما بخت‌های اول
+بخشی از احتمال خود را به بقیه پس می‌دهند (آرژانتین از ۱۹٫۰٪ به ۱۶٫۶٪).</li>
+<li><b>۱۰ ژوئن</b> ــ پیشینِ ارزش ترکیب: ارزش بازار بازیکنان (ترانسفرمارکت) امتیازهای
+برازش‌شده را کمی جابه‌جا می‌کند (β=۰٫۳۵). بهبود log-loss از ۰٫۸۵۴ به ۰٫۸۱۸ ــ بزرگ‌ترین
+ارتقای پروژه.</li>
+<li><b>۱۱ ژوئن</b> ــ ممیزی کالیبراسیون نتیجهٔ دقیق؛ نتیجهٔ منفیِ محبوب ما: یک اصلاح
+وسوسه‌انگیز (تساوی‌های پرگل در یک پنجرهٔ آزمون ۲۸٪ ارزان‌قیمت به نظر می‌رسیدند) در
+اعتبارسنجی روی سه پنجرهٔ قدیمی‌تر رد شد و <b>عرضه نشد</b>. شبکهٔ نمرات از قبل کالیبره بود؛
+مقاومت در برابر «اصلاح» هم بخشی از روش است.</li>
+<li><b>۱۱ ژوئن</b> ــ پوشش کامل بازار: دفترهای نتیجهٔ دقیق، مجموع گل، گلزنی هر دو تیم و
+هندیکپ پلی‌مارکت متصل شدند تا هر احتمالی که مدل می‌سازد کنار قیمت زنده و اختلافش بنشیند.</li>
+<li><b>۱۲ ژوئن</b> ــ یک مدل، بازارهای بسیار: مجموع گل تیمی، خطوط گل بیشتر و «اولین گل»
+از همان شبکهٔ موجود؛ بازارهای نیمه با سهم برازش‌شدهٔ گل‌های نیمهٔ اول (۰٫۴۴۷ روی ۲٬۳۶۰
+گل)؛ بازارهای آیندهٔ تورنمنت در برابر آنسامبل قیمت‌گذاری شدند. کرنرها دومین ایدهٔ
+ردشده را آوردند: قدرت گلزنی نتوانست تعداد کرنر را خارج از نمونه پیش‌بینی کند، پس مدلشان
+آگاهانه یک نرخ پایه است.</li>
+<li><b>۱۲ ژوئن، بعدتر</b> ــ یک بازبینی بیرونی کد دو باگ واقعی یافت (آلودگی در ابزار
+اعتبارسنجی پیشینِ ارزش ترکیب ــ اجرای پاکیزه دقیقاً همان اعداد منتشرشده را بازتولید کرد ــ
+و تصادفی‌بودن بدون بذر در موتور تورنمنت که حالا قطعی است) و دو دفاع به همراه آورد:
+محافظت قیمت در لحظهٔ اجرا برای شرط‌ها و دفتر شرط‌بندی کاغذی که هر فرصت یافت‌شده را با
+ارزش خط پایانی می‌سنجد. پیش‌بینی‌ها تغییری نکردند؛ اعتماد به آن‌ها بهتر کسب شد.</li>
+<li><b>۱۳ ژوئن</b> ــ نظر دوم: یک مدل همراه الو→گل ساخته شد و همان امتحان را داد. حکم روی
+همان ۱٬۰۷۱ مسابقهٔ کنارگذاشته: دیکسون-کولز ۰٫۸۱۹، الو ۰٫۸۵۸، ترکیب ۵۰/۵۰ آن‌ها ۰٫۸۳۱ ــ
+<em>بدتر از دیکسون-کولز به‌تنهایی</em>؛ پس ترکیب رد شد و الو هرگز به اعداد منتشرشده راه
+ندارد. فقط به‌عنوان نظر دوم نمایشی روی صفحهٔ هر مسابقه می‌نشیند و اختلافش با مدل اصلی تنها
+یک سیم هشدار است.</li>
+<li><b>ادامه‌دار</b> ــ هر شب نتایج واقعی دریافت می‌شود، براکت قفل‌شده به‌صورت عمومی ارزیابی
+می‌شود، مدل روی تازه‌ترین بازی‌ها دوباره برازش می‌شود و نسخهٔ آن روزِ سایت منجمد می‌شود.</li>
+</ol>
+
+<h2>هر تکرار، چقدر پیش‌بینی را جابه‌جا کرد</h2>
+<p class="fineprint">نمودار زیر شانس قهرمانی را در تمام اجراهای آرشیوشده نشان می‌دهد؛ خط‌چین‌ها لحظهٔ ورود هر روش جدید هستند. جدول، بزرگ‌ترین جابه‌جایی هر مرحله را خلاصه می‌کند. خط‌های صافِ روزهای آخر هم خودشان پیام دارند: ممیزی‌های کالیبراسیون و بازارهای جدید پیش‌بینی‌ها را تغییر ندادند ــ و قرار هم نبود تغییر دهند.</p>
+<figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 320" style="max-width:660px;width:100%"><rect width="660" height="320" fill="var(--paper, #f6f1e6)"/><line x1="40.0" y1="34" x2="40.0" y2="290" stroke="var(--ink-soft, #6b6353)" stroke-dasharray="3,3"/><circle cx="40.0" cy="26" r="8" fill="var(--ink, #211d16)"/><text x="40.0" y="29.5" font-size="9.5" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">1</text><line x1="47.1" y1="34" x2="47.1" y2="290" stroke="var(--ink-soft, #6b6353)" stroke-dasharray="3,3"/><circle cx="47.1" cy="26" r="8" fill="var(--ink, #211d16)"/><text x="47.1" y="29.5" font-size="9.5" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">2</text><line x1="50.7" y1="34" x2="50.7" y2="290" stroke="var(--ink-soft, #6b6353)" stroke-dasharray="3,3"/><circle cx="50.7" cy="26" r="8" fill="var(--ink, #211d16)"/><text x="50.7" y="29.5" font-size="9.5" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">3</text><line x1="59.6" y1="34" x2="59.6" y2="290" stroke="var(--ink-soft, #6b6353)" stroke-dasharray="3,3"/><circle cx="59.6" cy="26" r="8" fill="var(--ink, #211d16)"/><text x="59.6" y="29.5" font-size="9.5" fill="var(--paper, #f6f1e6)" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">4</text><polyline points="40.0,76.8 41.8,76.7 43.6,66.8 45.3,78.7 47.1,105.9 48.9,104.6 50.7,80.0 52.5,83.5 54.2,80.1 56.0,80.5 57.8,83.2 59.6,83.1 61.4,80.1 63.1,85.0 64.9,79.4 66.7,81.4 68.5,81.8 70.3,81.8 72.0,79.3 73.8,78.3 75.6,81.8 77.4,81.9 79.2,81.1 80.9,81.1 82.7,80.0 84.5,79.0 86.3,80.4 88.1,80.9 89.8,79.1 91.6,81.0 93.4,81.7 95.2,83.2 97.0,81.8 98.7,80.2 100.5,80.0 102.3,82.4 104.1,80.7 105.9,79.8 107.6,81.9 109.4,83.4 111.2,80.8 113.0,81.5 114.8,80.0 116.5,79.8 118.3,79.6 120.1,79.7 121.9,82.7 123.7,79.9 125.4,79.6 127.2,79.2 129.0,80.7 130.8,81.3 132.6,79.3 134.3,82.4 136.1,80.4 137.9,83.1 139.7,79.6 141.5,80.1 143.2,80.0 145.0,82.0 146.8,81.0 148.6,81.0 150.4,81.3 152.1,79.3 153.9,79.1 155.7,82.0 157.5,82.3 159.3,83.2 161.0,83.7 162.8,82.2 164.6,79.0 166.4,79.9 168.2,80.3 169.9,82.4 171.7,78.7 173.5,81.5 175.3,81.1 177.1,81.2 178.8,83.0 180.6,78.7 182.4,81.5 184.2,79.6 186.0,81.0 187.7,81.5 189.5,82.0 191.3,79.1 193.1,81.3 194.9,77.8 196.6,82.0 198.4,81.0 200.2,80.4 202.0,82.0 203.8,81.4 205.5,81.3 207.3,79.8 209.1,81.3 210.9,80.4 212.7,81.3 214.4,81.5 216.2,80.1 218.0,79.3 219.8,83.5 221.6,82.0 223.3,81.8 225.1,81.0 226.9,82.4 228.7,83.0 230.5,81.2 232.2,81.8 234.0,79.9 235.8,80.2 237.6,83.9 239.4,80.2 241.1,80.9 242.9,83.8 244.7,80.5 246.5,78.8 248.3,78.3 250.0,82.5 251.8,80.4 253.6,83.9 255.4,79.8 257.2,80.7 258.9,82.4 260.7,84.1 262.5,80.7 264.3,81.7 266.1,80.3 267.8,84.4 269.6,77.1 271.4,80.1 273.2,81.4 275.0,80.7 276.7,79.7 278.5,80.1 280.3,82.2 282.1,80.2 283.9,81.9 285.6,82.7 287.4,81.3 289.2,81.5 291.0,79.4 292.8,77.9 294.5,79.9 296.3,81.4 298.1,80.0 299.9,81.0 301.7,79.1 303.4,82.8 305.2,81.3 307.0,81.8 308.8,82.1 310.6,85.4 312.3,81.1 314.1,81.7 315.9,80.5 317.7,82.3 319.5,82.3 321.2,81.7 323.0,81.4 324.8,80.0 326.6,81.9 328.4,82.3 330.1,80.2 331.9,80.9 333.7,79.2 335.5,80.7 337.3,81.8 339.0,80.7 340.8,83.8 342.6,79.2 344.4,80.3 346.2,79.3 347.9,81.9 349.7,80.0 351.5,81.7 353.3,81.9 355.1,81.4 356.8,82.7 358.6,82.5 360.4,80.0 362.2,80.2 364.0,80.4 365.7,82.2 367.5,81.8 369.3,80.2 371.1,83.0 372.9,81.7 374.6,82.5 376.4,81.7 378.2,78.9 380.0,82.4 381.8,79.4 383.5,81.1 385.3,81.4 387.1,82.3 388.9,81.8 390.7,79.9 392.4,80.0 394.2,80.4 396.0,82.5 397.8,85.1 399.6,82.3 401.3,82.7 403.1,81.7 404.9,79.8 406.7,82.0 408.5,79.3 410.2,79.9 412.0,80.1 413.8,84.8 415.6,81.9 417.4,81.1 419.1,82.4 420.9,84.2 422.7,79.8 424.5,82.5 426.3,82.2 428.0,81.0 429.8,81.7 431.6,82.7 433.4,80.4 435.2,81.1 436.9,81.1 438.7,84.9 440.5,82.0 442.3,80.5 444.1,83.0 445.8,81.4 447.6,80.2 449.4,81.1 451.2,86.2 453.0,81.0 454.7,81.5 456.5,80.3 458.3,79.3 460.1,79.9 461.9,80.2 463.6,81.1 465.4,81.2 467.2,81.9 469.0,80.4 470.8,80.7 472.5,83.1 474.3,80.8 476.1,80.3 477.9,79.1 479.7,80.7 481.4,82.4 483.2,80.7 485.0,81.2 486.8,81.3 488.6,79.6 490.3,82.3 492.1,82.1 493.9,84.7 495.7,80.7 497.5,81.2 499.2,80.5 501.0,79.7 502.8,82.2 504.6,81.3 506.4,81.9 508.1,79.1 509.9,82.2 511.7,80.7 513.5,81.4 515.3,81.7 517.0,80.8 518.8,79.3 520.6,80.5 522.4,81.0 524.2,79.6 525.9,80.0 527.7,81.7 529.5,78.6 531.3,79.8 533.1,79.6 534.8,80.4 536.6,82.1 538.4,82.1 540.2,79.8 542.0,79.8 543.7,81.4 545.5,82.7 547.3,79.3 549.1,79.8 550.9,77.9 552.6,81.0 554.4,80.1 556.2,80.3 558.0,78.7 559.8,80.8 561.5,81.3 563.3,81.5 565.1,82.1 566.9,79.9 568.7,80.7 570.4,81.5 572.2,85.4 574.0,80.9" fill="none" stroke="#14633f" stroke-width="2"/><text x="578" y="83.9" font-size="10" fill="#14633f" font-family="ui-monospace,Menlo,monospace">Argentina 19%</text><polyline points="40.0,178.1 41.8,179.9 43.6,181.1 45.3,182.8 47.1,190.1 48.9,190.4 50.7,132.9 52.5,132.4 54.2,132.4 56.0,131.5 57.8,131.4 59.6,132.2 61.4,133.3 63.1,131.9 64.9,130.1 66.7,131.5 68.5,131.7 70.3,131.2 72.0,135.5 73.8,130.5 75.6,131.6 77.4,133.2 79.2,133.4 80.9,131.9 82.7,133.2 84.5,132.1 86.3,131.7 88.1,131.8 89.8,130.5 91.6,135.2 93.4,131.8 95.2,130.9 97.0,131.8 98.7,133.8 100.5,132.5 102.3,132.5 104.1,133.9 105.9,133.2 107.6,132.4 109.4,129.6 111.2,133.6 113.0,130.7 114.8,132.5 116.5,131.4 118.3,132.4 120.1,131.5 121.9,129.2 123.7,132.3 125.4,133.7 127.2,132.3 129.0,133.4 130.8,129.2 132.6,134.4 134.3,131.7 136.1,133.1 137.9,131.9 139.7,131.9 141.5,131.5 143.2,132.3 145.0,133.7 146.8,135.3 148.6,132.4 150.4,131.6 152.1,131.7 153.9,134.2 155.7,130.9 157.5,132.4 159.3,130.5 161.0,133.9 162.8,129.8 164.6,132.9 166.4,133.5 168.2,129.1 169.9,129.7 171.7,132.3 173.5,132.4 175.3,132.8 177.1,130.7 178.8,131.1 180.6,133.2 182.4,133.2 184.2,132.3 186.0,134.7 187.7,132.5 189.5,132.8 191.3,132.9 193.1,133.9 194.9,132.3 196.6,131.7 198.4,132.3 200.2,132.3 202.0,129.7 203.8,133.9 205.5,133.5 207.3,133.8 209.1,131.4 210.9,130.3 212.7,130.7 214.4,132.2 216.2,130.4 218.0,132.8 219.8,131.5 221.6,130.4 223.3,130.7 225.1,132.8 226.9,132.8 228.7,132.5 230.5,132.5 232.2,130.9 234.0,133.6 235.8,131.4 237.6,135.6 239.4,131.2 241.1,132.5 242.9,132.8 244.7,132.2 246.5,133.2 248.3,136.0 250.0,134.7 251.8,133.4 253.6,132.8 255.4,133.6 257.2,133.2 258.9,129.8 260.7,133.8 262.5,131.9 264.3,131.2 266.1,135.0 267.8,130.7 269.6,132.7 271.4,133.5 273.2,130.7 275.0,133.9 276.7,130.9 278.5,132.7 280.3,132.3 282.1,131.3 283.9,132.8 285.6,130.3 287.4,132.9 289.2,131.8 291.0,131.2 292.8,134.0 294.5,132.5 296.3,131.2 298.1,131.3 299.9,132.8 301.7,134.7 303.4,131.8 305.2,134.8 307.0,132.7 308.8,130.9 310.6,130.6 312.3,130.3 314.1,132.6 315.9,131.6 317.7,131.9 319.5,131.3 321.2,131.6 323.0,132.3 324.8,132.5 326.6,132.1 328.4,131.9 330.1,133.4 331.9,130.8 333.7,133.5 335.5,131.7 337.3,132.7 339.0,133.2 340.8,132.1 342.6,133.5 344.4,134.2 346.2,133.7 347.9,131.2 349.7,131.2 351.5,130.6 353.3,131.6 355.1,131.5 356.8,132.1 358.6,131.2 360.4,133.6 362.2,132.8 364.0,132.1 365.7,134.8 367.5,132.1 369.3,132.4 371.1,132.1 372.9,131.8 374.6,133.7 376.4,131.9 378.2,133.1 380.0,132.4 381.8,130.9 383.5,133.6 385.3,130.5 387.1,132.6 388.9,133.6 390.7,132.2 392.4,133.9 394.2,132.1 396.0,134.0 397.8,132.2 399.6,130.5 401.3,130.2 403.1,131.3 404.9,132.1 406.7,130.8 408.5,132.5 410.2,131.8 412.0,134.3 413.8,132.4 415.6,134.4 417.4,131.4 419.1,132.8 420.9,133.6 422.7,131.8 424.5,130.8 426.3,132.2 428.0,130.5 429.8,131.6 431.6,132.4 433.4,132.2 435.2,133.1 436.9,132.4 438.7,132.5 440.5,132.7 442.3,131.2 444.1,130.7 445.8,132.4 447.6,131.8 449.4,131.4 451.2,132.5 453.0,132.1 454.7,134.6 456.5,132.5 458.3,132.7 460.1,131.9 461.9,130.9 463.6,133.1 465.4,132.6 467.2,131.8 469.0,132.3 470.8,131.1 472.5,131.2 474.3,132.2 476.1,132.5 477.9,131.3 479.7,133.3 481.4,131.4 483.2,131.3 485.0,133.5 486.8,131.7 488.6,130.1 490.3,133.5 492.1,130.9 493.9,132.8 495.7,133.3 497.5,133.2 499.2,131.8 501.0,133.4 502.8,132.5 504.6,131.6 506.4,131.9 508.1,132.2 509.9,131.2 511.7,134.5 513.5,134.6 515.3,130.5 517.0,133.3 518.8,133.3 520.6,132.5 522.4,131.6 524.2,134.3 525.9,131.4 527.7,133.5 529.5,132.9 531.3,132.5 533.1,133.7 534.8,132.9 536.6,131.2 538.4,130.8 540.2,131.6 542.0,132.7 543.7,130.8 545.5,132.6 547.3,132.6 549.1,132.9 550.9,132.2 552.6,130.7 554.4,131.3 556.2,132.8 558.0,134.3 559.8,132.6 561.5,133.3 563.3,132.7 565.1,133.4 566.9,133.2 568.7,132.8 570.4,133.7 572.2,130.8 574.0,133.1" fill="none" stroke="#a72a1e" stroke-width="2"/><text x="578" y="136.1" font-size="10" fill="#a72a1e" font-family="ui-monospace,Menlo,monospace">Spain 14%</text><polyline points="40.0,219.1 41.8,220.6 43.6,219.6 45.3,219.7 47.1,224.4 48.9,222.2 50.7,173.6 52.5,173.1 54.2,177.4 56.0,174.9 57.8,174.5 59.6,173.7 61.4,173.1 63.1,171.6 64.9,175.3 66.7,174.6 68.5,173.3 70.3,175.6 72.0,173.6 73.8,173.9 75.6,174.9 77.4,176.1 79.2,175.0 80.9,172.7 82.7,175.8 84.5,173.1 86.3,175.5 88.1,174.2 89.8,175.9 91.6,173.5 93.4,175.8 95.2,175.0 97.0,175.7 98.7,174.3 100.5,174.1 102.3,176.2 104.1,172.6 105.9,175.6 107.6,173.0 109.4,173.8 111.2,175.5 113.0,175.1 114.8,174.2 116.5,174.5 118.3,174.6 120.1,174.5 121.9,176.7 123.7,173.2 125.4,174.6 127.2,174.5 129.0,174.2 130.8,175.5 132.6,174.5 134.3,173.1 136.1,173.3 137.9,174.9 139.7,175.3 141.5,173.0 143.2,175.0 145.0,173.9 146.8,171.3 148.6,173.8 150.4,173.3 152.1,176.3 153.9,176.2 155.7,174.3 157.5,172.2 159.3,172.8 161.0,173.6 162.8,176.6 164.6,176.2 166.4,174.3 168.2,175.7 169.9,176.1 171.7,174.3 173.5,174.2 175.3,173.9 177.1,176.3 178.8,173.7 180.6,175.9 182.4,172.7 184.2,172.3 186.0,174.2 187.7,173.1 189.5,174.9 191.3,174.1 193.1,173.8 194.9,175.1 196.6,174.0 198.4,173.9 200.2,174.8 202.0,175.3 203.8,175.1 205.5,175.8 207.3,174.1 209.1,174.8 210.9,174.8 212.7,173.5 214.4,174.1 216.2,174.7 218.0,175.8 219.8,173.0 221.6,174.3 223.3,175.3 225.1,174.3 226.9,174.8 228.7,175.9 230.5,174.6 232.2,175.7 234.0,175.3 235.8,173.8 237.6,175.3 239.4,175.0 241.1,173.6 242.9,173.6 244.7,174.0 246.5,175.0 248.3,174.3 250.0,173.2 251.8,175.0 253.6,173.6 255.4,174.8 257.2,175.6 258.9,175.5 260.7,174.2 262.5,174.5 264.3,173.7 266.1,172.8 267.8,173.3 269.6,174.7 271.4,173.1 273.2,174.1 275.0,174.1 276.7,175.8 278.5,174.8 280.3,176.7 282.1,175.3 283.9,175.0 285.6,174.6 287.4,175.1 289.2,175.0 291.0,174.0 292.8,174.1 294.5,175.3 296.3,173.5 298.1,173.3 299.9,175.8 301.7,176.3 303.4,174.6 305.2,174.6 307.0,174.2 308.8,174.7 310.6,173.7 312.3,173.8 314.1,174.1 315.9,174.3 317.7,173.8 319.5,175.8 321.2,175.2 323.0,175.0 324.8,176.8 326.6,175.8 328.4,174.5 330.1,176.6 331.9,175.3 333.7,174.9 335.5,175.0 337.3,175.7 339.0,174.6 340.8,175.5 342.6,174.2 344.4,174.5 346.2,171.9 347.9,174.1 349.7,174.1 351.5,174.9 353.3,175.1 355.1,173.8 356.8,173.8 358.6,175.5 360.4,174.9 362.2,174.8 364.0,174.2 365.7,174.9 367.5,176.1 369.3,176.1 371.1,173.6 372.9,172.9 374.6,174.7 376.4,174.6 378.2,175.9 380.0,173.6 381.8,176.0 383.5,173.7 385.3,175.8 387.1,175.3 388.9,173.9 390.7,174.1 392.4,172.2 394.2,175.7 396.0,174.2 397.8,174.7 399.6,174.8 401.3,174.1 403.1,173.8 404.9,174.5 406.7,174.7 408.5,174.8 410.2,174.2 412.0,174.2 413.8,174.3 415.6,173.2 417.4,175.9 419.1,173.2 420.9,173.5 422.7,174.3 424.5,174.1 426.3,174.8 428.0,176.0 429.8,176.1 431.6,175.0 433.4,173.5 435.2,174.1 436.9,173.7 438.7,173.6 440.5,177.4 442.3,175.6 444.1,174.3 445.8,174.5 447.6,175.2 449.4,175.7 451.2,174.8 453.0,174.2 454.7,175.8 456.5,174.7 458.3,175.6 460.1,176.6 461.9,176.5 463.6,173.9 465.4,174.8 467.2,175.1 469.0,175.0 470.8,174.9 472.5,175.6 474.3,173.3 476.1,173.8 477.9,177.7 479.7,172.7 481.4,173.9 483.2,173.2 485.0,175.8 486.8,175.3 488.6,175.6 490.3,175.2 492.1,175.2 493.9,173.3 495.7,175.8 497.5,174.3 499.2,173.7 501.0,174.1 502.8,174.3 504.6,173.8 506.4,175.1 508.1,175.1 509.9,173.9 511.7,174.2 513.5,172.9 515.3,174.8 517.0,175.3 518.8,175.0 520.6,174.8 522.4,175.9 524.2,174.8 525.9,174.2 527.7,176.3 529.5,173.6 531.3,175.3 533.1,174.3 534.8,174.5 536.6,175.7 538.4,172.3 540.2,173.1 542.0,173.5 543.7,174.8 545.5,174.3 547.3,176.2 549.1,175.3 550.9,175.7 552.6,176.3 554.4,175.0 556.2,174.6 558.0,176.1 559.8,175.9 561.5,174.7 563.3,173.7 565.1,173.3 566.9,174.9 568.7,175.0 570.4,175.3 572.2,172.8 574.0,174.2" fill="none" stroke="#856a1d" stroke-width="2"/><text x="578" y="177.2" font-size="10" fill="#856a1d" font-family="ui-monospace,Menlo,monospace">England 10%</text><polyline points="40.0,184.8 41.8,190.1 43.6,185.9 45.3,188.3 47.1,196.4 48.9,196.2 50.7,175.0 52.5,174.2 54.2,176.5 56.0,175.1 57.8,177.7 59.6,175.2 61.4,174.1 63.1,174.8 64.9,177.0 66.7,175.7 68.5,176.5 70.3,177.0 72.0,175.2 73.8,175.1 75.6,174.2 77.4,174.7 79.2,175.8 80.9,176.1 82.7,176.7 84.5,175.6 86.3,178.9 88.1,176.1 89.8,177.8 91.6,175.8 93.4,175.0 95.2,175.9 97.0,176.5 98.7,176.0 100.5,173.6 102.3,175.9 104.1,175.8 105.9,176.0 107.6,175.8 109.4,177.2 111.2,175.6 113.0,176.0 114.8,175.7 116.5,176.2 118.3,176.7 120.1,175.1 121.9,174.6 123.7,175.2 125.4,176.2 127.2,175.8 129.0,175.2 130.8,176.2 132.6,176.3 134.3,176.9 136.1,174.7 137.9,175.5 139.7,175.1 141.5,176.8 143.2,177.2 145.0,175.9 146.8,176.5 148.6,176.8 150.4,177.9 152.1,175.3 153.9,177.8 155.7,177.3 157.5,176.0 159.3,175.2 161.0,175.8 162.8,177.3 164.6,177.6 166.4,176.0 168.2,177.2 169.9,176.9 171.7,176.0 173.5,175.6 175.3,177.8 177.1,173.8 178.8,176.5 180.6,175.8 182.4,176.3 184.2,173.7 186.0,174.6 187.7,176.0 189.5,175.3 191.3,175.9 193.1,174.8 194.9,177.3 196.6,174.8 198.4,175.5 200.2,175.0 202.0,175.5 203.8,173.9 205.5,175.5 207.3,177.4 209.1,176.7 210.9,175.3 212.7,177.7 214.4,176.2 216.2,176.3 218.0,176.1 219.8,175.3 221.6,174.7 223.3,173.3 225.1,174.5 226.9,176.7 228.7,174.9 230.5,176.1 232.2,174.3 234.0,176.2 235.8,176.5 237.6,174.2 239.4,177.0 241.1,175.3 242.9,175.5 244.7,177.1 246.5,175.1 248.3,177.3 250.0,175.2 251.8,173.3 253.6,175.1 255.4,174.2 257.2,176.7 258.9,176.8 260.7,175.3 262.5,174.0 264.3,174.8 266.1,176.3 267.8,177.4 269.6,176.9 271.4,176.0 273.2,174.5 275.0,175.9 276.7,176.7 278.5,175.2 280.3,175.3 282.1,175.6 283.9,174.3 285.6,174.8 287.4,175.5 289.2,176.9 291.0,177.0 292.8,176.3 294.5,176.0 296.3,177.4 298.1,177.6 299.9,175.6 301.7,175.9 303.4,175.0 305.2,174.6 307.0,175.8 308.8,176.9 310.6,174.3 312.3,176.5 314.1,175.8 315.9,176.0 317.7,174.6 319.5,174.1 321.2,176.1 323.0,176.2 324.8,174.6 326.6,175.2 328.4,177.2 330.1,176.1 331.9,175.8 333.7,173.7 335.5,177.7 337.3,174.9 339.0,174.6 340.8,176.2 342.6,176.5 344.4,175.3 346.2,175.5 347.9,176.6 349.7,176.1 351.5,176.1 353.3,176.8 355.1,176.0 356.8,176.6 358.6,176.2 360.4,175.0 362.2,176.6 364.0,175.8 365.7,175.8 367.5,175.6 369.3,176.0 371.1,175.3 372.9,176.6 374.6,174.0 376.4,176.1 378.2,174.7 380.0,177.1 381.8,175.8 383.5,174.6 385.3,175.3 387.1,174.6 388.9,175.8 390.7,176.5 392.4,175.2 394.2,176.1 396.0,176.3 397.8,175.3 399.6,176.2 401.3,173.9 403.1,176.6 404.9,174.7 406.7,175.9 408.5,175.0 410.2,176.1 412.0,178.0 413.8,175.6 415.6,174.2 417.4,175.5 419.1,175.0 420.9,173.5 422.7,176.3 424.5,176.2 426.3,175.3 428.0,174.9 429.8,174.9 431.6,176.5 433.4,176.6 435.2,175.7 436.9,174.9 438.7,175.3 440.5,174.6 442.3,174.7 444.1,176.7 445.8,176.9 447.6,176.0 449.4,175.9 451.2,175.6 453.0,175.9 454.7,175.9 456.5,175.0 458.3,172.2 460.1,176.2 461.9,176.9 463.6,176.0 465.4,175.5 467.2,176.0 469.0,175.0 470.8,175.8 472.5,176.8 474.3,176.9 476.1,177.0 477.9,175.6 479.7,176.9 481.4,175.6 483.2,174.9 485.0,175.6 486.8,175.5 488.6,177.7 490.3,176.0 492.1,175.9 493.9,176.2 495.7,175.8 497.5,176.0 499.2,174.0 501.0,176.0 502.8,176.5 504.6,177.7 506.4,172.3 508.1,175.5 509.9,175.2 511.7,176.3 513.5,175.2 515.3,174.7 517.0,175.7 518.8,176.7 520.6,176.6 522.4,174.9 524.2,176.1 525.9,174.0 527.7,174.9 529.5,176.3 531.3,174.2 533.1,176.9 534.8,176.9 536.6,175.6 538.4,174.7 540.2,178.1 542.0,176.0 543.7,176.6 545.5,174.8 547.3,176.8 549.1,177.3 550.9,177.7 552.6,175.6 554.4,176.7 556.2,175.9 558.0,175.1 559.8,175.3 561.5,176.5 563.3,176.3 565.1,175.1 566.9,175.8 568.7,172.9 570.4,175.2 572.2,176.0 574.0,175.2" fill="none" stroke="#211d16" stroke-width="2"/><text x="578" y="189.2" font-size="10" fill="#211d16" font-family="ui-monospace,Menlo,monospace">Brazil 10%</text><polyline points="40.0,245.8 41.8,246.7 43.6,244.7 45.3,243.6 47.1,244.0 48.9,245.4 50.7,198.4 52.5,197.8 54.2,199.5 56.0,199.9 57.8,198.2 59.6,197.5 61.4,198.8 63.1,199.9 64.9,199.5 66.7,196.9 68.5,198.1 70.3,198.4 72.0,199.2 73.8,201.3 75.6,199.8 77.4,197.8 79.2,197.9 80.9,198.8 82.7,197.9 84.5,197.3 86.3,196.2 88.1,199.0 89.8,198.4 91.6,199.2 93.4,198.2 95.2,196.8 97.0,198.2 98.7,197.1 100.5,200.8 102.3,198.6 104.1,199.8 105.9,197.9 107.6,199.0 109.4,198.1 111.2,198.5 113.0,199.9 114.8,198.5 116.5,198.8 118.3,198.2 120.1,198.8 121.9,199.3 123.7,198.3 125.4,199.3 127.2,197.3 129.0,198.2 130.8,198.5 132.6,197.4 134.3,198.9 136.1,197.3 137.9,198.8 139.7,198.9 141.5,199.2 143.2,198.5 145.0,198.5 146.8,200.2 148.6,198.6 150.4,197.4 152.1,199.3 153.9,196.1 155.7,199.1 157.5,200.1 159.3,198.0 161.0,198.3 162.8,198.0 164.6,198.2 166.4,198.3 168.2,199.2 169.9,198.4 171.7,200.2 173.5,199.8 175.3,197.5 177.1,198.9 178.8,198.5 180.6,198.8 182.4,198.0 184.2,199.9 186.0,198.0 187.7,197.9 189.5,196.4 191.3,199.0 193.1,198.1 194.9,199.3 196.6,197.2 198.4,199.1 200.2,199.3 202.0,198.2 203.8,199.2 205.5,197.1 207.3,199.4 209.1,199.8 210.9,199.0 212.7,199.3 214.4,199.0 216.2,199.6 218.0,199.1 219.8,198.1 221.6,198.0 223.3,199.2 225.1,197.2 226.9,196.5 228.7,198.4 230.5,199.2 232.2,198.4 234.0,198.1 235.8,199.8 237.6,196.9 239.4,197.8 241.1,198.0 242.9,198.9 244.7,197.4 246.5,199.0 248.3,195.4 250.0,199.2 251.8,196.8 253.6,199.6 255.4,197.4 257.2,198.1 258.9,199.3 260.7,197.9 262.5,198.4 264.3,198.2 266.1,197.7 267.8,199.2 269.6,198.2 271.4,198.9 273.2,198.5 275.0,199.2 276.7,197.4 278.5,199.0 280.3,197.7 282.1,197.4 283.9,196.7 285.6,197.7 287.4,196.9 289.2,199.3 291.0,198.6 292.8,197.7 294.5,197.0 296.3,198.3 298.1,198.4 299.9,200.1 301.7,197.1 303.4,198.9 305.2,198.6 307.0,198.3 308.8,199.9 310.6,198.1 312.3,198.5 314.1,198.8 315.9,198.1 317.7,198.6 319.5,198.0 321.2,197.1 323.0,197.1 324.8,199.1 326.6,197.8 328.4,197.5 330.1,198.2 331.9,200.0 333.7,198.5 335.5,197.7 337.3,198.4 339.0,199.5 340.8,196.8 342.6,198.9 344.4,198.5 346.2,200.3 347.9,196.8 349.7,197.9 351.5,198.0 353.3,197.4 355.1,198.6 356.8,198.1 358.6,199.3 360.4,199.1 362.2,197.5 364.0,197.8 365.7,199.5 367.5,198.1 369.3,197.7 371.1,198.2 372.9,197.8 374.6,199.3 376.4,195.9 378.2,199.0 380.0,197.9 381.8,199.4 383.5,198.9 385.3,198.0 387.1,197.9 388.9,198.0 390.7,198.9 392.4,199.4 394.2,196.7 396.0,197.8 397.8,195.7 399.6,197.0 401.3,199.4 403.1,197.4 404.9,198.1 406.7,200.1 408.5,199.4 410.2,198.6 412.0,197.7 413.8,199.9 415.6,199.1 417.4,198.9 419.1,197.3 420.9,200.1 422.7,199.0 424.5,198.2 426.3,198.1 428.0,198.9 429.8,198.8 431.6,199.4 433.4,199.0 435.2,198.3 436.9,197.1 438.7,198.0 440.5,198.0 442.3,199.5 444.1,197.3 445.8,198.4 447.6,199.6 449.4,198.8 451.2,197.0 453.0,198.6 454.7,197.7 456.5,198.1 458.3,199.0 460.1,198.0 461.9,198.8 463.6,198.5 465.4,197.0 467.2,197.7 469.0,197.2 470.8,199.0 472.5,198.0 474.3,199.2 476.1,197.7 477.9,197.4 479.7,197.9 481.4,198.0 483.2,198.3 485.0,198.3 486.8,197.4 488.6,199.0 490.3,197.3 492.1,199.2 493.9,198.4 495.7,199.1 497.5,198.4 499.2,198.2 501.0,199.1 502.8,198.4 504.6,198.2 506.4,200.3 508.1,197.9 509.9,199.1 511.7,198.1 513.5,199.0 515.3,198.1 517.0,197.8 518.8,197.8 520.6,199.8 522.4,197.4 524.2,199.0 525.9,200.1 527.7,197.9 529.5,200.4 531.3,198.3 533.1,199.0 534.8,199.1 536.6,198.5 538.4,199.5 540.2,198.9 542.0,198.8 543.7,197.9 545.5,198.5 547.3,197.2 549.1,198.4 550.9,199.4 552.6,199.5 554.4,200.9 556.2,198.0 558.0,199.9 559.8,198.2 561.5,197.5 563.3,197.2 565.1,198.4 566.9,198.2 568.7,197.5 570.4,196.2 572.2,199.0 574.0,198.6" fill="none" stroke="#4a6fa5" stroke-width="2"/><text x="578" y="201.6" font-size="10" fill="#4a6fa5" font-family="ui-monospace,Menlo,monospace">France 8%</text><polyline points="40.0,244.5 41.8,241.5 43.6,241.2 45.3,242.8 47.1,242.6 48.9,242.6 50.7,217.3 52.5,215.7 54.2,215.0 56.0,216.9 57.8,215.6 59.6,215.6 61.4,217.4 63.1,215.2 64.9,217.1 66.7,218.5 68.5,216.1 70.3,214.6 72.0,216.6 73.8,216.1 75.6,216.1 77.4,215.2 79.2,215.3 80.9,216.1 82.7,216.6 84.5,217.1 86.3,215.6 88.1,216.5 89.8,216.4 91.6,217.5 93.4,216.0 95.2,217.1 97.0,216.3 98.7,218.3 100.5,216.0 102.3,215.3 104.1,215.7 105.9,217.0 107.6,216.9 109.4,216.1 111.2,215.4 113.0,215.3 114.8,216.9 116.5,216.4 118.3,215.0 120.1,216.0 121.9,215.7 123.7,216.7 125.4,216.5 127.2,217.3 129.0,215.7 130.8,216.7 132.6,217.4 134.3,216.4 136.1,219.3 137.9,215.7 139.7,216.5 141.5,216.6 143.2,215.6 145.0,214.9 146.8,215.5 148.6,215.5 150.4,216.4 152.1,216.4 153.9,215.7 155.7,217.4 157.5,215.7 159.3,217.4 161.0,215.3 162.8,217.6 164.6,216.0 166.4,216.4 168.2,217.0 169.9,215.9 171.7,216.4 173.5,216.0 175.3,217.5 177.1,215.6 178.8,216.5 180.6,218.0 182.4,216.1 184.2,218.0 186.0,216.0 187.7,216.6 189.5,216.6 191.3,217.2 193.1,216.7 194.9,215.1 196.6,217.3 198.4,216.4 200.2,217.3 202.0,218.0 203.8,215.9 205.5,216.9 207.3,217.1 209.1,214.7 210.9,215.9 212.7,216.7 214.4,215.5 216.2,215.7 218.0,216.7 219.8,214.7 221.6,216.4 223.3,217.6 225.1,215.9 226.9,215.9 228.7,215.7 230.5,215.7 232.2,216.2 234.0,213.7 235.8,217.4 237.6,214.9 239.4,216.3 241.1,217.7 242.9,216.0 244.7,217.2 246.5,217.1 248.3,217.1 250.0,216.0 251.8,216.4 253.6,215.9 255.4,217.4 257.2,215.5 258.9,215.1 260.7,215.3 262.5,218.4 264.3,217.3 266.1,215.2 267.8,215.4 269.6,217.7 271.4,217.1 273.2,216.4 275.0,216.2 276.7,215.9 278.5,216.0 280.3,216.9 282.1,218.6 283.9,217.0 285.6,215.5 287.4,217.4 289.2,214.7 291.0,217.3 292.8,215.5 294.5,216.4 296.3,217.0 298.1,217.5 299.9,215.5 301.7,214.0 303.4,215.9 305.2,216.6 307.0,214.9 308.8,214.2 310.6,215.9 312.3,217.2 314.1,215.2 315.9,215.6 317.7,215.7 319.5,217.1 321.2,216.3 323.0,215.4 324.8,216.5 326.6,216.4 328.4,218.1 330.1,216.6 331.9,216.9 333.7,216.7 335.5,215.6 337.3,215.1 339.0,216.0 340.8,216.3 342.6,216.9 344.4,216.3 346.2,215.9 347.9,216.1 349.7,217.7 351.5,216.5 353.3,215.5 355.1,218.0 356.8,216.9 358.6,216.0 360.4,216.0 362.2,215.6 364.0,218.0 365.7,216.1 367.5,216.3 369.3,216.1 371.1,216.1 372.9,216.9 374.6,215.6 376.4,215.5 378.2,215.9 380.0,216.7 381.8,215.3 383.5,214.5 385.3,217.4 387.1,216.1 388.9,215.2 390.7,215.9 392.4,217.2 394.2,216.2 396.0,217.1 397.8,215.5 399.6,215.4 401.3,217.3 403.1,216.4 404.9,216.3 406.7,214.1 408.5,217.5 410.2,216.3 412.0,216.3 413.8,215.4 415.6,216.7 417.4,215.4 419.1,217.2 420.9,218.2 422.7,217.1 424.5,216.4 426.3,215.9 428.0,216.3 429.8,216.5 431.6,214.9 433.4,216.3 435.2,216.9 436.9,216.9 438.7,215.5 440.5,216.0 442.3,216.6 444.1,216.9 445.8,215.9 447.6,216.5 449.4,218.3 451.2,216.4 453.0,216.4 454.7,215.3 456.5,216.6 458.3,217.4 460.1,217.0 461.9,216.1 463.6,215.3 465.4,216.7 467.2,216.1 469.0,215.9 470.8,216.7 472.5,215.6 474.3,217.1 476.1,215.2 477.9,217.9 479.7,215.4 481.4,216.3 483.2,215.6 485.0,217.9 486.8,216.0 488.6,216.5 490.3,215.5 492.1,215.1 493.9,216.9 495.7,216.6 497.5,216.3 499.2,217.4 501.0,216.4 502.8,216.6 504.6,216.6 506.4,215.5 508.1,216.0 509.9,218.2 511.7,215.4 513.5,215.2 515.3,216.7 517.0,216.0 518.8,218.0 520.6,214.5 522.4,216.0 524.2,215.3 525.9,217.1 527.7,215.3 529.5,215.5 531.3,215.7 533.1,215.4 534.8,216.7 536.6,215.1 538.4,217.4 540.2,217.6 542.0,216.0 543.7,216.7 545.5,216.9 547.3,216.2 549.1,215.6 550.9,215.3 552.6,215.7 554.4,216.5 556.2,215.2 558.0,214.6 559.8,216.0 561.5,217.1 563.3,216.9 565.1,217.2 566.9,216.3 568.7,216.9 570.4,216.5 572.2,215.9 574.0,215.9" fill="none" stroke="#7b4aa5" stroke-width="2"/><text x="578" y="218.9" font-size="10" fill="#7b4aa5" font-family="ui-monospace,Menlo,monospace">Portugal 7%</text><polyline points="40.0,228.3 41.8,219.4 43.6,219.9 45.3,220.5 47.1,222.6 48.9,223.2 50.7,258.1 52.5,258.8 54.2,259.1 56.0,258.8 57.8,259.5 59.6,258.5 61.4,257.9 63.1,259.5 64.9,257.4 66.7,257.7 68.5,258.3 70.3,258.4 72.0,257.8 73.8,258.9 75.6,258.7 77.4,257.6 79.2,257.7 80.9,258.3 82.7,258.4 84.5,258.0 86.3,257.5 88.1,259.1 89.8,258.5 91.6,258.5 93.4,258.3 95.2,258.9 97.0,258.3 98.7,257.9 100.5,258.6 102.3,258.5 104.1,258.7 105.9,257.6 107.6,257.7 109.4,259.3 111.2,259.5 113.0,258.4 114.8,257.9 116.5,258.1 118.3,259.1 120.1,258.3 121.9,258.8 123.7,258.3 125.4,257.3 127.2,259.8 129.0,259.3 130.8,259.3 132.6,259.9 134.3,257.9 136.1,258.6 137.9,258.0 139.7,258.4 141.5,259.0 143.2,258.5 145.0,259.3 146.8,257.8 148.6,258.1 150.4,257.9 152.1,259.0 153.9,258.3 155.7,258.6 157.5,258.8 159.3,258.6 161.0,259.1 162.8,257.8 164.6,258.5 166.4,258.9 168.2,257.8 169.9,258.3 171.7,258.1 173.5,258.6 175.3,257.0 177.1,259.4 178.8,257.8 180.6,258.9 182.4,258.6 184.2,258.4 186.0,258.6 187.7,258.5 189.5,259.0 191.3,258.7 193.1,257.8 194.9,258.0 196.6,258.6 198.4,257.4 200.2,258.9 202.0,259.5 203.8,258.7 205.5,257.5 207.3,258.4 209.1,258.3 210.9,257.1 212.7,257.9 214.4,259.0 216.2,258.9 218.0,259.1 219.8,258.9 221.6,258.8 223.3,259.3 225.1,259.1 226.9,258.5 228.7,257.9 230.5,258.5 232.2,258.6 234.0,258.5 235.8,258.4 237.6,258.0 239.4,258.3 241.1,259.6 242.9,257.7 244.7,258.1 246.5,258.5 248.3,258.3 250.0,257.6 251.8,258.4 253.6,257.9 255.4,259.1 257.2,257.7 258.9,258.1 260.7,258.6 262.5,258.7 264.3,257.3 266.1,257.9 267.8,259.0 269.6,259.8 271.4,257.4 273.2,258.4 275.0,258.6 276.7,258.7 278.5,259.8 280.3,259.1 282.1,258.3 283.9,258.8 285.6,257.8 287.4,258.5 289.2,259.4 291.0,258.4 292.8,258.9 294.5,258.8 296.3,258.3 298.1,258.9 299.9,258.1 301.7,257.4 303.4,257.8 305.2,258.6 307.0,258.8 308.8,258.0 310.6,257.7 312.3,258.5 314.1,258.8 315.9,259.0 317.7,258.0 319.5,258.0 321.2,258.4 323.0,258.5 324.8,258.1 326.6,257.1 328.4,258.5 330.1,258.3 331.9,258.1 333.7,258.6 335.5,258.0 337.3,258.0 339.0,258.9 340.8,258.3 342.6,258.3 344.4,257.9 346.2,258.7 347.9,258.7 349.7,258.1 351.5,258.3 353.3,258.7 355.1,258.5 356.8,257.7 358.6,259.1 360.4,258.9 362.2,258.8 364.0,259.1 365.7,258.1 367.5,258.4 369.3,258.3 371.1,259.0 372.9,258.1 374.6,258.6 376.4,260.4 378.2,257.9 380.0,258.7 381.8,258.4 383.5,258.6 385.3,258.1 387.1,257.7 388.9,258.8 390.7,258.3 392.4,258.3 394.2,259.1 396.0,258.1 397.8,258.7 399.6,259.3 401.3,258.5 403.1,258.7 404.9,258.5 406.7,258.0 408.5,258.0 410.2,259.4 412.0,257.6 413.8,258.0 415.6,258.1 417.4,258.7 419.1,258.4 420.9,257.1 422.7,258.7 424.5,258.5 426.3,258.9 428.0,258.4 429.8,258.3 431.6,258.6 433.4,257.3 435.2,258.4 436.9,258.3 438.7,259.0 440.5,258.1 442.3,259.0 444.1,259.5 445.8,258.5 447.6,257.7 449.4,257.8 451.2,258.3 453.0,258.4 454.7,259.1 456.5,258.3 458.3,258.5 460.1,257.9 461.9,259.5 463.6,259.4 465.4,258.0 467.2,258.3 469.0,258.4 470.8,258.8 472.5,257.3 474.3,259.6 476.1,257.6 477.9,258.4 479.7,259.4 481.4,258.1 483.2,259.0 485.0,257.9 486.8,258.9 488.6,258.8 490.3,258.4 492.1,258.0 493.9,257.8 495.7,258.5 497.5,258.1 499.2,259.0 501.0,259.0 502.8,258.5 504.6,258.5 506.4,259.0 508.1,259.3 509.9,258.3 511.7,258.7 513.5,257.8 515.3,258.7 517.0,257.6 518.8,257.0 520.6,258.6 522.4,258.0 524.2,258.5 525.9,258.7 527.7,257.6 529.5,258.9 531.3,258.9 533.1,258.3 534.8,257.8 536.6,259.3 538.4,258.8 540.2,258.0 542.0,258.5 543.7,257.9 545.5,257.4 547.3,258.8 549.1,258.5 550.9,258.7 552.6,259.0 554.4,258.1 556.2,259.3 558.0,258.6 559.8,259.1 561.5,258.1 563.3,258.7 565.1,258.1 566.9,258.1 568.7,258.3 570.4,257.8 572.2,259.0 574.0,259.7" fill="none" stroke="#3f8f8a" stroke-width="2"/><text x="578" y="262.7" font-size="10" fill="#3f8f8a" font-family="ui-monospace,Menlo,monospace">Japan 3%</text><text x="40" y="14" font-size="12" fill="var(--ink, #211d16)" font-family="ui-monospace,Menlo,monospace">championship odds, every archived run</text><text x="40" y="312" font-size="10" fill="var(--ink-soft, #6b6353)" font-family="ui-monospace,Menlo,monospace">20260609 → 20261104 · 301 runs</text></svg></figure>
+<table class="markets evo"><thead><tr><th>#</th><th>روش</th><th>بزرگ‌ترین جابه‌جایی‌ها</th></tr></thead>
+<tbody><tr><td class="num">1</td><td>v1: DC + Monte Carlo</td><td>نقطهٔ شروع</td></tr><tr><td class="num">2</td><td>anomaly variance</td><td>Argentina -2.5pp, Brazil -0.7pp, Spain -0.7pp</td></tr><tr><td class="num">3</td><td>squad-value prior</td><td>Spain +5.2pp, England +4.4pp, France +4.2pp</td></tr><tr><td class="num">4</td><td>nightly auto-runs</td><td>—</td></tr></tbody></table>
+
+<h2>نقاط کور شناخته‌شده</h2>
+<p class="fineprint">ترکیب بازیکنان، مصدومیت‌ها و محرومیت‌ها مستقیماً در مدل حضور ندارند؛
+این اطلاعات از طریق بازار وارد می‌شوند. آب‌وهوا و ارتفاع زمین ضریب مستقلی ندارند، چون با
+داده‌های موجود قابل برآورد نیستند و فقط به‌عنوان هشدار در نظر گرفته می‌شوند. شبیه‌سازی
+درون‌بازی انجام نمی‌شود و فقط نتیجهٔ نهایی مدل‌سازی می‌شود. اندازهٔ شوک‌های تصادفی
+فرض‌هایی اعلام‌شده هستند، نه پارامترهایی که از داده برآورد شده باشند. همچنین انگیزهٔ
+تیم‌ها در مسابقات کم‌اهمیت هفتهٔ سوم مرحلهٔ گروهی با بازبینی دستی مدیریت می‌شود؛ تقریباً
+همان روشی که بسیاری از محاسبه‌گرهای حرفه‌ای ضرایب از آن استفاده می‌کنند.</p>
+<p>این مدل قرار نیست آینده را پیشگویی کند. هدفش ارائهٔ یک مبنای منصفانه و سازگار برای
+ارزش‌گذاری احتمالات است.</p>
+</main>
+<footer>
+  <p>Form chips read most-recent first. Stats computed over each team's last 10 completed internationals.</p>
+  <p>Model run: 2026-11-04 12:44 UTC · Polymarket snapshot: 2026-11-04 12:44 UTC · every run archived in runs/</p>
+  <p>Data: API-Football · FIFA rankings 2026 · <a href="method.html">how this works</a> ·
+  <a href="archive.html">previous versions</a> ·
+  <a href="https://github.com/amirdaraee/world-cup-predictions">code on GitHub</a> ·
+  personal research, verify before staking. ·
+  <a href="#" onclick="wcfbCookies();return false;">cookie choices</a></p>
+</footer>
+<div id="cookie-consent" role="dialog" aria-label="Cookie consent" hidden>
+  <p>We use cookies to analyse traffic and understand how the site is
+  used. You can accept or decline — your choice is remembered.</p>
+  <div class="cc-btns">
+    <button id="cc-reject" class="cc-no">Decline</button>
+    <button id="cc-accept" class="cc-yes">Accept</button>
+  </div>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('cookie-consent');
+  if (!box) return;
+  function stored() { try { return localStorage.getItem('wcfb_consent'); }
+                       catch (e) { return null; } }
+  function decide(v) {
+    try { localStorage.setItem('wcfb_consent', v); } catch (e) {}
+    box.hidden = true;
+    if (v === 'granted' && window.wcfbLoadGA) wcfbLoadGA();
+  }
+  if (!stored()) box.hidden = false;   // first visit: ask
+  document.getElementById('cc-accept').onclick = function() { decide('granted'); };
+  document.getElementById('cc-reject').onclick = function() { decide('denied'); };
+  // let anyone reopen the choice from the footer (easy to withdraw consent)
+  window.wcfbCookies = function() { box.hidden = false; };
+})();
+</script>
+</body>
+</html>
