@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12 13:30 UTC",
+ "generated": "2026-11-13 01:41 UTC",
  "method": "Elo (margin-aware K) -> Poisson goals map -> same DC grid; structurally independent second opinion, display-only",
  "params": {
   "K": 64.0,
