@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24 05:11 UTC",
+  "generated": "2026-11-24 15:30 UTC",
   "method": "Boot/nation: Binomial player-share model over the 100k simulated tournaments; shares from international goals 2024-26. Glove: heuristic rank (reach-final prob x defensive record). Ball: Polymarket prices only.",
   "golden_boot": [
     {
@@ -7,16 +7,16 @@
       "team": "England",
       "intl_goals_24_26": 19,
       "exp_goals": 3.82,
-      "p_model": 0.2052,
+      "p_model": 0.2029,
       "market": 0.125,
-      "edge": 0.0802
+      "edge": 0.0779
     },
     {
       "player": "J. David",
       "team": "Canada",
       "intl_goals_24_26": 11,
       "exp_goals": 3.07,
-      "p_model": 0.0966,
+      "p_model": 0.0974,
       "market": null,
       "edge": null
     },
@@ -25,33 +25,33 @@
       "team": "Spain",
       "intl_goals_24_26": 17,
       "exp_goals": 2.73,
-      "p_model": 0.0784,
+      "p_model": 0.0801,
       "market": 0.075,
-      "edge": 0.0034
+      "edge": 0.0051
     },
     {
       "player": "Kylian Mbappé",
       "team": "France",
       "intl_goals_24_26": 10,
-      "exp_goals": 2.61,
-      "p_model": 0.069,
+      "exp_goals": 2.62,
+      "p_model": 0.0698,
       "market": 0.145,
-      "edge": -0.076
+      "edge": -0.0752
     },
     {
       "player": "Lautaro Martínez",
       "team": "Argentina",
       "intl_goals_24_26": 16,
-      "exp_goals": 2.62,
-      "p_model": 0.0656,
+      "exp_goals": 2.61,
+      "p_model": 0.065,
       "market": 0.0225,
-      "edge": 0.0431
+      "edge": 0.0425
     },
     {
       "player": "E. Haaland",
       "team": "Norway",
       "intl_goals_24_26": 30,
-      "exp_goals": 2.29,
+      "exp_goals": 2.3,
       "p_model": 0.0525,
       "market": 0.055,
       "edge": -0.0025
@@ -60,17 +60,17 @@
       "player": "Cristiano Ronaldo",
       "team": "Portugal",
       "intl_goals_24_26": 15,
-      "exp_goals": 2.09,
-      "p_model": 0.0376,
+      "exp_goals": 2.1,
+      "p_model": 0.038,
       "market": 0.0435,
-      "edge": -0.0059
+      "edge": -0.0055
     },
     {
       "player": "R. Jiménez",
       "team": "Mexico",
       "intl_goals_24_26": 10,
       "exp_goals": 2.13,
-      "p_model": 0.0316,
+      "p_model": 0.0315,
       "market": null,
       "edge": null
     },
@@ -78,44 +78,44 @@
       "player": "L. Messi",
       "team": "Argentina",
       "intl_goals_24_26": 13,
-      "exp_goals": 2.13,
-      "p_model": 0.0296,
+      "exp_goals": 2.12,
+      "p_model": 0.0293,
       "market": 0.0415,
-      "edge": -0.0119
+      "edge": -0.0122
     },
     {
       "player": "Brahim Díaz",
       "team": "Morocco",
       "intl_goals_24_26": 13,
       "exp_goals": 1.86,
-      "p_model": 0.0222,
+      "p_model": 0.0223,
       "market": 0.0125,
-      "edge": 0.0097
-    },
-    {
-      "player": "F. Wirtz",
-      "team": "Germany",
-      "intl_goals_24_26": 11,
-      "exp_goals": 1.78,
-      "p_model": 0.0186,
-      "market": null,
-      "edge": null
+      "edge": 0.0098
     },
     {
       "player": "M. Olise",
       "team": "France",
       "intl_goals_24_26": 7,
       "exp_goals": 1.83,
-      "p_model": 0.0178,
+      "p_model": 0.0183,
       "market": 0.048,
-      "edge": -0.0302
+      "edge": -0.0297
+    },
+    {
+      "player": "F. Wirtz",
+      "team": "Germany",
+      "intl_goals_24_26": 11,
+      "exp_goals": 1.77,
+      "p_model": 0.0178,
+      "market": null,
+      "edge": null
     },
     {
       "player": "B. Embolo",
       "team": "Switzerland",
       "intl_goals_24_26": 11,
       "exp_goals": 1.81,
-      "p_model": 0.0167,
+      "p_model": 0.0161,
       "market": null,
       "edge": null
     },
@@ -124,18 +124,18 @@
       "team": "Sweden",
       "intl_goals_24_26": 21,
       "exp_goals": 1.5,
-      "p_model": 0.013,
+      "p_model": 0.0126,
       "market": 0.0075,
-      "edge": 0.0055
+      "edge": 0.0051
     },
     {
       "player": "S. Mané",
       "team": "Senegal",
       "intl_goals_24_26": 9,
       "exp_goals": 1.48,
-      "p_model": 0.0121,
+      "p_model": 0.0119,
       "market": 0.003,
-      "edge": 0.0091
+      "edge": 0.0089
     },
     {
       "player": "L. Díaz",
@@ -147,56 +147,56 @@
       "edge": -0.0007
     },
     {
-      "player": "Raphinha",
-      "team": "Brazil",
-      "intl_goals_24_26": 6,
-      "exp_goals": 1.56,
-      "p_model": 0.011,
-      "market": 0.0345,
-      "edge": -0.0235
-    },
-    {
       "player": "Vinícius Júnior",
       "team": "Brazil",
       "intl_goals_24_26": 6,
       "exp_goals": 1.57,
-      "p_model": 0.0105,
+      "p_model": 0.0109,
       "market": 0.027,
-      "edge": -0.0165
+      "edge": -0.0161
+    },
+    {
+      "player": "Raphinha",
+      "team": "Brazil",
+      "intl_goals_24_26": 6,
+      "exp_goals": 1.57,
+      "p_model": 0.0108,
+      "market": 0.0345,
+      "edge": -0.0237
+    },
+    {
+      "player": "Son Heung-Min",
+      "team": "South Korea",
+      "intl_goals_24_26": 12,
+      "exp_goals": 1.46,
+      "p_model": 0.0096,
+      "market": null,
+      "edge": null
     },
     {
       "player": "K. De Bruyne",
       "team": "Belgium",
       "intl_goals_24_26": 11,
       "exp_goals": 1.48,
-      "p_model": 0.0099,
+      "p_model": 0.0094,
       "market": null,
       "edge": null
     },
     {
-      "player": "Son Heung-Min",
-      "team": "South Korea",
+      "player": "C. Gakpo",
+      "team": "Netherlands",
       "intl_goals_24_26": 12,
-      "exp_goals": 1.45,
-      "p_model": 0.0088,
-      "market": null,
-      "edge": null
+      "exp_goals": 1.36,
+      "p_model": 0.0081,
+      "market": 0.022,
+      "edge": -0.0139
     },
     {
-      "player": "Bruno Fernandes",
-      "team": "Portugal",
+      "player": "S. Rahimi",
+      "team": "Morocco",
       "intl_goals_24_26": 10,
-      "exp_goals": 1.4,
-      "p_model": 0.0081,
-      "market": 0.0095,
-      "edge": -0.0014
-    },
-    {
-      "player": "A. Ueda",
-      "team": "Japan",
-      "intl_goals_24_26": 10,
-      "exp_goals": 1.34,
-      "p_model": 0.0081,
+      "exp_goals": 1.43,
+      "p_model": 0.0079,
       "market": null,
       "edge": null
     },
@@ -210,177 +210,177 @@
       "edge": null
     },
     {
-      "player": "C. Gakpo",
-      "team": "Netherlands",
-      "intl_goals_24_26": 12,
-      "exp_goals": 1.36,
-      "p_model": 0.0078,
-      "market": 0.022,
-      "edge": -0.0142
-    },
-    {
-      "player": "S. Rahimi",
-      "team": "Morocco",
+      "player": "A. Ueda",
+      "team": "Japan",
       "intl_goals_24_26": 10,
-      "exp_goals": 1.43,
-      "p_model": 0.0077,
+      "exp_goals": 1.33,
+      "p_model": 0.0079,
       "market": null,
       "edge": null
+    },
+    {
+      "player": "Bruno Fernandes",
+      "team": "Portugal",
+      "intl_goals_24_26": 10,
+      "exp_goals": 1.4,
+      "p_model": 0.0078,
+      "market": 0.0095,
+      "edge": -0.0017
     }
   ],
   "top_scorer_nation": [
     {
       "team": "Spain",
-      "exp_goals": 11.96,
-      "p_model": 0.1796,
+      "exp_goals": 11.97,
+      "p_model": 0.1824,
       "market": 0.205,
-      "edge": -0.0254
+      "edge": -0.0226
     },
     {
       "team": "Argentina",
-      "exp_goals": 11.64,
-      "p_model": 0.1562,
+      "exp_goals": 11.58,
+      "p_model": 0.1531,
       "market": 0.0665,
-      "edge": 0.0897
+      "edge": 0.0866
     },
     {
       "team": "Brazil",
-      "exp_goals": 11.02,
-      "p_model": 0.119,
+      "exp_goals": 11.04,
+      "p_model": 0.1185,
       "market": 0.095,
-      "edge": 0.024
+      "edge": 0.0235
     },
     {
       "team": "England",
       "exp_goals": 10.5,
-      "p_model": 0.0948,
+      "p_model": 0.0945,
       "market": 0.125,
-      "edge": -0.0302
+      "edge": -0.0305
     },
     {
       "team": "France",
-      "exp_goals": 9.6,
-      "p_model": 0.0738,
+      "exp_goals": 9.62,
+      "p_model": 0.0756,
       "market": 0.165,
-      "edge": -0.0912
+      "edge": -0.0894
     },
     {
       "team": "Germany",
-      "exp_goals": 9.31,
-      "p_model": 0.0549,
+      "exp_goals": 9.28,
+      "p_model": 0.0554,
       "market": 0.115,
-      "edge": -0.0601
+      "edge": -0.0596
     },
     {
       "team": "Portugal",
-      "exp_goals": 8.7,
-      "p_model": 0.0544,
+      "exp_goals": 8.71,
+      "p_model": 0.055,
       "market": 0.0555,
-      "edge": -0.0011
+      "edge": -0.0005
     },
     {
       "team": "Belgium",
-      "exp_goals": 8.82,
-      "p_model": 0.0436,
+      "exp_goals": 8.83,
+      "p_model": 0.0431,
       "market": 0.0405,
-      "edge": 0.0031
+      "edge": 0.0026
     },
     {
       "team": "Canada",
       "exp_goals": 9.61,
-      "p_model": 0.0413,
+      "p_model": 0.041,
       "market": 0.004,
-      "edge": 0.0373
+      "edge": 0.037
     },
     {
       "team": "United States",
-      "exp_goals": 7.98,
-      "p_model": 0.0321,
+      "exp_goals": 7.97,
+      "p_model": 0.0319,
       "market": 0.009,
-      "edge": 0.0231
+      "edge": 0.0229
     },
     {
       "team": "Netherlands",
-      "exp_goals": 7.29,
-      "p_model": 0.0235,
+      "exp_goals": 7.26,
+      "p_model": 0.0224,
       "market": 0.032,
-      "edge": -0.0085
-    },
-    {
-      "team": "Japan",
-      "exp_goals": 6.85,
-      "p_model": 0.0181,
-      "market": 0.0075,
-      "edge": 0.0106
+      "edge": -0.0096
     },
     {
       "team": "Switzerland",
       "exp_goals": 8.22,
-      "p_model": 0.0177,
+      "p_model": 0.0179,
       "market": 0.0135,
-      "edge": 0.0042
+      "edge": 0.0044
     },
     {
-      "team": "Mexico",
-      "exp_goals": 7.82,
-      "p_model": 0.0153,
-      "market": 0.011,
-      "edge": 0.0043
+      "team": "Japan",
+      "exp_goals": 6.82,
+      "p_model": 0.0171,
+      "market": 0.0075,
+      "edge": 0.0096
     },
     {
       "team": "Colombia",
-      "exp_goals": 6.54,
-      "p_model": 0.0148,
+      "exp_goals": 6.53,
+      "p_model": 0.0152,
       "market": 0.0105,
-      "edge": 0.0043
+      "edge": 0.0047
+    },
+    {
+      "team": "Morocco",
+      "exp_goals": 7.17,
+      "p_model": 0.015,
+      "market": 0.0035,
+      "edge": 0.0115
     }
   ],
   "golden_glove": [
     {
       "player": "E. Martínez",
       "team": "Argentina",
-      "score": 0.36,
-      "p_final": 0.2881,
+      "score": 0.354,
+      "p_final": 0.2835,
       "conceded_pg": 0.3,
       "market": 0.19
     },
     {
       "player": "Unai Simón",
       "team": "Spain",
-      "score": 0.27,
-      "p_final": 0.2429,
+      "score": 0.272,
+      "p_final": 0.2447,
       "conceded_pg": 0.4,
       "market": 0.125
     },
     {
       "player": "J. Pickford",
       "team": "England",
-      "score": 0.182,
-      "p_final": 0.1825,
+      "score": 0.181,
+      "p_final": 0.181,
       "conceded_pg": 0.5,
       "market": 0.16
     },
     {
       "player": "Y. Bounou",
       "team": "Morocco",
-      "score": 0.127,
-      "p_final": 0.1019,
+      "score": 0.128,
+      "p_final": 0.1024,
       "conceded_pg": 0.3,
       "market": 0.03
     },
     {
       "player": "Alisson Becker",
       "team": "Brazil",
-      "score": 0.112,
-      "p_final": 0.1792,
+      "score": 0.113,
+      "p_final": 0.1802,
       "conceded_pg": 1.1,
       "market": 0.165
     },
     {
       "player": "M. Maignan",
       "team": "France",
-      "score": 0.11,
-      "p_final": 0.1545,
+      "score": 0.111,
+      "p_final": 0.1554,
       "conceded_pg": 0.9,
       "market": 0.145
     },
@@ -388,23 +388,23 @@
       "player": "Diogo Costa",
       "team": "Portugal",
       "score": 0.086,
-      "p_final": 0.1288,
+      "p_final": 0.1295,
       "conceded_pg": 1.0,
       "market": 0.145
     },
     {
       "player": "T. Courtois",
       "team": "Belgium",
-      "score": 0.064,
-      "p_final": 0.0705,
+      "score": 0.066,
+      "p_final": 0.0722,
       "conceded_pg": 0.6,
       "market": 0.08
     },
     {
       "player": "T. Hayakawa",
       "team": "Japan",
-      "score": 0.06,
-      "p_final": 0.0661,
+      "score": 0.059,
+      "p_final": 0.065,
       "conceded_pg": 0.6,
       "market": null
     },
@@ -412,23 +412,23 @@
       "player": "O. Baumann",
       "team": "Germany",
       "score": 0.053,
-      "p_final": 0.0692,
+      "p_final": 0.069,
       "conceded_pg": 0.8,
       "market": 0.0245
     },
     {
       "player": "C. Vargas",
       "team": "Colombia",
-      "score": 0.046,
-      "p_final": 0.0689,
+      "score": 0.045,
+      "p_final": 0.0673,
       "conceded_pg": 1.0,
       "market": null
     },
     {
       "player": "B. Verbruggen",
       "team": "Netherlands",
-      "score": 0.044,
-      "p_final": 0.0574,
+      "score": 0.043,
+      "p_final": 0.056,
       "conceded_pg": 0.8,
       "market": 0.125
     },
@@ -436,7 +436,7 @@
       "player": "H. Galíndez",
       "team": "Ecuador",
       "score": 0.037,
-      "p_final": 0.0366,
+      "p_final": 0.0374,
       "conceded_pg": 0.5,
       "market": null
     },
@@ -444,15 +444,15 @@
       "player": "S. Rochet",
       "team": "Uruguay",
       "score": 0.033,
-      "p_final": 0.0458,
+      "p_final": 0.0465,
       "conceded_pg": 0.9,
       "market": 0.06
     },
     {
       "player": "D. St. Clair",
       "team": "Canada",
-      "score": 0.029,
-      "p_final": 0.0264,
+      "score": 0.03,
+      "p_final": 0.0269,
       "conceded_pg": 0.4,
       "market": null
     }
@@ -462,43 +462,43 @@
       "player": "Lamine Yamal",
       "market": 0.115,
       "team": "Spain",
-      "team_champion_p": 0.1414
+      "team_champion_p": 0.144
     },
     {
       "player": "Kylian Mbappé",
       "market": 0.095,
       "team": "France",
-      "team_champion_p": 0.0805
+      "team_champion_p": 0.0818
     },
     {
       "player": "Michael Olise",
       "market": 0.08,
       "team": "France",
-      "team_champion_p": 0.0805
+      "team_champion_p": 0.0818
     },
     {
       "player": "Harry Kane",
       "market": 0.07,
       "team": "England",
-      "team_champion_p": 0.1054
+      "team_champion_p": 0.1045
     },
     {
       "player": "Lionel Messi",
       "market": 0.07,
       "team": "Argentina",
-      "team_champion_p": 0.1895
+      "team_champion_p": 0.186
     },
     {
       "player": "Bruno Fernandes",
       "market": 0.065,
       "team": "Portugal",
-      "team_champion_p": 0.066
+      "team_champion_p": 0.0656
     },
     {
       "player": "Pedri",
       "market": 0.06,
       "team": "Spain",
-      "team_champion_p": 0.1414
+      "team_champion_p": 0.144
     },
     {
       "player": "Vinícius Jr.",
@@ -510,43 +510,43 @@
       "player": "Vitinha",
       "market": 0.0375,
       "team": "Portugal",
-      "team_champion_p": 0.066
+      "team_champion_p": 0.0656
     },
     {
       "player": "Ousmane Dembélé",
       "market": 0.033,
       "team": "France",
-      "team_champion_p": 0.0805
+      "team_champion_p": 0.0818
     },
     {
       "player": "Florian Wirtz",
       "market": 0.033,
       "team": "Germany",
-      "team_champion_p": 0.0287
+      "team_champion_p": 0.0289
     },
     {
       "player": "Cristiano Ronaldo",
       "market": 0.0325,
       "team": "Portugal",
-      "team_champion_p": 0.066
+      "team_champion_p": 0.0656
     },
     {
       "player": "Rayan Cherki",
       "market": 0.0265,
       "team": "France",
-      "team_champion_p": 0.0805
+      "team_champion_p": 0.0818
     },
     {
       "player": "Erling Haaland",
       "market": 0.026,
       "team": "Norway",
-      "team_champion_p": 0.0105
+      "team_champion_p": 0.0102
     },
     {
       "player": "Jude Bellingham",
       "market": 0.0255,
       "team": "England",
-      "team_champion_p": 0.1054
+      "team_champion_p": 0.1045
     }
   ],
   "prices_at": "2026-06-10 14:54 UTC"
